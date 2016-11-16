@@ -2,6 +2,6 @@
 Containing
 * .zshrc
 * .vimrc
-* i3config
-
+* i3-config
+* i3status-config
 more to come ...
