@@ -1,12 +1,12 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
-
 # Path to your oh-my-zsh installation.
   export ZSH=/home/tak/.oh-my-zsh
 
-# Set name of the theme to load. Optionally, if you set this to "random"
-# it'll load a random theme each time that oh-my-zsh is loaded.
-# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
+# Set name of the theme to load.
+# Look in ~/.oh-my-zsh/themes/
+# Optionally, if you set this to "random", it'll load a random theme each
+# time that oh-my-zsh is loaded.
+#ZSH_THEME="gnzh"
+#ZSH_THEME="flazz"
 ZSH_THEME="amuse"
 
 # Uncomment the following line to use case-sensitive completion.
@@ -53,11 +53,12 @@ ZSH_THEME="amuse"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git)
 
-source $ZSH/oh-my-zsh.sh
-
 # User configuration
 
+  export PATH="/home/tak/GNUstep/Tools:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl"
 # export MANPATH="/usr/local/man:$MANPATH"
+
+source $ZSH/oh-my-zsh.sh
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -73,7 +74,7 @@ source $ZSH/oh-my-zsh.sh
 # export ARCHFLAGS="-arch x86_64"
 
 # ssh
-# export SSH_KEY_PATH="~/.ssh/rsa_id"
+# export SSH_KEY_PATH="~/.ssh/dsa_id"
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -83,5 +84,62 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-source /home/tak/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-alias ls='ls -lh --group-directories-first --color=auto'
+
+
+#alias cp="cp -i"                          # confirm before overwriting something
+alias df='df -h'                          # human-readable sizes
+alias free='free -m'                      # show sizes in MB
+alias np='nano -w PKGBUILD'
+alias more=less
+
+# Better ls
+alias ls='ls -lh --color=auto --group-directories-first'
+alias grep='grep --color=auto'
+
+# Pacman shortcuts
+alias pacu='sudo pacman -Syyu && yaourt -Syyua'
+alias pacs='sudo pacman -S'
+alias pacrsc='sudo pacman -Rsc'
+alias yaourt='yaourt --noconfirm'
+# Moved to update functions (see above)
+#alias pacu='sudo pacman -Syu && yaourt -Syua'
+#alias pacufull='sudo pacman -Syyu && yaourt -Syua'
+
+# zshrc editing
+alias eZ='vim ~/.zshrc'
+alias rZ='source ~/.zshrc'
+alias reboot='sudo systemctl reboot'
+alias poweroff='sudo systemctl poweroff'
+# Grub update - (currently systemd-boot -> no need for that)
+#alias update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
+
+# Fast ssh-key evaluation
+alias ssh-eval-key='eval $(ssh-agent -s) && ssh-add ~/.ssh/id_rsa'
+
+# i3-shortcuts
+alias i3config='vim ~/.config/i3/config'
+alias i3statusconfig='vim ~/.config/i3status/config'
+
+# Fast terminal-directory navigation
+alias xclip='xclip -selection c'
+alias PWD='echo $(pwd) | xclip && pwd && echo "path copied"'
+alias CD='echo "cd $(xclip -o)" && cd $(xclip -o)'
+alias :q='exit'
+
+alias img='feh'
+alias pdf='zathura'
+
+alias sshaddtak='eval "$(ssh-agent -s)" && ssh-add ~/.ssh/id_rsa_tak3r07'
+
+export JAVA_HOME=/usr/lib/jvm/java-8-jdk
+export TERMINAL=gnome-terminal
+export EDITOR=vim
+export VISUAL=vim
+
+# Maven java server debugging
+export MAVEN_OPTS=-agentlib:jdwp=transport=dt_socket,address=8000,server=y,suspend=n
+
+
+
+
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
