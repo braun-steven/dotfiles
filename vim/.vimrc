@@ -14,6 +14,8 @@ Plugin 'Xuyuanp/nerdtree-git-plugin'
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
 
+" PaperColor theme
+Plugin 'NLKNguyen/papercolor-theme'
 
 " Plugin You Complete Me
 Plugin 'Valloric/YouCompleteMe'
