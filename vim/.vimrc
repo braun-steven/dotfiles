@@ -9,7 +9,8 @@ call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
-
+Plugin 'scrooloose/nerdtree'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
 
@@ -17,6 +18,8 @@ Plugin 'VundleVim/Vundle.vim'
 " Plugin You Complete Me
 Plugin 'Valloric/YouCompleteMe'
 
+" Bracket autocomplete
+Plugin 'jiangmiao/auto-pairs'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required

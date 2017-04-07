@@ -7,7 +7,7 @@
 # time that oh-my-zsh is loaded.
 #ZSH_THEME="gnzh"
 #ZSH_THEME="flazz"
-ZSH_THEME="amuse"
+ZSH_THEME="materialshell-dark"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -51,7 +51,7 @@ ZSH_THEME="amuse"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git git-flow-avh mvn)
 
 # User configuration
 
@@ -91,6 +91,7 @@ alias df='df -h'                          # human-readable sizes
 alias free='free -m'                      # show sizes in MB
 alias np='nano -w PKGBUILD'
 alias more=less
+alias cat='ccat'
 
 # Better ls
 alias ls='ls -lh --color=auto --group-directories-first'
@@ -131,6 +132,12 @@ alias pdf='zathura'
 
 alias sshaddtak='eval "$(ssh-agent -s)" && ssh-add ~/.ssh/id_rsa_tak3r07'
 
+alias ga='git add -v'
+alias gaa='git add -A -v'
+alias gaad='git add -A -v --dry-run'
+alias gc='git commit'
+alias gcm='git commit -m'
+
 export JAVA_HOME=/usr/lib/jvm/java-8-jdk
 export TERMINAL=gnome-terminal
 export EDITOR=vim
@@ -138,8 +145,10 @@ export VISUAL=vim
 
 # Maven java server debugging
 export MAVEN_OPTS=-agentlib:jdwp=transport=dt_socket,address=8000,server=y,suspend=n
-
-
+PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
+PATH="/home/tak/bin:$PATH"
+#PATH="/home/tak/gcc:$PATH"
 
 
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+function gi() { curl -L -s https://www.gitignore.io/api/$@ ;}

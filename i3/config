@@ -174,11 +174,20 @@ bindsym $mod+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        status_command i3status
+  status_command i3status
         tray_output eDP1 
 		position top 
 		#workspace_buttons yes
 		separator_symbol "〉"
+  colors {
+    separator #666666
+    background #000000
+    statusline #ffffff
+    focused_workspace #4c7899 #285577 #ffffff
+    active_workspace #333333 #5f676a #ffffff
+    inactive_workspace #333333 #222222 #888888
+    urgent_workspace #2f343a #900000 #ffffff
+  }
 }
 
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-mute 0 false && pactl set-sink-volume alsa_output.platform-broadwell-audio.HiFi__hw_broadwellrt286__sink +5% && killall -SIGUSR1 i3status
@@ -219,18 +228,24 @@ exec --no-startup-id setxkbmap de
  
 
 # i3 lock
-exec --no-startup-id xautolock -time 20 -locker 'i3lock -f -e -d -c 000000' -detectsleep &
+exec --no-startup-id xautolock -time 30 -locker 'i3lock -f -e -d -c 000000' -detectsleep &
+exec --no-startup-id pulseaudio
+exec --no-startup-id pa-applet
 
 # nm-applet
-#exec --no-startup-id nm-applet --tray --sm-disable & 
+exec --no-startup-id nm-applet --tray --sm-disable & 
 
-# pidgin, telegram
-exec --no-startup-id i3-msg 'workspace 10; exec pidgin; exec sleep 1'
-exec --no-startup-id i3-msg 'exec skypeforlinux; exec sleep 3 && i3-msg "workspace 1"'
 
 # locker shortcut
 set $Locker i3lock -f -e -d -c 000000 && sleep 1
 
 # suspend/lock shortcuts
 bindsym $mod+s exec --no-startup-id $Locker && systemctl suspend  
-bindsym $mod+l exec --no-startup-id i3lock -f -e -d -c 000000 & 
+bindsym $mod+l exec --no-startup-id i3lock -f -e -d -c 000000 &
+
+client.focused #4c7899 #285577 #ffffff #2e9ef4
+client.focused_inactive #333333 #5f676a #ffffff #484e50
+client.unfocused #333333 #222222 #888888 #292d2e
+client.urgent #2f343a #900000 #ffffff #900000
+
+
