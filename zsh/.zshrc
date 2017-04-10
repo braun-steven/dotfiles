@@ -132,6 +132,11 @@ alias pdf='zathura'
 
 alias sshaddtak='eval "$(ssh-agent -s)" && ssh-add ~/.ssh/id_rsa_tak3r07'
 
+alias edit-vim='vim ~/dotfiles/vim/.vimrc'
+alias edit-zsh='vim ~/dotfiles/zsh/.zshrc'
+alias edit-i3='vim ~/dotfiles/i3/config'
+alias edit-i3status='vim ~/dotfiles/i3status/config'
+
 alias ga='git add -v'
 alias gaa='git add -A -v'
 alias gaad='git add -A -v --dry-run'
@@ -147,6 +152,7 @@ export VISUAL=vim
 export MAVEN_OPTS=-agentlib:jdwp=transport=dt_socket,address=8000,server=y,suspend=n
 PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
 PATH="/home/tak/bin:$PATH"
+LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/lib/"
 #PATH="/home/tak/gcc:$PATH"
 
 
