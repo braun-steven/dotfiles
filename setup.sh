@@ -1,7 +1,14 @@
 #!/bin/bash
 
+if [ ! -e /bin/zsh ]
+then
+	echo "Installing zsh"
+	sudo pacman -S zsh
+fi
+
 # Install oh-my-zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+
 
 echo "Linking .zshrc"
 # Link .zshrc
@@ -12,6 +19,11 @@ then
 fi
 ln -s ./zsh/.zshrc ~/.zshrc
 
+source ~/.zshrc
+
+echo "Installing Vundle"
+yaourt -S vundle-git
+
 # Link .vimrc
 echo "Linking .vimrc"
 if [ -e ~/.vimrc ]
@@ -20,7 +32,8 @@ then
 	mv ~/.vimrc ~/.vimrcbak
 fi
 ln -s ./vim/.vimrc ~/.vimrc
-echo "Keep in mind to install Vundle and execute ':PluginInstall' in vim\n"
+echo "Installing plugins"
+vim +PluginInstall +qall
 
 # Link i3
 echo "Linking i3 configs"
