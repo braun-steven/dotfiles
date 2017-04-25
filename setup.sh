@@ -58,12 +58,4 @@ then
 fi
 ln -s .i3status/config ~/.config/i3status/config
 
-echo "Linking qutebrowser configs"
-if [ -e ~/.config/qutebrowser ]
-then
-	echo "Created backup ~/.config/qutebrowser"
-	mv ~/.config/qutebrowser ~/.config/qutebrowser.bak
-fi
-ln -s qutebrowser ~/.config/qutebrowser
-
 echo "Finished"
