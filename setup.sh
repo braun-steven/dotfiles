@@ -7,6 +7,7 @@ then
 fi
 
 # Install oh-my-zsh
+echo "Installing oh-my-zsh"
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
 
@@ -57,5 +58,8 @@ then
 	mv ~/.config/i3status/config ~/.config/i3status/configbak
 fi
 ln -s .i3status/config ~/.config/i3status/config
+
+# Installing some software
+sudo pacman -S gnome-screenshot
 
 echo "Finished"

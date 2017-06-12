@@ -143,6 +143,11 @@ alias gaad='git add -A -v --dry-run'
 alias gc='git commit'
 alias gcm='git commit -m'
 
+alias qutebrowser='qutebrowser --backend webengine'
+
+alias gnome-screenshot='gnome-screenshot -a'
+
+
 export JAVA_HOME=/usr/lib/jvm/java-8-jdk
 export TERMINAL=gnome-terminal
 export EDITOR=vim
@@ -155,6 +160,7 @@ PATH="/home/tak/bin:$PATH"
 LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/lib/"
 #PATH="/home/tak/gcc:$PATH"
 
+eval $(keychain --eval --quiet id_rsa id_rsa_tak3r07)
 
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 function gi() { curl -L -s https://www.gitignore.io/api/$@ ;}
