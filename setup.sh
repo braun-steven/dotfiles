@@ -36,6 +36,11 @@ ln -s ./vim/.vimrc ~/.vimrc
 echo "Installing plugins"
 vim +PluginInstall +qall
 
+# Set vim theme
+mkdir ~/.vim/
+mkdir ~/.vim/colors
+cp ./vim/github.vim ~/.vim/colors/
+
 # Link i3
 echo "Linking i3 configs"
 if [ -e ~/.config/i3/config ]
