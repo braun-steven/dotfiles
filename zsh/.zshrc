@@ -7,7 +7,7 @@
 # time that oh-my-zsh is loaded.
 #ZSH_THEME="gnzh"
 #ZSH_THEME="flazz"
-ZSH_THEME="materialshell-dark"
+ZSH_THEME="materialshell-oceanic"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"

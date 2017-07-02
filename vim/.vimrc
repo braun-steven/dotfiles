@@ -14,8 +14,6 @@ Plugin 'Xuyuanp/nerdtree-git-plugin'
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
 
-" PaperColor theme
-Plugin 'NLKNguyen/papercolor-theme'
 
 " Plugin You Complete Me
 Plugin 'Valloric/YouCompleteMe'
@@ -42,7 +40,7 @@ filetype plugin indent on    " required
 set path=.,,**
 set t_Co=256
 set background=dark
-colorscheme PaperColor
+colorscheme github
 syntax on
 set tabstop=4
 set softtabstop=4

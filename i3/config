@@ -14,7 +14,7 @@ set $mod Mod4
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
 
-font pango:monospace 11
+font pango:monospace 12
 #font pango: Source Code Pro Semibold, FontAwesome Regular 11 
 #font pango:DejaVu Sans Mono, Terminus Bold Semi-Condensed 11
 #font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
@@ -176,7 +176,7 @@ bindsym $mod+r mode "resize"
 bar {
   status_command i3status
         #tray_output eDP1 
-        tray_output DVI-I-2 
+        tray_output eDP1 
 		position top 
 		#workspace_buttons yes
 		separator_symbol "〉"
@@ -191,8 +191,8 @@ bar {
   }
 }
 
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-mute 0 false && pactl set-sink-volume alsa_output.platform-broadwell-audio.HiFi__hw_broadwellrt286__sink +5% && killall -SIGUSR1 i3status
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-mute 0 false && pactl set-sink-volume alsa_output.platform-broadwell-audio.HiFi__hw_broadwellrt286__sink -5% && killall -SIGUSR1 i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-mute 0 false && pactl set-sink-volume alsa_output.pci-0000_00_1b.0.analog-stereo +5% && killall -SIGUSR1 i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-mute 0 false && pactl set-sink-volume alsa_output.pci-0000_00_1b.0.analog-stereo -5% && killall -SIGUSR1 i3status
 # Sreen brightness controls
 bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
 bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
@@ -249,4 +249,8 @@ client.focused_inactive #333333 #5f676a #ffffff #484e50
 client.unfocused #333333 #222222 #888888 #292d2e
 client.urgent #2f343a #900000 #ffffff #900000
 
-
+####### i3-gaps
+#gaps inner 10
+#gaps outer -4
+#smart_gaps on
+#smart_borders on

@@ -61,5 +61,7 @@ ln -s .i3status/config ~/.config/i3status/config
 
 # Installing some software
 sudo pacman -S gnome-screenshot
+sudo cp scripts/gscrot /usr/bin/gscrot
+sudo chmod +x /usr/bin/gscrot
 
 echo "Finished"
