@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-  export ZSH=/home/tak/.oh-my-zsh
+export ZSH=/home/tak/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -130,8 +130,6 @@ alias :q='exit'
 alias img='feh'
 alias pdf='zathura'
 
-alias sshaddtak='eval "$(ssh-agent -s)" && ssh-add ~/.ssh/id_rsa_tak3r07'
-
 alias edit-vim='vim ~/dotfiles/vim/.vimrc'
 alias edit-zsh='vim ~/dotfiles/zsh/.zshrc'
 alias edit-i3='vim ~/dotfiles/i3/config'
@@ -147,20 +145,22 @@ alias qutebrowser='qutebrowser --backend webengine'
 
 alias gnome-screenshot='gnome-screenshot -a'
 
+alias dekeymap='sudo setxkbmap -layout de'
+alias uskeymap='sudo setxkbmap -layout us'
 
 export JAVA_HOME=/usr/lib/jvm/java-8-jdk
 export TERMINAL=gnome-terminal
 export EDITOR=vim
 export VISUAL=vim
+export WEKA_HOME=/home/tak/wekafiles
 
 # Maven java server debugging
 export MAVEN_OPTS=-agentlib:jdwp=transport=dt_socket,address=8000,server=y,suspend=n
 PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
 PATH="/home/tak/bin:$PATH"
-LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/lib/"
-#PATH="/home/tak/gcc:$PATH"
+export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/lib/"
 
-eval $(keychain --eval --quiet id_rsa id_rsa_tak3r07)
+eval $(keychain --eval --quiet id_rsa id_rsa_mz id_rsa_tak3r07)
 
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 function gi() { curl -L -s https://www.gitignore.io/api/$@ ;}
