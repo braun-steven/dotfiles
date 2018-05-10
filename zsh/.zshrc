@@ -7,7 +7,7 @@ export ZSH=/home/tak/.oh-my-zsh
 # time that oh-my-zsh is loaded.
 #ZSH_THEME="gnzh"
 #ZSH_THEME="flazz"
-ZSH_THEME="robbyrussell"
+ZSH_THEME="amuse"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"

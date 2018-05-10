@@ -22,9 +22,6 @@ ln -s ./zsh/.zshrc ~/.zshrc
 
 source ~/.zshrc
 
-echo "Installing Vundle"
-yaourt -S vundle-git
-
 # Link .vimrc
 echo "Linking .vimrc"
 if [ -e ~/.vimrc ]
@@ -33,8 +30,6 @@ then
 	mv ~/.vimrc ~/.vimrcbak
 fi
 ln -s ./vim/.vimrc ~/.vimrc
-echo "Installing plugins"
-vim +PluginInstall +qall
 
 # Set vim theme
 mkdir ~/.vim/
@@ -63,10 +58,5 @@ then
 	mv ~/.config/i3status/config ~/.config/i3status/configbak
 fi
 ln -s .i3status/config ~/.config/i3status/config
-
-# Installing some software
-sudo pacman -S gnome-screenshot
-sudo cp scripts/gscrot /usr/bin/gscrot
-sudo chmod +x /usr/bin/gscrot
 
 echo "Finished"
