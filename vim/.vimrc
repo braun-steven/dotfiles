@@ -40,7 +40,8 @@ filetype plugin indent on    " required
 set path=.,,**
 set t_Co=256
 set background=dark
-colorscheme github
+let g:solarized_termcolors=256
+colorscheme solarized
 syntax on
 set tabstop=4
 set softtabstop=4

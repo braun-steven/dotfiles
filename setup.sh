@@ -11,19 +11,18 @@ echo "Installing oh-my-zsh"
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
 
-echo "Linking .zshrc"
+echo "Linking fish"
 # Link .zshrc
-if [ -e ~/.zshrc ]
+if [ -e ~/.config/fish/config.fish ]
 then
-	echo "Created backup ~/.zshrcbak"
-	mv ~/.zshrc ~/.zshrcbak
+	echo "Created backup ~/.config/fish/config.fish.bak"
+	mv ~/.config/fish/config.fish ~/.config/fish/config.fish.bak
 fi
-ln -s ./zsh/.zshrc ~/.zshrc
-
-source ~/.zshrc
+mkdir -p ~/.config/fish/
+ln -s ./fish/config.fish ~/.config/fish/config.fish
 
 echo "Installing Vundle"
-yaourt -S vundle-git
+yay -S vundle-git
 
 # Link .vimrc
 echo "Linking .vimrc"
