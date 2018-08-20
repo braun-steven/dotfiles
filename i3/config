@@ -197,8 +197,8 @@ bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-mute 0 false &&
 bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
 bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
 # Screen off/on
-bindsym $mod+Ctrl+1 exec xrandr --output HDMI1 --off --output eDP1 --auto 
-bindsym $mod+Ctrl+0 exec xrandr --output HDMI1 --auto --output eDP1 --off
+bindsym $mod+Ctrl+1 exec xbacklight -set 100
+bindsym $mod+Ctrl+0 exec xbacklight -set 0
 
 # Enable worksapce back and forth
 workspace_auto_back_and_forth yes
@@ -222,10 +222,7 @@ bindsym $mod+Ctrl+c exec chromium
 bindsym $mod+u exec gnome-terminal -x bash -c 'cd ~/uni && ranger'
 
 # Set keyboardlayout to german
-#exec --no-startup-id setxkbmap de
-
-# Set keyboardlayout to german
-exec --no-startup-id setxkbmap us 
+exec --no-startup-id setxkbmap de
 
 # Workspace
 #exec --no-startup-id feh --bg-scale ~/Downloads/black.jpg
