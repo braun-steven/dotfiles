@@ -174,6 +174,7 @@ bindsym $mod+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
+  font pango:DejaVu Sans Mono, Icons 11
   status_command i3status
         #tray_output eDP1 
         tray_output eDP1 
@@ -181,13 +182,13 @@ bar {
 		#workspace_buttons yes
 		separator_symbol "〉"
   colors {
-    separator #515151
-    background #2d2d2d
-    statusline #cccccc
-    focused_workspace #d5f5d5 #99cc99 #000000
-    active_workspace #666666 #333333 #ffffff
-    inactive_workspace #5c5c5c #2d2d2d #999999
-    urgent_workspace #ffbdbe #f2777a #ffffff
+    separator #666666
+    background #000000
+    statusline #ffffff
+    focused_workspace #4c7899 #285577 #ffffff
+    active_workspace #333333 #5f676a #ffffff
+    inactive_workspace #333333 #222222 #888888
+    urgent_workspace #2f343a #900000 #ffffff
   }
 }
 
@@ -218,9 +219,6 @@ floating_modifier $mod
 # Chromium
 bindsym $mod+Ctrl+c exec chromium
 
-# Open range in 01Uni folder
-bindsym $mod+u exec gnome-terminal -x bash -c 'cd ~/uni && ranger'
-
 # Set keyboardlayout to german
 exec --no-startup-id setxkbmap de
 
@@ -250,7 +248,8 @@ bindsym $mod+l exec --no-startup-id i3lock -f -e -d -c 000000 &
 #smart_gaps on
 #smart_borders on
 
-client.focused #d5f5d5 #99cc99 #000000 #2d2d2d
-client.focused_inactive #858585 #393939 #888888 #292d2e
-client.unfocused #5c5c5c #2d2d2d #999999 #292d2e
+client.focused #4c7899 #285577 #ffffff #2e9ef4
+client.focused_inactive #333333 #5f676a #ffffff #484e50
+client.unfocused #333333 #222222 #888888 #292d2e
 client.urgent #2f343a #900000 #ffffff #900000
+

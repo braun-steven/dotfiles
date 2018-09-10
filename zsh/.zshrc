@@ -7,7 +7,7 @@
 # time that oh-my-zsh is loaded.
 #ZSH_THEME="gnzh"
 #ZSH_THEME="flazz"
-ZSH_THEME="robbyrussell"
+ZSH_THEME="amuse"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -98,13 +98,11 @@ alias ls='ls -lh --color=auto --group-directories-first'
 alias grep='grep --color=auto'
 
 # Pacman shortcuts
-alias pacu='sudo pacman -Syyu && yaourt -Syyua'
+alias pacu='sudo pacman -Syyu && yay -Syyua'
 alias pacs='sudo pacman -S'
 alias pacrsc='sudo pacman -Rsc'
-alias yaourt='yaourt --noconfirm'
+alias yay='yay --noconfirm'
 # Moved to update functions (see above)
-#alias pacu='sudo pacman -Syu && yaourt -Syua'
-#alias pacufull='sudo pacman -Syyu && yaourt -Syua'
 
 # zshrc editing
 alias eZ='vim ~/.zshrc'
@@ -146,21 +144,22 @@ alias gcm='git commit -m'
 alias qutebrowser='qutebrowser --backend webengine'
 
 alias gnome-screenshot='gnome-screenshot -a'
+alias vim=nvim
 
 
-export JAVA_HOME=/usr/lib/jvm/java-8-jdk
+export JAVA_HOME=/usr/lib/jvm/java-10-openjdk
 export TERMINAL=gnome-terminal
-export EDITOR=vim
-export VISUAL=vim
+export EDITOR=nvim
+export VISUAL=nvim
 
 # Maven java server debugging
-export MAVEN_OPTS=-agentlib:jdwp=transport=dt_socket,address=8000,server=y,suspend=n
+#export MAVEN_OPTS=-agentlib:jdwp=transport=dt_socket,address=8000,server=y,suspend=n
 PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
 PATH="/home/tak/bin:$PATH"
 LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/lib/"
 #PATH="/home/tak/gcc:$PATH"
 
-eval $(keychain --eval --quiet id_rsa id_rsa_tak3r07)
+eval $(keychain --eval --quiet id_rsa id_rsa_mz id_rsa_tak3r07)
 
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 function gi() { curl -L -s https://www.gitignore.io/api/$@ ;}

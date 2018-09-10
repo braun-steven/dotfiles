@@ -22,8 +22,8 @@ ln -s ./zsh/.zshrc ~/.zshrc
 
 source ~/.zshrc
 
-echo "Installing Vundle"
-yaourt -S vundle-git
+echo "Installing vim-plug"
+sudo pacman -S vim-plug
 
 # Link .vimrc
 echo "Linking .vimrc"
@@ -34,12 +34,7 @@ then
 fi
 ln -s ./vim/.vimrc ~/.vimrc
 echo "Installing plugins"
-vim +PluginInstall +qall
-
-# Set vim theme
-mkdir ~/.vim/
-mkdir ~/.vim/colors
-cp ./vim/github.vim ~/.vim/colors/
+vim +PlugInstall 
 
 # Link i3
 echo "Linking i3 configs"
