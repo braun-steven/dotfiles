@@ -57,10 +57,10 @@ bindsym $mod+Right focus right
 bindsym $mod+Up focus up
 bindsym $mod+Down focus down 
 
-#bindsym $mod+h focus left
-#bindsym $mod+l focus right
-#bindsym $mod+k focus up
-#bindsym $mod+j focus down 
+bindsym $mod+h focus left
+bindsym $mod+l focus right
+bindsym $mod+k focus up
+bindsym $mod+j focus down 
 
 
 
@@ -71,17 +71,17 @@ bindsym $mod+Mod1+Right workspace next
 bindsym $mod+Mod1+Left workspace prev
 
 
-#bindsym $mod+Ctrl+l workspace next
-#bindsym $mod+Ctrl+h workspace prev 
-#bindsym $mod+Mod1+l workspace next
-#bindsym $mod+Mod1+h workspace prev
+bindsym $mod+Ctrl+l workspace next
+bindsym $mod+Ctrl+h workspace prev 
+bindsym $mod+Mod1+l workspace next
+bindsym $mod+Mod1+h workspace prev
 
 
 # move focused window
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+odiaeresis move right
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
@@ -90,10 +90,10 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $mod+h split h
+bindsym Ctrl+Mod1+h split h
 
 # split in vertical orientation
-bindsym $mod+v split v
+bindsym Ctrl+Mod1+v split v
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
@@ -239,7 +239,7 @@ set $Locker i3lock -f -e -d -c 000000 && sleep 1
 
 # suspend/lock shortcuts
 bindsym $mod+s exec --no-startup-id $Locker && systemctl suspend  
-bindsym $mod+l exec --no-startup-id i3lock -f -e -d -c 000000 &
+bindsym $mod+space+l exec --no-startup-id i3lock -f -e -d -c 000000 &
 
 ####### i3-gaps
 #gaps inner 10

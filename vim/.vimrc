@@ -18,6 +18,10 @@ endif
  Plug 'rhysd/committia.vim'
  Plug 'lervag/vimtex'
  Plug 'JuliaEditorSupport/julia-vim'
+ Plug 'scrooloose/nerdtree'
+ Plug 'nvie/vim-flake8'
+ "Plug 'vim-syntastic/syntastic'
+ Plug 'Xuyuanp/nerdtree-git-plugin'
 " Initialize plugin system
 call plug#end()
 
@@ -75,7 +79,29 @@ let g:deoplete#file#enable_buffer_path = 1
 map <A-Right> gt
 map <A-Left> gT
 
+"split navigations
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
 " Lightline
 let g:lightline = {
       \ 'colorscheme': 'one',
       \ }
+
+" syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+" nerdtree
+map <C-n> :NERDTreeToggle<CR>
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+let python_highlight_all=1
