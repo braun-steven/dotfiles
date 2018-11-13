@@ -51,11 +51,11 @@ ZSH_THEME="amuse"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git git-flow-avh mvn)
+plugins=(git git-flow-avh mvn gradle adb)
 
 # User configuration
 
-  export PATH="/home/tak/GNUstep/Tools:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl"
+  export PATH="/home/tak/GNUstep/Tools:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/home/tak/.local/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
@@ -112,9 +112,6 @@ alias poweroff='sudo systemctl poweroff'
 # Grub update - (currently systemd-boot -> no need for that)
 #alias update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
 
-# Fast ssh-key evaluation
-alias ssh-eval-key='eval $(ssh-agent -s) && ssh-add ~/.ssh/id_rsa'
-
 # i3-shortcuts
 alias i3config='vim ~/.config/i3/config'
 alias i3statusconfig='vim ~/.config/i3status/config'
@@ -128,8 +125,6 @@ alias :q='exit'
 alias img='feh'
 alias pdf='zathura'
 
-alias sshaddtak='eval "$(ssh-agent -s)" && ssh-add ~/.ssh/id_rsa_tak3r07'
-
 alias edit-vim='vim ~/dotfiles/vim/.vimrc'
 alias edit-zsh='vim ~/dotfiles/zsh/.zshrc'
 alias edit-i3='vim ~/dotfiles/i3/config'
@@ -141,8 +136,6 @@ alias gaad='git add -A -v --dry-run'
 alias gc='git commit'
 alias gcm='git commit -m'
 
-alias qutebrowser='qutebrowser --backend webengine'
-
 alias gnome-screenshot='gnome-screenshot -a'
 alias vim=nvim
 
@@ -151,15 +144,17 @@ export JAVA_HOME=/usr/lib/jvm/java-10-openjdk
 export TERMINAL=gnome-terminal
 export EDITOR=nvim
 export VISUAL=nvim
+export WEKA_HOME=$HOME/wekafiles
 
 # Maven java server debugging
 #export MAVEN_OPTS=-agentlib:jdwp=transport=dt_socket,address=8000,server=y,suspend=n
 PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
 PATH="/home/tak/bin:$PATH"
+PATH="$PATH:/usr/bin/julia"
 LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/lib/"
 #PATH="/home/tak/gcc:$PATH"
 
-eval $(keychain --eval --quiet id_rsa id_rsa_mz id_rsa_tak3r07)
+eval $(keychain --eval --quiet id_rsa_mz id_rsa)
 
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 function gi() { curl -L -s https://www.gitignore.io/api/$@ ;}

@@ -8,17 +8,18 @@ call plug#begin('~/.vim/plugged')
 if has('nvim')
   Plug 'shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 endif
-
 " Bracket autocomplete
  Plug 'jiangmiao/auto-pairs'
  Plug 'rakr/vim-one'
+ Plug 'zchee/deoplete-jedi'
 
- Plug 'vim-airline/vim-airline'
- Plug 'JuliaEditorSupport/julia-vim'
+ Plug 'itchyny/lightline.vim'
  Plug 'artur-shaik/vim-javacomplete2'
+ Plug 'rhysd/committia.vim'
+ Plug 'lervag/vimtex'
+ Plug 'JuliaEditorSupport/julia-vim'
 " Initialize plugin system
 call plug#end()
-
 
 filetype plugin indent on    " required
 
@@ -40,14 +41,15 @@ if (empty($TMUX))
 endif
 
 colorscheme one
-let g:airline_theme='one'
 let g:one_allow_italics=1 " I love italic for comments
 set background=dark
 let g:deoplete#enable_at_startup=1
 set path=.,,**
 syntax on
-set tabstop=2
-set softtabstop=2
+set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
+"set tabstop=4
+"set softtabstop=4
+"set shiftwidth=4
 set number
 set showcmd
 set cursorline
@@ -68,3 +70,12 @@ let g:deoplete#sources = {}
 let g:deoplete#sources._ = []
 let g:deoplete#file#enable_buffer_path = 1
 "set mouse=a
+
+" Command to move among tabs in Konsole-style
+map <A-Right> gt
+map <A-Left> gT
+
+" Lightline
+let g:lightline = {
+      \ 'colorscheme': 'one',
+      \ }
