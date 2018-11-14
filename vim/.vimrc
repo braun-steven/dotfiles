@@ -50,10 +50,10 @@ set background=dark
 let g:deoplete#enable_at_startup=1
 set path=.,,**
 syntax on
-set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
-"set tabstop=4
-"set softtabstop=4
-"set shiftwidth=4
+set expandtab
+set tabstop=4
+set softtabstop=2
+set shiftwidth=2
 set number
 set showcmd
 set cursorline
