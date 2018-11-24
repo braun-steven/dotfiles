@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-  export ZSH=/home/tak/.oh-my-zsh
+export ZSH=$HOME/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -55,7 +55,7 @@ plugins=(git git-flow-avh mvn gradle adb)
 
 # User configuration
 
-  export PATH="/home/tak/GNUstep/Tools:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/home/tak/.local/bin"
+export PATH="$HOME/GNUstep/Tools:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:$HOME/.local/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
@@ -146,15 +146,18 @@ export EDITOR=nvim
 export VISUAL=nvim
 export WEKA_HOME=$HOME/wekafiles
 
+# fzf
+export FZF_DEFAULT_OPTS='--height 40% --border --exact'
+
 # Maven java server debugging
 #export MAVEN_OPTS=-agentlib:jdwp=transport=dt_socket,address=8000,server=y,suspend=n
 PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
-PATH="/home/tak/bin:$PATH"
+PATH="$HOME/bin:$PATH"
 PATH="$PATH:/usr/bin/julia"
 LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/lib/"
-#PATH="/home/tak/gcc:$PATH"
+#PATH="$HOME/gcc:$PATH"
 
 eval $(keychain --eval --quiet id_rsa_mz id_rsa)
 
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 function gi() { curl -L -s https://www.gitignore.io/api/$@ ;}
+source $HOME/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

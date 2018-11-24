@@ -22,6 +22,7 @@ endif
  Plug 'nvie/vim-flake8'
  "Plug 'vim-syntastic/syntastic'
  Plug 'Xuyuanp/nerdtree-git-plugin'
+ Plug '907th/vim-auto-save'
 " Initialize plugin system
 call plug#end()
 
@@ -60,6 +61,7 @@ set cursorline
 set wildmenu
 set showmatch
 set incsearch
+set colorcolumn=88
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 filetype plugin indent on  
@@ -105,3 +107,8 @@ map <C-n> :NERDTreeToggle<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 let python_highlight_all=1
+
+" autosave
+let g:auto_save = 1  " enable AutoSave on Vim startup
+"let g:auto_save_no_updatetime = 1  " do not change the 'updatetime' option
+"let g:auto_save_in_insert_mode = 0  " do not save while in insert mode
