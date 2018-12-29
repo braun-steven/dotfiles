@@ -14,7 +14,7 @@ ZSH_THEME="amuse"
 
 # Uncomment the following line to use hyphen-insensitive completion. Case
 # sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
+HYPHEN_INSENSITIVE="true"
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
 # DISABLE_AUTO_UPDATE="true"
@@ -51,7 +51,7 @@ ZSH_THEME="amuse"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git git-flow-avh mvn gradle adb)
+plugins=(git git-flow-avh mvn gradle adb virtualenv zsh-autosuggestions)
 
 # User configuration
 
@@ -100,7 +100,6 @@ alias grep='grep --color=auto'
 # Pacman shortcuts
 alias pacu='sudo pacman -Syyu && yay -Syyua'
 alias pacs='sudo pacman -S'
-alias pacrsc='sudo pacman -Rsc'
 alias yay='yay --noconfirm'
 # Moved to update functions (see above)
 
@@ -130,15 +129,8 @@ alias edit-zsh='vim ~/dotfiles/zsh/.zshrc'
 alias edit-i3='vim ~/dotfiles/i3/config'
 alias edit-i3status='vim ~/dotfiles/i3status/config'
 
-alias ga='git add -v'
-alias gaa='git add -A -v'
-alias gaad='git add -A -v --dry-run'
-alias gc='git commit'
-alias gcm='git commit -m'
-
 alias gnome-screenshot='gnome-screenshot -a'
 alias vim=nvim
-
 
 export JAVA_HOME=/usr/lib/jvm/java-10-openjdk
 export TERMINAL=gnome-terminal
@@ -158,6 +150,22 @@ LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/lib/"
 #PATH="$HOME/gcc:$PATH"
 
 eval $(keychain --eval --quiet id_rsa_mz id_rsa)
+
+autoload -Uz add-zsh-hook
+
+function xterm_title_precmd () {
+	print -Pn '\e]2;%n@%m %1~\a'
+}
+
+function xterm_title_preexec () {
+	print -Pn '\e]2;%n@%m %1~ %# '
+	print -n "${(q)1}\a"
+}
+
+if [[ "$TERM" == (screen*|xterm*|rxvt*) ]]; then
+	add-zsh-hook -Uz precmd xterm_title_precmd
+	add-zsh-hook -Uz preexec xterm_title_preexec
+fi
 
 function gi() { curl -L -s https://www.gitignore.io/api/$@ ;}
 source $HOME/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

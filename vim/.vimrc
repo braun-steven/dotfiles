@@ -4,14 +4,13 @@ set nocompatible               " be iMproved
 " - For Neovim: ~/.local/share/nvim/plugged
 " - Avoid using standard Vim directory names like 'plugin'
 call plug#begin('~/.vim/plugged')
+" Bash
+ Plug 'vim-scripts/bash-support.vim'
 
-if has('nvim')
-  Plug 'shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-endif
+
 " Bracket autocomplete
  Plug 'jiangmiao/auto-pairs'
  Plug 'rakr/vim-one'
- Plug 'zchee/deoplete-jedi'
 
  Plug 'itchyny/lightline.vim'
  Plug 'artur-shaik/vim-javacomplete2'
@@ -20,9 +19,25 @@ endif
  Plug 'JuliaEditorSupport/julia-vim'
  Plug 'scrooloose/nerdtree'
  Plug 'nvie/vim-flake8'
- "Plug 'vim-syntastic/syntastic'
  Plug 'Xuyuanp/nerdtree-git-plugin'
- Plug '907th/vim-auto-save'
+
+ " Deoplete
+ if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+ else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+ endif
+
+ "autosave
+ Plug 'vim-scripts/vim-auto-save'
+
+ Plug 'JuliaEditorSupport/julia-vim'
+
+ "Python-Mode
+ Plug 'python-mode/python-mode', { 'branch': 'develop' }
+
 " Initialize plugin system
 call plug#end()
 
@@ -108,7 +123,16 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 
 let python_highlight_all=1
 
-" autosave
+" Deoplete
+let g:deoplete#enable_at_startup = 1
+" Select omnibox suggestions with up/down
+inoremap <expr><Down>    pumvisible() ?   "\<C-n>"  : "\<Down>"
+inoremap <expr><Up>    pumvisible() ?   "\<C-p>"  : "\<Up>"
+
+" Autosave
 let g:auto_save = 1  " enable AutoSave on Vim startup
 "let g:auto_save_no_updatetime = 1  " do not change the 'updatetime' option
 "let g:auto_save_in_insert_mode = 0  " do not save while in insert mode
+
+" Python mode
+let g:pymode_python = 'python3'
