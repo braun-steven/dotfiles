@@ -21,14 +21,7 @@ call plug#begin('~/.vim/plugged')
  Plug 'nvie/vim-flake8'
  Plug 'Xuyuanp/nerdtree-git-plugin'
 
- " Deoplete
- if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
- else
-  Plug 'Shougo/deoplete.nvim'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
- endif
+ Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 
  "autosave
  Plug 'vim-scripts/vim-auto-save'
