@@ -18,7 +18,7 @@ call plug#begin('~/.vim/plugged')
  Plug 'lervag/vimtex'
  Plug 'JuliaEditorSupport/julia-vim'
  Plug 'scrooloose/nerdtree'
- Plug 'nvie/vim-flake8'
+ "Plug 'nvie/vim-flake8'
  Plug 'Xuyuanp/nerdtree-git-plugin'
 
  Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
@@ -28,8 +28,7 @@ call plug#begin('~/.vim/plugged')
 
  Plug 'JuliaEditorSupport/julia-vim'
 
- "Python-Mode
- Plug 'python-mode/python-mode', { 'branch': 'develop' }
+ Plug 'vim-syntastic/syntastic'
 
 " Initialize plugin system
 call plug#end()
@@ -116,16 +115,7 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 
 let python_highlight_all=1
 
-" Deoplete
-let g:deoplete#enable_at_startup = 1
-" Select omnibox suggestions with up/down
-inoremap <expr><Down>    pumvisible() ?   "\<C-n>"  : "\<Down>"
-inoremap <expr><Up>    pumvisible() ?   "\<C-p>"  : "\<Up>"
-
 " Autosave
 let g:auto_save = 1  " enable AutoSave on Vim startup
 "let g:auto_save_no_updatetime = 1  " do not change the 'updatetime' option
 "let g:auto_save_in_insert_mode = 0  " do not save while in insert mode
-
-" Python mode
-let g:pymode_python = 'python3'
