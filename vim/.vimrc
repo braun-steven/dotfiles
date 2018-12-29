@@ -28,7 +28,7 @@ call plug#begin('~/.vim/plugged')
 
  Plug 'JuliaEditorSupport/julia-vim'
 
- Plug 'vim-syntastic/syntastic'
+ Plug 'davidhalter/jedi-vim'
 
 " Initialize plugin system
 call plug#end()
@@ -119,3 +119,6 @@ let python_highlight_all=1
 let g:auto_save = 1  " enable AutoSave on Vim startup
 "let g:auto_save_no_updatetime = 1  " do not change the 'updatetime' option
 "let g:auto_save_in_insert_mode = 0  " do not save while in insert mode
+
+" Make jedi compatible with YCM
+let g:jedi#completions_enabled = 0
