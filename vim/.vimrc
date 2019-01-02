@@ -36,9 +36,6 @@ call plug#begin('~/.vim/plugged')
 
  Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 
- "autosave
- Plug 'vim-scripts/vim-auto-save'
-
  Plug 'JuliaEditorSupport/julia-vim'
 
  Plug 'davidhalter/jedi-vim'
