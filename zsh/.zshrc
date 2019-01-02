@@ -137,6 +137,7 @@ export TERMINAL=gnome-terminal
 export EDITOR=nvim
 export VISUAL=nvim
 export WEKA_HOME=$HOME/wekafiles
+export DOTFILES=$HOME/dotfiles
 
 # fzf
 export FZF_DEFAULT_OPTS='--height 40% --border --exact'
