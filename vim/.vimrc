@@ -1,16 +1,29 @@
 set nocompatible               " be iMproved
+" Remove '-- INSERT --' line since it is shown in lighline anyway
+set noshowmode
 
 " Specify a directory for plugins
 " - For Neovim: ~/.local/share/nvim/plugged
 " - Avoid using standard Vim directory names like 'plugin'
 call plug#begin('~/.vim/plugged')
+" Sensible vim config
+ Plug 'tpope/vim-sensible'
+
 " Bash
  Plug 'vim-scripts/bash-support.vim'
 
+ " Fuzzy search anything
+ Plug 'ctrlpvim/ctrlp.vim'
+
+ Plug 'airblade/vim-gitgutter'
+ Plug 'majutsushi/tagbar'
+ Plug 'ludovicchabant/vim-gutentags'
 
 " Bracket autocomplete
  Plug 'jiangmiao/auto-pairs'
- Plug 'rakr/vim-one'
+ Plug 'joshdick/onedark.vim'
+ "Plug 'rakr/vim-one'
+ Plug 'sheerun/vim-polyglot'
 
  Plug 'itchyny/lightline.vim'
  Plug 'artur-shaik/vim-javacomplete2'
@@ -52,10 +65,14 @@ if (empty($TMUX))
   endif
 endif
 
-colorscheme one
+" Set leader key to ','
+:let mapleader = ','
+
+let g:onedark_termcolors=256
+let g:onedark_terminal_italics=1
+colorscheme onedark
 let g:one_allow_italics=1 " I love italic for comments
 set background=dark
-let g:deoplete#enable_at_startup=1
 set path=.,,**
 syntax on
 set expandtab
@@ -75,13 +92,6 @@ filetype plugin indent on
 set omnifunc=syntaxcomplete#Complete
 
 autocmd FileType java setlocal omnifunc=javacomplete#Complete
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#omni_patterns = {}
-let g:deoplete#omni_patterns.java = '[^. *\t]\.\w*'
-let g:deoplete#auto_completion_start_length = 2
-let g:deoplete#sources = {}
-let g:deoplete#sources._ = []
-let g:deoplete#file#enable_buffer_path = 1
 "set mouse=a
 
 " Command to move among tabs in Konsole-style
@@ -96,18 +106,20 @@ nnoremap <C-H> <C-W><C-H>
 
 " Lightline
 let g:lightline = {
-      \ 'colorscheme': 'one',
+      \ 'colorscheme': 'onedark',
+      \ 'component_function': {
+      \   'mode': 'LightlineMode',
+      \ }
       \ }
 
-" syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+function! LightlineMode()
+  return expand('%:t') ==# '__Tagbar__' ? 'Tagbar':
+        \ expand('%:t') ==# 'ControlP' ? 'CtrlP' :
+        \ &filetype ==# 'unite' ? 'Unite' :
+        \ &filetype ==# 'vimfiler' ? 'VimFiler' :
+        \ &filetype ==# 'vimshell' ? 'VimShell' :
+        \ lightline#mode()
+endfunction
 
 " nerdtree
 map <C-n> :NERDTreeToggle<CR>
@@ -122,3 +134,19 @@ let g:auto_save = 1  " enable AutoSave on Vim startup
 
 " Make jedi compatible with YCM
 let g:jedi#completions_enabled = 0
+
+" Vim tagbar toggle
+nmap <F8> :TagbarToggle<CR>
+let g:tagbar_type_julia = {
+    \ 'ctagstype' : 'julia',
+    \ 'kinds'     : [
+        \ 't:struct', 'f:function', 'm:macro', 'c:const']
+    \ }
+
+
+" Ctrlp ignore
+let g:ctrlp_custom_ignore = 'env\|git'
+
+" Disable ycm extra conf question
+let g:ycm_confirm_extra_conf = 0
+nnoremap <Leader>t :CtrlPTag<CR>

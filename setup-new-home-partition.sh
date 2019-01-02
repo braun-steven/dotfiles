@@ -34,7 +34,11 @@ then
 fi
 ln -s ./vim/.vimrc ~/.vimrc
 echo "Installing plugins"
-vim +PlugInstall 
+vim +PlugClean +PlugUpdate 
+
+echo "Linking ctags config"
+ln -s ~/dotfiles/.ctags.d ~/.ctags.d
+
 
 # Link i3
 echo "Linking i3 configs"

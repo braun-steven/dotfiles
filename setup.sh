@@ -13,10 +13,10 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/mas
 source ~/.zshrc
 
 echo "Installing vim-plug"
-sudo pacman -S vim neovim vim-plug vim-airline google-chrome rankmirrors 
+sudo pacman -S vim neovim vim-plug google-chrome rankmirrors 
 
 echo "Installing plugins"
-vim +PlugInstall 
+vim +PlugClean +PlugUpdate
 
 # Installing some software
 sudo pacman -S gnome-screenshot
