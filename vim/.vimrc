@@ -6,14 +6,15 @@ set noshowmode
 " - For Neovim: ~/.local/share/nvim/plugged
 " - Avoid using standard Vim directory names like 'plugin'
 call plug#begin('~/.vim/plugged')
+" FZF
+ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+ Plug 'junegunn/fzf.vim'
+
 " Sensible vim config
  Plug 'tpope/vim-sensible'
 
 " Bash
  Plug 'vim-scripts/bash-support.vim'
-
- " Fuzzy search anything
- Plug 'ctrlpvim/ctrlp.vim'
 
  Plug 'airblade/vim-gitgutter'
  Plug 'majutsushi/tagbar'
@@ -67,7 +68,7 @@ endif
 
 let g:onedark_termcolors=256
 let g:onedark_terminal_italics=1
-colorscheme onedark
+colorscheme onedark 
 let g:one_allow_italics=1 " I love italic for comments
 set background=dark
 set path=.,,**

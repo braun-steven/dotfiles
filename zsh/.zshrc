@@ -170,3 +170,5 @@ fi
 
 function gi() { curl -L -s https://www.gitignore.io/api/$@ ;}
 source $HOME/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
