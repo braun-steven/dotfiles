@@ -52,17 +52,19 @@ bindsym $mod+d exec dmenu_run -l 15 -i -p "$" -sb "#2C6A86" -fn "Monospace-12:no
 
 
 # window navigation
-bindsym $mod+Left focus left
-bindsym $mod+Right focus right
-bindsym $mod+Up focus up
-bindsym $mod+Down focus down 
+# bindsym $mod+Left focus left
+# bindsym $mod+Right focus right
+# bindsym $mod+Up focus up
+# bindsym $mod+Down focus down 
 
-#bindsym $mod+h focus left
-#bindsym $mod+l focus right
-#bindsym $mod+k focus up
-#bindsym $mod+j focus down 
+bindsym Mod1+h focus left
+bindsym Mod1+l focus right
+bindsym Mod1+k focus up
+bindsym Mod1+j focus down 
 
 
+bindsym Ctrl+Mod1+h workspace prev
+bindsym Ctrl+Mod1+l workspace next
 
 # Navigate workspace next/prev
 bindsym $mod+Ctrl+Right workspace next

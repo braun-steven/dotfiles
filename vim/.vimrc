@@ -1,11 +1,34 @@
+set hidden
 set nocompatible               " be iMproved
 " Remove '-- INSERT --' line since it is shown in lighline anyway
 set noshowmode
+
+" Disable arrows
+let g:elite_mode=1
 
 " Specify a directory for plugins
 " - For Neovim: ~/.local/share/nvim/plugged
 " - Avoid using standard Vim directory names like 'plugin'
 call plug#begin('~/.vim/plugged')
+ " Automatically manage tabs/spaces 
+ Plug 'tpope/vim-sleuth'
+
+ " Comment/uncomment with gc
+ Plug 'tpope/vim-commentary'
+ Plug 'ervandew/supertab'
+
+" Buftabline
+ Plug 'ap/vim-buftabline'
+
+" Linting
+ Plug 'w0rp/ale'
+
+ " Python formatting with :Black
+ Plug 'ambv/black'
+
+ " Python virtual envs
+ Plug 'plytophogy/vim-virtualenv'
+
 " FZF
  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
  Plug 'junegunn/fzf.vim'
@@ -16,23 +39,28 @@ call plug#begin('~/.vim/plugged')
 " Bash
  Plug 'vim-scripts/bash-support.vim'
 
+ " Git info on the sidebar
  Plug 'airblade/vim-gitgutter'
+
+ " Tagbar with <F8>
  Plug 'majutsushi/tagbar'
+
+ " CTag automation
  Plug 'ludovicchabant/vim-gutentags'
 
 " Bracket autocomplete
  Plug 'jiangmiao/auto-pairs'
  Plug 'joshdick/onedark.vim'
- "Plug 'rakr/vim-one'
  Plug 'sheerun/vim-polyglot'
 
+ " Statusline
  Plug 'itchyny/lightline.vim'
- Plug 'artur-shaik/vim-javacomplete2'
+
+ " Git commit extension
  Plug 'rhysd/committia.vim'
  Plug 'lervag/vimtex'
  Plug 'JuliaEditorSupport/julia-vim'
  Plug 'scrooloose/nerdtree'
- "Plug 'nvie/vim-flake8'
  Plug 'Xuyuanp/nerdtree-git-plugin'
 
  Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
@@ -121,6 +149,7 @@ endfunction
 
 " nerdtree
 map <C-n> :NERDTreeToggle<CR>
+map <C-m> :TagbarToggle<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 let python_highlight_all=1
@@ -141,10 +170,27 @@ let g:tagbar_type_julia = {
         \ 't:struct', 'f:function', 'm:macro', 'c:const']
     \ }
 
+" FZF
+nmap ; :Buffers<CR>
+nmap <Leader>t :Tags<CR>
+nmap <Leader>f :Files<CR>
 
-" Ctrlp ignore
-let g:ctrlp_custom_ignore = 'env\|git'
 
 " Disable ycm extra conf question
 let g:ycm_confirm_extra_conf = 0
-nnoremap <Leader>t :CtrlPTag<CR>
+
+" Buftabline
+nnoremap <C-N> :bnext<CR>
+nnoremap <C-P> :bprev<CR>
+
+" Disable arrow movement, resize splits instead.
+if get(g:, 'elite_mode')
+	nnoremap <Up>    :resize +2<CR>
+	nnoremap <Down>  :resize -2<CR>
+	nnoremap <Left>  :vertical resize +2<CR>
+	nnoremap <Right> :vertical resize -2<CR>
+endif
+
+" Clear search with <C-L> 
+nnoremap <silent> <C-L> :nohlsearch<CR><C-L>
+
