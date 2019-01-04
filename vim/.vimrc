@@ -24,9 +24,6 @@ call plug#begin('~/.vim/plugged')
  Plug 'desmap/ale-sensible'
  Plug 'w0rp/ale'
 
- " Python formatting with :Black
- Plug 'ambv/black'
-
  " Python virtual envs
  Plug 'plytophogy/vim-virtualenv'
 
@@ -73,13 +70,6 @@ call plug#begin('~/.vim/plugged')
 
  Plug 'davidhalter/jedi-vim'
 
- " Utility Snippets
- " Track the engine.
- Plug 'SirVer/ultisnips'
-
- " " Snippets are separated from the engine
- Plug 'honza/vim-snippets'
- 
 " Initialize plugin system
 call plug#end()
 
@@ -198,12 +188,6 @@ endif
 
 " Clear search with <C-L> 
 nnoremap <esc> :noh<return><esc>
-
-" Util snips config
-" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<c-x><c-c>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 " Ale fixers
 let g:ale_fixers = ['prettier', 'standard'] 
