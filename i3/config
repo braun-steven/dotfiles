@@ -10,6 +10,7 @@
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
 set $mod Mod4
+set $mod2 Mod1
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -57,53 +58,42 @@ bindsym $mod+d exec dmenu_run -l 15 -i -p "$" -sb "#2C6A86" -fn "Monospace-12:no
 # bindsym $mod+Up focus up
 # bindsym $mod+Down focus down 
 
-bindsym Mod1+h focus left
-bindsym Mod1+l focus right
-bindsym Mod1+k focus up
-bindsym Mod1+j focus down 
+bindsym $mod+h focus left
+bindsym $mod+l focus right
+bindsym $mod+k focus up
+bindsym $mod+j focus down 
 
-
-bindsym Ctrl+Mod1+h workspace prev
-bindsym Ctrl+Mod1+l workspace next
 
 # Navigate workspace next/prev
-bindsym $mod+Ctrl+Right workspace next
-bindsym $mod+Ctrl+Left workspace prev 
-bindsym $mod+Mod1+Right workspace next
-bindsym $mod+Mod1+Left workspace prev
-
-
-#bindsym $mod+Ctrl+l workspace next
-#bindsym $mod+Ctrl+h workspace prev 
-#bindsym $mod+Mod1+l workspace next
-#bindsym $mod+Mod1+h workspace prev
+bindsym $mod+Ctrl+l workspace next
+bindsym $mod+Ctrl+h workspace prev 
 
 
 # move focused window
-#bindsym $mod+Shift+h move left
-#bindsym $mod+Shift+j move down
-#bindsym $mod+Shift+k move up
-#bindsym $mod+Shift+l move right
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
 
 # alternatively, you can use the cursor keys:
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
+# bindsym $mod+Shift+Left move left
+# bindsym $mod+Shift+Down move down
+# bindsym $mod+Shift+Up move up
+# bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $mod+h split h
+bindsym $mod+$mod2+h split h
 
 # split in vertical orientation
-bindsym $mod+v split v
+bindsym $mod+$mod2+v split v
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
-# bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
+# bindsym $mod+$mod2+s layout stacking
+bindsym $mod+$mod2+w layout tabbed
+bindsym $mod+$mod2+e layout toggle split
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
@@ -176,22 +166,22 @@ bindsym $mod+r mode "resize"
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
-bar {
-	font pango:DejaVu Sans Mono, Icons 11
-	status_command i3status
-	tray_output primary
-	position top 
-	separator_symbol "〉"
-  colors {
-    separator #666666
-    background #000000
-    statusline #ffffff
-    focused_workspace #4c7899 #285577 #ffffff
-    active_workspace #333333 #5f676a #ffffff
-    inactive_workspace #333333 #222222 #888888
-    urgent_workspace #2f343a #900000 #ffffff
-  }
-}
+# bar {
+# 	font pango:DejaVu Sans Mono, Icons 11
+# 	status_command i3status
+# 	tray_output primary
+# 	position top 
+# 	separator_symbol "〉"
+#   colors {
+#     separator #666666
+#     background #000000
+#     statusline #ffffff
+#     focused_workspace #4c7899 #285577 #ffffff
+#     active_workspace #333333 #5f676a #ffffff
+#     inactive_workspace #333333 #222222 #888888
+#     urgent_workspace #2f343a #900000 #ffffff
+#   }
+# }
 
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-mute 0 false && pactl set-sink-volume alsa_output.pci-0000_00_1b.0.analog-stereo +5% && killall -SIGUSR1 i3status
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-mute 0 false && pactl set-sink-volume alsa_output.pci-0000_00_1b.0.analog-stereo -5% && killall -SIGUSR1 i3status
@@ -221,10 +211,10 @@ floating_modifier $mod
 bindsym $mod+Ctrl+c exec chromium
 
 # Set keyboardlayout to german
-exec --no-startup-id setxkbmap de
+exec --no-startup-id setxkbmap us altgr-intl
 
-# Workspace
-#exec --no-startup-id feh --bg-scale ~/Downloads/black.jpg
+# Wallpaper 
+exec --no-startup-id feh --bg-scale ~/Downloads/solarized-wallpaper.png
  
 
 # i3 lock
@@ -235,22 +225,31 @@ exec --no-startup-id pa-applet
 # nm-applet
 exec --no-startup-id nm-applet --tray --sm-disable & 
 
-
 # locker shortcut
 set $Locker i3lock -f -e -d -c 000000 && sleep 1
 
 # suspend/lock shortcuts
-bindsym $mod+s exec --no-startup-id $Locker && systemctl suspend  
-bindsym $mod+l exec --no-startup-id i3lock -f -e -d -c 000000 &
+bindsym $mod+$mod2+s exec --no-startup-id $Locker && systemctl suspend  
+bindsym $mod+$mod2+l exec --no-startup-id i3lock -f -e -d -c 000000 &
 
 ####### i3-gaps
-#gaps inner 10
-#gaps outer -4
-#smart_gaps on
-#smart_borders on
+for_window [class="^.*"] border pixel 3
+gaps inner 8
+gaps outer 5
+smart_gaps on
+smart_borders on
 
-client.focused #4c7899 #285577 #ffffff #2e9ef4
-client.focused_inactive #333333 #5f676a #ffffff #484e50
-client.unfocused #333333 #222222 #888888 #292d2e
-client.urgent #2f343a #900000 #ffffff #900000
+client.focused          #002b36 #586e75 #fdf6e3 #268bd2
+client.focused_inactive #002b36 #073642 #839496 #073642
+client.unfocused        #002b36 #073642 #839496 #073642
+client.urgent           #002b36 #dc322f #fdf6e3 #002b36 
+# client.focused #4c7899 #285577 #ffffff #2e9ef4
+# client.focused_inactive #333333 #5f676a #ffffff #484e50
+# client.unfocused #333333 #222222 #888888 #292d2e
+# client.urgent #2f343a #900000 #ffffff #900000
 
+# Polybar
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+
+# Compton
+exec compton -bc -r 3 -l -4 -t -4 --shadow-exclude '_GTK_FRAME_EXTENTS@:c'

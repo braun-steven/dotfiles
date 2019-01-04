@@ -3,6 +3,10 @@ set nocompatible               " be iMproved
 " Remove '-- INSERT --' line since it is shown in lighline anyway
 set noshowmode
 
+" Reload .vimrc on save
+autocmd! bufwritepost .vimrc source %
+
+
 " Disable arrows
 let g:elite_mode=1
 
@@ -10,17 +14,14 @@ let g:elite_mode=1
 " - For Neovim: ~/.local/share/nvim/plugged
 " - Avoid using standard Vim directory names like 'plugin'
 call plug#begin('~/.vim/plugged')
- " Automatically manage tabs/spaces 
- Plug 'tpope/vim-sleuth'
+ Plug 'lifepillar/vim-solarized8'
 
  " Comment/uncomment with gc
  Plug 'tpope/vim-commentary'
- Plug 'ervandew/supertab'
-
-" Buftabline
- Plug 'ap/vim-buftabline'
+ "Plug 'ervandew/supertab'
 
 " Linting
+ Plug 'desmap/ale-sensible'
  Plug 'w0rp/ale'
 
  " Python formatting with :Black
@@ -50,7 +51,10 @@ call plug#begin('~/.vim/plugged')
 
 " Bracket autocomplete
  Plug 'jiangmiao/auto-pairs'
+
  Plug 'joshdick/onedark.vim'
+
+ " Syntax highlighting
  Plug 'sheerun/vim-polyglot'
 
  " Statusline
@@ -58,17 +62,24 @@ call plug#begin('~/.vim/plugged')
 
  " Git commit extension
  Plug 'rhysd/committia.vim'
- Plug 'lervag/vimtex'
  Plug 'JuliaEditorSupport/julia-vim'
+
+ " File tree with <C-n>
  Plug 'scrooloose/nerdtree'
  Plug 'Xuyuanp/nerdtree-git-plugin'
 
+ " Autocomplete framework
  Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
-
- Plug 'JuliaEditorSupport/julia-vim'
 
  Plug 'davidhalter/jedi-vim'
 
+ " Utility Snippets
+ " Track the engine.
+ Plug 'SirVer/ultisnips'
+
+ " " Snippets are separated from the engine
+ Plug 'honza/vim-snippets'
+ 
 " Initialize plugin system
 call plug#end()
 
@@ -91,13 +102,13 @@ if (empty($TMUX))
   endif
 endif
 
-" Set leader key to ','
-:let mapleader = ','
+" Set leader key to <space> 
+:let mapleader = ' '
 
 let g:onedark_termcolors=256
 let g:onedark_terminal_italics=1
-colorscheme onedark 
-let g:one_allow_italics=1 " I love italic for comments
+colorscheme solarized8
+" colorscheme onedark 
 set background=dark
 set path=.,,**
 syntax on
@@ -111,7 +122,7 @@ set cursorline
 set wildmenu
 set showmatch
 set incsearch
-set colorcolumn=88
+set colorcolumn=120
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 filetype plugin indent on  
@@ -119,10 +130,6 @@ set omnifunc=syntaxcomplete#Complete
 
 autocmd FileType java setlocal omnifunc=javacomplete#Complete
 "set mouse=a
-
-" Command to move among tabs in Konsole-style
-map <A-Right> gt
-map <A-Left> gT
 
 "split navigations
 nnoremap <C-J> <C-W><C-J>
@@ -132,11 +139,18 @@ nnoremap <C-H> <C-W><C-H>
 
 " Lightline
 let g:lightline = {
-      \ 'colorscheme': 'onedark',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ], [ 'readonly', 'relativepath', 'modified' ] ]
+      \ },
+      \ 'colorscheme': 'solarized',
       \ 'component_function': {
-      \   'mode': 'LightlineMode',
+      \   'mode': 'LightlineMode'
       \ }
       \ }
+
+" function! LightLineFilename()
+"   return fnamemodify(expand("%"), ":~:.")
+" endfunction
 
 function! LightlineMode()
   return expand('%:t') ==# '__Tagbar__' ? 'Tagbar':
@@ -153,11 +167,6 @@ map <C-m> :TagbarToggle<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 let python_highlight_all=1
-
-" Autosave
-let g:auto_save = 1  " enable AutoSave on Vim startup
-"let g:auto_save_no_updatetime = 1  " do not change the 'updatetime' option
-"let g:auto_save_in_insert_mode = 0  " do not save while in insert mode
 
 " Make jedi compatible with YCM
 let g:jedi#completions_enabled = 0
@@ -179,10 +188,6 @@ nmap <Leader>f :Files<CR>
 " Disable ycm extra conf question
 let g:ycm_confirm_extra_conf = 0
 
-" Buftabline
-nnoremap <C-N> :bnext<CR>
-nnoremap <C-P> :bprev<CR>
-
 " Disable arrow movement, resize splits instead.
 if get(g:, 'elite_mode')
 	nnoremap <Up>    :resize +2<CR>
@@ -192,5 +197,13 @@ if get(g:, 'elite_mode')
 endif
 
 " Clear search with <C-L> 
-nnoremap <silent> <C-L> :nohlsearch<CR><C-L>
+nnoremap <esc> :noh<return><esc>
 
+" Util snips config
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<c-x><c-c>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" Ale fixers
+let g:ale_fixers = ['prettier', 'standard'] 
