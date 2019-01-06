@@ -1,5 +1,4 @@
 set hidden
-set nocompatible               " be iMproved
 " Remove '-- INSERT --' line since it is shown in lighline anyway
 set noshowmode
 
@@ -14,14 +13,24 @@ let g:elite_mode=1
 " - For Neovim: ~/.local/share/nvim/plugged
 " - Avoid using standard Vim directory names like 'plugin'
 call plug#begin('~/.vim/plugged')
+ " Automatically handle tabs/spaces
+ Plug 'tpope/vim-sleuth'
+
+ " Vim git integration
+ Plug 'tpope/vim-fugitive'
+ Plug 'tpope/vim-rhubarb'
+ Plug 'shumphrey/fugitive-gitlab.vim'
+
+ " Git info on the sidebar
+ Plug 'airblade/vim-gitgutter'
+
  Plug 'lifepillar/vim-solarized8'
 
  " Comment/uncomment with gc
  Plug 'tpope/vim-commentary'
- "Plug 'ervandew/supertab'
+ Plug 'ervandew/supertab'
 
 " Linting
- Plug 'desmap/ale-sensible'
  Plug 'w0rp/ale'
 
  " Python virtual envs
@@ -37,8 +46,6 @@ call plug#begin('~/.vim/plugged')
 " Bash
  Plug 'vim-scripts/bash-support.vim'
 
- " Git info on the sidebar
- Plug 'airblade/vim-gitgutter'
 
  " Tagbar with <F8>
  Plug 'majutsushi/tagbar'
@@ -48,8 +55,6 @@ call plug#begin('~/.vim/plugged')
 
 " Bracket autocomplete
  Plug 'jiangmiao/auto-pairs'
-
- Plug 'joshdick/onedark.vim'
 
  " Syntax highlighting
  Plug 'sheerun/vim-polyglot'
@@ -65,13 +70,25 @@ call plug#begin('~/.vim/plugged')
  Plug 'scrooloose/nerdtree'
  Plug 'Xuyuanp/nerdtree-git-plugin'
 
- " Autocomplete framework
- Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
+ "" Autocomplete framework
+ " Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
+
+ if has('nvim')
+    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+ else
+   Plug 'Shougo/deoplete.nvim'
+   Plug 'roxma/nvim-yarp'
+   Plug 'roxma/vim-hug-neovim-rpc'
+ endif
+ Plug 'zchee/deoplete-jedi'
 
  Plug 'davidhalter/jedi-vim'
 
 " Initialize plugin system
 call plug#end()
+
+" Use deoplete
+let g:deoplete#enable_at_startup = 1
 
 filetype plugin indent on    " required
 
@@ -95,8 +112,8 @@ endif
 " Set leader key to <space> 
 :let mapleader = ' '
 
-let g:onedark_termcolors=256
-let g:onedark_terminal_italics=1
+" let g:onedark_termcolors=256
+" let g:onedark_terminal_italics=1
 colorscheme solarized8
 " colorscheme onedark 
 set background=dark
@@ -115,7 +132,6 @@ set incsearch
 set colorcolumn=120
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
-filetype plugin indent on  
 set omnifunc=syntaxcomplete#Complete
 
 autocmd FileType java setlocal omnifunc=javacomplete#Complete
@@ -138,10 +154,6 @@ let g:lightline = {
       \ }
       \ }
 
-" function! LightLineFilename()
-"   return fnamemodify(expand("%"), ":~:.")
-" endfunction
-
 function! LightlineMode()
   return expand('%:t') ==# '__Tagbar__' ? 'Tagbar':
         \ expand('%:t') ==# 'ControlP' ? 'CtrlP' :
@@ -162,7 +174,6 @@ let python_highlight_all=1
 let g:jedi#completions_enabled = 0
 
 " Vim tagbar toggle
-nmap <F8> :TagbarToggle<CR>
 let g:tagbar_type_julia = {
     \ 'ctagstype' : 'julia',
     \ 'kinds'     : [
@@ -186,8 +197,8 @@ if get(g:, 'elite_mode')
 	nnoremap <Right> :vertical resize -2<CR>
 endif
 
-" Clear search with <C-L> 
-nnoremap <esc> :noh<return><esc>
-
 " Ale fixers
 let g:ale_fixers = ['prettier', 'standard'] 
+
+" Clear search
+nnoremap <CR> :noh<CR><CR>
