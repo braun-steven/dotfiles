@@ -60,7 +60,7 @@ font-1 = "Iosevka Nerd Font:antialias=false:size=12;2"
 
 modules-left = i3
 modules-center =  
-modules-right = filesystem xbacklight pulseaudio xkeyboard memory cpu wlan vpn eth battery date powermenu
+modules-right = filesystem xbacklight pulseaudio xkeyboard memory wlan vpn eth battery date powermenu
 
 tray-position = right
 tray-padding = 2

@@ -51,7 +51,7 @@ HYPHEN_INSENSITIVE="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git git-flow-avh mvn gradle adb virtualenv)
+plugins=(git git-flow-avh mvn gradle adb)
 
 # User configuration
 
@@ -131,6 +131,8 @@ alias edit-i3status='vim ~/dotfiles/i3status/config'
 
 alias gnome-screenshot='gnome-screenshot -a'
 alias vim=nvim
+
+alias envactivate='source ./env/bin/activate'
 
 export JAVA_HOME=/usr/lib/jvm/java-10-openjdk
 export TERMINAL=gnome-terminal

@@ -13,6 +13,7 @@ let g:elite_mode=1
 " - For Neovim: ~/.local/share/nvim/plugged
 " - Avoid using standard Vim directory names like 'plugin'
 call plug#begin('~/.vim/plugged')
+
  " Automatically handle tabs/spaces
  Plug 'tpope/vim-sleuth'
 
@@ -28,7 +29,7 @@ call plug#begin('~/.vim/plugged')
 
  " Comment/uncomment with gc
  Plug 'tpope/vim-commentary'
- Plug 'ervandew/supertab'
+ "Plug 'ervandew/supertab'
 
 " Linting
  Plug 'w0rp/ale'
@@ -61,9 +62,12 @@ call plug#begin('~/.vim/plugged')
 
  " Statusline
  Plug 'itchyny/lightline.vim'
+ Plug 'maximbaz/lightline-ale'
 
  " Git commit extension
  Plug 'rhysd/committia.vim'
+
+ " Julia support
  Plug 'JuliaEditorSupport/julia-vim'
 
  " File tree with <C-n>
@@ -81,14 +85,18 @@ call plug#begin('~/.vim/plugged')
    Plug 'roxma/vim-hug-neovim-rpc'
  endif
  Plug 'zchee/deoplete-jedi'
-
+ Plug 'Shougo/neco-syntax'
  Plug 'davidhalter/jedi-vim'
 
+ " Hex color preview
+ Plug 'lilydjwg/colorizer'
 " Initialize plugin system
 call plug#end()
 
 " Use deoplete
 let g:deoplete#enable_at_startup = 1
+
+
 
 filetype plugin indent on    " required
 
@@ -112,13 +120,10 @@ endif
 " Set leader key to <space> 
 :let mapleader = ' '
 
-" let g:onedark_termcolors=256
-" let g:onedark_terminal_italics=1
-colorscheme solarized8
-" colorscheme onedark 
+syntax on 
 set background=dark
+colorscheme solarized8
 set path=.,,**
-syntax on
 set expandtab
 set tabstop=4
 set softtabstop=2
@@ -130,11 +135,9 @@ set wildmenu
 set showmatch
 set incsearch
 set colorcolumn=120
-autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+"autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
-set omnifunc=syntaxcomplete#Complete
-
-autocmd FileType java setlocal omnifunc=javacomplete#Complete
+"set omnifunc=syntaxcomplete#Complete
 "set mouse=a
 
 "split navigations
@@ -171,7 +174,7 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 let python_highlight_all=1
 
 " Make jedi compatible with YCM
-let g:jedi#completions_enabled = 0
+"let g:jedi#completions_enabled = 0
 
 " Vim tagbar toggle
 let g:tagbar_type_julia = {
@@ -187,7 +190,7 @@ nmap <Leader>f :Files<CR>
 
 
 " Disable ycm extra conf question
-let g:ycm_confirm_extra_conf = 0
+"let g:ycm_confirm_extra_conf = 0
 
 " Disable arrow movement, resize splits instead.
 if get(g:, 'elite_mode')
@@ -202,3 +205,16 @@ let g:ale_fixers = ['prettier', 'standard']
 
 " Clear search
 nnoremap <CR> :noh<CR><CR>
+
+" Jedi
+let g:jedi#rename_command = "<leader>r"
+let g:jedi#auto_close_doc = 1
+let g:jedi#rename_command = '<Leader>r'
+let g:jedi#usages_command = '<Leader>u'
+let g:jedi#goto_command = "gd"
+let g:jedi#show_call_signatures = "1"
+" Disable since deoplete is enabled
+let g:jedi#completions_enabled = 0
+
+
+
