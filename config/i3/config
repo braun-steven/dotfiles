@@ -48,8 +48,8 @@ set $mybordercol #3988AC
 set $mybgcol #2C6A86 
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run -l 15 -i -p "$" -sb "#2C6A86" -fn "Monospace-12:normal"
-#bindsym $mod+d exec rofi -combi-modi window#drun#ssh -font "hack 13" -show combi
+# bindsym $mod+d exec dmenu_run -l 15 -i -p "$" -sb "#2C6A86" -fn "Monospace-12:normal"
+bindsym $mod+d exec rofi -show run
 
 
 # window navigation
@@ -256,7 +256,7 @@ smart_borders on
         # "cyan":    "#2aa198",
         # "green":   "#859900",
 
-client.focused          #4c7899 #285577 #fdf6e3 #268bd2
+client.focused          #4c7899 #4c7899 #fdf6e3 #268bd2
 # client.focused          #4c7899 #285577 #fdf6e3 #268bd2
 client.focused_inactive #002b36 #073642 #839496 #073642
 client.unfocused        #002b36 #073642 #839496 #073642
