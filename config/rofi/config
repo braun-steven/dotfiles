@@ -2,6 +2,7 @@ rofi.combi-modi:    window,drun,ssh
 rofi.theme:         solarized 
 rofi.font:          hack 11
 rofi.modi:          combi 
+rofi.matching:      fuzzy
 
 
 rofi.kb-row-up:                      Up,Control+k,Shift+Tab,Shift+ISO_Left_Tab
