@@ -23,8 +23,7 @@ function link {
 	from=$2
 	to=$3
 
-	if[ -e $1 ]
-	then
+	if [ -e $1 ]; then
 		echo "Existing $1 config found. Creating backup with .bak extension ..."
 		mv $3 $3.bak
 	fi
