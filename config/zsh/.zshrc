@@ -124,10 +124,10 @@ alias :q='exit'
 alias img='feh'
 alias pdf='zathura'
 
-alias edit-vim='vim ~/dotfiles/vim/.vimrc'
-alias edit-zsh='vim ~/dotfiles/zsh/.zshrc'
-alias edit-i3='vim ~/dotfiles/i3/config'
-alias edit-i3status='vim ~/dotfiles/i3status/config'
+alias edit-vim='vim ~/dotfiles/config/vim/.vimrc'
+alias edit-zsh='vim ~/dotfiles/config/zsh/.zshrc'
+alias edit-i3='vim ~/dotfiles/config/i3/config'
+alias edit-i3status='vim ~/dotfiles/config/i3status/config'
 
 alias gnome-screenshot='gnome-screenshot -a'
 alias vim=nvim

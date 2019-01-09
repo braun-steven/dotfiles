@@ -13,6 +13,13 @@ let g:elite_mode=1
 " - For Neovim: ~/.local/share/nvim/plugged
 " - Avoid using standard Vim directory names like 'plugin'
 call plug#begin('~/.vim/plugged')
+ Plug 'dracula/vim', { 'as': 'dracula' }
+
+ " Show buffer in tabline
+ Plug 'ap/vim-buftabline'
+
+ " Quoting/paranthesizing made simple
+ Plug 'tpope/vim-surround'
 
  " Automatically handle tabs/spaces
  Plug 'tpope/vim-sleuth'
@@ -75,28 +82,14 @@ call plug#begin('~/.vim/plugged')
  Plug 'Xuyuanp/nerdtree-git-plugin'
 
  "" Autocomplete framework
- " Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
+ Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 
- if has('nvim')
-    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
- else
-   Plug 'Shougo/deoplete.nvim'
-   Plug 'roxma/nvim-yarp'
-   Plug 'roxma/vim-hug-neovim-rpc'
- endif
- Plug 'zchee/deoplete-jedi'
- Plug 'Shougo/neco-syntax'
  Plug 'davidhalter/jedi-vim'
 
  " Hex color preview
  Plug 'lilydjwg/colorizer'
 " Initialize plugin system
 call plug#end()
-
-" Use deoplete
-let g:deoplete#enable_at_startup = 1
-
-
 
 filetype plugin indent on    " required
 
@@ -167,14 +160,11 @@ function! LightlineMode()
 endfunction
 
 " nerdtree
-map <C-n> :NERDTreeToggle<CR>
-map <C-m> :TagbarToggle<CR>
+map <F5> :NERDTreeToggle<CR>
+map <F6> :TagbarToggle<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 let python_highlight_all=1
-
-" Make jedi compatible with YCM
-"let g:jedi#completions_enabled = 0
 
 " Vim tagbar toggle
 let g:tagbar_type_julia = {
@@ -184,13 +174,12 @@ let g:tagbar_type_julia = {
     \ }
 
 " FZF
-nmap ; :Buffers<CR>
 nmap <Leader>t :Tags<CR>
 nmap <Leader>f :Files<CR>
 
 
 " Disable ycm extra conf question
-"let g:ycm_confirm_extra_conf = 0
+let g:ycm_confirm_extra_conf = 0
 
 " Disable arrow movement, resize splits instead.
 if get(g:, 'elite_mode')
@@ -209,12 +198,25 @@ nnoremap <CR> :noh<CR><CR>
 " Jedi
 let g:jedi#rename_command = "<leader>r"
 let g:jedi#auto_close_doc = 1
-let g:jedi#rename_command = '<Leader>r'
 let g:jedi#usages_command = '<Leader>u'
 let g:jedi#goto_command = "gd"
 let g:jedi#show_call_signatures = "1"
 " Disable since deoplete is enabled
 let g:jedi#completions_enabled = 0
 
-
-
+" Buftabline
+let g:buftabline_numbers = 1
+let g:buftabline_indicators = 1
+nnoremap <Leader>b :Buffers<CR>
+nnoremap <Leader>n :bnext<CR>
+nnoremap <Leader>p :bprev<CR>
+nnoremap <Leader>1 :b1<CR>
+nnoremap <Leader>2 :b2<CR>
+nnoremap <Leader>3 :b3<CR>
+nnoremap <Leader>4 :b4<CR>
+nnoremap <Leader>5 :b5<CR>
+nnoremap <Leader>6 :b6<CR>
+nnoremap <Leader>7 :b7<CR>
+nnoremap <Leader>8 :b8<CR>
+nnoremap <Leader>9 :b9<CR>
+nnoremap <Leader>0 :b10<CR>
