@@ -32,7 +32,7 @@ function link {
 	echo "$2 -> $3"
 }
 
-dotfiles_dir="~/dotfiles"
+dotfiles_dir="$HOME/dotfiles"
 
 # Setup links 
 link "zsh" $dotfiles_dir/config/zsh/.zshrc $HOME/.zshrc
