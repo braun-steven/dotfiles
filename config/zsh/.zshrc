@@ -171,6 +171,11 @@ if [[ "$TERM" == (screen*|xterm*|rxvt*) ]]; then
 fi
 
 function gi() { curl -L -s https://www.gitignore.io/api/$@ ;}
+
+if [[ ! -d $HOME/zsh-syntax-highlighting ]]; then
+	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $HOME/
+
+fi
 source $HOME/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
