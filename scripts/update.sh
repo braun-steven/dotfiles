@@ -19,6 +19,6 @@
 
 set -o nounset                              # Treat unset variables as an error
 
-git add . -v
+git add .. -v
 git commit -m "Update dotfiles"
 git push

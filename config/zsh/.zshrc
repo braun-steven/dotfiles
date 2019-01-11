@@ -51,7 +51,7 @@ HYPHEN_INSENSITIVE="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git git-flow-avh mvn gradle adb)
+plugins=(git git-flow-avh mvn gradle)
 
 # User configuration
 
@@ -128,6 +128,8 @@ alias edit-vim='vim ~/dotfiles/config/vim/.vimrc'
 alias edit-zsh='vim ~/dotfiles/config/zsh/.zshrc'
 alias edit-i3='vim ~/dotfiles/config/i3/config'
 alias edit-i3status='vim ~/dotfiles/config/i3status/config'
+alias edit-xresources='vim ~/.Xresources'
+alias reload-xresources='xrdb -merge ~/.Xresources'
 
 alias gnome-screenshot='gnome-screenshot -a'
 alias vim=nvim
@@ -143,6 +145,11 @@ export DOTFILES=$HOME/dotfiles
 
 # fzf
 export FZF_DEFAULT_OPTS='--height 40% --border --exact'
+
+bindkey '^w' backward-kill-word
+bindkey '^a' beginning-of-line
+bindkey '^e' end-of-line
+
 
 # Maven java server debugging
 #export MAVEN_OPTS=-agentlib:jdwp=transport=dt_socket,address=8000,server=y,suspend=n
