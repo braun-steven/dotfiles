@@ -42,3 +42,5 @@ link "vim" $dotfiles_dir/config/vim/.vimrc $HOME/.vimrc
 link "polybar" $dotfiles_dir/config/polybar $HOME/.config/polybar
 link "flake8" $dotfiles_dir/config/flake/flake8 $HOME/.flake8
 link "rofi" $dotfiles_dir/config/rofi $HOME/.config/rofi
+link "compton" $dotfiles_dir/config/compton.conf $HOME/.config/compton.conf
+

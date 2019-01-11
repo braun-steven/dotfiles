@@ -17,16 +17,37 @@
 ;==========================================================
 
 [colors]
-;background = ${xrdb:color0:#222}
-background = #002b36
-background-alt = #073642
-;foreground = ${xrdb:color7:#222}
-foreground = #93a1a1
-foreground-alt = #eee8d5
-primary = #ffb52a
-secondary = #e60053
-alert = #bd2c40
-red = dc322f
+background = ${xrdb:color0:#ffffff}
+foreground = ${xrdb:foreground:#ffffff}
+
+black = ${xrdb:color0:#ffffff}
+gret = ${xrdb:color8:#ffffff}
+white = ${xrdb:color7:#ffffff}
+
+red = ${xrdb:color1:#ffffff}
+blue = ${xrdb:color4:#ffffff}
+magneta = ${xrdb:color5:#ffffff}
+cyan = ${xrdb:color6:#ffffff}
+green = ${xrdb:color2:#ffffff}
+yellow = ${xrdb:color3:#ffffff}
+orange = ${xrdb:color16:#ffffff}
+
+base00 = ${xrdb:color0:#000000}
+base01 = ${xrdb:color10:#000000}
+base02 = ${xrdb:color11:#000000}
+base03 = ${xrdb:color8:#000000}
+base04 = ${xrdb:color12:#000000}
+base05 = ${xrdb:color7:#000000}
+base06 = ${xrdb:color13:#000000}
+base07 = ${xrdb:color15:#000000}
+base08 = ${xrdb:color1:#000000}
+base09 = ${xrdb:color9:#000000}
+base0A = ${xrdb:color3:#000000}
+base0B = ${xrdb:color2:#000000}
+base0C = ${xrdb:color6:#000000}
+base0D = ${xrdb:color4:#000000}
+base0E = ${xrdb:color5:#000000}
+base0F = ${xrdb:color14:#000000}
 
 [bar/example]
 ;monitor = ${env:MONITOR:HDMI-1}
@@ -97,7 +118,7 @@ type = internal/xkeyboard
 blacklist-0 = num lock
 
 format-prefix = " "
-format-prefix-foreground = ${colors.foreground-alt}
+format-prefix-foreground = ${colors.foreground}
 ;format-prefix-underline = ${colors.secondary}
 
 label-layout = %layout%
@@ -116,13 +137,13 @@ mount-0 = /
 
 label-mounted = %{F#0a81f5}%mountpoint%%{F-}: %percentage_used%%
 label-unmounted = %mountpoint% not mounted
-label-unmounted-foreground = ${colors.foreground-alt}
+label-unmounted-foreground = ${colors.foreground}
 
 [module/bspwm]
 type = internal/bspwm
 
 label-focused = %index%
-label-focused-background = ${colors.background-alt}
+label-focused-background = ${colors.background}
 label-focused-underline= ${colors.primary}
 label-focused-padding = 2
 
@@ -134,7 +155,7 @@ label-urgent-background = ${colors.alert}
 label-urgent-padding = 2
 
 label-empty = %index%
-label-empty-foreground = ${colors.foreground-alt}
+label-empty-foreground = ${colors.foreground}
 label-empty-padding = 2
 
 ; Separator in between workspaces
@@ -142,41 +163,49 @@ label-empty-padding = 2
 
 [module/i3]
 type = internal/i3
-format = <label-state> <label-mode>
 index-sort = true
 wrapping-scroll = false
-
-; Only show workspaces on the same output as the bar
-;pin-workspaces = true
-
+enable-click = true
+format = <label-state> <label-mode>
+ 
+; ws-icon-0 = 1
+; ws-icon-1 = 2
+; ws-icon-2 = 3
+; ws-icon-3 = 4
+; ws-icon-4 = 5
+; ws-icon-5 = 6
+; ws-icon-6 = 7
+; ws-icon-7 = 8
+; ws-icon-8 = 9
+; ws-icon-9 = 10
+ 
+; label-mode = %mode%
 label-mode-padding = 2
-label-mode-foreground = #000
-label-mode-background = ${colors.primary}
-
-; focused = Active workspace on focused monitor
+label-mode-foreground = ${colors.base05}
+label-mode-background = ${colors.base01}
+label-mode-underline = ${colors.base09}
+ 
 label-focused = %index%
-label-focused-background = ${module/bspwm.label-focused-background}
-label-focused-underline = ${module/bspwm.label-focused-underline}
-label-focused-padding = ${module/bspwm.label-focused-padding}
-
-; unfocused = Inactive workspace on any monitor
+label-focused-padding = 2
+label-focused-foreground = ${colors.base05}
+label-focused-background = ${colors.base0D}
+label-focused-underline = ${colors.base0D}
+ 
 label-unfocused = %index%
-label-unfocused-padding = ${module/bspwm.label-occupied-padding}
-
-; visible = Active workspace on unfocused monitor
+label-unfocused-padding = 2
+label-unfocused-foreground = ${colors.base03}
+label-unfocused-background = ${colors.base00}
+ 
 label-visible = %index%
-label-visible-background = ${self.label-focused-background}
-label-visible-underline = ${self.label-focused-underline}
-label-visible-padding = ${self.label-focused-padding}
-
-; urgent = Workspace with urgency hint set
+label-visible-padding = 2
+label-visible-foreground = ${colors.base05}
+label-visible-background = ${colors.base00}
+ 
 label-urgent = %index%
-label-urgent-background = ${module/bspwm.label-urgent-background}
-label-urgent-padding = ${module/bspwm.label-urgent-padding}
-
-; Separator in between workspaces
-; label-separator = |
-
+label-urgent-padding = 2
+label-urgent-foreground = ${colors.base07}
+label-urgent-background = ${colors.base03}
+label-urgent-underline = ${colors.base0A}
 
 [module/mpd]
 type = internal/mpd
@@ -206,7 +235,7 @@ bar-fill-font = 2
 bar-fill-foreground = #9f78e1
 bar-empty = ─
 bar-empty-font = 2
-bar-empty-foreground = ${colors.foreground-alt}
+bar-empty-foreground = ${colors.foreground}
 
 [module/backlight-acpi]
 inherit = module/xbacklight
@@ -216,7 +245,7 @@ card = intel_backlight
 [module/cpu]
 type = internal/cpu
 interval = 2
-format-prefix-foreground = ${colors.foreground-alt}
+format-prefix-foreground = ${colors.foreground}
 ;format-underline = #f90000
 format = <label>
 label = %{A1:termite -e htop:} %percentage%%%{A}
@@ -225,7 +254,7 @@ label = %{A1:termite -e htop:} %percentage%%%{A}
 type = internal/memory
 interval = 2
 format = <label>
-format-prefix-foreground = ${colors.foreground-alt}
+format-prefix-foreground = ${colors.foreground}
 ;format-underline = #4bffdc
 label = %{A1:termite -e htop:} %gb_used%%{A}
 
@@ -243,14 +272,14 @@ format-disconnected = <label-disconnected>
 ;format-disconnected = <label-disconnected>
 ;format-disconnected-underline = ${self.format-connected-underline}
 ;label-disconnected = %ifname% disconnected
-;label-disconnected-foreground = ${colors.foreground-alt}
+;label-disconnected-foreground = ${colors.foreground}
 
 ramp-signal-0 =" "
 ramp-signal-1 =" "
 ramp-signal-2 =" "
 ramp-signal-3 =" "
 ramp-signal-4 =" "
-ramp-signal-foreground = ${colors.foreground-alt}
+ramp-signal-foreground = ${colors.foreground}
 
 [module/eth]
 type = internal/network
@@ -259,14 +288,14 @@ interval = 3.0
 
 format-connected-underline = #55aa55
 format-connected-prefix = " "
-format-connected-prefix-foreground = ${colors.foreground-alt}
+format-connected-prefix-foreground = ${colors.foreground}
 label-connected = %local_ip%
 
 format-disconnected =
 ;format-disconnected = <label-disconnected>
 ;format-disconnected-underline = ${self.format-connected-underline}
 ;label-disconnected = %ifname% disconnected
-;label-disconnected-foreground = ${colors.foreground-alt}
+;label-disconnected-foreground = ${colors.foreground}
 
 [module/date]
 type = internal/date
@@ -279,7 +308,7 @@ time = %H:%M
 time-alt = %H:%M:%S
 
 format-prefix = 
-format-prefix-foreground = ${colors.foreground-alt}
+format-prefix-foreground = ${colors.foreground}
 ;format-underline = #0a6cf5
 
 label = %date% %time%
@@ -309,7 +338,7 @@ bar-volume-fill = ─
 bar-volume-fill-font = 2
 bar-volume-empty = ─
 bar-volume-empty-font = 2
-bar-volume-empty-foreground = ${colors.foreground-alt}
+bar-volume-empty-foreground = ${colors.foreground}
 
 [module/alsa]
 type = internal/alsa
@@ -319,7 +348,7 @@ label-volume = VOL
 label-volume-foreground = ${root.foreground}
 
 format-muted-prefix = " "
-format-muted-foreground = ${colors.foreground-alt}
+format-muted-foreground = ${colors.foreground}
 label-muted = sound muted
 
 bar-volume-width = 10
@@ -337,7 +366,7 @@ bar-volume-fill = ─
 bar-volume-fill-font = 2
 bar-volume-empty = ─
 bar-volume-empty-font = 2
-bar-volume-empty-foreground = ${colors.foreground-alt}
+bar-volume-empty-foreground = ${colors.foreground}
 
 [module/battery]
 type = internal/battery
@@ -352,7 +381,7 @@ format-discharging = <label-discharging>
 ;format-discharging-underline = ${self.format-charging-underline}
 
 format-full = <label-full>
-format-full-prefix-foreground = ${colors.foreground-alt}
+format-full-prefix-foreground = ${colors.foreground}
 ;format-full-underline = ${self.format-charging-underline}
 
 time-format = %H:%M
@@ -365,18 +394,18 @@ ramp-capacity-2 = 
 ramp-capacity-3 = 
 ramp-capacity-4 = 
 
-ramp-capacity-foreground = ${colors.foreground-alt}
+ramp-capacity-foreground = ${colors.foreground}
 
 animation-charging-0 = 
 animation-charging-1 = 
 animation-charging-2 = 
-animation-charging-foreground = ${colors.foreground-alt}
+animation-charging-foreground = ${colors.foreground}
 animation-charging-framerate = 750
 
 animation-discharging-0 = 
 animation-discharging-1 = 
 animation-discharging-2 = 
-animation-discharging-foreground = ${colors.foreground-alt}
+animation-discharging-foreground = ${colors.foreground}
 animation-discharging-framerate = 750
 
 [module/temperature]
@@ -396,7 +425,7 @@ label-warn-foreground = ${colors.secondary}
 ramp-0 = 
 ramp-1 = 
 ramp-2 = 
-ramp-foreground = ${colors.foreground-alt}
+ramp-foreground = ${colors.foreground}
 
 [module/powermenu]
 type = custom/menu
@@ -410,7 +439,7 @@ label-open-foreground = ${colors.secondary}
 label-close =  cancel
 label-close-foreground = ${colors.secondary}
 label-separator = |
-label-separator-foreground = ${colors.foreground-alt}
+label-separator-foreground = ${colors.foreground}
 
 menu-0-0 = reboot
 menu-0-0-exec = menu-open-1

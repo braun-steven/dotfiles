@@ -13,81 +13,90 @@ let g:elite_mode=1
 " - For Neovim: ~/.local/share/nvim/plugged
 " - Avoid using standard Vim directory names like 'plugin'
 call plug#begin('~/.vim/plugged')
- Plug 'dracula/vim', { 'as': 'dracula' }
+  Plug 'daviesjamie/vim-base16-lightline'
+  Plug 'mike-hearn/base16-vim-lightline'
+  Plug 'chriskempson/base16-vim'
+  Plug 'joshdick/onedark.vim'
 
- " Show buffer in tabline
- Plug 'ap/vim-buftabline'
+  "
+  Plug 'easymotion/vim-easymotion'
 
- " Quoting/paranthesizing made simple
- Plug 'tpope/vim-surround'
+  " Add repeat support for plugin maps
+  Plug 'unblevable/quick-scope'
+  Plug 'unblevable/quick-scope'
+  " Show buffer in tabline
+  Plug 'ap/vim-buftabline'
 
- " Automatically handle tabs/spaces
- Plug 'tpope/vim-sleuth'
+  " Quoting/paranthesizing made simple
+  Plug 'tpope/vim-surround'
 
- " Vim git integration
- Plug 'tpope/vim-fugitive'
- Plug 'tpope/vim-rhubarb'
- Plug 'shumphrey/fugitive-gitlab.vim'
+  " Automatically handle tabs/spaces
+  Plug 'tpope/vim-sleuth'
 
- " Git info on the sidebar
- Plug 'airblade/vim-gitgutter'
+  " Vim git integration
+  Plug 'tpope/vim-fugitive'
+  Plug 'tpope/vim-rhubarb'
+  Plug 'shumphrey/fugitive-gitlab.vim'
 
- Plug 'lifepillar/vim-solarized8'
+  " Git info on the sidebar
+  Plug 'airblade/vim-gitgutter'
 
- " Comment/uncomment with gc
- Plug 'tpope/vim-commentary'
- "Plug 'ervandew/supertab'
+  Plug 'lifepillar/vim-solarized8'
 
-" Linting
- Plug 'w0rp/ale'
+  " Comment/uncomment with gc
+  Plug 'tpope/vim-commentary'
+  "Plug 'ervandew/supertab'
 
- " Python virtual envs
- Plug 'plytophogy/vim-virtualenv'
+  " Linting
+  Plug 'w0rp/ale'
 
-" FZF
- Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
- Plug 'junegunn/fzf.vim'
+  " Python virtual envs
+  Plug 'plytophogy/vim-virtualenv'
 
-" Sensible vim config
- Plug 'tpope/vim-sensible'
+  " FZF
+  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+  Plug 'junegunn/fzf.vim'
 
-" Bash
- Plug 'vim-scripts/bash-support.vim'
+  " Sensible vim config
+  Plug 'tpope/vim-sensible'
+
+  " Bash
+  Plug 'vim-scripts/bash-support.vim'
 
 
- " Tagbar with <F8>
- Plug 'majutsushi/tagbar'
+  " Tagbar with <F8>
+  Plug 'majutsushi/tagbar'
 
- " CTag automation
- Plug 'ludovicchabant/vim-gutentags'
+  " CTag automation
+  Plug 'ludovicchabant/vim-gutentags'
 
-" Bracket autocomplete
- Plug 'jiangmiao/auto-pairs'
+  " Bracket autocomplete
+  Plug 'jiangmiao/auto-pairs'
 
- " Syntax highlighting
- Plug 'sheerun/vim-polyglot'
+  " Syntax highlighting
+  Plug 'sheerun/vim-polyglot'
 
- " Statusline
- Plug 'itchyny/lightline.vim'
- Plug 'maximbaz/lightline-ale'
+  " Statusline
+  Plug 'itchyny/lightline.vim'
+  Plug 'maximbaz/lightline-ale'
 
- " Git commit extension
- Plug 'rhysd/committia.vim'
+  " Git commit extension
+  Plug 'rhysd/committia.vim'
 
- " Julia support
- Plug 'JuliaEditorSupport/julia-vim'
+  " Julia support
+  Plug 'JuliaEditorSupport/julia-vim'
 
- " File tree with <C-n>
- Plug 'scrooloose/nerdtree'
- Plug 'Xuyuanp/nerdtree-git-plugin'
+  " File tree with <C-n>
+  Plug 'scrooloose/nerdtree'
+  Plug 'Xuyuanp/nerdtree-git-plugin'
 
- "" Autocomplete framework
- Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
+  "" Autocomplete framework
+  Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 
- Plug 'davidhalter/jedi-vim'
+  Plug 'davidhalter/jedi-vim'
 
- " Hex color preview
- Plug 'lilydjwg/colorizer'
+  " Hex color preview
+  Plug 'lilydjwg/colorizer'
 " Initialize plugin system
 call plug#end()
 
@@ -97,25 +106,27 @@ filetype plugin indent on    " required
 "Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
 "If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
 "(see < http://sunaku.github.io/tmux-24bit-color.html#usage > for more information.)
-if (empty($TMUX))
-  if (has("nvim"))
-  "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
-  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-  endif
-  "For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
-  "Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
-  " < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
-  if (has("termguicolors"))
-    set termguicolors
-  endif
-endif
+"if (empty($TMUX))
+"  if (has("nvim"))
+"  "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
+"  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+"  endif
+"  "For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
+"  "Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
+"  " < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
+"  if (has("termguicolors"))
+"    set termguicolors
+"  endif
+"endif
 
 " Set leader key to <space> 
 :let mapleader = ' '
 
-syntax on 
+" syntax on 
 set background=dark
-colorscheme solarized8
+set t_Co=256
+let base16colorspace=256  " Access colors present in 256 colorspace
+colorscheme base16-oceanicnext
 set path=.,,**
 set expandtab
 set tabstop=4
@@ -144,7 +155,7 @@ let g:lightline = {
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ], [ 'readonly', 'relativepath', 'modified' ] ]
       \ },
-      \ 'colorscheme': 'solarized',
+      \ 'colorscheme': 'base16',
       \ 'component_function': {
       \   'mode': 'LightlineMode'
       \ }
@@ -220,3 +231,14 @@ nnoremap <Leader>7 :b7<CR>
 nnoremap <Leader>8 :b8<CR>
 nnoremap <Leader>9 :b9<CR>
 nnoremap <Leader>0 :b10<CR>
+
+" EasyMotion
+map <Leader><Leader>l <Plug>(easymotion-lineforward)
+map <Leader><Leader>j <Plug>(easymotion-j)
+map <Leader><Leader>k <Plug>(easymotion-k)
+map <Leader><Leader>h <Plug>(easymotion-linebackward)
+
+" Quick scope
+" Trigger a highlight in the appropriate direction when pressing these keys:
+let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+
