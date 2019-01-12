@@ -13,9 +13,7 @@ let g:elite_mode=1
 " - For Neovim: ~/.local/share/nvim/plugged
 " - Avoid using standard Vim directory names like 'plugin'
 call plug#begin('~/.vim/plugged')
-  Plug 'daviesjamie/vim-base16-lightline'
-  Plug 'mike-hearn/base16-vim-lightline'
-  Plug 'chriskempson/base16-vim'
+  Plug 'mhartington/oceanic-next'
   Plug 'joshdick/onedark.vim'
 
   "
@@ -23,7 +21,7 @@ call plug#begin('~/.vim/plugged')
 
   " Add repeat support for plugin maps
   Plug 'unblevable/quick-scope'
-  Plug 'unblevable/quick-scope'
+
   " Show buffer in tabline
   Plug 'ap/vim-buftabline'
 
@@ -45,7 +43,7 @@ call plug#begin('~/.vim/plugged')
 
   " Comment/uncomment with gc
   Plug 'tpope/vim-commentary'
-  "Plug 'ervandew/supertab'
+  Plug 'ervandew/supertab'
 
   " Linting
   Plug 'w0rp/ale'
@@ -106,27 +104,27 @@ filetype plugin indent on    " required
 "Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
 "If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
 "(see < http://sunaku.github.io/tmux-24bit-color.html#usage > for more information.)
-"if (empty($TMUX))
-"  if (has("nvim"))
-"  "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
-"  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-"  endif
-"  "For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
-"  "Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
-"  " < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
-"  if (has("termguicolors"))
-"    set termguicolors
-"  endif
-"endif
+if (empty($TMUX))
+  if (has("nvim"))
+  "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
+  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+  endif
+  "For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
+  "Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
+  " < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
+  if (has("termguicolors"))
+    set termguicolors
+  endif
+endif
 
 " Set leader key to <space> 
 :let mapleader = ' '
 
 " syntax on 
 set background=dark
-set t_Co=256
-let base16colorspace=256  " Access colors present in 256 colorspace
-colorscheme base16-oceanicnext
+let g:oceanic_next_terminal_bold = 1
+let g:oceanic_next_terminal_italic = 1
+colorscheme OceanicNext
 set path=.,,**
 set expandtab
 set tabstop=4
@@ -155,7 +153,7 @@ let g:lightline = {
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ], [ 'readonly', 'relativepath', 'modified' ] ]
       \ },
-      \ 'colorscheme': 'base16',
+      \ 'colorscheme': 'oceanicnext',
       \ 'component_function': {
       \   'mode': 'LightlineMode'
       \ }
@@ -175,7 +173,7 @@ map <F5> :NERDTreeToggle<CR>
 map <F6> :TagbarToggle<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
-let python_highlight_all=1
+"let python_highlight_all=1
 
 " Vim tagbar toggle
 let g:tagbar_type_julia = {
@@ -218,7 +216,7 @@ let g:jedi#completions_enabled = 0
 " Buftabline
 let g:buftabline_numbers = 1
 let g:buftabline_indicators = 1
-nnoremap <Leader>b :Buffers<CR>
+nnoremap ; :Buffers<CR>
 nnoremap <Leader>n :bnext<CR>
 nnoremap <Leader>p :bprev<CR>
 nnoremap <Leader>1 :b1<CR>
@@ -242,3 +240,23 @@ map <Leader><Leader>h <Plug>(easymotion-linebackward)
 " Trigger a highlight in the appropriate direction when pressing these keys:
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 
+" Disable trailing spaces warning
+let g:python_highlight_space_errors=0
+
+" ALE config
+let g:ale_set_highlights = 0
+" highlight ALEWarning ctermbg=Blue
+" highlight ALEError ctermbg=Green
+" Check Python files with flake8 and pylint.
+let b:ale_linters = ['flake8', 'pylint']
+let g:ale_echo_msg_error_str = 'E'
+let g:ale_echo_msg_warning_str = 'W'
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+" Lint always in Normal Mode
+let g:ale_lint_on_text_changed = 'normal'
+" Lint when leaving Insert Mode but don't lint when in Insert Mode 
+let g:ale_lint_on_insert_leave = 1
+
+" Save
+nmap <C-s> :w<CR>
+nmap <C-q> :q<CR>
