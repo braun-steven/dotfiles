@@ -5,7 +5,6 @@ set noshowmode
 " Reload .vimrc on save
 autocmd! bufwritepost .vimrc source %
 
-
 " Disable arrows
 let g:elite_mode=1
 
@@ -13,10 +12,10 @@ let g:elite_mode=1
 " - For Neovim: ~/.local/share/nvim/plugged
 " - Avoid using standard Vim directory names like 'plugin'
 call plug#begin('~/.vim/plugged')
+  " Main theme
   Plug 'mhartington/oceanic-next'
-  Plug 'joshdick/onedark.vim'
 
-  "
+  " Easier vim navigation
   Plug 'easymotion/vim-easymotion'
 
   " Add repeat support for plugin maps
@@ -32,17 +31,16 @@ call plug#begin('~/.vim/plugged')
   Plug 'tpope/vim-sleuth'
 
   " Vim git integration
-  Plug 'tpope/vim-fugitive'
-  Plug 'tpope/vim-rhubarb'
-  Plug 'shumphrey/fugitive-gitlab.vim'
-
-  " Git info on the sidebar
-  Plug 'airblade/vim-gitgutter'
-
-  Plug 'lifepillar/vim-solarized8'
+  Plug 'tpope/vim-fugitive' " Git commands
+  Plug 'tpope/vim-rhubarb' " Gbrowse support for github
+  Plug 'shumphrey/fugitive-gitlab.vim' " Gbrowse support for gitlab
+  Plug 'airblade/vim-gitgutter' " Git info on the sidebar
+  Plug 'rhysd/committia.vim' " Git commit extension
 
   " Comment/uncomment with gc
   Plug 'tpope/vim-commentary'
+
+  " Use tab as autocomplete
   Plug 'ervandew/supertab'
 
   " Linting
@@ -58,9 +56,8 @@ call plug#begin('~/.vim/plugged')
   " Sensible vim config
   Plug 'tpope/vim-sensible'
 
-  " Bash
+  " Bash support
   Plug 'vim-scripts/bash-support.vim'
-
 
   " Tagbar with <F8>
   Plug 'majutsushi/tagbar'
@@ -71,15 +68,12 @@ call plug#begin('~/.vim/plugged')
   " Bracket autocomplete
   Plug 'jiangmiao/auto-pairs'
 
-  " Syntax highlighting
+  " Advanced syntax highlighting
   Plug 'sheerun/vim-polyglot'
 
   " Statusline
   Plug 'itchyny/lightline.vim'
   Plug 'maximbaz/lightline-ale'
-
-  " Git commit extension
-  Plug 'rhysd/committia.vim'
 
   " Julia support
   Plug 'JuliaEditorSupport/julia-vim'
@@ -90,11 +84,11 @@ call plug#begin('~/.vim/plugged')
 
   "" Autocomplete framework
   Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
-
   Plug 'davidhalter/jedi-vim'
 
   " Hex color preview
   Plug 'lilydjwg/colorizer'
+
 " Initialize plugin system
 call plug#end()
 
@@ -133,14 +127,10 @@ set shiftwidth=2
 set number
 set showcmd
 set cursorline
+set colorcolumn=120
 set wildmenu
 set showmatch
 set incsearch
-set colorcolumn=120
-"autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
-
-"set omnifunc=syntaxcomplete#Complete
-"set mouse=a
 
 "split navigations
 nnoremap <C-J> <C-W><C-J>
@@ -168,14 +158,12 @@ function! LightlineMode()
         \ lightline#mode()
 endfunction
 
-" nerdtree
+" Map file tree and tab bar to <F5> and <F6>
 map <F5> :NERDTreeToggle<CR>
 map <F6> :TagbarToggle<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
-"let python_highlight_all=1
-
-" Vim tagbar toggle
+" Add julia tagbar config
 let g:tagbar_type_julia = {
     \ 'ctagstype' : 'julia',
     \ 'kinds'     : [
@@ -185,7 +173,6 @@ let g:tagbar_type_julia = {
 " FZF
 nmap <Leader>t :Tags<CR>
 nmap <Leader>f :Files<CR>
-
 
 " Disable ycm extra conf question
 let g:ycm_confirm_extra_conf = 0
@@ -210,7 +197,7 @@ let g:jedi#auto_close_doc = 1
 let g:jedi#usages_command = '<Leader>u'
 let g:jedi#goto_command = "gd"
 let g:jedi#show_call_signatures = "1"
-" Disable since deoplete is enabled
+" Disable since ycm is enabled
 let g:jedi#completions_enabled = 0
 
 " Buftabline
@@ -257,6 +244,6 @@ let g:ale_lint_on_text_changed = 'normal'
 " Lint when leaving Insert Mode but don't lint when in Insert Mode 
 let g:ale_lint_on_insert_leave = 1
 
-" Save
+" Save and quit
 nmap <C-s> :w<CR>
 nmap <C-q> :q<CR>
