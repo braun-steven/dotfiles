@@ -50,6 +50,7 @@ set $mybgcol #2C6A86
 # start dmenu (a program launcher)
 # bindsym $mod+d exec dmenu_run -l 15 -i -p "$" -sb "#2C6A86" -fn "Monospace-12:normal"
 bindsym $mod+d exec rofi -show run
+bindsym $mod+Shift+d exec rofi -show combi 
 
 
 # window navigation
