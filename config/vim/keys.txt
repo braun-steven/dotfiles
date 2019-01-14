@@ -6,6 +6,9 @@
 | F<char>      | Jump to previous <char> 
 | ;            | Repeat last f/t movement
 | ct<char>     | Cut till <char>
+| mx           | Toggle mark 'x'
+| dmx          | Delete mark 'x'
+| 'x           | Go to mark 'x'
 |--------------|----------------------------------------------------------------
 | EasyMotion   |
 |--------------|----------------------------------------------------------------

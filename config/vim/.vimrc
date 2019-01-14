@@ -8,10 +8,20 @@ autocmd! bufwritepost .vimrc source %
 " Disable arrows
 let g:elite_mode=1
 
+" Enable hard time using hjkl
+let g:hardtime_default_on = 1
+
+
 " Specify a directory for plugins
 " - For Neovim: ~/.local/share/nvim/plugged
 " - Avoid using standard Vim directory names like 'plugin'
 call plug#begin('~/.vim/plugged')
+  " Show marks
+  Plug 'kshenoy/vim-signature'
+
+  " Have a hard time using hjkl
+  Plug 'takac/vim-hardtime'
+
   " Main theme
   Plug 'mhartington/oceanic-next'
 
@@ -20,9 +30,6 @@ call plug#begin('~/.vim/plugged')
 
   " Add repeat support for plugin maps
   Plug 'unblevable/quick-scope'
-
-  " Show buffer in tabline
-  Plug 'ap/vim-buftabline'
 
   " Quoting/paranthesizing made simple
   Plug 'tpope/vim-surround'
@@ -39,9 +46,6 @@ call plug#begin('~/.vim/plugged')
 
   " Comment/uncomment with gc
   Plug 'tpope/vim-commentary'
-
-  " Use tab as autocomplete
-  Plug 'ervandew/supertab'
 
   " Linting
   Plug 'w0rp/ale'
@@ -132,6 +136,9 @@ set wildmenu
 set showmatch
 set incsearch
 
+" Map Ctrl-c to esc
+" imap <C-c> <Esc>
+
 "split navigations
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
@@ -141,13 +148,21 @@ nnoremap <C-H> <C-W><C-H>
 " Lightline
 let g:lightline = {
       \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ], [ 'readonly', 'relativepath', 'modified' ] ]
+      \   'left': [ [ 'mode', 'paste' ], [ 'gitbranch', 'readonly', 'relativepath', 'modified' ] ]
       \ },
       \ 'colorscheme': 'oceanicnext',
       \ 'component_function': {
-      \   'mode': 'LightlineMode'
+      \   'mode': 'LightlineMode',
+      \   'gitbranch' : 'fugitive#head',
       \ }
       \ }
+
+let g:lightline.separator = {
+	\   'left': '', 'right': ''
+  \}
+let g:lightline.subseparator = {
+	\   'left': '', 'right': '' 
+  \}
 
 function! LightlineMode()
   return expand('%:t') ==# '__Tagbar__' ? 'Tagbar':
@@ -243,7 +258,3 @@ let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 let g:ale_lint_on_text_changed = 'normal'
 " Lint when leaving Insert Mode but don't lint when in Insert Mode 
 let g:ale_lint_on_insert_leave = 1
-
-" Save and quit
-nmap <C-s> :w<CR>
-nmap <C-q> :q<CR>
