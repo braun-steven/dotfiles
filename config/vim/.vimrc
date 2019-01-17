@@ -19,6 +19,12 @@ call plug#begin('~/.vim/plugged')
   " Show marks
   Plug 'kshenoy/vim-signature'
 
+  " Python autoimport
+  Plug 'mgedmin/python-imports.vim'
+
+  " Tex
+  Plug 'lervag/vimtex'
+
   " Have a hard time using hjkl
   Plug 'takac/vim-hardtime'
 
@@ -28,14 +34,8 @@ call plug#begin('~/.vim/plugged')
   " Easier vim navigation
   Plug 'easymotion/vim-easymotion'
 
-  " Add repeat support for plugin maps
-  Plug 'unblevable/quick-scope'
-
   " Quoting/paranthesizing made simple
   Plug 'tpope/vim-surround'
-
-  " Automatically handle tabs/spaces
-  Plug 'tpope/vim-sleuth'
 
   " Vim git integration
   Plug 'tpope/vim-fugitive' " Git commands
@@ -87,8 +87,17 @@ call plug#begin('~/.vim/plugged')
   Plug 'Xuyuanp/nerdtree-git-plugin'
 
   "" Autocomplete framework
-  Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
+  " Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
+  if has('nvim')
+    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  else
+    Plug 'Shougo/deoplete.nvim'
+    Plug 'roxma/nvim-yarp'
+    Plug 'roxma/vim-hug-neovim-rpc'
+  endif
   Plug 'davidhalter/jedi-vim'
+  Plug 'zchee/deoplete-jedi'
+  " Plug 'ervandew/supertab'
 
   " Hex color preview
   Plug 'lilydjwg/colorizer'
@@ -148,7 +157,8 @@ nnoremap <C-H> <C-W><C-H>
 " Lightline
 let g:lightline = {
       \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ], [ 'gitbranch', 'readonly', 'relativepath', 'modified' ] ]
+      \   'left': [ [ 'mode', 'paste' ], [ 'gitbranch', 'readonly', 'relativepath', 'modified' ] ],
+      \   'right' : [ ['lineinfo'], ['percent'], ['filetype'] ]
       \ },
       \ 'colorscheme': 'oceanicnext',
       \ 'component_function': {
@@ -186,8 +196,9 @@ let g:tagbar_type_julia = {
     \ }
 
 " FZF
-nmap <Leader>t :Tags<CR>
-nmap <Leader>f :Files<CR>
+nmap <Leader><Leader>b :Buffers<CR>
+nmap <Leader><Leader>t :Tags<CR>
+nmap <Leader><Leader>f :Files<CR>
 
 " Disable ycm extra conf question
 let g:ycm_confirm_extra_conf = 0
@@ -212,31 +223,20 @@ let g:jedi#auto_close_doc = 1
 let g:jedi#usages_command = '<Leader>u'
 let g:jedi#goto_command = "gd"
 let g:jedi#show_call_signatures = "1"
-" Disable since ycm is enabled
+" Disable since deoplete is enabled
 let g:jedi#completions_enabled = 0
 
-" Buftabline
-let g:buftabline_numbers = 1
-let g:buftabline_indicators = 1
-nnoremap ; :Buffers<CR>
-nnoremap <Leader>n :bnext<CR>
-nnoremap <Leader>p :bprev<CR>
-nnoremap <Leader>1 :b1<CR>
-nnoremap <Leader>2 :b2<CR>
-nnoremap <Leader>3 :b3<CR>
-nnoremap <Leader>4 :b4<CR>
-nnoremap <Leader>5 :b5<CR>
-nnoremap <Leader>6 :b6<CR>
-nnoremap <Leader>7 :b7<CR>
-nnoremap <Leader>8 :b8<CR>
-nnoremap <Leader>9 :b9<CR>
-nnoremap <Leader>0 :b10<CR>
-
 " EasyMotion
-map <Leader><Leader>l <Plug>(easymotion-lineforward)
-map <Leader><Leader>j <Plug>(easymotion-j)
-map <Leader><Leader>k <Plug>(easymotion-k)
-map <Leader><Leader>h <Plug>(easymotion-linebackward)
+map  <Leader>f <Plug>(easymotion-bd-f)
+" s{char}{char} to move to {char}{char}
+nmap s <Plug>(easymotion-overwin-f2)
+vmap s <Plug>(easymotion-overwin-f2)
+" Move to line
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
+" Move to word
+map  <Leader>w <Plug>(easymotion-bd-w)
+let g:EasyMotion_smartcase = 1
 
 " Quick scope
 " Trigger a highlight in the appropriate direction when pressing these keys:
@@ -246,9 +246,9 @@ let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 let g:python_highlight_space_errors=0
 
 " ALE config
-let g:ale_set_highlights = 0
-" highlight ALEWarning ctermbg=Blue
-" highlight ALEError ctermbg=Green
+let g:ale_set_highlights = 1
+highlight ALEWarning gui=undercurl guisp=#fac863
+highlight ALEError gui=undercurl guisp=#ec5f67
 " Check Python files with flake8 and pylint.
 let b:ale_linters = ['flake8', 'pylint']
 let g:ale_echo_msg_error_str = 'E'
@@ -258,3 +258,32 @@ let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 let g:ale_lint_on_text_changed = 'normal'
 " Lint when leaving Insert Mode but don't lint when in Insert Mode 
 let g:ale_lint_on_insert_leave = 1
+
+" Disable latex-box from polyglot dependency to make vimtex usable
+let g:polyglot_disabled = ['latex']
+
+" Python import
+map <F10>    :ImportName<CR>
+
+" Deoplete
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_ignore_case = 1
+let g:deoplete#enable_smart_case = 1
+" Disable autocompletion (using deoplete instead)
+let g:jedi#completions_enabled = 0
+"set completeopt-=preview
+let g:python_host_prog = '/usr/bin/python'
+let g:python3_host_prog = '/usr/bin/python3'
+
+" use tab to forward cycle
+inoremap <silent><expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+" use tab to backward cycle
+inoremap <silent><expr><s-tab> pumvisible() ? "\<c-p>" : "\<s-tab>"
+" inoremap <silent><expr> <TAB>
+" 		\ pumvisible() ? "\<C-n>" :
+" 		\ <SID>check_back_space() ? "\<TAB>" :
+" 		\ deoplete#mappings#manual_complete()
+" 		function! s:check_back_space() abort "{{{
+" 		let col = col('.') - 1
+" 		return !col || getline('.')[col - 1]  =~ '\s'
+" 		endfunction"}}}
