@@ -231,7 +231,7 @@ exec --no-startup-id nm-applet --tray --sm-disable &
 set $Locker betterlockscreen -l blur && sleep 1
 
 # suspend/lock shortcuts
-bindsym $mod+$mod2+s exec --no-startup-id $Locker && systemctl suspend  
+bindsym $mod+$mod2+s exec --no-startup-id systemctl suspend && $Locker 
 bindsym $mod+$mod2+l exec --no-startup-id $Locker
 
 ####### i3-gaps

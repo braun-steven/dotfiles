@@ -1,6 +1,7 @@
 set hidden
 " Remove '-- INSERT --' line since it is shown in lighline anyway
 set noshowmode
+set clipboard=unnamed
 
 " Reload .vimrc on save
 autocmd! bufwritepost .vimrc source %
@@ -9,7 +10,7 @@ autocmd! bufwritepost .vimrc source %
 let g:elite_mode=1
 
 " Enable hard time using hjkl
-let g:hardtime_default_on = 1
+"let g:hardtime_default_on = 1
 
 
 " Specify a directory for plugins
@@ -228,9 +229,6 @@ let g:jedi#completions_enabled = 0
 
 " EasyMotion
 map  <Leader>f <Plug>(easymotion-bd-f)
-" s{char}{char} to move to {char}{char}
-nmap s <Plug>(easymotion-overwin-f2)
-vmap s <Plug>(easymotion-overwin-f2)
 " Move to line
 map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
@@ -287,3 +285,7 @@ inoremap <silent><expr><s-tab> pumvisible() ? "\<c-p>" : "\<s-tab>"
 " 		let col = col('.') - 1
 " 		return !col || getline('.')[col - 1]  =~ '\s'
 " 		endfunction"}}}
+"
+
+" Reformat python code with \r
+nmap \r :ALEFix black<CR>
