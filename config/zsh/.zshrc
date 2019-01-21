@@ -57,6 +57,7 @@ plugins=(git git-flow-avh mvn gradle zsh-syntax-highlighting zsh-autosuggestions
 
 # export MANPATH="/usr/local/man:$MANPATH"
 # EXPORTS #
+source $ZSH/oh-my-zsh.sh
 
 export PATH="$PATH:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:$HOME/.local/bin:$HOME/bin"
 
@@ -142,7 +143,6 @@ alias envactivate='source ./env/bin/activate'
 
 
 
-source $ZSH/oh-my-zsh.sh
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -177,3 +177,4 @@ if [[ ! -d $HOME/zsh-syntax-highlighting ]]; then
 fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+source ./zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
