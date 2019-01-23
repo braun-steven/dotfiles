@@ -64,9 +64,10 @@ export PATH="$PATH:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/lib/jvm/default/
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
   export TERM=xterm-color
-  export EDITOR='vim'
+  export EDITOR='nvim'
+  alias vim=nvim
 else
-  export EDITOR='mvim'
+  export EDITOR='vim'
 fi
 
 export JAVA_HOME=/usr/lib/jvm/java-10-openjdk
@@ -77,7 +78,7 @@ export WEKA_HOME=$HOME/wekafiles
 export DOTFILES=$HOME/dotfiles
 
 # fzf
-export FZF_DEFAULT_OPTS='--height 40% --border --exact'
+export FZF_DEFAULT_OPTS='--height 40% --border'
 
 # Maven java server debugging
 #export MAVEN_OPTS=-agentlib:jdwp=transport=dt_socket,address=8000,server=y,suspend=n
@@ -86,9 +87,10 @@ PATH="$HOME/bin:$PATH"
 PATH="$PATH:/usr/bin/julia"
 LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/lib/"
 
-# Evaluate keychain
-eval $(keychain --eval --quiet id_rsa_mz id_rsa)
-
+# Eval keychain only locally
+if [[ -n $SSH_CONNECTION ]]; then
+  eval $(keychain --eval --quiet id_rsa_mz id_rsa)
+fi
 
 # Aliases
 alias df='df -h'                          # human-readable sizes
@@ -137,7 +139,6 @@ alias xresourcesconfig='vim ~/.Xresources'
 alias xresourcesreload='xrdb -merge ~/.Xresources'
 
 alias gnome-screenshot='gnome-screenshot -a'
-alias vim=nvim
 
 alias envactivate='source ./env/bin/activate'
 

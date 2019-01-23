@@ -103,6 +103,9 @@ call plug#begin('~/.vim/plugged')
   " Hex color preview
   Plug 'lilydjwg/colorizer'
 
+  " Language spell/grammer checker, invoke with: :LanguageToolCheck
+  Plug 'dpelle/vim-LanguageTool'
+
 " Initialize plugin system
 call plug#end()
 
@@ -289,3 +292,8 @@ inoremap <silent><expr><s-tab> pumvisible() ? "\<c-p>" : "\<s-tab>"
 
 " Reformat python code with \r
 nmap \r :ALEFix black<CR>
+
+" LanguageTool config
+let g:languagetool_jar = '$HOME/Downloads/LanguageTool-4.3/languagetool-commandline.jar'
+hi LanguageToolGrammarError  guisp=#fac863 gui=undercurl guifg=NONE guibg=NONE ctermfg=white ctermbg=blue term=underline cterm=none
+hi LanguageToolSpellingError guisp=#ec5f67  gui=undercurl guifg=NONE guibg=NONE ctermfg=white ctermbg=red  term=underline cterm=none

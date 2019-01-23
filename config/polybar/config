@@ -187,7 +187,7 @@ label-mode-underline = ${colors.base09}
  
 label-focused = %index%
 label-focused-padding = 2
-label-focused-foreground = ${colors.base05}
+label-focused-foreground = ${colors.base00}
 label-focused-background = ${colors.base0D}
 label-focused-underline = ${colors.base0D}
  
