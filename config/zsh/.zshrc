@@ -62,18 +62,18 @@ source $ZSH/oh-my-zsh.sh
 export PATH="$PATH:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:$HOME/.local/bin:$HOME/bin"
 
 # Preferred editor for local and remote sessions
-if [[ -n $SSH_CONNECTION ]]; then
+if [[ -z $SSH_CONNECTION ]]; then
   export TERM=xterm-color
-  export EDITOR='nvim'
+  export EDITOR=nvim
+  export VISUAL=nvim
   alias vim=nvim
 else
-  export EDITOR='vim'
+  export EDITOR=vim
+  export VISUAL=vim
 fi
 
 export JAVA_HOME=/usr/lib/jvm/java-10-openjdk
-export TERMINAL=gnome-terminal
-export EDITOR=nvim
-export VISUAL=nvim
+export TERMINAL=termite
 export WEKA_HOME=$HOME/wekafiles
 export DOTFILES=$HOME/dotfiles
 
