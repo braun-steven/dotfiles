@@ -51,7 +51,7 @@ HYPHEN_INSENSITIVE="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git git-flow-avh mvn gradle zsh-syntax-highlighting zsh-autosuggestions)
+plugins=(git git-flow-avh mvn gradle)
 
 # User configuration
 
@@ -88,7 +88,7 @@ PATH="$PATH:/usr/bin/julia"
 LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/lib/"
 
 # Eval keychain only locally
-if [[ -n $SSH_CONNECTION ]]; then
+if [[ -z $SSH_CONNECTION ]]; then
   eval $(keychain --eval --quiet id_rsa_mz id_rsa)
 fi
 
@@ -155,7 +155,7 @@ bindkey '^e' end-of-line
 
 
 
-autoload -Uz add-zsh-hook
+# autoload -Uz add-zsh-hook
 
 function xterm_title_precmd () {
 	print -Pn '\e]2;%n@%m %1~\a'
@@ -176,6 +176,6 @@ function gi() { curl -L -s https://www.gitignore.io/api/$@ ;}
 if [[ ! -d $HOME/zsh-syntax-highlighting ]]; then
 	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $HOME/zsh-syntax-highlighting
 fi
-
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-source ./zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $HOME/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
