@@ -67,6 +67,7 @@ if [[ -z $SSH_CONNECTION ]]; then
   export EDITOR=nvim
   export VISUAL=nvim
   alias vim=nvim
+  alias cat='ccat'
 else
   export EDITOR=vim
   export VISUAL=vim
@@ -97,7 +98,6 @@ alias df='df -h'                          # human-readable sizes
 alias free='free -m'                      # show sizes in MB
 alias np='nano -w PKGBUILD'
 alias more=less
-alias cat='ccat'
 
 # Better ls
 alias ls='ls -lh --color=auto --group-directories-first'
