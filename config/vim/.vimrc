@@ -17,6 +17,7 @@ let g:elite_mode=1
 " - For Neovim: ~/.local/share/nvim/plugged
 " - Avoid using standard Vim directory names like 'plugin'
 call plug#begin('~/.vim/plugged')
+  Plug 'lifepillar/vim-solarized8'
   " Show marks
   Plug 'kshenoy/vim-signature'
 
@@ -78,6 +79,7 @@ call plug#begin('~/.vim/plugged')
 
   " Statusline
   Plug 'itchyny/lightline.vim'
+  Plug 'mengelbrecht/lightline-bufferline'
   Plug 'maximbaz/lightline-ale'
 
   " Julia support
@@ -98,7 +100,7 @@ call plug#begin('~/.vim/plugged')
   endif
   Plug 'davidhalter/jedi-vim'
   Plug 'zchee/deoplete-jedi'
-  " Plug 'ervandew/supertab'
+  Plug 'ervandew/supertab'
 
   " Hex color preview
   Plug 'lilydjwg/colorizer'
@@ -106,7 +108,14 @@ call plug#begin('~/.vim/plugged')
   " Language spell/grammer checker, invoke with: :LanguageToolCheck
   Plug 'dpelle/vim-LanguageTool'
 
-" Initialize plugin system
+  " UtilSnips
+    " Track the engine.
+  Plug 'SirVer/ultisnips'
+
+  " Snippets are separated from the engine. Add this if you want them:
+  Plug 'honza/vim-snippets'
+
+  " Initialize plugin system
 call plug#end()
 
 filetype plugin indent on    " required
@@ -133,9 +142,11 @@ endif
 
 " syntax on 
 set background=dark
-let g:oceanic_next_terminal_bold = 1
-let g:oceanic_next_terminal_italic = 1
-colorscheme OceanicNext
+" let g:oceanic_next_terminal_bold = 1
+" let g:oceanic_next_terminal_italic = 1
+let g:solarized_extra_hi_groups = 1
+let g:solarized_term_italics = 1
+colorscheme solarized8 
 set path=.,,**
 set expandtab
 set tabstop=4
@@ -164,7 +175,7 @@ let g:lightline = {
       \   'left': [ [ 'mode', 'paste' ], [ 'gitbranch', 'readonly', 'relativepath', 'modified' ] ],
       \   'right' : [ ['lineinfo'], ['percent'], ['filetype'] ]
       \ },
-      \ 'colorscheme': 'oceanicnext',
+      \ 'colorscheme': 'solarized',
       \ 'component_function': {
       \   'mode': 'LightlineMode',
       \   'gitbranch' : 'fugitive#head',
@@ -178,6 +189,7 @@ let g:lightline.subseparator = {
 	\   'left': '', 'right': '' 
   \}
 
+
 function! LightlineMode()
   return expand('%:t') ==# '__Tagbar__' ? 'Tagbar':
         \ expand('%:t') ==# 'ControlP' ? 'CtrlP' :
@@ -187,6 +199,25 @@ function! LightlineMode()
         \ lightline#mode()
 endfunction
 
+" Lightline Buffers
+set showtabline=2
+let g:lightline#bufferline#show_number  = 2
+let g:lightline#bufferline#shorten_path = 0
+let g:lightline#bufferline#unnamed      = '[No Name]'
+let g:lightline.tabline          = {'left': [['buffers']]}
+let g:lightline.component_expand = {'buffers': 'lightline#bufferline#buffers'}
+let g:lightline.component_type   = {'buffers': 'tabsel'}
+autocmd BufWritePost,TextChanged,TextChangedI * call lightline#update()
+nmap <Leader>1 <Plug>lightline#bufferline#go(1)
+nmap <Leader>2 <Plug>lightline#bufferline#go(2)
+nmap <Leader>3 <Plug>lightline#bufferline#go(3)
+nmap <Leader>4 <Plug>lightline#bufferline#go(4)
+nmap <Leader>5 <Plug>lightline#bufferline#go(5)
+nmap <Leader>6 <Plug>lightline#bufferline#go(6)
+nmap <Leader>7 <Plug>lightline#bufferline#go(7)
+nmap <Leader>8 <Plug>lightline#bufferline#go(8)
+nmap <Leader>9 <Plug>lightline#bufferline#go(9)
+nmap <Leader>0 <Plug>lightline#bufferline#go(10)
 " Map file tree and tab bar to <F5> and <F6>
 map <F5> :NERDTreeToggle<CR>
 map <F6> :TagbarToggle<CR>
@@ -200,6 +231,7 @@ let g:tagbar_type_julia = {
     \ }
 
 " FZF
+nmap ; :Buffers<CR>
 nmap <Leader><Leader>b :Buffers<CR>
 nmap <Leader><Leader>t :Tags<CR>
 nmap <Leader><Leader>f :Files<CR>
@@ -276,10 +308,10 @@ let g:jedi#completions_enabled = 0
 let g:python_host_prog = '/usr/bin/python'
 let g:python3_host_prog = '/usr/bin/python3'
 
-" use tab to forward cycle
-inoremap <silent><expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
-" use tab to backward cycle
-inoremap <silent><expr><s-tab> pumvisible() ? "\<c-p>" : "\<s-tab>"
+" " use tab to forward cycle
+" inoremap <silent><expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+" " use tab to backward cycle
+" inoremap <silent><expr><s-tab> pumvisible() ? "\<c-p>" : "\<s-tab>"
 " inoremap <silent><expr> <TAB>
 " 		\ pumvisible() ? "\<C-n>" :
 " 		\ <SID>check_back_space() ? "\<TAB>" :
@@ -292,8 +324,26 @@ inoremap <silent><expr><s-tab> pumvisible() ? "\<c-p>" : "\<s-tab>"
 
 " Reformat python code with \r
 nmap \r :ALEFix black<CR>
+nmap \i :ALEFix isort<CR>
 
 " LanguageTool config
 let g:languagetool_jar = '$HOME/Downloads/LanguageTool-4.3/languagetool-commandline.jar'
 hi LanguageToolGrammarError  guisp=#fac863 gui=undercurl guifg=NONE guibg=NONE ctermfg=white ctermbg=blue term=underline cterm=none
 hi LanguageToolSpellingError guisp=#ec5f67  gui=undercurl guifg=NONE guibg=NONE ctermfg=white ctermbg=red  term=underline cterm=none
+
+" UtilSnips
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+  let g:UltiSnipsExpandTrigger="<tab>"
+  let g:UltiSnipsJumpForwardTrigger="<c-b>"
+  let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+  " If you want :UltiSnipsEdit to split your window.
+  let g:UltiSnipsEditSplit="vertical"
+
+" Supertab 
+let g:SuperTabDefaultCompletionType = "<c-n>"
+
+" Map jj, jk, kj to exit insert mode
+imap jj <Esc>
+imap jk <Esc>
+imap kj <Esc>

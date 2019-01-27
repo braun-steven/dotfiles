@@ -16,38 +16,41 @@
 ;
 ;==========================================================
 
+include-file = ~/.config/polybar/global.conf
+; include-file = ~/.config/polybar/bars/top.conf
+
 [colors]
-background = ${xrdb:color0:#ffffff}
-foreground = ${xrdb:foreground:#ffffff}
+; background = ${xrdb:color0:#ffffff}
+; foreground = ${xrdb:foreground:#ffffff}
 
 black = ${xrdb:color0:#ffffff}
 gret = ${xrdb:color8:#ffffff}
 white = ${xrdb:color7:#ffffff}
 
-red = ${xrdb:color1:#ffffff}
-blue = ${xrdb:color4:#ffffff}
-magneta = ${xrdb:color5:#ffffff}
-cyan = ${xrdb:color6:#ffffff}
-green = ${xrdb:color2:#ffffff}
-yellow = ${xrdb:color3:#ffffff}
-orange = ${xrdb:color16:#ffffff}
+; red = ${xrdb:color1:#ffffff}
+; blue = ${xrdb:color4:#ffffff}
+; magneta = ${xrdb:color5:#ffffff}
+; cyan = ${xrdb:color6:#ffffff}
+; green = ${xrdb:color2:#ffffff}
+; yellow = ${xrdb:color3:#ffffff}
+; orange = ${xrdb:color16:#ffffff}
 
-base00 = ${xrdb:color0:#000000}
-base01 = ${xrdb:color10:#000000}
-base02 = ${xrdb:color11:#000000}
-base03 = ${xrdb:color8:#000000}
-base04 = ${xrdb:color12:#000000}
-base05 = ${xrdb:color7:#000000}
-base06 = ${xrdb:color13:#000000}
-base07 = ${xrdb:color15:#000000}
-base08 = ${xrdb:color1:#000000}
-base09 = ${xrdb:color9:#000000}
-base0A = ${xrdb:color3:#000000}
-base0B = ${xrdb:color2:#000000}
-base0C = ${xrdb:color6:#000000}
-base0D = ${xrdb:color4:#000000}
-base0E = ${xrdb:color5:#000000}
-base0F = ${xrdb:color14:#000000}
+; base00 = ${xrdb:color0:#000000}
+; base01 = ${xrdb:color10:#000000}
+; base02 = ${xrdb:color11:#000000}
+; base03 = ${xrdb:color8:#000000}
+; base04 = ${xrdb:color12:#000000}
+; base05 = ${xrdb:color7:#000000}
+; base06 = ${xrdb:color13:#000000}
+; base07 = ${xrdb:color15:#000000}
+; base08 = ${xrdb:color1:#000000}
+; base09 = ${xrdb:color9:#000000}
+; base0A = ${xrdb:color3:#000000}
+; base0B = ${xrdb:color2:#000000}
+; base0C = ${xrdb:color6:#000000}
+; base0D = ${xrdb:color4:#000000}
+; base0E = ${xrdb:color5:#000000}
+; base0F = ${xrdb:color14:#000000}
 
 [bar/example]
 ;monitor = ${env:MONITOR:HDMI-1}
@@ -58,8 +61,8 @@ height = 25
 radius = 0.0
 fixed-center = true 
 
-background = ${colors.background}
-foreground = ${colors.foreground}
+background = ${colors.base00}
+foreground = ${colors.base05}
 
 line-size = 3
 line-color = #f00
@@ -163,49 +166,81 @@ label-empty-padding = 2
 
 [module/i3]
 type = internal/i3
-index-sort = true
-wrapping-scroll = false
-enable-click = true
 format = <label-state> <label-mode>
- 
-; ws-icon-0 = 1
-; ws-icon-1 = 2
-; ws-icon-2 = 3
-; ws-icon-3 = 4
-; ws-icon-4 = 5
-; ws-icon-5 = 6
-; ws-icon-6 = 7
-; ws-icon-7 = 8
-; ws-icon-8 = 9
-; ws-icon-9 = 10
- 
-; label-mode = %mode%
-label-mode-padding = 2
-label-mode-foreground = ${colors.base05}
-label-mode-background = ${colors.base01}
-label-mode-underline = ${colors.base09}
- 
-label-focused = %index%
+
+index-sort = true
+enable-click = true
+fuzzy-match = true
+wrapping-scroll = false
+strip-wsnumbers = true
+pin-workspaces = false
+
+label-focused = %name%
+label-focused-background = ${colors.foreground}
+label-focused-foreground = #ff000000
 label-focused-padding = 2
-label-focused-foreground = ${colors.base00}
-label-focused-background = ${colors.base0D}
-label-focused-underline = ${colors.base0D}
- 
-label-unfocused = %index%
+
+label-unfocused = %name%
+label-unfocused-background = ${colors.background}
+label-unfocused-foreground = ${colors.foreground}
 label-unfocused-padding = 2
-label-unfocused-foreground = ${colors.base03}
-label-unfocused-background = ${colors.base00}
- 
-label-visible = %index%
-label-visible-padding = 2
-label-visible-foreground = ${colors.base05}
-label-visible-background = ${colors.base00}
- 
-label-urgent = %index%
+
+label-urgent = 
+label-urgent-background = #00000000
+label-urgent-foreground = ${colors.foreground}
 label-urgent-padding = 2
-label-urgent-foreground = ${colors.base07}
-label-urgent-background = ${colors.base03}
-label-urgent-underline = ${colors.base0A}
+
+label-visible = %name%
+label-visible-background = #00000000 
+label-visible-foreground = ${colors.foreground}
+label-visible-padding = 2
+
+ws-icon-default = 
+; [module/i3]
+; type = internal/i3
+; index-sort = true
+; wrapping-scroll = false
+; enable-click = true
+; format = <label-state> <label-mode>
+ 
+; ; ws-icon-0 = 1
+; ; ws-icon-1 = 2
+; ; ws-icon-2 = 3
+; ; ws-icon-3 = 4
+; ; ws-icon-4 = 5
+; ; ws-icon-5 = 6
+; ; ws-icon-6 = 7
+; ; ws-icon-7 = 8
+; ; ws-icon-8 = 9
+; ; ws-icon-9 = 10
+ 
+; ; label-mode = %mode%
+; label-mode-padding = 2
+; label-mode-foreground = ${colors.base05}
+; label-mode-background = ${colors.base01}
+; label-mode-underline = ${colors.base09}
+ 
+; label-focused = %index%
+; label-focused-padding = 2
+; label-focused-foreground = ${colors.base00}
+; label-focused-background = ${colors.base0D}
+; label-focused-underline = ${colors.base0D}
+ 
+; label-unfocused = %index%
+; label-unfocused-padding = 2
+; label-unfocused-foreground = ${colors.base03}
+; label-unfocused-background = ${colors.base00}
+ 
+; label-visible = %index%
+; label-visible-padding = 2
+; label-visible-foreground = ${colors.base05}
+; label-visible-background = ${colors.base00}
+ 
+; label-urgent = %index%
+; label-urgent-padding = 2
+; label-urgent-foreground = ${colors.base07}
+; label-urgent-background = ${colors.base03}
+; label-urgent-underline = ${colors.base0A}
 
 [module/mpd]
 type = internal/mpd
