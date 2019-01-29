@@ -2,7 +2,7 @@
 --recurse=yes
 --tag-relative=yes
 --exclude=.git
---exclude=env
+#--exclude=env
 
 
 # Julia

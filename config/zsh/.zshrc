@@ -142,8 +142,12 @@ alias gnome-screenshot='gnome-screenshot -a'
 
 alias envactivate='source ./env/bin/activate'
 
+export DARKMODE=1
 
 
+
+# Add dir colors
+eval `dircolors ~/.config/dircolors-solarized.db`
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -172,6 +176,13 @@ if [[ "$TERM" == (screen*|xterm*|rxvt*) ]]; then
 fi
 
 function gi() { curl -L -s https://www.gitignore.io/api/$@ ;}
+
+function toggle_darkmode() {
+  f="$HOME/.zshrc"
+  grep -q "export DARKMODE=1" $f && sed -i "s/export DARKMODE=1/export DARKMODE=0/g" $f || sed -i "s/DARKMODE=0/DARKMODE=1/g" $f
+  source $f
+}
+
 
 if [[ ! -d $HOME/zsh-syntax-highlighting ]]; then
 	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $HOME/zsh-syntax-highlighting

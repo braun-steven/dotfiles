@@ -141,9 +141,13 @@ endif
 :let mapleader = ' '
 
 " syntax on 
-set background=dark
 " let g:oceanic_next_terminal_bold = 1
 " let g:oceanic_next_terminal_italic = 1
+if($DARKMODE == 1)
+set background=dark
+else
+set background=light
+endif
 let g:solarized_extra_hi_groups = 1
 let g:solarized_term_italics = 1
 colorscheme solarized8 
@@ -201,10 +205,10 @@ endfunction
 
 " Lightline Buffers
 set showtabline=2
-let g:lightline#bufferline#show_number  = 2
-let g:lightline#bufferline#shorten_path = 0
+let g:lightline#bufferline#show_number  = 0
+let g:lightline#bufferline#shorten_path = 1
 let g:lightline#bufferline#unnamed      = '[No Name]'
-let g:lightline.tabline          = {'left': [['buffers']]}
+let g:lightline.tabline          = {'left': [['buffers']], 'right' : []}
 let g:lightline.component_expand = {'buffers': 'lightline#bufferline#buffers'}
 let g:lightline.component_type   = {'buffers': 'tabsel'}
 autocmd BufWritePost,TextChanged,TextChangedI * call lightline#update()
