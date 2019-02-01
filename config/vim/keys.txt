@@ -9,6 +9,8 @@
 | mx           | Toggle mark 'x'
 | dmx          | Delete mark 'x'
 | 'x           | Go to mark 'x'
+| q<char>      | Record in <char>
+| @<char>      | Replay record from <char>
 |--------------|----------------------------------------------------------------
 | EasyMotion   |
 |--------------|----------------------------------------------------------------
@@ -25,17 +27,12 @@
 | ysiw]        | Surround word under cursor with []
 | yss)         | Surround entire linke with ()
 |--------------|----------------------------------------------------------------
-| Buffers      |                                                               
-|--------------|----------------------------------------------------------------
-| <Leader>b    | Show buffers                                                  
-| <Leader>n    | Buffer next                                                    
-| <Leader>p    | Buffer previous
-| <Leader>0-9  | Go to buffer 0-9
-|--------------|----------------------------------------------------------------
 | Misc         |                                                               
 |--------------|----------------------------------------------------------------
 | <Leader>f    | FZF File
-| <Leader>t    | FZF Tag
+| <Leader>t    | FZF Tag (Buffer)
+| <Leader>T    | FZF Tag (Global)
+| <Leader>l    | FZF Line 
 | <F5>         | Toggle NERDTree
 | <F6>         | Toggle TagBar 
 \------------------------------------------------------------------------------/

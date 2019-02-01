@@ -68,6 +68,8 @@ bindsym $mod+j focus down
 # Navigate workspace next/prev
 bindsym $mod+Ctrl+l workspace next
 bindsym $mod+Ctrl+h workspace prev 
+bindsym $mod+$mod2+l workspace next
+bindsym $mod+$mod2+h workspace prev 
 
 
 # move focused window
@@ -233,15 +235,15 @@ exec --no-startup-id nm-applet --tray --sm-disable &
 set $Locker betterlockscreen -l blur && sleep 1
 
 # suspend/lock shortcuts
-bindsym $mod+$mod2+s exec --no-startup-id systemctl suspend && $Locker 
-bindsym $mod+$mod2+l exec --no-startup-id $Locker
+bindsym $mod+$mod2+Ctrl+s exec --no-startup-id systemctl suspend && $Locker 
+bindsym $mod+$mod2+Ctrl+l exec --no-startup-id $Locker
 
 ####### i3-gaps
 for_window [class="^.*"] border pixel 2
-gaps inner 8
-gaps outer 5
-smart_gaps on
-smart_borders on
+# gaps inner 8
+# gaps outer 5
+# smart_gaps on
+# smart_borders on
 ## Base16 Solarized Dark
 # Author: Ethan Schoonover (modified by aramisgithub)
 #
@@ -317,7 +319,7 @@ client.background       $base07
 
 
 # Compton
-exec compton -bc -r 5 -l -4 -t -4 --shadow-exclude '_GTK_FRAME_EXTENTS@:c'
+# exec compton -bc -r 5 -l -4 -t -4 --shadow-exclude '_GTK_FRAME_EXTENTS@:c'
 
 # Cheat sheet
 for_window [title="cheatsheet"] floating enable, move position center

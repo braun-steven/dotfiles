@@ -17,6 +17,8 @@ let g:elite_mode=1
 " - For Neovim: ~/.local/share/nvim/plugged
 " - Avoid using standard Vim directory names like 'plugin'
 call plug#begin('~/.vim/plugged')
+  Plug 'terryma/vim-multiple-cursors'
+  Plug 'jceb/vim-orgmode'
   Plug 'lifepillar/vim-solarized8'
   " Show marks
   Plug 'kshenoy/vim-signature'
@@ -237,8 +239,28 @@ let g:tagbar_type_julia = {
 " FZF
 nmap ; :Buffers<CR>
 nmap <Leader><Leader>b :Buffers<CR>
-nmap <Leader><Leader>t :Tags<CR>
+nmap <Leader><Leader>l :Lines<CR>
+nmap <Leader><Leader>t :BTags<CR>
+nmap <Leader><Leader>T :Tags<CR>
 nmap <Leader><Leader>f :Files<CR>
+" Customize fzf colors to match your color scheme
+autocmd! FileType fzf
+autocmd  FileType fzf set laststatus=0 noshowmode noruler
+  \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
 
 " Disable ycm extra conf question
 let g:ycm_confirm_extra_conf = 0
@@ -332,8 +354,8 @@ nmap \i :ALEFix isort<CR>
 
 " LanguageTool config
 let g:languagetool_jar = '$HOME/Downloads/LanguageTool-4.3/languagetool-commandline.jar'
-hi LanguageToolGrammarError  guisp=#fac863 gui=undercurl guifg=NONE guibg=NONE ctermfg=white ctermbg=blue term=underline cterm=none
-hi LanguageToolSpellingError guisp=#ec5f67  gui=undercurl guifg=NONE guibg=NONE ctermfg=white ctermbg=red  term=underline cterm=none
+hi LanguageToolGrammarError  guisp=#b58900 gui=undercurl guifg=NONE guibg=NONE ctermfg=white ctermbg=blue term=underline cterm=none
+hi LanguageToolSpellingError guisp=#dc322f  gui=undercurl guifg=NONE guibg=NONE ctermfg=white ctermbg=red  term=underline cterm=none
 
 " UtilSnips
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.

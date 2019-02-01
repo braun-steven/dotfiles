@@ -414,7 +414,7 @@ full-at = 98
 format-charging = <label-charging>
 ;format-charging-underline = #ffb52a
 
-format-discharging = <label-discharging>
+format-discharging = <ramp-capacity> <label-discharging>
 ;format-discharging-underline = ${self.format-charging-underline}
 
 format-full = <label-full>
@@ -425,6 +425,7 @@ time-format = %H:%M
 label-discharging = %time% %percentage%%
 label-charging =  %percentage%%
 label-full = 🔌 %percentage%%
+ramp-capacity-0-foreground=#ff5555
 ramp-capacity-0 = 
 ramp-capacity-1 = 
 ramp-capacity-2 = 
