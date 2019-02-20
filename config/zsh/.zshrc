@@ -1,6 +1,21 @@
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
+# Source antigen
+source ~/antigen.zsh
+antigen use oh-my-zsh
+# plugins=(git git-flow-avh mvn gradle)
+antigen bundle git
+antigen bundle git-flow-avh
+antigen bundle git-flow-mvn
+antigen bundle gradle
+# antigen bundle agkozak/zsh-z
+antigen bundle z 
+antigen bundle fzf
+antigen bundle zsh-users/zsh-syntax-highlighting
+# antigen theme bureau
+antigen apply
+
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
@@ -51,7 +66,7 @@ HYPHEN_INSENSITIVE="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git git-flow-avh mvn gradle)
+# plugins=(git git-flow-avh mvn gradle)
 
 # User configuration
 

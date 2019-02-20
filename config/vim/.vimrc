@@ -17,8 +17,11 @@ let g:elite_mode=1
 " - For Neovim: ~/.local/share/nvim/plugged
 " - Avoid using standard Vim directory names like 'plugin'
 call plug#begin('~/.vim/plugged')
+  Plug 'morhetz/gruvbox'
+  Plug 'KeitaNakamura/neodark.vim'
+  Plug 'joshdick/onedark.vim'
+
   Plug 'terryma/vim-multiple-cursors'
-  Plug 'jceb/vim-orgmode'
   Plug 'lifepillar/vim-solarized8'
   " Show marks
   Plug 'kshenoy/vim-signature'
@@ -103,7 +106,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'davidhalter/jedi-vim'
   Plug 'zchee/deoplete-jedi'
   Plug 'ervandew/supertab'
-
+   
   " Hex color preview
   Plug 'lilydjwg/colorizer'
 
@@ -142,17 +145,11 @@ endif
 " Set leader key to <space> 
 :let mapleader = ' '
 
-" syntax on 
-" let g:oceanic_next_terminal_bold = 1
-" let g:oceanic_next_terminal_italic = 1
-if($DARKMODE == 1)
+syntax on 
 set background=dark
-else
-set background=light
-endif
-let g:solarized_extra_hi_groups = 1
-let g:solarized_term_italics = 1
-colorscheme solarized8 
+" let g:onedark_terminal_italics = 1
+let g:gruvbox_italic = 1
+colorscheme gruvbox 
 set path=.,,**
 set expandtab
 set tabstop=4
@@ -181,7 +178,7 @@ let g:lightline = {
       \   'left': [ [ 'mode', 'paste' ], [ 'gitbranch', 'readonly', 'relativepath', 'modified' ] ],
       \   'right' : [ ['lineinfo'], ['percent'], ['filetype'] ]
       \ },
-      \ 'colorscheme': 'solarized',
+      \ 'colorscheme': 'gruvbox',
       \ 'component_function': {
       \   'mode': 'LightlineMode',
       \   'gitbranch' : 'fugitive#head',
@@ -373,3 +370,25 @@ let g:SuperTabDefaultCompletionType = "<c-n>"
 imap jj <Esc>
 imap jk <Esc>
 imap kj <Esc>
+
+" CTRL-C doesn't trigger the InsertLeave autocmd . map to <ESC> instead.
+inoremap <c-c> <ESC>
+
+" italics fix
+" set t_ZH=^[[3m
+" set t_ZR=^[[23m
+
+map \b :call InsertLine()<CR>
+
+function! InsertLine()
+  let trace = expand("import ipdb; ipdb.set_trace(context=5)")
+  execute "normal O".trace
+endfunction
+
+" Delte backwards in insert mode
+noremap! <C-BS> <C-w>
+noremap! <M-BS> <C-w>
+
+
+inoremap <C-w> <C-\><C-o>dB
+inoremap <C-BS> <C-\><C-o>db
