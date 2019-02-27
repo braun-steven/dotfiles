@@ -17,12 +17,12 @@ let g:elite_mode=1
 " - For Neovim: ~/.local/share/nvim/plugged
 " - Avoid using standard Vim directory names like 'plugin'
 call plug#begin('~/.vim/plugged')
+  Plug 'fvictorio/vim-extract-variable'
+  Plug 'machakann/vim-highlightedyank'
+  Plug '~/.vim/plugged/vim-pydoc'
   Plug 'morhetz/gruvbox'
-  Plug 'KeitaNakamura/neodark.vim'
-  Plug 'joshdick/onedark.vim'
 
   Plug 'terryma/vim-multiple-cursors'
-  Plug 'lifepillar/vim-solarized8'
   " Show marks
   Plug 'kshenoy/vim-signature'
 
@@ -34,9 +34,6 @@ call plug#begin('~/.vim/plugged')
 
   " Have a hard time using hjkl
   Plug 'takac/vim-hardtime'
-
-  " Main theme
-  Plug 'mhartington/oceanic-next'
 
   " Easier vim navigation
   Plug 'easymotion/vim-easymotion'
@@ -162,6 +159,7 @@ set colorcolumn=120
 set wildmenu
 set showmatch
 set incsearch
+set relativenumber
 
 " Map Ctrl-c to esc
 " imap <C-c> <Esc>
@@ -172,17 +170,34 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
+nnoremap H ^
+nnoremap L $
+
 " Lightline
 let g:lightline = {
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ], [ 'gitbranch', 'readonly', 'relativepath', 'modified' ] ],
-      \   'right' : [ ['lineinfo'], ['percent'], ['filetype'] ]
+      \   'right' : [ ['lineinfo'], ['percent'], ['filetype'], [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok' ]]
       \ },
       \ 'colorscheme': 'gruvbox',
       \ 'component_function': {
       \   'mode': 'LightlineMode',
       \   'gitbranch' : 'fugitive#head',
       \ }
+      \ }
+
+let g:lightline.component_expand = {
+      \  'linter_checking': 'lightline#ale#checking',
+      \  'linter_warnings': 'lightline#ale#warnings',
+      \  'linter_errors': 'lightline#ale#errors',
+      \  'linter_ok': 'lightline#ale#ok',
+      \ }
+
+let g:lightline.component_type = {
+      \     'linter_checking': 'left',
+      \     'linter_warnings': 'warning',
+      \     'linter_errors': 'error',
+      \     'linter_ok': 'left',
       \ }
 
 let g:lightline.separator = {
@@ -240,6 +255,8 @@ nmap <Leader><Leader>l :Lines<CR>
 nmap <Leader><Leader>t :BTags<CR>
 nmap <Leader><Leader>T :Tags<CR>
 nmap <Leader><Leader>f :Files<CR>
+nmap <Leader><Leader>h :History<CR>
+
 " Customize fzf colors to match your color scheme
 autocmd! FileType fzf
 autocmd  FileType fzf set laststatus=0 noshowmode noruler
@@ -259,8 +276,6 @@ let g:fzf_colors =
   \ 'spinner': ['fg', 'Label'],
   \ 'header':  ['fg', 'Comment'] }
 
-" Disable ycm extra conf question
-let g:ycm_confirm_extra_conf = 0
 
 " Disable arrow movement, resize splits instead.
 if get(g:, 'elite_mode')
@@ -271,7 +286,8 @@ if get(g:, 'elite_mode')
 endif
 
 " Ale fixers
-let g:ale_fixers = ['prettier', 'standard'] 
+let g:ale_fixers = ['black'] 
+let g:ale_fix_on_save = 1
 
 " Clear search
 nnoremap <CR> :noh<CR><CR>
@@ -303,8 +319,8 @@ let g:python_highlight_space_errors=0
 
 " ALE config
 let g:ale_set_highlights = 1
-highlight ALEWarning gui=undercurl guisp=#fac863
-highlight ALEError gui=undercurl guisp=#ec5f67
+" highlight ALEWarning gui=undercurl guisp=#fac863
+" highlight ALEError gui=undercurl guisp=#ec5f67
 " Check Python files with flake8 and pylint.
 let b:ale_linters = ['flake8', 'pylint']
 let g:ale_echo_msg_error_str = 'E'
@@ -392,3 +408,18 @@ noremap! <M-BS> <C-w>
 
 inoremap <C-w> <C-\><C-o>dB
 inoremap <C-BS> <C-\><C-o>db
+
+
+" Ultisnips
+let g:ultisnips_python_style="google"
+
+" Add surroundings in visual mode and insert
+vmap s) S)i
+vmap s( S)i
+vmap s] S]i
+vmap s[ S]i
+vmap s{ S}i
+vmap s} S}i
+
+" Python print stuff in selection
+vnoremap p yoprint("<ESC>pa:", <ESC>pa)<ESC>

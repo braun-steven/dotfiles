@@ -2,6 +2,7 @@
 ;; This file is loaded by Spacemacs at startup.
 ;; It must be stored in your home directory.
 
+
 (defun dotspacemacs/layers ()
   "Layer configuration:
 This function should only modify configuration layer settings."
@@ -41,9 +42,10 @@ This function should only modify configuration layer settings."
      ;; ----------------------------------------------------------------
      helm
      (auto-completion :variables
+                      spacemacs-default-company-backends '(company-files  company-capf company-anaconda :with company-capf)
                       auto-completion-enable-snippets-in-popup t
                       auto-completion-enable-sort-by-usage t)
-     better-defaults
+     ;; better-defaults
      emacs-lisp
      git
      markdown
@@ -67,6 +69,7 @@ This function should only modify configuration layer settings."
      (gtags :variables gtags-enable-by-default t)
      (latex :variables latex-enable-auto-fill t)
      (julia :variables julia-mode-enable-lsp t)
+     chrome
      )
 
    ;; List of additional packages that will be installed without being
@@ -77,7 +80,7 @@ This function should only modify configuration layer settings."
    ;; '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
    dotspacemacs-additional-packages '(
-                                      evil-easymotion
+                                      atomic-chrome
                                       company-flx
                                       )
 
@@ -202,7 +205,8 @@ It should only modify the values of Spacemacs settings."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press `SPC T n' to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(atom-one-dark
+   dotspacemacs-themes '(gruvbox
+                         atom-one-dark
                          spacemacs-dark
                          spacemacs-light)
 
@@ -365,7 +369,7 @@ It should only modify the values of Spacemacs settings."
    ;;                       text-mode
    ;;   :size-limit-kb 1000)
    ;; (default nil)
-   dotspacemacs-line-numbers t
+   dotspacemacs-line-numbers 'relative
 
    ;; Code folding method. Possible values are `evil' and `origami'.
    ;; (default 'evil)
@@ -459,8 +463,6 @@ configuration.
 It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
   (setq-default git-magit-status-fullscreen t)
-  (with-eval-after-load 'company
-    (company-flx-mode +1))
   )
 
 (defun dotspacemacs/user-load ()
@@ -513,6 +515,20 @@ before packages are loaded."
 
   ;; Company files
   (define-key evil-insert-state-map (kbd "C-x C-f") 'company-files)
+
+  ;; Enable orgmode inline images
+  (setq org-startup-with-inline-images t)
+
+  ;; Company fuzzy matching
+  (with-eval-after-load 'company
+    (company-flx-mode +1))
+
+  (eval-after-load "company"
+    '(add-to-list 'company-backends '(company-anaconda :with company-capf)))
+
+  ;; Atomic chrome 
+  (require 'atomic-chrome)
+  (atomic-chrome-start-server)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -584,13 +600,22 @@ This function is called at the very end of Spacemacs initialization."
     ("#dc322f" "#cb4b16" "#b58900" "#546E00" "#B4C342" "#00629D" "#2aa198" "#d33682" "#6c71c4")))
  '(package-selected-packages
    (quote
-    (company-flx atom-one-dark-theme oceanic-theme evil-easymotion gmail-message-mode ham-mode html-to-markdown flymd edit-server csv-mode git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter flyspell-correct-helm flyspell-correct diff-hl browse-at-remote auto-dictionary lsp-ui company-lsp dracula-theme doom-themes django-theme darktooth-theme autothemer darkokai-theme darkmine-theme darkburn-theme dakrone-theme cyberpunk-theme color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized clues-theme cherry-blossom-theme busybee-theme bubbleberry-theme birds-of-paradise-plus-theme badwolf-theme apropospriate-theme anti-zenburn-theme ample-zen-theme ample-theme alect-themes afternoon-theme yasnippet-snippets yapfify xterm-color unfill smeargle shell-pop pyvenv pytest pyenv-mode py-isort pippel pipenv pip-requirements orgit org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download org-brain mwim multi-term mmm-mode markdown-toc markdown-mode magit-svn magit-gitflow lsp-julia lsp-mode dash-functional live-py-mode julia-repl julia-mode importmagic epc ctable concurrent deferred htmlize helm-pydoc helm-org-rifle helm-gtags helm-gitignore helm-git-grep helm-company helm-c-yasnippet gnuplot gitignore-templates gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md ggtags fuzzy flycheck-pos-tip pos-tip flycheck evil-org evil-magit magit magit-popup git-commit with-editor eshell-z eshell-prompt-extras esh-help cython-mode company-statistics company-auctex company-anaconda company auto-yasnippet yasnippet auctex-latexmk auctex anaconda-mode pythonic ac-ispell auto-complete ws-butler writeroom-mode visual-fill-column winum volatile-highlights vi-tilde-fringe uuidgen treemacs-projectile treemacs-evil treemacs ht pfuture toc-org symon string-inflection spaceline-all-the-icons spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode password-generator paradox spinner overseer org-bullets open-junk-file nameless move-text macrostep lorem-ipsum link-hint indent-guide hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-xref helm-themes helm-swoop helm-purpose window-purpose imenu-list helm-projectile helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state iedit evil-goggles evil-exchange evil-escape evil-ediff evil-cleverparens smartparens paredit evil-args evil-anzu anzu eval-sexp-fu elisp-slime-nav editorconfig dumb-jump doom-modeline eldoc-eval shrink-path all-the-icons memoize f dash s define-word counsel-projectile projectile counsel swiper ivy pkg-info epl column-enforce-mode clean-aindent-mode centered-cursor-mode auto-highlight-symbol auto-compile packed aggressive-indent ace-window ace-link ace-jump-helm-line helm avy helm-core popup which-key use-package pcre2el org-plus-contrib hydra font-lock+ evil goto-chg undo-tree dotenv-mode diminish bind-map bind-key async)))
+    (atomic-chrome jedi-core ede-php-autoload-composer-installers jedi company-jedi company-flx atom-one-dark-theme oceanic-theme evil-easymotion gmail-message-mode ham-mode html-to-markdown flymd edit-server csv-mode git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter flyspell-correct-helm flyspell-correct diff-hl browse-at-remote auto-dictionary lsp-ui company-lsp dracula-theme doom-themes django-theme darktooth-theme autothemer darkokai-theme darkmine-theme darkburn-theme dakrone-theme cyberpunk-theme color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized clues-theme cherry-blossom-theme busybee-theme bubbleberry-theme birds-of-paradise-plus-theme badwolf-theme apropospriate-theme anti-zenburn-theme ample-zen-theme ample-theme alect-themes afternoon-theme yasnippet-snippets yapfify xterm-color unfill smeargle shell-pop pyvenv pytest pyenv-mode py-isort pippel pipenv pip-requirements orgit org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download org-brain mwim multi-term mmm-mode markdown-toc markdown-mode magit-svn magit-gitflow lsp-julia lsp-mode dash-functional live-py-mode julia-repl julia-mode importmagic epc ctable concurrent deferred htmlize helm-pydoc helm-org-rifle helm-gtags helm-gitignore helm-git-grep helm-company helm-c-yasnippet gnuplot gitignore-templates gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md ggtags fuzzy flycheck-pos-tip pos-tip flycheck evil-org evil-magit magit magit-popup git-commit with-editor eshell-z eshell-prompt-extras esh-help cython-mode company-statistics company-auctex company-anaconda company auto-yasnippet yasnippet auctex-latexmk auctex anaconda-mode pythonic ac-ispell auto-complete ws-butler writeroom-mode visual-fill-column winum volatile-highlights vi-tilde-fringe uuidgen treemacs-projectile treemacs-evil treemacs ht pfuture toc-org symon string-inflection spaceline-all-the-icons spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode password-generator paradox spinner overseer org-bullets open-junk-file nameless move-text macrostep lorem-ipsum link-hint indent-guide hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-xref helm-themes helm-swoop helm-purpose window-purpose imenu-list helm-projectile helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state iedit evil-goggles evil-exchange evil-escape evil-ediff evil-cleverparens smartparens paredit evil-args evil-anzu anzu eval-sexp-fu elisp-slime-nav editorconfig dumb-jump doom-modeline eldoc-eval shrink-path all-the-icons memoize f dash s define-word counsel-projectile projectile counsel swiper ivy pkg-info epl column-enforce-mode clean-aindent-mode centered-cursor-mode auto-highlight-symbol auto-compile packed aggressive-indent ace-window ace-link ace-jump-helm-line helm avy helm-core popup which-key use-package pcre2el org-plus-contrib hydra font-lock+ evil goto-chg undo-tree dotenv-mode diminish bind-map bind-key async)))
  '(pdf-view-midnight-colors (quote ("#b2b2b2" . "#292b2e")))
  '(pos-tip-background-color "#eee8d5")
  '(pos-tip-foreground-color "#586e75")
  '(smartrep-mode-line-active-bg (solarized-color-blend "#859900" "#eee8d5" 0.2))
  '(term-default-bg-color "#fdf6e3")
  '(term-default-fg-color "#657b83")
+ '(tetris-x-colors
+   [[229 192 123]
+    [97 175 239]
+    [209 154 102]
+    [224 108 117]
+    [152 195 121]
+    [198 120 221]
+    [86 182 194]])
+ '(tooltip-mode t)
  '(vc-annotate-background nil)
  '(vc-annotate-background-mode nil)
  '(vc-annotate-color-map
@@ -626,7 +651,6 @@ This function is called at the very end of Spacemacs initialization."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:background nil))))
  '(company-tooltip-common ((t (:inherit company-tooltip :weight bold :underline nil))))
  '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :weight bold :underline nil)))))
 )

@@ -162,7 +162,7 @@ export DARKMODE=1
 
 
 # Add dir colors
-eval `dircolors ~/.config/dircolors-solarized.db`
+eval `dircolors ~/.config/dircolors-gruvbox.db`
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -198,6 +198,9 @@ function toggle_darkmode() {
   source $f
 }
 
+if [[ ! -f $HOME/antigen.zsh ]]; then
+    curl -L git.io/antigen > antigen.zsh
+fi
 
 if [[ ! -d $HOME/zsh-syntax-highlighting ]]; then
 	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $HOME/zsh-syntax-highlighting
