@@ -199,7 +199,7 @@ function toggle_darkmode() {
 }
 
 if [[ ! -f $HOME/antigen.zsh ]]; then
-    curl -L git.io/antigen > antigen.zsh
+    curl -L git.io/antigen > $HOME/antigen.zsh
 fi
 
 if [[ ! -d $HOME/zsh-syntax-highlighting ]]; then
