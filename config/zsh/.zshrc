@@ -143,7 +143,8 @@ alias CD='echo "cd $(xclip -o)" && cd $(xclip -o)'
 alias :q='exit'
 
 alias img='feh'
-alias pdf='zathura'
+alias pdf='zathura --fork'
+alias zathura='zathura --fork'
 
 alias vimconfig='vim ~/dotfiles/config/vim/.vimrc'
 alias vimupdate='vim +PlugClean +PlugUpdate +UpdateRemoteRepositories +qa'

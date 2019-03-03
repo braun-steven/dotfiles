@@ -17,14 +17,23 @@ let g:elite_mode=1
 " - For Neovim: ~/.local/share/nvim/plugged
 " - Avoid using standard Vim directory names like 'plugin'
 call plug#begin('~/.vim/plugged')
+
+  "" Autocomplete framework
+  if has('nvim')
+    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  else
+    Plug 'Shougo/deoplete.nvim'
+    Plug 'roxma/nvim-yarp'
+    Plug 'roxma/vim-hug-neovim-rpc'
+  endif
+  Plug 'davidhalter/jedi-vim'
+  Plug 'zchee/deoplete-jedi'
+  Plug 'ervandew/supertab'
+
   Plug 'fvictorio/vim-extract-variable'
-  Plug 'machakann/vim-highlightedyank'
-  Plug '~/.vim/plugged/vim-pydoc'
   Plug 'morhetz/gruvbox'
 
   Plug 'terryma/vim-multiple-cursors'
-  " Show marks
-  Plug 'kshenoy/vim-signature'
 
   " Python autoimport
   Plug 'mgedmin/python-imports.vim'
@@ -91,18 +100,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'scrooloose/nerdtree'
   Plug 'Xuyuanp/nerdtree-git-plugin'
 
-  "" Autocomplete framework
-  " Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
-  if has('nvim')
-    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-  else
-    Plug 'Shougo/deoplete.nvim'
-    Plug 'roxma/nvim-yarp'
-    Plug 'roxma/vim-hug-neovim-rpc'
-  endif
-  Plug 'davidhalter/jedi-vim'
-  Plug 'zchee/deoplete-jedi'
-  Plug 'ervandew/supertab'
    
   " Hex color preview
   Plug 'lilydjwg/colorizer'
@@ -155,7 +152,7 @@ set shiftwidth=2
 set number
 set showcmd
 set cursorline
-set colorcolumn=120
+set colorcolumn=100
 set wildmenu
 set showmatch
 set incsearch
@@ -170,8 +167,14 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
+" Custom mappings
 nnoremap H ^
 nnoremap L $
+
+" Keep visual mode while indenting
+vnoremap < <gv
+vnoremap > >gv
+
 
 " Lightline
 let g:lightline = {
@@ -223,8 +226,8 @@ let g:lightline#bufferline#show_number  = 0
 let g:lightline#bufferline#shorten_path = 1
 let g:lightline#bufferline#unnamed      = '[No Name]'
 let g:lightline.tabline          = {'left': [['buffers']], 'right' : []}
-let g:lightline.component_expand = {'buffers': 'lightline#bufferline#buffers'}
-let g:lightline.component_type   = {'buffers': 'tabsel'}
+let g:lightline.component_expand.buffers  = 'lightline#bufferline#buffers'
+let g:lightline.component_type.buffers = 'tabsel'
 autocmd BufWritePost,TextChanged,TextChangedI * call lightline#update()
 nmap <Leader>1 <Plug>lightline#bufferline#go(1)
 nmap <Leader>2 <Plug>lightline#bufferline#go(2)
@@ -250,12 +253,12 @@ let g:tagbar_type_julia = {
 
 " FZF
 nmap ; :Buffers<CR>
-nmap <Leader><Leader>b :Buffers<CR>
-nmap <Leader><Leader>l :Lines<CR>
-nmap <Leader><Leader>t :BTags<CR>
-nmap <Leader><Leader>T :Tags<CR>
-nmap <Leader><Leader>f :Files<CR>
-nmap <Leader><Leader>h :History<CR>
+nmap <Leader>fb :Buffers<CR>
+nmap <Leader>fl :Lines<CR>
+nmap <Leader>ft :BTags<CR>
+nmap <Leader>fT :Tags<CR>
+nmap <Leader>ff :Files<CR>
+nmap <Leader>fh :History<CR>
 
 " Customize fzf colors to match your color scheme
 autocmd! FileType fzf
@@ -301,18 +304,13 @@ let g:jedi#show_call_signatures = "1"
 " Disable since deoplete is enabled
 let g:jedi#completions_enabled = 0
 
-" EasyMotion
-map  <Leader>f <Plug>(easymotion-bd-f)
 " Move to line
 map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
+map <Leader>l <Plug>(easymotion-bd-jk)
 " Move to word
 map  <Leader>w <Plug>(easymotion-bd-w)
 let g:EasyMotion_smartcase = 1
-
-" Quick scope
-" Trigger a highlight in the appropriate direction when pressing these keys:
-let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 
 " Disable trailing spaces warning
 let g:python_highlight_space_errors=0
@@ -347,23 +345,31 @@ let g:jedi#completions_enabled = 0
 let g:python_host_prog = '/usr/bin/python'
 let g:python3_host_prog = '/usr/bin/python3'
 
-" " use tab to forward cycle
-" inoremap <silent><expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
-" " use tab to backward cycle
-" inoremap <silent><expr><s-tab> pumvisible() ? "\<c-p>" : "\<s-tab>"
-" inoremap <silent><expr> <TAB>
-" 		\ pumvisible() ? "\<C-n>" :
-" 		\ <SID>check_back_space() ? "\<TAB>" :
-" 		\ deoplete#mappings#manual_complete()
-" 		function! s:check_back_space() abort "{{{
-" 		let col = col('.') - 1
-" 		return !col || getline('.')[col - 1]  =~ '\s'
-" 		endfunction"}}}
-"
-
 " Reformat python code with \r
-nmap \r :ALEFix black<CR>
-nmap \i :ALEFix isort<CR>
+nmap <localleader>r :ALEFix black<CR>
+nmap <localleader>i :ALEFix isort<CR>
+:let maplocalleader = ','
+
+"""""""""""""""""""
+" Python bindings "
+"""""""""""""""""""
+augroup pythonbindings
+  autocmd! pythonbindings
+  " Refactor with ALE black
+  autocmd Filetype python nmap <buffer> <silent> <localleader>r :ALEFix black<CR>
+
+  " Python print stuff in selection
+  autocmd Filetype python vnoremap <buffer> <silent> <localleader>p yoprint("<ESC>pa:", <ESC>pa)<ESC>
+
+  " Insert debugging with ipdb
+  autocmd Filetype python nmap <buffer> <silent> <localleader>b :call InsertIPDB()<CR>
+
+  " Function to insert python IPDB debug line
+  function! InsertIPDB()
+    let trace = expand("import ipdb; ipdb.set_trace(context=5)")
+    execute "normal O".trace
+  endfunction
+augroup end
 
 " LanguageTool config
 let g:languagetool_jar = '$HOME/Downloads/LanguageTool-4.3/languagetool-commandline.jar'
@@ -372,34 +378,19 @@ hi LanguageToolSpellingError guisp=#dc322f  gui=undercurl guifg=NONE guibg=NONE 
 
 " UtilSnips
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-  let g:UltiSnipsExpandTrigger="<tab>"
-  let g:UltiSnipsJumpForwardTrigger="<c-b>"
-  let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-
-  " If you want :UltiSnipsEdit to split your window.
-  let g:UltiSnipsEditSplit="vertical"
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:ultisnips_python_style="google"
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
 
 " Supertab 
 let g:SuperTabDefaultCompletionType = "<c-n>"
 
-" Map jj, jk, kj to exit insert mode
-imap jj <Esc>
-imap jk <Esc>
-imap kj <Esc>
-
 " CTRL-C doesn't trigger the InsertLeave autocmd . map to <ESC> instead.
 inoremap <c-c> <ESC>
 
-" italics fix
-" set t_ZH=^[[3m
-" set t_ZR=^[[23m
-
-map \b :call InsertLine()<CR>
-
-function! InsertLine()
-  let trace = expand("import ipdb; ipdb.set_trace(context=5)")
-  execute "normal O".trace
-endfunction
 
 " Delte backwards in insert mode
 noremap! <C-BS> <C-w>
@@ -410,9 +401,6 @@ inoremap <C-w> <C-\><C-o>dB
 inoremap <C-BS> <C-\><C-o>db
 
 
-" Ultisnips
-let g:ultisnips_python_style="google"
-
 " Add surroundings in visual mode and insert
 vmap s) S)i
 vmap s( S)i
@@ -421,5 +409,3 @@ vmap s[ S]i
 vmap s{ S}i
 vmap s} S}i
 
-" Python print stuff in selection
-vnoremap p yoprint("<ESC>pa:", <ESC>pa)<ESC>
