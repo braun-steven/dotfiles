@@ -75,6 +75,7 @@ HYPHEN_INSENSITIVE="true"
 source $ZSH/oh-my-zsh.sh
 
 export PATH="$PATH:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:$HOME/.local/bin:$HOME/bin"
+export TERM="xterm-256color"
 
 # Preferred editor for local and remote sessions
 if [[ -z $SSH_CONNECTION ]]; then
@@ -101,6 +102,7 @@ export FZF_DEFAULT_OPTS='--height 40% --border'
 PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
 PATH="$HOME/bin:$PATH"
 PATH="$PATH:/usr/bin/julia"
+PATH="$PATH:$HOME/.emacs.d/bin"
 LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/lib/"
 
 # Eval keychain only locally
@@ -119,7 +121,7 @@ alias ls='ls -lh --color=auto --group-directories-first'
 alias grep='grep --color=auto'
 
 # Pacman shortcuts
-alias pacu='sudo pacman -Syyu && yay -Syyua'
+alias pacu='sudo pacman -Syu && yay -Syua'
 alias pacs='sudo pacman -S'
 alias yay='yay --noconfirm'
 # Moved to update functions (see above)
@@ -143,7 +145,7 @@ alias CD='echo "cd $(xclip -o)" && cd $(xclip -o)'
 alias :q='exit'
 
 alias img='feh'
-alias pdf='zathura --fork'
+alias pdf='evince'
 alias zathura='zathura --fork'
 
 alias vimconfig='vim ~/dotfiles/config/vim/.vimrc'
@@ -157,9 +159,6 @@ alias xresourcesreload='xrdb -merge ~/.Xresources'
 alias gnome-screenshot='gnome-screenshot -a'
 
 alias envactivate='source ./env/bin/activate'
-
-export DARKMODE=1
-
 
 
 # Add dir colors

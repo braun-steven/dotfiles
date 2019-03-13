@@ -43,7 +43,7 @@ This function should only modify configuration layer settings."
      ;; ----------------------------------------------------------------
      helm
      (auto-completion :variables
-                      spacemacs-default-company-backends '(company-files  company-capf company-anaconda :with company-capf)
+                      spacemacs-default-company-backends '(company-files  company-capf company-anaconda)
                       auto-completion-enable-snippets-in-popup t
                       auto-completion-enable-sort-by-usage t)
      ;; better-defaults ;; emacs binding specifics
