@@ -22,8 +22,11 @@ let g:elite_mode=1
 " - For Neovim: ~/.local/share/nvim/plugged
 " - Avoid using standard Vim directory names like 'plugin'
 call plug#begin('~/.vim/plugged')
-" Visual leader guide
-Plug 'hecal3/vim-leader-guide'
+" Vim which key guide
+Plug 'liuchengxu/vim-which-key'
+
+" Python/Braceless language text objects
+Plug 'tweekmonster/braceless.vim'
 
 Plug 'Yggdroot/indentLine'
 
@@ -162,6 +165,7 @@ syntax on                 " Enable syntax highlighting
 set background=dark
 let g:gruvbox_italic=1
 let g:gruvbox_bold=1
+" let g:gruvbox_contrast_dark='soft'
 colorscheme gruvbox
 set path=.,,**
 set expandtab
@@ -421,41 +425,59 @@ vmap s} S}i
 
 " Leader mappings {{{
 " Prefix dictionary
-let g:lmap = {}
+let g:which_key_map = {}
 
 " Buffers <Leader>b
-let g:lmap.b = {'name' : 'Buffer Menu'}
+let g:which_key_map.b = {'name' : '+buffer'}
 nmap <Leader>bb :Buffers<CR>
+let g:which_key_map.b.b = 'buffers'
 nmap <Leader>bd :bd<CR>
+let g:which_key_map.b.d = 'delete'
 nmap <Leader>bn :bn<CR>
+let g:which_key_map.b.n = 'next'
 nmap <Leader>bp :bp<CR>
+let g:which_key_map.b.p = 'previous'
 nmap <Leader>b<Tab> :b#<CR>
+let g:which_key_map.b['<TAB>'] = 'last-tab'
 nmap <Leader><Tab> :b#<CR>
+let g:which_key_map['<TAB>'] = 'last-tab'
 
 " Files <Leader>f
-let g:lmap.f = {'name' : 'File Menu'}
+let g:which_key_map.f = {'name' : '+file'}
 nmap <Leader>ff :Files<CR>
+let g:which_key_map.f.f = 'find'
 nmap <Leader>fg :GFiles<CR>
+let g:which_key_map.f.t = 'git-file'
 nmap <Leader>fd :e ~/.vimrc<CR>
+let g:which_key_map.f.t = 'edit-vim-config'
 nmap <Leader>fr :History<CR>
+let g:which_key_map.f.t = 'mru'
 
 
 " Tags <Leader>t
-let g:lmap.t = {'name' : 'Tag Menu'}
-nmap <Leader>tt :Tags
-nmap <Leader>tb :BTags
+let g:which_key_map.t = {'name' : '+tag'}
+nmap <Leader>tt :Tags<CR>
+let g:which_key_map.t.t = 'all-tags'
+nmap <Leader>tb :BTags<CR>
+let g:which_key_map.t.b = 'buffer-tags'
 
 " Search <Leader>/
-let g:lmap['/'] = {'name' : 'Search Menu'}
+let g:which_key_map['/'] = {'name' : '+search'}
 nmap <Leader>/l :BLines<CR>
+let g:which_key_map['/'].l = 'buffer-lines'
 nmap <Leader>/L :Lines<CR>
+let g:which_key_map['/'].L = 'all-lines'
 nmap <Leader>/h :History<CR>
+let g:which_key_map['/'].h = 'history'
 nmap <Leader>/c :Commands<CR>
+let g:which_key_map['/'].c = 'commands'
 
 " Git <Leader>g
-let g:lmap.g = {'name' : 'Git Menu'}
+let g:which_key_map.g = {'name' : '+git'}
 nmap <Leader>gc :Commits<CR>
+let g:which_key_map.g.c = 'commits'
 nmap <Leader>gs :Gstatus<CR>
+let g:which_key_map.g.s = 'status'
 
 " Single commands
 " Move to word
@@ -466,8 +488,10 @@ map <Leader>k <Plug>(easymotion-k)
 map <Leader>l <Plug>(easymotion-bd-jk)
 " }}}
 
-" Leader Guide {{{
-call leaderGuide#register_prefix_descriptions("<Space>", "g:lmap")
-nnoremap <silent> <leader> :<c-u>LeaderGuide '<Space>'<CR>
-vnoremap <silent> <leader> :<c-u>LeaderGuideVisual '<Space>'<CR>
-" }}}
+
+" Enable braceless for python files
+autocmd FileType python BracelessEnable +indent +fold
+
+call which_key#register('<Space>', "g:which_key_map")
+nnoremap <silent> <leader> :<c-u>WhichKey '<Space>'<CR>
+vnoremap <silent> <leader> :<c-u>WhichKeyVisual '<Space>'<CR>
