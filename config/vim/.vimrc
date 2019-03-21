@@ -1,12 +1,9 @@
 set hidden
-let g:vim_markdown_folding_disabled = 1
+
 " Remove '-- INSERT --' line since it is shown in lighline anyway
 set noshowmode
 set clipboard=unnamed
 
-" Italics
-" set t_ZH=^[[3m
-" set t_ZR=^[[23m
 
 " Reload .vimrc on save
 autocmd! bufwritepost .vimrc source %
@@ -18,12 +15,17 @@ let g:elite_mode=1
 "let g:hardtime_default_on = 1
 
 
+" Autoinstall Plug if not available
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent execute "!curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+  autocmd VimEnter * PlugInstall | source $MYVIMRC
+endif
 " Specify a directory for plugins
 " - For Neovim: ~/.local/share/nvim/plugged
 " - Avoid using standard Vim directory names like 'plugin'
 call plug#begin('~/.vim/plugged')
-" Vim which key guide
-Plug 'liuchengxu/vim-which-key'
+" Vim session handling made easy
+Plug 'thaerkh/vim-workspace'
 
 " Python/Braceless language text objects
 Plug 'tweekmonster/braceless.vim'
@@ -110,7 +112,6 @@ Plug 'sheerun/vim-polyglot'
 
 " Statusline
 Plug 'itchyny/lightline.vim'
-Plug 'mengelbrecht/lightline-bufferline'
 Plug 'maximbaz/lightline-ale'
 
 " Julia support
@@ -176,7 +177,7 @@ set number                " Enable numbers
 set relativenumber        " Enable relative numbers
 set showcmd               " Show command in bottom right position
 set cursorline            " Highlight line where curser is
-set colorcolumn=100
+" set colorcolumn=100
 set wildmenu
 set showmatch
 set incsearch             " Enable incremental seach; Highlight while typing
@@ -244,16 +245,6 @@ function! LightlineMode()
         \ &filetype ==# 'vimshell' ? 'VimShell' :
         \ lightline#mode()
 endfunction
-
-" Lightline Buffers
-set showtabline=2
-let g:lightline#bufferline#show_number  = 0
-let g:lightline#bufferline#shorten_path = 1
-let g:lightline#bufferline#unnamed      = '[No Name]'
-let g:lightline.tabline          = {'left': [['buffers']], 'right' : []}
-let g:lightline.component_expand.buffers  = 'lightline#bufferline#buffers'
-let g:lightline.component_type.buffers = 'tabsel'
-autocmd BufWritePost,TextChanged,TextChangedI * call lightline#update()
 " }}}
 
 " FZF {{{
@@ -284,7 +275,7 @@ endif
 
 
 " Clear search
-nnoremap <CR> :noh<CR><CR>
+nnoremap <silent> <CR> :noh<CR><CR>
 
 " Jedi {{{
 let g:jedi#rename_command = "<leader>r"
@@ -324,7 +315,7 @@ let g:ale_fix_on_save = 1
 let g:ale_set_highlights = 1
 
 " Check Python files with flake8 and pylint.
-let b:ale_linters = ['flake8', 'pylint']
+let b:ale_linters = ['flake8']
 let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
@@ -418,80 +409,31 @@ vmap s[ S]i
 vmap s{ S}i
 vmap s} S}i
 
-" IndentLines {{{
-" let g:indentLine_char_list = ['|', '¦', '┆', '┊']
-" }}}
+" Leader mappings {{
+nnoremap <silent> <Leader>b :Buffers<CR>
+nnoremap <silent> <Leader>l :Lines<CR>
+nnoremap <silent> <Leader>t :BTags<CR>
+nnoremap <silent> <Leader>T :Tags<CR>
+nnoremap <silent> <Leader>f :Files<CR>
+nnoremap <silent> <Leader>h :History<CR>
+nnoremap <silent> <Leader><Tab> :b#<CR>
 
-
-" Leader mappings {{{
-" Prefix dictionary
-let g:which_key_map = {}
-
-" Buffers <Leader>b
-let g:which_key_map.b = {'name' : '+buffer'}
-nmap <Leader>bb :Buffers<CR>
-let g:which_key_map.b.b = 'buffers'
-nmap <Leader>bd :bd<CR>
-let g:which_key_map.b.d = 'delete'
-nmap <Leader>bn :bn<CR>
-let g:which_key_map.b.n = 'next'
-nmap <Leader>bp :bp<CR>
-let g:which_key_map.b.p = 'previous'
-nmap <Leader>b<Tab> :b#<CR>
-let g:which_key_map.b['<TAB>'] = 'last-tab'
-nmap <Leader><Tab> :b#<CR>
-let g:which_key_map['<TAB>'] = 'last-tab'
-
-" Files <Leader>f
-let g:which_key_map.f = {'name' : '+file'}
-nmap <Leader>ff :Files<CR>
-let g:which_key_map.f.f = 'find'
-nmap <Leader>fg :GFiles<CR>
-let g:which_key_map.f.t = 'git-file'
-nmap <Leader>fd :e ~/.vimrc<CR>
-let g:which_key_map.f.t = 'edit-vim-config'
-nmap <Leader>fr :History<CR>
-let g:which_key_map.f.t = 'mru'
-
-
-" Tags <Leader>t
-let g:which_key_map.t = {'name' : '+tag'}
-nmap <Leader>tt :Tags<CR>
-let g:which_key_map.t.t = 'all-tags'
-nmap <Leader>tb :BTags<CR>
-let g:which_key_map.t.b = 'buffer-tags'
-
-" Search <Leader>/
-let g:which_key_map['/'] = {'name' : '+search'}
-nmap <Leader>/l :BLines<CR>
-let g:which_key_map['/'].l = 'buffer-lines'
-nmap <Leader>/L :Lines<CR>
-let g:which_key_map['/'].L = 'all-lines'
-nmap <Leader>/h :History<CR>
-let g:which_key_map['/'].h = 'history'
-nmap <Leader>/c :Commands<CR>
-let g:which_key_map['/'].c = 'commands'
-
-" Git <Leader>g
-let g:which_key_map.g = {'name' : '+git'}
-nmap <Leader>gc :Commits<CR>
-let g:which_key_map.g.c = 'commits'
-nmap <Leader>gs :Gstatus<CR>
-let g:which_key_map.g.s = 'status'
-
-" Single commands
 " Move to word
 map  <Leader>w <Plug>(easymotion-bd-w)
 " " Move to line
 map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
 map <Leader>l <Plug>(easymotion-bd-jk)
+" }}
+
+
+" Vim workspace {{{
+nnoremap <leader>s :ToggleWorkspace<CR>
+let g:workspace_session_directory = $HOME . '/.vim/sessions/'
+let g:workspace_autosave = 0
+let g:workspace_autosave_untrailspaces = 0
 " }}}
 
-
-" Enable braceless for python files
-autocmd FileType python BracelessEnable +indent +fold
-
-call which_key#register('<Space>', "g:which_key_map")
-nnoremap <silent> <leader> :<c-u>WhichKey '<Space>'<CR>
-vnoremap <silent> <leader> :<c-u>WhichKeyVisual '<Space>'<CR>
+" Vim markdown{{{
+let g:vim_markdown_folding_disabled = 1
+" }}}
