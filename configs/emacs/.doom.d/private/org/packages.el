@@ -1,6 +1,5 @@
 ;; -*- no-byte-compile: t; -*-
 
-(package! org-gcal)
 (package! org-super-agenda)
 (package! org-ql)
 (package! org-pomodoro)
