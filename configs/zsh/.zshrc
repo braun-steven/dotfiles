@@ -86,19 +86,6 @@ fi
 ##################################
 
 ##################################
-#  PREZTO begin                  #
-##################################
-
-# if [[ ! -d $HOME/.zprezto ]]; then
-#   git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
-# fi
-
-##################################
-#  PREZTO end                    #
-##################################
-
-
-##################################
 #  ZGEN begin                    #
 ##################################
 
@@ -125,26 +112,31 @@ if ! zgen saved; then
   zgen load mafredri/zsh-async
   zgen load junegunn/fzf shell
 
+  zgen load esc/conda-zsh-completion
+
   zgen load zsh-users/zsh-autosuggestions
-  zgen load zsh-users/zsh-syntax-highlighting
+  # zgen load zsh-users/zsh-syntax-highlighting
+  zgen load zdharma/fast-syntax-highlighting
 
   # Load Prezto
   zgen prezto
 
   # Load Prezto Modules
-  zgen prezto git
-  zgen prezto environment
-  zgen prezto terminal
-  zgen prezto editor
+  # zgen prezto git
+  # zgen prezto environment
+  # zgen prezto terminal
+  # zgen prezto editor
   zgen prezto history
-  zgen prezto directory
-  zgen prezto spectrum
+  # zgen prezto directory
+  # zgen prezto spectrum
   zgen prezto utility
   zgen prezto completion
-  zgen prezto syntax-highlighting
-  zgen prezto history-substring-search
+  # zgen prezto syntax-highlighting
+  # zgen prezto history-substring-search
   # zgen prezto autosuggestions
-  zgen prezto prompt
+  # zgen prezto prompt
+
+  zgen prezto utility safe-ops 'no'
 
   # generate the init script from plugins above
   zgen save
@@ -156,6 +148,7 @@ ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 ##################################
 #  ZGEN end                      #
 ##################################
+
 
 
 ##################################
@@ -195,5 +188,6 @@ source ~/.bash_aliases
 ##################################
 #  MISC end                      #
 ##################################
+
 
 autopair-init
