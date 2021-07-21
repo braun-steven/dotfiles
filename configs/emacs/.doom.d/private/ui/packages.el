@@ -1,8 +1,7 @@
 ;; -*- no-byte-compile: t; -*-
 
 ;; Themes
-(package! modus-operandi-theme)
-(package! modus-vivendi-theme)
+(package! modus-themes)
 
 ;; Show colors as character background
 (package! rainbow-mode)
