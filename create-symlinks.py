@@ -27,6 +27,7 @@ def create_link(entry: os.DirEntry, dotconfig: bool):
             logger.info(f"Removing {dst}")
             os.remove(dst)
 
+
     elif os.path.exists(dst):
         # Not a symlink, but file exists
         logger.warn(f"Destination: {dst} already exists (dir)")
