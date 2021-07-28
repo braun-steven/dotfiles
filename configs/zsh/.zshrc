@@ -17,19 +17,6 @@ export SUDO_EDITOR="emacsclient -nw"
 export FZF_DEFAULT_OPTS='--height 40% --border'
 export FZF_DEFAULT_COMMAND='ag -g .'
 
-# Add ruby binaries to path if available
-if command -v ruby &> /dev/null; then
-  PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
-fi
-
-# Extend $PATH
-export PATH="$PATH:$HOME/.local/bin"
-export PATH="$PATH:$HOME/dotbin"  # scripts from dotfiles
-export PATH="$HOME/bin:$PATH"  # local binaries
-export PATH="$PATH:$HOME/.emacs.d/bin" # doom binaries
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"  # yarn
-
-export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/lib/"
 
 # Fixes some terminal application colors
 export TERM="xterm-256color"
