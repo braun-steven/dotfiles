@@ -3,6 +3,20 @@
 #
 # Go into zsh shell
 
+# Add ruby binaries to path if available
+if command -v ruby &> /dev/null; then
+  PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
+fi
+
+# Extend $PATH
+export PATH="$PATH:$HOME/.local/bin"
+export PATH="$PATH:$HOME/dotbin"  # scripts from dotfiles
+export PATH="$HOME/bin:$PATH"  # local binaries
+export PATH="$PATH:$HOME/.emacs.d/bin" # doom binaries
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"  # yarn
+
+export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/lib/"
+
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
