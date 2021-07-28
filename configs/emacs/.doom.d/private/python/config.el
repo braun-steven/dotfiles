@@ -24,4 +24,10 @@
   (use-package! py-pyment
     :after python
     :config
-    (setq py-pyment-options '("--output=google"))))
+    (setq py-pyment-options '("--output=google")))
+
+  ;; Fix for confusing yasnippet results in completion
+  (setq! +lsp-company-backends
+         (if (featurep! :editor snippets)
+             '(:separate company-yasnippet company-capf)
+           'company-capf)))

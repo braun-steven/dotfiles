@@ -1,0 +1,5 @@
+#!/bin/bash
+
+basedir=$1
+
+find $basedir -name *.drawio -exec rm -f {}.pdf \; -exec drawio --crop --transparent -x -o {}.pdf {} \;
