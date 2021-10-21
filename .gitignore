@@ -10,3 +10,8 @@ configs/emacs/.doom.d/+modules/lang/org/org-gcal-credentials.el
 
 # Fish
 fish_variables
+
+# Onedrive stuff
+./configs/onedrive/.config/onedrive/items*
+./configs/onedrive/.config/onedrive/.config.hash
+./configs/onedrive/.config/onedrive/refresh_token
