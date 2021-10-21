@@ -30,8 +30,9 @@
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
 (setq doom-font (font-spec :family "Hack" :size 19))
+;; (setq doom-font (font-spec :family "Iosevka" :size 20))
 ;; (setq doom-font (font-spec :family "DejaVu Sans Mono" :size 19))
-;; (setq doom-font (font-spec :family "IBM Plex Mono" :size 20))
+;; (setq doom-font (font-spec :family "IBM Plex Mono" :size 19))
 ;; (setq doom-font (font-spec :family "DroidSansMono Nerd Font" :size 20))
 ;; (setq doom-variable-pitch-font (font-spec :family "DejaVu Serif" :size 25 :weight 'semi-light))
 ;; (setq doom-variable-pitch-font (font-spec :family "Source Sans Pro" :size 28 :weight 'semi-light))
@@ -78,7 +79,7 @@
 ;; Company config
 (setq
  company-minimum-prefix-length 3
- company-idle-delay 0.2
+ company-idle-delay 0.1
  company-tooltip-idle-delay 1.0)
 
 ;; Emacs config location
@@ -111,17 +112,10 @@
   :config
   (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 
+(after! emacs-everywhere
 
-;; Bury compilation buffers if successful
-;; (add-hook 'compilation-finish-functions 'slang/bury-compile-buffer-if-successful)
+  (add-to-list 'emacs-everywhere-markdown-windows "Mattermost"))
 
-;; EMACS ANYWHERE
-;; Define a function or use a lambda of the same signature
-(defun popup-handler (app-name window-title x y w h)
-  (markdown-mode))
-
-;; Hook your function
-(add-hook 'ea-popup-hook 'popup-handler)
 
 ;; ;; Fix doom modeline icons (only issue on arch emacs binary)
 ;; (custom-set-faces!
@@ -171,19 +165,20 @@
   (setq magit-status-margin '(t age magit-log-margin-width t 18)))
 
 
-(use-package! modus-themes
-  :init
-  ;; Add all your customizations prior to loading the themes
-  (setq modus-themes-slanted-constructs t
-        modus-themes-syntax '(green-strings yellow-comments)
-        modus-themes-bold-constructs nil)
 
-  ;; Load the theme files before enabling a theme
-  (modus-themes-load-themes)
-  :config
-  (modus-themes-load-operandi)
-  ;; Load the theme of your choice:
-  :bind ("<f5>" . modus-themes-toggle))
+;; Enable auto-fill-mode everywhere
+;; TODO: Choose some sane defaults for specific modes?
+(auto-fill-mode 1)
+
+(use-package vertico-directory
+  ;; More convenient directory navigation commands
+  :bind (:map vertico-map
+              ("RET" . vertico-directory-enter)
+              ("DEL" . vertico-directory-delete-char)
+              ("M-DEL" . vertico-directory-delete-word)))
+
+;; Disable loading all known projects when opening a single project. If set to true, this may greatly reduce performance.
+(setq lsp-pyright-multi-root nil)
 
 
 ;; Load private modules

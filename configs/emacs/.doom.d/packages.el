@@ -67,7 +67,7 @@
 (package! lsp-julia :recipe (:host github :repo "non-jedi/lsp-julia"))
 
 ;; Helm
-(package! helm)
+;; (package! helm)
 
 ;; Collection of Ridiculously Useful eXtensions for Emacs
 (package! crux)
@@ -80,9 +80,6 @@
 (package! evil-replace-with-register)
 
 (package! git-link)
-
-(package! corfu)
-(package! orderless)
 
 ;; Load private module packages
 (dolist (file (directory-files "~/.doom.d/private/" t directory-files-no-dot-files-regexp))

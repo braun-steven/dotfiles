@@ -21,3 +21,5 @@
 	rebase = false
 [init]
 	defaultBranch = master
+[status]
+	showUntrackedFiles = all

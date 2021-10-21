@@ -10,6 +10,7 @@ fi
 
 # Extend $PATH
 export PATH="$PATH:$HOME/.local/bin"
+export PATH="$PATH:$HOME/.cargo/bin"
 export PATH="$PATH:$HOME/dotbin"  # scripts from dotfiles
 export PATH="$HOME/bin:$PATH"  # local binaries
 export PATH="$PATH:$HOME/.emacs.d/bin" # doom binaries
@@ -31,3 +32,5 @@ fi
 if [[ $(ps --no-header --pid=$PPID --format=cmd) != "zsh" ]]; then
   exec zsh
 fi
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash

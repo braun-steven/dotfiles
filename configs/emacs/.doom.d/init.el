@@ -19,10 +19,11 @@
        ;;japanese
 
        :completion
-       (company +childframe)            ; the ultimate code completion backend
+       company            ; the ultimate code completion backend
        ;; (helm +fuzzy)              ; the *other* search engine for love and life
        ;;ido               ; the other *other* search engine...
-       (ivy +icons +prescient)               ; a search engine for love and life
+       ;; (ivy +icons +prescient +childframe)               ; a search engine for love and life
+       (vertico +icons)
 
        :ui
        ;; (ligatures +fira)
@@ -50,7 +51,7 @@
        vi-tilde-fringe   ; fringe tildes to mark beyond EOB
        ;; (window-select +numbers)     ; visually switch windows
        workspaces        ; tab emulation, persistence & separate workspaces
-       zen               ; distraction-free coding or writing
+       ;; zen               ; distraction-free coding or writing
 
        :editor
        (evil +everywhere); come to the dark side, we have cookies
@@ -94,7 +95,8 @@
        (eval +overlay)     ; run code, run (also, repls)
        ;;gist              ; interacting with github gists
        (lookup           ; helps you navigate your code and documentation
-        +docsets)        ; ...or in Dash docsets locally
+        +docsets
+        +dictionary)        ; ...or in Dash docsets locally
        (lsp +peek)
        ;;macos             ; MacOS-specific commands
        magit             ; a git porcelain for Emacs
@@ -142,14 +144,15 @@
        ;;nix               ; I hereby declare "nix geht mehr!"
        ;;ocaml             ; an objective camel
        (org              ; organize your plain life in plain text
-        +dragndrop       ; drag & drop files/images into org buffers
+        ;; +dragndrop       ; drag & drop files/images into org buffers
         +roam2
-        +journal
+        ;; +journal
         ;;+hugo            ; use Emacs for hugo blogging
         ;;+jupyter        ; ipython/jupyter support for babel
         ;;+pandoc          ; export-with-pandoc support
-        +pomodoro        ; be fruitful with the tomato technique
-        +present)        ; using org-mode for presentations
+        ;; +pomodoro        ; be fruitful with the tomato technique
+        ;; +present        ; using org-mode for presentations
+        )
        ;;perl              ; write code no one else can comprehend
        ;;php               ; perl's insecure younger brother
        ;;plantuml          ; diagrams for confusing people more
@@ -170,7 +173,7 @@
        ;;web               ; the tubes
 
        :email
-       (mu4e +gmail)
+       ;; (mu4e +gmail)
        ;;notmuch
        ;;(wanderlust +gmail)
 
@@ -186,9 +189,7 @@
 
        :config
        ;;literate
-       (default +bindings +smartparens)
-
-       )
+       (default +bindings +smartparens))
 
 ;; Let j and k go over visual lines
 (setq evil-respect-visual-line-mode t)

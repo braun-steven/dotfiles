@@ -1,0 +1,16 @@
+hosts=(
+    # dl1
+    # mllab
+    # dgxa
+    dgxb
+    dgxc
+    dgxd
+    dgxe
+)
+for host in "${hosts[@]}"
+do
+    echo "Host: $host"
+    echo "-----------"
+    ssh $host -t "zsh -c '.local/bin/gpustat -cp'"
+    echo "-----------"
+done

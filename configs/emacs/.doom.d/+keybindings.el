@@ -19,7 +19,8 @@
       "`" nil
 
       :leader
-      "SPC" #'counsel-M-x
+      "SPC" #'execute-extended-command
+      ;; "SPC" #'counsel-M-x
 
       "x"  nil
       (:prefix ("x" . "font")
