@@ -34,10 +34,7 @@
          (file+headline org-default-notes-file "Inbox")
          "** TODO %?\n:PROPERTIES:\n:CREATED:\t%u\n:END:\n"
          :empty-lines 1)
-        ("m" "Master Thesis" entry (file+headline "~/org/gtd/gtd.org" "Master Thesis")
-         "* TODO %?")
-        ("e" "email" entry (file+headline org-default-notes-file "Inbox")
-         "* TODO Reply: %a %?")))
+        ))
 
 ;; Set default column view headings: Task Total-Time Time-Stamp
 ;; (setq org-columns-default-format "%50ITEM(Task) %10CLOCKSUM %16TIMESTAMP_IA")
@@ -275,6 +272,7 @@
 (add-to-list 'org-agenda-custom-commands `,slang/org-agenda-todo-view)
 (add-to-list 'org-agenda-custom-commands `,slang/org-agenda-next-view)
 (add-to-list 'org-agenda-custom-commands `,slang/org-agenda-lower-eq-10-mins-view)
+(add-to-list 'org-agenda-custom-commands `,(slang/make-org-agenda-custom-view "phd" "cp" "PhD"))
 (add-to-list 'org-agenda-custom-commands `,(slang/make-org-agenda-custom-view "@work" "cw" "At Work"))
 (add-to-list 'org-agenda-custom-commands `,(slang/make-org-agenda-custom-view "@home" "ch" "At Home"))
 (add-to-list 'org-agenda-custom-commands `,(slang/make-org-agenda-custom-view "@studying" "cs" "At Studying"))

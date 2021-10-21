@@ -15,7 +15,8 @@ set scrolloff=5
 
 " always show signcolumns
 set signcolumn=yes
-set clipboard=unnamedplus
+" set clipboard=unnamedplus
+set clipboard+=unnamedplus
 
 " Use global replace by default (/g) to revert
 set gdefault
@@ -140,6 +141,8 @@ Plug 'itchyny/lightline.vim'
 " Add repeat support for plugins
 Plug 'tpope/vim-repeat'
 Plug 'godlygeek/tabular'
+
+" Plug 'glacambre/firenvim'
 
 " Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
@@ -344,8 +347,8 @@ let g:python_highlight_space_errors=0
 let g:tex_flavor='latex'
 let g:vimtex_view_method='zathura'
 let g:vimtex_quickfix_mode=0
-set conceallevel=1
-let g:tex_conceal='abdmg'
+" set conceallevel=1
+" let g:tex_conceal='abdmg'
 
 
 " LaTeX bindings {{{
@@ -354,7 +357,7 @@ augroup latexbindings
   autocmd Filetype tex inoremap <buffer> <silent> _ _{}<Left>
   autocmd Filetype tex inoremap <buffer> <silent> ^ ^{}<Left>
 
-  autocmd BufWritePost *.tex execute ':!pdflatex %'
+  " autocmd BufWritePost *.tex execute ':!pdflatex %'
 augroup end
 " }}}
 

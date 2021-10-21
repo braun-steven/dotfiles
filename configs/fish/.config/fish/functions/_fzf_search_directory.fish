@@ -1,8 +1,4 @@
 function _fzf_search_directory --description "Search the current directory. Replace the current token with the selected file paths."
-    # Make sure that fzf uses fish to execute _fzf_preview_file.
-    # See similar comment in _fzf_search_variables.fish.
-    set --local --export SHELL (command --search fish)
-
     set fd_opts --color=always $fzf_fd_opts
     set fzf_arguments --multi --ansi $fzf_dir_opts
     set token (commandline --current-token)
@@ -17,27 +13,24 @@ function _fzf_search_directory --description "Search the current directory. Repl
         set --append fd_opts --base-directory=$unescaped_exp_token
         # use the directory name as fzf's prompt to indicate the search is limited to that directory
         set --prepend fzf_arguments --prompt="$unescaped_exp_token" --preview="_fzf_preview_file $expanded_token{}"
-        set file_paths_selected $unescaped_exp_token(fd $fd_opts 2>/dev/null | fzf $fzf_arguments)
+        set file_paths_selected $unescaped_exp_token(fd $fd_opts 2>/dev/null | _fzf_wrapper $fzf_arguments)
     else
         set --prepend fzf_arguments --query="$unescaped_exp_token" --preview='_fzf_preview_file {}'
-        set file_paths_selected (fd $fd_opts 2>/dev/null | fzf $fzf_arguments)
+        set file_paths_selected (fd $fd_opts 2>/dev/null | _fzf_wrapper $fzf_arguments)
     end
 
 
     if test $status -eq 0
-        # Fish will implicitly take action on a path when a path is provided as the first token and it
-        # begins with a dot or slash. If the path is a directory, Fish will cd into it. If the path is
-        # an executable, Fish will execute it. To help users harness this convenient behavior, we
-        # automatically prepend ./ to the selected path if
+        # Fish will cd implicitly if a directory name ending in a slash is provided.
+        # To help the user leverage this feature, we automatically append / to the selected path if
         # - only one path was selected,
         # - the user was in the middle of inputting the first token,
-        # - and the path doesn't already begin with a dot or slash
-        # Then, the user only needs to hit Enter once more to potentially cd into or execute that path.
-        if test (count $file_paths_selected) = 1 \
-                && not string match --quiet --regex "^[.|/]" $file_paths_selected
+        # - the path is a directory
+        # Then, the user only needs to hit Enter once more to cd into that directory.
+        if test (count $file_paths_selected) = 1
             set commandline_tokens (commandline --tokenize)
-            if test "$commandline_tokens" = "$current_token"
-                set file_paths_selected ./$file_paths_selected
+            if test "$commandline_tokens" = "$token" -a -d "$file_paths_selected"
+                set file_paths_selected $file_paths_selected/
             end
         end
 
