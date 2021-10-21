@@ -75,7 +75,12 @@
     (cons 360 "#5B6268")))
  '(vc-annotate-very-old-color nil)
  '(warning-suppress-log-types '((lsp-on-idle-hook) ((undo discard-info)) (:warning)))
- '(warning-suppress-types '((lsp-on-idle-hook) ((undo discard-info)) (:warning)))
+ '(warning-suppress-types
+   '((pdf-view-mode-hook)
+     (pdf-view-mode-hook)
+     (lsp-on-idle-hook)
+     ((undo discard-info))
+     (:warning)))
  '(xterm-color-names
    ["black" "#ff8059" "#44bc44" "#eecc00" "#2fafff" "#feacd0" "#00d3d0" "gray65"])
  '(xterm-color-names-bright

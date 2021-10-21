@@ -100,7 +100,8 @@ bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
-bindsym $mod+Shift+space floating toggle
+# bindsym $mod+Shift+space floating toggle
+bindsym $mod+Shift+f floating toggle
 
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
@@ -119,9 +120,17 @@ bindsym $mod+4 workspace number 4
 bindsym $mod+5 workspace number 5
 bindsym $mod+6 workspace number 6
 bindsym $mod+7 workspace number 7
-bindsym $mod+8 workspace number 8 gtd
-bindsym $mod+9 workspace number 9 mail+cal
-bindsym $mod+0 workspace number 10 chat
+bindsym $mod+8 workspace number 8
+bindsym $mod+9 workspace number 9
+bindsym $mod+0 workspace number 10
+bindsym $mod+y workspace number 11 (y)
+bindsym $mod+u workspace number 12 (u)
+bindsym $mod+i workspace number 13 (i) gtd
+bindsym $mod+o workspace number 14 (o) mail+cal
+bindsym $mod+p workspace number 15 (p) chat
+
+# Allow workspace renaming
+bindsym $mod+Shift+r exec --no-startup-id i3-rename-workspace
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace number 1 web
@@ -131,28 +140,39 @@ bindsym $mod+Shift+4 move container to workspace number 4
 bindsym $mod+Shift+5 move container to workspace number 5
 bindsym $mod+Shift+6 move container to workspace number 6
 bindsym $mod+Shift+7 move container to workspace number 7
-bindsym $mod+Shift+8 move container to workspace number 8 gtd
-bindsym $mod+Shift+9 move container to workspace number 9 mail+cal
-bindsym $mod+Shift+0 move container to workspace number 10 chat
+bindsym $mod+Shift+8 move container to workspace number 8
+bindsym $mod+Shift+9 move container to workspace number 9
+bindsym $mod+Shift+0 move container to workspace number 10
+bindsym $mod+Shift+y move container to workspace number 11 (y)
+bindsym $mod+Shift+u move container to workspace number 12 (u)
+bindsym $mod+Shift+i move container to workspace number 13 (i) gtd
+bindsym $mod+Shift+o move container to workspace number 14 (o) mail+cal
+bindsym $mod+Shift+p move container to workspace number 15 (p) chat
 
 
 # Assign specific applications to specific workspaces
-assign [class="Mattermost"] 10 chat
-assign [class="Signal"] 10 chat
+assign [class="Mattermost"] 15 (p) chat
+assign [class="Signal"] 15 (p) chat
 
 
 # Set workspaces to specific monitors
+set $firstmon HDMI-0
 set $secondmon DP-0
-workspace 1 output HDMI-0
-workspace 2 output HDMI-0
-workspace 3 output HDMI-0
-workspace 4 output HDMI-0
-workspace 5 output HDMI-0
-workspace 6 output $secondmon
-workspace 7 output $secondmon
-workspace 8 output $secondmon
-workspace 9 output $secondmon
-workspace 10 output $secondmon
+workspace 1 output $firstmon
+workspace 2 output $firstmon
+workspace 3 output $firstmon
+workspace 4 output $firstmon
+workspace 5 output $firstmon
+workspace 6 output $firstmon
+workspace 7 output $firstmon
+workspace 8 output $firstmon
+workspace 9 output $firstmon
+workspace 10 output $firstmon
+workspace 11 output $secondmon
+workspace 12 output $secondmon
+workspace 13 output $secondmon
+workspace 14 output $secondmon
+workspace 15 output $secondmon
 
 # reload the configuration file
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
@@ -251,7 +271,7 @@ set $Locker i3lock -c 1d2026 && sleep 1
 # i3 lock
 # exec --no-startup-id xautolock -time 30 -locker $Locker -detectsleep &
 # exec --no-startup-id xautolock -time 15 -locker $Locker -notify 20 -notifier 'xset dpms force off' &
-exec --no-startup-id xautolock -time 30 -locker "$Locker && systemctl suspend" &
+# exec --no-startup-id xautolock -time 30 -locker "$Locker && systemctl suspend" &
 # exec --no-startup-id pulseaudio
 
 # nm-applet
@@ -260,7 +280,7 @@ exec --no-startup-id nm-applet --tray --sm-disable &
 exec --no-startup-id blueberry-tray &
 
 # Start pulseaudio controls with mod+p in floating mode
-bindsym $mod+p exec alacritty -e bash -c 'pulsemixer' -t "pulsemixer" &
+bindsym $mod+Ctrl+p exec alacritty -e bash -c 'pulsemixer' -t "pulsemixer" &
 
 
 # Floating window rules
@@ -274,9 +294,9 @@ bindsym $mod+$mod2+Ctrl+l exec --no-startup-id $Locker
 # bindsym $mod+Shift+e exec ~/.emacs_anywhere/bin/run
 # for_window [class="Emacs" title="\*Emacs Anywhere\*"] floating enable
 bindsym $mod+Shift+e exec doom everywhere
-for_window [class="Emacs" title="^Emacs Everywhere.*"] floating enable
-for_window [class="Emacs" title="^Emacs Everywhere.*"] resize set 800 680
-for_window [class="Emacs" title="^Emacs Everywhere.*"] move absolute position center
+# for_window [class="Emacs" title="^Emacs Everywhere.*"] floating enable
+# for_window [class="Emacs" title="^Emacs Everywhere.*"] resize set 800 680
+# for_window [class="Emacs" title="^Emacs Everywhere.*"] move absolute position center
 
 # Set default border size
 # border pixel 10

@@ -1,15 +1,13 @@
-;; org-gcal settings
-(load! "+org-gcal-credentials")
 (load! "+agenda")
 
 ;; Hide emphasis markers like /foo/ and *bar*
 (setq org-hide-emphasis-markers nil)
 ;; Show emphasis markers at point
-(use-package! org-appear
-  :after org
-  :config
-  (add-hook 'org-mode-hook 'org-appear-mode)
-  (setq org-appear-autolinks t))
+;; (use-package! org-appear
+;;   :after org
+;;   :config
+;;   (add-hook 'org-mode-hook 'org-appear-mode)
+;;   (setq org-appear-autolinks t))
 
 
 ;; (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)))
@@ -84,15 +82,12 @@
 (add-to-list 'org-export-filter-bold-functions 'my-beamer-bold)
 
 ;; Make exports async by default
-(setq org-export-in-background t)
+;; (setq org-export-in-background t)
 
 
 ;; Make TAB cycle all subtrees
 (after! evil-org
   (remove-hook 'org-tab-first-hook #'+org-cycle-only-current-subtree-h))
-
-;; Set PDF viewer
-(add-to-list 'org-file-apps '("\\.pdf" . "emacsclient -c -a '' %s"))
 
 ;; Toggle latex fragments automatically with pointer
 ;; (add-hook 'org-mode-hook 'org-fragtog-mode)
@@ -169,12 +164,12 @@
 (setq org-preview-latex-default-process 'imagemagick)
 
 
-(setq slang/doom-one-colors-alist '(('red . "#ff6c6b")
-                                    ('green . "#98be65")
-                                    ('yellow . "#ECBE7B")
-                                    ('blue . "#51afef")
-                                    ('magenta . "#c678dd")
-                                    ('cyan . "#46D9FF")))
+(setq slang/doom-one-colors-alist '((red . "#ff6c6b")
+                                    (green . "#98be65")
+                                    (yellow . "#ECBE7B")
+                                    (blue . "#51afef")
+                                    (magenta . "#c678dd")
+                                    (cyan . "#46D9FF")))
 
 (defun slang/set-org-todo-keyword-faces-from-theme-color-alist (theme-colors)
   "Argument theme-colors is an alist from modus themes."
@@ -198,23 +193,29 @@
 (setq prettify-symbols-unprettify-at-point 'right-edge)
 
 ;; List of symbols to be prettified
-(setq-default prettify-symbols-alist
-              '(("#+BEGIN_SRC" . ">>")
-                ("#+END_SRC" . ">>")
-                ("#+begin_src" . ">>")
-                ("#+end_src" . ">>")
-                (">=" . "≥")
-                ("=>" . "⇨")
-                ("[ ]"  "☐")
-                ("[X]" . "☑" )
-                ("[-]" . "❍" )
-                ("[ ]" . "☐")
-                ("[X]" . "☑")))
-(add-hook 'org-mode-hook 'prettify-symbols-mode)
+;; (setq-default prettify-symbols-alist
+;;               '(("#+BEGIN_SRC" . ">>")
+;;                 ("#+END_SRC" . ">>")
+;;                 ("#+begin_src" . ">>")
+;;                 ("#+end_src" . ">>")
+;;                 (">=" . "≥")
+;;                 ("=>" . "⇨")
+;;                 ("[ ]"  "☐")
+;;                 ("[X]" . "☑" )
+;;                 ("[-]" . "❍" )
+;;                 ("[ ]" . "☐")
+;;                 ("[X]" . "☑")))
+;; (add-hook 'org-mode-hook 'prettify-symbols-mode)
 
 ;; (add-to-list 'org-emphasis-alist '("!" (:foreground "red")))
 
 
-(after! org-journal
-  (setq org-journal-dir "~/org/journal/")
-  (setq org-journal-file-type 'monthly))
+(setq org-roam-capture-templates
+      '(
+        ("d" "default" plain "%?" :target
+         (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
+         :unnarrowed t)
+        ("m" "meeting" plain (file "~/org/notes/phd/meetings/template.org")
+        :target (file+head "~/org/notes/phd/meetings/misc.org" "#+title: ${title}\n")
+         :unnarrowed t)
+        ))

@@ -13,6 +13,9 @@
   ;; Make word motions ignore snake case underscores
   (add-hook 'python-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
 
+  (add-hook 'python-mode-hook #'(lambda () (setq fill-column 100)))
+
+
   ;; Set correct conda variables
   (use-package! conda
     :after python

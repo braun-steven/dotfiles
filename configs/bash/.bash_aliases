@@ -19,7 +19,7 @@ alias zshreload="source ~/.zshrc"
 alias i3config="$EDITOR ~/.config/i3/config"
 alias xresourcesconfig="$EDITOR ~/.Xresources"
 alias xresourcesreload="xrdb -merge ~/.Xresources"
-alias rsync="rsync --archive --compress-level=3 --copy-links --partial --inplace --progress --rsh=ssh -r"
+alias rsync="rsync --archive --compress-level=3 --copy-links --partial --inplace --info=progress2 --rsh=ssh -r"
 alias tlmgr="/usr/share/texmf-dist/scripts/texlive/tlmgr.pl --usermode"
 
 # Update all pip packages

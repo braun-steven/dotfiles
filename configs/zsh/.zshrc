@@ -6,12 +6,15 @@
 if command -v nvim &>/dev/null; then
   # Use nvim for manpages
   export MANPAGER="nvim -c 'set ft=man' -"
+  # Emacsclient as (sudo-)editor
+  export EDITOR="nvim"
+  export SUDO_EDITOR="nvim"
+  alias vim=nvim
+else
+  # Emacsclient as (sudo-)editor
+  export EDITOR="vim"
+  export SUDO_EDITOR="vim"
 fi
-
-
-# Emacsclient as (sudo-)editor
-export EDITOR="emacsclient -nw"
-export SUDO_EDITOR="emacsclient -nw"
 
 # FZF options
 export FZF_DEFAULT_OPTS='--height 40% --border'
@@ -117,7 +120,7 @@ if ! zgen saved; then
   # zgen prezto directory
   # zgen prezto spectrum
   zgen prezto utility
-  zgen prezto completion
+  zgen prezto completion  # Must be loaded after utility
   # zgen prezto syntax-highlighting
   # zgen prezto history-substring-search
   # zgen prezto autosuggestions
@@ -172,9 +175,48 @@ eval "$(direnv hook zsh)"
 
 source ~/.bash_aliases
 
+
+function maybe_activate_conda_env () {
+
+  # Check if "conda" command is available,
+  if ! command -v conda &>/dev/null; then
+    return
+  fi
+
+  # Check if conda env is set
+  if [ ! -z "${CONDA_DEFAULT_ENV}" ]; then
+    dirname=${PWD##*/}  # Get directory name without full path
+
+    # Check if conda env is part of current pwd (allows for PWD being a subdir)
+    if [[ "${PWD}" == *"${CONDA_DEFAULT_ENV}"* ]]; then
+      return
+    else
+      echo "Deactivating conda environment ${CONDA_DEFAULT_ENV}"
+      conda deactivate
+      return
+    fi
+  fi
+
+
+  # Get directory name without full path
+  dirname=${PWD##*/}
+  # If directory name can be found in conda evironments, activate it!
+  if grep -q $dirname <(command ls ~/.conda/envs/); then
+    echo "Conda environment '$dirname' found! Activating now ..."
+    conda activate $dirname
+  fi
+}
+# Add maybe_activate_conda_env as chpwd (change working directory) hook
+autoload -U add-zsh-hook
+add-zsh-hook -Uz chpwd maybe_activate_conda_env
+
+autopair-init
+
+# Function to fix Wacom Graphic tablet to HDMI-0 output
+function fix-wacom () {
+  xinput map-to-output $(xinput | grep stylus | awk -F= '{print $2}' | awk -F\[ '{ print $1 }') HDMI-0
+}
+
 ##################################
 #  MISC end                      #
 ##################################
-
-
-autopair-init

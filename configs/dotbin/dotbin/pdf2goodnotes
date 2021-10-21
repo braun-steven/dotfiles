@@ -1,0 +1,176 @@
+#!/usr/bin/env python3
+import argparse
+import random
+import shutil
+import arxiv
+import os
+import smtplib
+import urllib.request
+from email import encoders
+from email.mime.base import MIMEBase
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+
+from PyPDF2 import PdfFileReader
+
+
+def notify_mail(credentials_path, subject, message, path=None):
+    """
+    Sends an E-Mail to the a specified address with a chosen message and subject
+     Args:
+        cred_path (string): path to the credentials
+        subject (string): subject of the e-mail
+        message (string): message of the e-mail
+        filename (string): path to the file that is going to be send via mail
+    Returns:
+        None
+    """
+    with open(credentials_path) as f:
+        lines = f.readlines()
+        email = lines[0].split("=")[1][:-1]
+        password = lines[1].split("=")[1][:-1]
+        receiver = lines[2].split("=")[1][:-1]
+
+    msg = MIMEMultipart()
+
+    msg["From"] = email
+    msg["To"] = receiver
+    # msg["To"] = "steven.lang.mz@gmail.com"
+    msg["Subject"] = subject
+
+    body = f"<body>{message}</body>"
+    msg.attach(MIMEText(body, "html"))
+
+    print("Sending Email:")
+    print()
+    print(msg)
+
+    attachment = open(path, "rb")
+
+    fname = path.split("/")[-1]
+    payload = MIMEBase("application", "octate-stream", Name=fname)
+    payload.set_payload((attachment).read())
+
+    # enconding the binary into base64
+    encoders.encode_base64(payload)
+
+    # add header with pdf name
+    payload.add_header("Content-Decomposition", "attachment", filename=fname)
+    msg.attach(payload)
+
+    server = smtplib.SMTP("smtp.gmail.com", 587)
+    server.starttls()
+    server.login(email, password)
+    text = msg.as_string()
+    server.sendmail(email, receiver, text)
+    server.quit()
+
+
+def download_from_arxiv(url: str):
+
+    directory = "/tmp/"
+    article_id = url_to_id(url)
+    # Download
+    result = arxiv.Search(id_list=[article_id])
+    result = [res for res in result.get()]
+    result = result[0]
+    print(f'Starting download of article: "{result.title}" ({article_id})')
+    path = result.download_pdf(dirpath=directory)
+    src = path
+    dst = path.replace("_", " ")
+    shutil.move(src, dst)
+
+    print(f"Download finished! Result saved at:\n{dst}")
+
+    return dst
+
+
+def download(url: str):
+    print("Starting download from", url)
+    fname_tmp = f"/tmp/file-{random.randint(0, 1000000)}.pdf"
+    result = urllib.request.urlretrieve(url, fname_tmp)
+
+    pdf = PdfFileReader(fname_tmp)
+    info = pdf.getDocumentInfo()
+    title = info.title
+    if "/Created" in info:
+        date = info["/Created"]
+
+        assert date != ""
+        assert title != ""
+
+        date_mod = date[2:] + "00"  # 00: unknown month
+        fname_new = f"{date_mod}.{title}.pdf"
+    else:
+        fname_new = f"{title}.pdf"
+
+    src = fname_tmp
+    dst = os.path.join("/tmp", fname_new)
+
+    shutil.move(src, dst)
+
+    return dst
+
+
+def url_to_id(url: str) -> str:
+    """
+    Parse the given URL of the form `https://arxiv.org/abs/1907.13625` to the id `1907.13625`.
+
+    Args:
+        url: Input arxiv URL.
+
+    Returns:
+        str: ArXiv article ID.
+    """
+    # Strip filetype
+    if url.endswith(".pdf"):
+        url = url[:-4]
+
+    return url.split("/")[-1]
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument("file_or_url", help="Path of the PDF to send.")
+    parser.add_argument("--rename", help="If given, rename the file to this string (extension is not necessary).")
+    args = parser.parse_args()
+
+    is_file = os.path.isfile(args.file_or_url)
+
+    if is_file:
+        pdf_path = args.file_or_url
+        url = None
+    elif (
+        args.file_or_url.startswith("https://")
+        or args.file_or_url.startswith("http://")
+        or args.file_or_url.startswith("www.")
+    ):
+        url = args.file_or_url
+    else:
+        raise Exception("Argument must be either a valid file or url.")
+
+    if not is_file:
+        # Download
+        if url.startswith("https://arxiv.org"):
+            pdf_path = download_from_arxiv(url)
+        else:
+            pdf_path = download(url)
+
+    else:
+        pdf_path = args.file_or_url
+
+    if args.rename:
+        src = pdf_path
+        dirname = os.path.dirname(pdf_path)
+        new_name = args.rename.replace(".pdf","") + ".pdf"
+        dst = os.path.join(dirname, new_name)
+        print(f"Renaming to {dst}")
+        shutil.move(src, dst)
+        pdf_path = dst
+
+
+    # Send via mail
+    credentials_path = os.path.join(
+        os.getenv("HOME"), ".mail-pdf-to-goodnotes-credentials"
+    )
+    notify_mail(credentials_path, subject=f"Paper", message="", path=pdf_path)
