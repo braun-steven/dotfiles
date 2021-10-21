@@ -1,0 +1,2 @@
+sync_dir = "~/onedrive"
+monitor_interval = "300"
