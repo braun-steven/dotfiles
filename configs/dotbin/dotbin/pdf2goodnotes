@@ -72,7 +72,7 @@ def download_from_arxiv(url: str):
     article_id = url_to_id(url)
     # Download
     result = arxiv.Search(id_list=[article_id])
-    result = [res for res in result.get()]
+    result = [res for res in result.results()]
     result = result[0]
     print(f'Starting download of article: "{result.title}" ({article_id})')
     path = result.download_pdf(dirpath=directory)

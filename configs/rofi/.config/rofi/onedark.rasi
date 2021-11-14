@@ -23,40 +23,7 @@
   fg:         #abb2bf;
   bg:         #282c34;
 
-  spacing: 0;
-  background-color: transparent;
-
-  font: "Knack Nerd Font 14";
   text-color: @text;
-}
-
-window {
-  transparency: "real";
-  fullscreen: true;
-  background-color: #282c34dd;
-}
-
-mainbox {
-  padding: 30% 30%;
-}
-
-inputbar {
-  margin: 0px 0px 20px 0px;
-  children: [prompt, textbox-prompt-colon, entry, case-indicator];
-}
-
-prompt {
-  text-color: @blue;
-}
-
-textbox-prompt-colon {
-  expand: false;
-  str: ":";
-  text-color: @text-alt;
-}
-
-entry {
-  margin: 0px 10px;
 }
 
 listview {
@@ -73,7 +40,6 @@ element {
 }
 
 element selected {
-  background-color: @emphasis;
   text-color: @text;
 }
 
@@ -88,7 +54,6 @@ element active, element selected active {
 message {
   padding: 5px;
   border-radius: 3px;
-  background-color: @emphasis;
   border: 1px;
   border-color: @cyan;
 }
@@ -96,5 +61,4 @@ message {
 button selected {
   padding: 5px;
   border-radius: 3px;
-  background-color: @emphasis;
 }

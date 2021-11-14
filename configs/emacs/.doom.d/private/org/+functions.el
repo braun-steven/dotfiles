@@ -18,8 +18,12 @@
 (defun slang/switch-to-agenda ()
   (interactive)
   (org-agenda nil "a")
-  (delete-other-windows)
-  )
+  (delete-other-windows))
+
+(defun slang/switch-to-agenda-phd ()
+  (interactive)
+  (org-agenda nil "cp")
+  (delete-other-windows))
 
 (defun slang/org-recent-done-items ()
   "Show recently done items (last week)."
