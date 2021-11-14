@@ -5,7 +5,7 @@
 # Check if nvim is available
 if command -v nvim &>/dev/null; then
   # Use nvim for manpages
-  export MANPAGER="nvim -c 'set ft=man' -"
+  # export MANPAGER="nvim -c 'set ft=man' -"
   # Emacsclient as (sudo-)editor
   export EDITOR="nvim"
   export SUDO_EDITOR="nvim"
@@ -119,7 +119,7 @@ if ! zgen saved; then
   zgen prezto history
   # zgen prezto directory
   # zgen prezto spectrum
-  zgen prezto utility
+  # zgen prezto utility
   zgen prezto completion  # Must be loaded after utility
   # zgen prezto syntax-highlighting
   # zgen prezto history-substring-search
