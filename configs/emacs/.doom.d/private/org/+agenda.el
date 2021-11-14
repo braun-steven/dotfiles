@@ -235,6 +235,13 @@
     "Make a custom agenda view filtered by a specific context tag."
     `(,key ,description
         (
+         ;; To be refiled
+         (org-ql-block
+          ;; Query
+          '(todo)
+          ((org-ql-block-header "Inbox")
+           (org-super-agenda-groups '((:auto-outline-path t)))
+           (org-agenda-files '(,(concat slang/org-agenda-directory "inbox.org")))))
 
         ;; Next Actions Category
         (alltodo ""

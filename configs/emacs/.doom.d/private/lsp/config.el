@@ -14,6 +14,7 @@
   (setq lsp-file-watch-threshold 2000)
   (setq lsp-enable-folding t)
 
+  (setq lsp-ui-doc-enable nil)
 
   ;; From https://emacs-lsp.github.io/lsp-mode/page/faq/#how-do-i-force-lsp-mode-to-forget-the-workspace-folders-for-multi-root
   (advice-add 'lsp :before (lambda (&rest _args) (eval '(setf (lsp-session-server-id->folders (lsp-session)) (ht)))))

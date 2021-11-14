@@ -5,8 +5,8 @@
 
   ;; Set latex viewer
   ;; (setq +latex-viewers '(zathura))
-  ;; (setq +latex-viewers '(pdf-tools))  ;; Results in wrong-type-argument bufferp, nil error for now
-  (setq +latex-viewers '(evince))
+  (setq +latex-viewers '(pdf-tools))  ;; Results in wrong-type-argument bufferp, nil error for now
+  ;; (setq +latex-viewers '(evince))
 
  ;; to use pdfview with auctex
  ;; (setq TeX-view-program-selection '((output-pdf "PDF Tools"))
@@ -15,7 +15,7 @@
  ;;    ) ;; not sure if last line is neccessary
 
   ;; Let evince not steal focus
-  (setq TeX-view-evince-keep-focus t)
+  ;; (setq TeX-view-evince-keep-focus t)
 
   ;; Make latex sections have a larger font
   (setq font-latex-fontify-sectioning 1.3)
@@ -29,8 +29,8 @@
   ;; (setq-default TeX-master "main")
 
   (setq TeX-view-program-selection '(
-        (output-pdf "Evince")
-        (output-pdf "Zathura")
+        ;; (output-pdf "Evince")
+        ;; (output-pdf "Zathura")
         (output-pdf "PDF Tools")
         ((output-dvi has-no-display-manager)
         "dvi2tty")
@@ -38,5 +38,5 @@
         "dvips and gv")
         (output-dvi "xdvi")
         (output-html "xdg-open")
-        (output-pdf "preview-pane")
+        ;; (output-pdf "preview-pane")
         )))
