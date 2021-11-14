@@ -5,4 +5,4 @@
 (package! org-superstar)
 
 (package! org-roam-bibtex)
-(package! org-ref)
+;; (package! org-ref)

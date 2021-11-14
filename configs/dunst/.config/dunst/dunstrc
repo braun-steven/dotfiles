@@ -17,19 +17,20 @@
     # will be ignored.
     follow = mouse
 
-    # The geometry of the window:
-    #   [{width}]x{height}[+/-{x}+/-{y}]
-    # The geometry of the message window.
-    # The height is measured in number of notifications everything else
-    # in pixels.  If the width is omitted but the height is given
-    # ("-geometry x2"), the message window expands over the whole screen
-    # (dmenu-like).  If width is 0, the window expands to the longest
-    # message displayed.  A positive x is measured from the left, a
-    # negative from the right side of the screen.  Y is measured from
-    # the top and down respectively.
-    # The width can be negative.  In this case the actual width is the
-    # screen width minus the width defined in within the geometry option.
-    geometry = "800x5-20+40"
+    # dynamic width from 0 to 300
+    # width = (0, 300)
+    # constant width of 300
+    width = (400, 800)
+
+    # The maximum height of a single notification, excluding the frame.
+    height = 200
+
+    # Position the notification in the top right corner
+    origin = top-right
+
+    # Offset from the origin
+    offset = 10x50
+
 
     # Show how many messages are currently hidden (because of geometry).
     indicate_hidden = yes
@@ -160,7 +161,7 @@
     ### Icons ###
 
     # Align icons left/right/off
-    icon_position = off
+    icon_position = left
 
     # Scale larger icons down to this size, set to 0 to disable
     max_icon_size = 32
@@ -278,7 +279,7 @@
    background = "#222222"
    foreground = "#888888"
    frame_color = "#222222"
-   timeout = 5
+   timeout = 10
    # Icon for notifications with low urgency, uncomment to enable
    #icon = /path/to/icon
 
@@ -286,7 +287,7 @@
    background = "#285577"
    foreground = "#ffffff"
    frame_color = "#222222"
-   timeout = 5
+   timeout = 10
    # Icon for notifications with normal urgency, uncomment to enable
    #icon = /path/to/icon
 
@@ -294,7 +295,7 @@
    background = "#900000"
    foreground = "#ffffff"
    frame_color = "#222222"
-   timeout = 0
+   timeout = 10
     # Icon for notifications with critical urgency, uncomment to enable
     #icon = /path/to/icon
 

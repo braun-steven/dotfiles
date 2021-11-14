@@ -3,6 +3,12 @@
   (load! "+functions")
   (load! "+keybindings")
 
+  (load! "evil-motion-trainer")
+
+  ;; Enable evil motion trainer everywhere
+  ;; (global-evil-motion-trainer-mode 1)
+  ;; (setq evil-motion-trainer-threshold 5)
+
   ;; Make evil substute (:s/foo/bar/) global by default (-> s/foo/bar/g)
   (use-package! evil
     :config
