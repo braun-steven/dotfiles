@@ -46,15 +46,15 @@
  )
 
 ;; Org-ref setup
-(use-package! org-ref
-  :after org
-  :config
-  (setq reftex-default-bibliography '("~/org/bib/refereces.bib")
-        org-ref-bibliography-notes "~/org/bib/notes.org"
-        org-ref-default-bibliography '("~/org/bib/references.bib")
-        bibtex-completion-bibliography "~/org/bib/references.bib"
-        bibtex-completion-library-path "~/org/bib/bibtex-pdfs"
-        bibtex-completion-notes-path "~/org/bib/helm-bibtex-notes"))
+;; (use-package! org-ref
+;;   :after org
+;;   :config
+;;   (setq reftex-default-bibliography '("~/org/bib/refereces.bib")
+;;         org-ref-bibliography-notes "~/org/bib/notes.org"
+;;         org-ref-default-bibliography '("~/org/bib/references.bib")
+;;         bibtex-completion-bibliography "~/org/bib/references.bib"
+;;         bibtex-completion-library-path "~/org/bib/bibtex-pdfs"
+;;         bibtex-completion-notes-path "~/org/bib/helm-bibtex-notes"))
 
 
 

@@ -1,12 +1,10 @@
 ;; Switch to other buffer with "SPC TAB"
 
 ;; Use F1 to open the agenda
-(map! "<f1>" nil
-      "<f1>" #'slang/switch-to-agenda)
+(map! "<f1>" #'slang/switch-to-agenda)
 
 ;; Use F2 to open agenda selection
-(map! "<f2>"
-      #'org-agenda)
+(map! "<f2>" #'slang/switch-to-agenda-phd)
 
 (map! "C-S-h" #'evil-window-left
       "C-S-j" #'evil-window-down

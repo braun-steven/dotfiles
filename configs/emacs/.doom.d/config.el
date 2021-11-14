@@ -184,3 +184,30 @@
 ;; Load private modules
 (dolist (file (directory-files "~/.doom.d/private/" t directory-files-no-dot-files-regexp))
         (load! (concat file "/config.el")))
+
+
+;; Projectile after switch cook
+(defun activate-project-conda-env-maybe ()
+  "Perform some action after switching Projectile projects."
+  (message "Project changed...")
+  ;; Do something interesting here...
+  ;;
+  ;; `projectile-current-project-files', and `projectile-current-project-dirs' can be used
+  ;; to get access to the new project's files, and directories.
+  (message "Project root:")
+  (setq conda-env-name-candidate (nth 1 (reverse (s-split "/" (projectile-project-root)))))
+
+  (if (member conda-env-name-candidate (conda-env-candidates))
+      ;; (message "Yes")
+      ;; (message "No")
+      (progn
+        (message (concat "Found conda environment: " conda-env-name-candidate))
+        (conda-env-activate conda-env-name-candidate))
+    )
+  )
+
+;; Ensure, that conda is loaded after projectile so that the hook works
+(after! projectile
+  (use-package! conda))
+
+(add-hook 'projectile-after-switch-project-hook #'activate-project-conda-env-maybe)
