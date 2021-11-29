@@ -106,7 +106,7 @@ if ! zgen saved; then
 
   zgen load zsh-users/zsh-autosuggestions
   # zgen load zsh-users/zsh-syntax-highlighting
-  zgen load zdharma/fast-syntax-highlighting
+  zgen load zdharma-continuum/fast-syntax-highlighting
 
   # Load Prezto
   zgen prezto
