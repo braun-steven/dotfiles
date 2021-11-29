@@ -120,14 +120,14 @@ bindsym $mod+4 workspace number 4
 bindsym $mod+5 workspace number 5
 bindsym $mod+6 workspace number 6
 bindsym $mod+7 workspace number 7
-bindsym $mod+8 workspace number 8
-bindsym $mod+9 workspace number 9
-bindsym $mod+0 workspace number 10
+bindsym $mod+8 workspace number 8 spotify
+bindsym $mod+9 workspace number 9 mail+cal
+bindsym $mod+0 workspace number 10 chat
 bindsym $mod+y workspace number 11 (y)
 bindsym $mod+u workspace number 12 (u)
-bindsym $mod+i workspace number 13 (i) gtd
-bindsym $mod+o workspace number 14 (o) mail+cal
-bindsym $mod+p workspace number 15 (p) chat
+bindsym $mod+i workspace number 13 (i)
+bindsym $mod+o workspace number 14 (o)
+bindsym $mod+p workspace number 15 (p) gtd
 
 # Allow workspace renaming
 bindsym $mod+Shift+r exec --no-startup-id i3-rename-workspace
@@ -140,19 +140,19 @@ bindsym $mod+Shift+4 move container to workspace number 4
 bindsym $mod+Shift+5 move container to workspace number 5
 bindsym $mod+Shift+6 move container to workspace number 6
 bindsym $mod+Shift+7 move container to workspace number 7
-bindsym $mod+Shift+8 move container to workspace number 8
-bindsym $mod+Shift+9 move container to workspace number 9
-bindsym $mod+Shift+0 move container to workspace number 10
+bindsym $mod+Shift+8 move container to workspace number 8 spotify
+bindsym $mod+Shift+9 move container to workspace number 9 mail+cal
+bindsym $mod+Shift+0 move container to workspace number 10 chat
 bindsym $mod+Shift+y move container to workspace number 11 (y)
 bindsym $mod+Shift+u move container to workspace number 12 (u)
-bindsym $mod+Shift+i move container to workspace number 13 (i) gtd
-bindsym $mod+Shift+o move container to workspace number 14 (o) mail+cal
-bindsym $mod+Shift+p move container to workspace number 15 (p) chat
+bindsym $mod+Shift+i move container to workspace number 13 (i) 
+bindsym $mod+Shift+o move container to workspace number 14 (o) 
+bindsym $mod+Shift+p move container to workspace number 15 (p) gtd
 
 
 # Assign specific applications to specific workspaces
-assign [class="Mattermost"] 15 (p) chat
-assign [class="Signal"] 15 (p) chat
+assign [class="Mattermost"] 10 chat
+assign [class="Signal"] 10 chat
 
 
 # Set workspaces to specific monitors
@@ -436,11 +436,14 @@ bindsym XF86AudioMute        exec --no-startup-id $volumepath/volume -n -t $stat
 # Enable gsd xsettings such that applications can infer dark/light theme settings
 # exec --no-startup-id /usr/lib/gsd-xsettings
 
- 
+# Enforce borders (and thus also window title borders) for all apps
+# Without this, some apps like eye-of-gnome will be without a titlebar
+for_window [class=.*] border normal 4
+
 # You can also use any non-zero value if you'd like to have a border
-for_window [class=".*"] border pixel 4
-smart_gaps on
-gaps inner 8
+# for_window [class=".*"] border pixel 4
+# smart_gaps on
+# gaps inner 8
 # gaps outer current plus 5
 # gaps horizontal current plus 40
 # gaps outer current toggle 60

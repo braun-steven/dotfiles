@@ -78,12 +78,13 @@
 
 ;; Company config
 (setq
- company-minimum-prefix-length 3
+ company-minimum-prefix-length 1
  company-idle-delay 0.1
  company-tooltip-idle-delay 1.0)
 
 ;; Emacs config location
 (setq emacs-dir (file-name-as-directory "~/.doom.d"))
+
 
 
 ;; Better scrolling
@@ -183,7 +184,8 @@
 
 ;; Load private modules
 (dolist (file (directory-files "~/.doom.d/private/" t directory-files-no-dot-files-regexp))
-        (load! (concat file "/config.el")))
+        (if (file-directory-p file)
+                (load! (concat file "/config.el"))))
 
 
 ;; Projectile after switch cook
@@ -211,3 +213,4 @@
   (use-package! conda))
 
 (add-hook 'projectile-after-switch-project-hook #'activate-project-conda-env-maybe)
+
