@@ -16,6 +16,11 @@ export PATH="$HOME/bin:$PATH"  # local binaries
 export PATH="$PATH:$HOME/.emacs.d/bin" # doom binaries
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"  # yarn
 
+# Latex installation from tug.org
+export PATH="/usr/local/texlive/2021/bin/:$PATH"
+export MANPATH="$PATH:/usr/local/texlive/2021/texmf-dist/doc/man"
+export INFOPATH="$PATH:/usr/local/texlive/2021/texmf-dist/doc/info"
+
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/lib/"
 
 

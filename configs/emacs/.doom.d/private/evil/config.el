@@ -3,7 +3,6 @@
   (load! "+functions")
   (load! "+keybindings")
 
-  (load! "evil-motion-trainer")
 
   ;; Enable evil motion trainer everywhere
   ;; (global-evil-motion-trainer-mode 1)
