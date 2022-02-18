@@ -84,17 +84,7 @@ Plug 'norcalli/nvim-colorizer.lua'
 Plug 'jiangmiao/auto-pairs'
 
 " Gruvbox colorscheme
-Plug 'gruvbox-community/gruvbox'
-Plug 'mhartington/oceanic-next'
-Plug 'romainl/Apprentice'
-Plug 'arcticicestudio/nord-vim'
 Plug 'rakr/vim-one'
-
-" Python autoimport
-" Plug 'mgedmin/python-imports.vim'
-
-" Vim session handling made easy
-" Plug 'thaerkh/vim-workspace'
 
 " Tex
 Plug 'lervag/vimtex'
@@ -104,10 +94,6 @@ Plug 'easymotion/vim-easymotion'
 
 " Quoting/paranthesizing made simple
 Plug 'tpope/vim-surround'
-
-" Vim git integration
-Plug 'tpope/vim-fugitive' " Git commands
-Plug 'rhysd/committia.vim' " Git commit extension
 
 " Comment/uncomment with gc
 Plug 'tpope/vim-commentary'
@@ -119,35 +105,15 @@ Plug 'junegunn/fzf.vim'
 " Sensible vim config
 Plug 'tpope/vim-sensible'
 
-" " CTag automation
-" Plug 'ludovicchabant/vim-gutentags'
-
 " Advanced syntax highlighting
 Plug 'sheerun/vim-polyglot'
 
 " Statusline
 Plug 'itchyny/lightline.vim'
 
-" Julia support
-" Plug 'JuliaEditorSupport/julia-vim'
-
-" UltiSnips
-" Track the engine.
-" Plug 'SirVer/ultisnips'
-
-" Snippets are separated from the engine. Add this if you want them:
-" Plug 'honza/vim-snippets'
-
 " Add repeat support for plugins
 Plug 'tpope/vim-repeat'
 Plug 'godlygeek/tabular'
-
-" Plug 'glacambre/firenvim'
-
-" Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
-" Advanced Python colorizer
-" Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 
 " Initialize plugin system
 call plug#end()
@@ -188,10 +154,6 @@ syntax on                 " Enable syntax highlighting
 
 " {{{ Colorscheme
 set background=dark
-let g:oceanic_next_terminal_bold = 1
-let g:oceanic_next_terminal_italic = 1
-" colorscheme OceanicNext
-" colorscheme nord
 colorscheme one
 
 " }}}
@@ -224,7 +186,7 @@ nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
 " Duplicate line and comment out the upper one
-nmap yp Ypkgccj
+nmap yp yypkgcc
 
 " Keep visual mode while indenting
 vnoremap < <gv
@@ -265,11 +227,13 @@ let g:fzf_colors =
       \ 'marker':  ['fg', 'Keyword'],
       \ 'spinner': ['fg', 'Label'],
       \ 'header':  ['fg', 'Comment'] }
+
 " Insert mode completion
 imap <c-x><c-k> <plug>(fzf-complete-word)
 imap <c-x><c-f> <plug>(fzf-complete-path)
 imap <c-x><c-j> <plug>(fzf-complete-file-ag)
 imap <c-x><c-l> <plug>(fzf-complete-line)
+
 
 " floating fzf
 if has('nvim')
@@ -433,7 +397,7 @@ nnoremap <silent> <Leader>sp :Lines<CR>
 nnoremap <silent> <Leader>sb :BLines<CR>
 nnoremap <silent> <Leader>tb :BTags<CR>
 nnoremap <silent> <Leader>tp :Tags<CR>
-nnoremap <silent> <Leader>f :Files<CR>
+nnoremap <silent> <Leader>ff :Files<CR>
 nnoremap <silent> <Leader>h :History<CR>
 
 " Jump motions
@@ -484,7 +448,6 @@ let g:python3_host_prog = '/usr/bin/python3'
 " let g:echodoc#enable_at_startup = 1
 " let g:echodoc#type = "floating"
 " " }}}
-
 " " Jedi {{{
 " let g:jedi#rename_command = "<leader>r"
 " let g:jedi#auto_close_doc = 1
