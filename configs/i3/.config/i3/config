@@ -38,8 +38,8 @@ floating_modifier $mod
 
 # start a terminal
 #bindsym $mod+Return exec i3-sensible-terminal
-bindsym $mod+Return exec alacritty
-bindsym $mod+Shift+Return exec emacsclient -c
+bindsym $mod+Return exec alacritty msg create-window
+# bindsym $mod+Shift+Return exec emacsclient -c
 bindsym $mod+Shift+c exec org-capture
 # bindsym $mod+Return exec kitty
 # bindsym $mod+Return exec i3-sensible-terminal
@@ -119,7 +119,7 @@ bindsym $mod+3 workspace number 3 sub
 bindsym $mod+4 workspace number 4
 bindsym $mod+5 workspace number 5
 bindsym $mod+6 workspace number 6
-bindsym $mod+7 workspace number 7
+bindsym $mod+7 workspace number 7 zoom
 bindsym $mod+8 workspace number 8 spotify
 bindsym $mod+9 workspace number 9 mail+cal
 bindsym $mod+0 workspace number 10 chat
@@ -139,7 +139,7 @@ bindsym $mod+Shift+3 move container to workspace number 3 sub
 bindsym $mod+Shift+4 move container to workspace number 4
 bindsym $mod+Shift+5 move container to workspace number 5
 bindsym $mod+Shift+6 move container to workspace number 6
-bindsym $mod+Shift+7 move container to workspace number 7
+bindsym $mod+Shift+7 move container to workspace number 7 zoom
 bindsym $mod+Shift+8 move container to workspace number 8 spotify
 bindsym $mod+Shift+9 move container to workspace number 9 mail+cal
 bindsym $mod+Shift+0 move container to workspace number 10 chat
@@ -279,11 +279,15 @@ exec --no-startup-id nm-applet --tray --sm-disable &
 exec --no-startup-id blueberry-tray &
 
 # Start pulseaudio controls with mod+p in floating mode
-bindsym $mod+Ctrl+p exec alacritty -e bash -c 'pulsemixer' -t "pulsemixer" &
+# Use create-window to reduce alacritty startup time
+# Use -t "Pulse" after "create-window" to correctly set title
+bindsym $mod+Ctrl+p exec --no-startup-id alacritty msg create-window -t "PULSE" -e 'pulsemixer'
+bindsym $mod+Ctrl+s exec --no-startup-id rofi-set-audio-sink
+# bindsym $mod+Ctrl+N exec --no-startup-id pactl set-default-sink alsa_output.pci-0000_08_00.4.analog-stereo
 
 
 # Floating window rules
-for_window [title="pulsemixer"] floating enable
+for_window [title="PULSE"] floating enable
 
 # suspend/lock shortcuts
 bindsym $mod+$mod2+Ctrl+s exec --no-startup-id $Locker && systemctl suspend
@@ -451,6 +455,5 @@ for_window [class=.*] border normal 4
 # Zoom
 for_window [class="zoom" title="Settings"] floating enable, move position center
 for_window [class="zoom" title="Participants.*"] floating enable, move position center
-for_window [class="zoom" title="Zoom - Licensed Account"] floating enable, move position center
-for_window [class="zoom" title="^zoom$"] floating enable
-for_window [class="zoom" title="Chat"] floating enable, move position mouse
+# for_window [class="zoom" title="^zoom$"] floating enable
+for_window [class="zoom" title="Chat"] floating enable, move position 70 ppt 80 ppt

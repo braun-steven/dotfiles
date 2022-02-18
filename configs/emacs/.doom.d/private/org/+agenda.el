@@ -74,10 +74,7 @@
 
 ;; Predefined tags
 (setq org-tag-alist
-      '(("@work" . ?w)
-        ("@studying" . ?s)
-        ("@home" . ?h)
-        ("@freetime" . ?f)))
+      '(("someday" . ?s)))
 
 ;; Disable super-agenda keymap (breaks evil up/down on headers)
 (setq org-super-agenda-header-map (make-sparse-keymap))
@@ -159,6 +156,7 @@
          (org-ql-block
           ;; Query
           '(and (not (or (tags "someday")
+                         (tags "phd")
                          (habit)
                          (todo "WAITING")
                          (todo "NEXT")))
