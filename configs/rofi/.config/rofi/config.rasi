@@ -2,7 +2,6 @@ configuration {
 	modi: "combi";
 	font: "IBMPlex Mono 18";
 	show-icons: true;
-	theme: "Arc-Dark";
 	terminal: "alacritty";
 	combi-modi: "drun,run,ssh";
 	kb-remove-char-back: "BackSpace";
@@ -13,3 +12,4 @@ configuration {
 	kb-row-up: "Up,Control+k,Shift+Tab,Shift+ISO_Left_Tab";
 	kb-row-down: "Down,Control+j";
 }
+@theme "Arc-Dark"

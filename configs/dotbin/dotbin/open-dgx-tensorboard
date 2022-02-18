@@ -1,0 +1,18 @@
+set -x
+set -e
+project=$1
+
+if [ -z "$project" ]
+then
+      echo "Project is not set, please run with `open-dgx-tensorboard <projectname>`"
+fi
+
+port="6281"
+function run {
+    alacritty -t "$1" -e bash -c "$1 \"zsh -i -c 'killall tensorboard && tensorboard --port $port --logdir ~/results/$project'\"" &
+
+}
+run "ssh -L 16006:127.0.0.1:$port dgxb"
+# run "ssh -L 16007:127.0.0.1:$port dgxc"
+# run "ssh -L 16008:127.0.0.1:$port dgxd"
+# run "ssh -L 16009:127.0.0.1:$port dgxe"

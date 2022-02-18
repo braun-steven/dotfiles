@@ -34,3 +34,10 @@ if hash exa 2>/dev/null; then
 else
   alias ls='ls -lh --color=auto --group-directories-first'
 fi
+
+
+# Fix usb driver
+alias fix-usb="sudo usb_modeswitch -R -v 8087 -p 0029"
+
+# Fix NVIDIA CUDA Error
+alias fix-nvidia="sudo rmmod nvidia_uvm && sudo modprobe nvidia_uvm"

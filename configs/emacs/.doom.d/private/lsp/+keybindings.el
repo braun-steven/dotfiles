@@ -5,3 +5,5 @@
 (map! :map lsp-ui-peek-mode-map
       "j"  #'lsp-ui-peek--select-next
       "k"  #'lsp-ui-peek--select-prev)
+
+(map! :nvi "C-k" #'lsp-ui-doc-show)

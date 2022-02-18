@@ -1,16 +1,13 @@
 (load! "+agenda")
 
+
+;; Fix issue of no org-capture-mode after opening org agend,
+;; see also: https://github.com/hlissner/doom-emacs/issues/5714
+;; (defalias '+org--restart-mode-h #'ignore)
+
 ;; Hide emphasis markers like /foo/ and *bar*
 (setq org-hide-emphasis-markers nil)
-;; Show emphasis markers at point
-;; (use-package! org-appear
-;;   :after org
-;;   :config
-;;   (add-hook 'org-mode-hook 'org-appear-mode)
-;;   (setq org-appear-autolinks t))
 
-
-;; (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)))
 (add-hook 'org-mode-hook 'org-superstar-mode)
 (remove-hook 'org-mode-hook 'writegood-mode)
 (remove-hook 'org-mode-hook 'org-bullets-mode)
@@ -219,3 +216,4 @@
         :target (file+head "~/org/notes/phd/meetings/misc.org" "#+title: ${title}\n")
          :unnarrowed t)
         ))
+
