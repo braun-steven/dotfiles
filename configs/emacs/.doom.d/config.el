@@ -29,7 +29,7 @@
 ;;
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
-(setq doom-font (font-spec :family "Hack" :size 19))
+(setq doom-font (font-spec :family "Hack" :size 18))
 ;; (setq doom-font (font-spec :family "Iosevka" :size 20))
 ;; (setq doom-font (font-spec :family "DejaVu Sans Mono" :size 19))
 ;; (setq doom-font (font-spec :family "IBM Plex Mono" :size 19))
@@ -78,8 +78,8 @@
 
 ;; Company config
 (setq
- company-minimum-prefix-length 1
- company-idle-delay 0.1
+ company-minimum-prefix-length 2
+ company-idle-delay 0.0
  company-tooltip-idle-delay 1.0)
 
 ;; Emacs config location
@@ -117,6 +117,14 @@
 
   (add-to-list 'emacs-everywhere-markdown-windows "Mattermost"))
 
+;; Make avy faces like vim-easymotion: no background, red to yellow foreground
+(after! avy
+(custom-set-faces!
+    `(avy-lead-face :weight bold :foreground "red" :background ,(face-attribute 'default :background))
+    `(avy-lead-face-0 :weight bold :foreground "dark orange" :background ,(face-attribute 'default :background))
+    `(avy-lead-face-1 :weight bold :foreground "orange" :background ,(face-attribute 'default :background))
+    `(avy-lead-face-2 :weight bold :foreground "gold" :background ,(face-attribute 'default :background))
+    `(avy-lead-face-3 :weight bold :foreground "yellow" :background ,(face-attribute 'default :background))))
 
 ;; ;; Fix doom modeline icons (only issue on arch emacs binary)
 ;; (custom-set-faces!
@@ -166,12 +174,11 @@
   (setq magit-status-margin '(t age magit-log-margin-width t 18)))
 
 
-
 ;; Enable auto-fill-mode everywhere
 ;; TODO: Choose some sane defaults for specific modes?
 (auto-fill-mode 1)
 
-(use-package vertico-directory
+(use-package! vertico-directory
   ;; More convenient directory navigation commands
   :bind (:map vertico-map
               ("RET" . vertico-directory-enter)
@@ -180,6 +187,13 @@
 
 ;; Disable loading all known projects when opening a single project. If set to true, this may greatly reduce performance.
 (setq lsp-pyright-multi-root nil)
+
+;; Avy settings
+(setq avy-orders-alist
+      '((avy-goto-char . avy-order-closest)
+        (avy-goto-word-0 . avy-order-closest)
+        (avy-goto-char-2 . avy-order-closest)
+        (avy-goto-char-timer . avy-order-closest)))
 
 
 ;; Load private modules

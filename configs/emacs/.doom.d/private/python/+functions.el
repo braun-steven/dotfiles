@@ -20,7 +20,7 @@
   "Insert pdb statement."
   (interactive)
   (evil-open-above 1)
-  (insert "__import__(\"pdb\").set_trace()")
+  (insert "breakpoint()")
   ;; (insert "breakpoint()")
   (evil-normal-state)
   (evil-next-line))

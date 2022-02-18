@@ -4,10 +4,10 @@
 
 Symlinks are managed with `GNU Stow`.
 
-Run the following in `$dotfiles/configs` to setup all symlinks:
+Run the following in `$dotfiles` to setup all symlinks:
 
 ```bash
-stow * -t $HOME -v
+./create-symlinks.py
 ```
 
 The dotfiles contain configurations for:

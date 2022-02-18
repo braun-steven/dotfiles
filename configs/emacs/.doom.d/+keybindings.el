@@ -11,6 +11,9 @@
       "C-S-k" #'evil-window-up
       "C-S-l" #'evil-window-right)
 
+;; Completion at point
+(map! :nvi "C-SPC" #'company-capf)
+
 (map! :leader
       ;; unmap first
       "SPC" nil 
@@ -70,10 +73,13 @@
 (map! 
  :nv "s" nil
  (:prefix ("s" .  "jump")
-  :nv "s"   #'+evil:swiper
+  :nv "s"   #'avy-goto-char-2
   :nv "j"   #'avy-goto-line-below
   :nv "k"   #'avy-goto-line-above
-  :nv "w"   #'avy-goto-word-0
+  :nv "w"   #'avy-goto-word-0-below
+  :nv "b"   #'avy-goto-word-0-above
+  :nv "W"   #'avy-goto-word-1-below
+  :nv "B"   #'avy-goto-word-1-above
   :nv "c"   #'avy-goto-char
   :nv "t"   #'avy-goto-char-timer))
 
