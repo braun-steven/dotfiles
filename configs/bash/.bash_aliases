@@ -20,7 +20,6 @@ alias i3config="$EDITOR ~/.config/i3/config"
 alias xresourcesconfig="$EDITOR ~/.Xresources"
 alias xresourcesreload="xrdb -merge ~/.Xresources"
 alias rsync="rsync --archive --compress-level=3 --copy-links --partial --inplace --info=progress2 --rsh=ssh -r"
-alias tlmgr="/usr/share/texmf-dist/scripts/texlive/tlmgr.pl --usermode"
 
 # Update all pip packages
 alias pipupdate="pip list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U"
@@ -35,9 +34,5 @@ else
   alias ls='ls -lh --color=auto --group-directories-first'
 fi
 
-
-# Fix usb driver
-alias fix-usb="sudo usb_modeswitch -R -v 8087 -p 0029"
-
-# Fix NVIDIA CUDA Error
-alias fix-nvidia="sudo rmmod nvidia_uvm && sudo modprobe nvidia_uvm"
+# Quicklook
+alias ql="qlmanage -p"

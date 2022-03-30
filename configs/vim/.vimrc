@@ -53,6 +53,9 @@ else
   set laststatus=2
 endif
 
+" Swap file
+set directory=~/.vim/tmp
+
 
 " Disable latex-box from polyglot dependency to make vimtex usable
 let g:polyglot_disabled = ['latex', 'markdown']

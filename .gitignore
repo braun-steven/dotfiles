@@ -15,3 +15,5 @@ fish_variables
 configs/onedrive/.config/onedrive/items*
 configs/onedrive/.config/onedrive/.config.hash
 configs/onedrive/.config/onedrive/refresh_token
+
+.DS_Store
