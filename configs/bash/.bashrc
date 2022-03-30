@@ -15,11 +15,7 @@ export PATH="$PATH:$HOME/dotbin"  # scripts from dotfiles
 export PATH="$HOME/bin:$PATH"  # local binaries
 export PATH="$PATH:$HOME/.emacs.d/bin" # doom binaries
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"  # yarn
-
-# Latex installation from tug.org
-export PATH="/usr/local/texlive/2021/bin/:$PATH"
-export MANPATH="$PATH:/usr/local/texlive/2021/texmf-dist/doc/man"
-export INFOPATH="$PATH:/usr/local/texlive/2021/texmf-dist/doc/info"
+export PATH="$PATH:/opt/homebrew/bin"  # homebrew
 
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/lib/"
 
@@ -27,11 +23,11 @@ export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/lib/"
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-# Eval keychain only locally
-# NOTE: This needs to be done after the interactive if-statement
-if [[ -z $SSH_CONNECTION ]]; then
-  eval $(keychain --eval --quiet id_rsa)
-fi
+# # Eval keychain only locally
+# # NOTE: This needs to be done after the interactive if-statement
+# if [[ -z $SSH_CONNECTION ]]; then
+#   eval $(keychain --eval --quiet id_rsa)
+# fi
 
 # Go into zsh
 if [[ $(ps --no-header --pid=$PPID --format=cmd) != "zsh" ]]; then

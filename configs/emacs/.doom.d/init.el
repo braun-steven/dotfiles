@@ -99,7 +99,6 @@
         +docsets
         +dictionary)        ; ...or in Dash docsets locally
        (lsp +peek)
-       ;;macos             ; MacOS-specific commands
        magit             ; a git porcelain for Emacs
        ;;make              ; run make tasks from Emacs
        ;;pass              ; password manager for nerds
@@ -187,6 +186,7 @@
 
        :os
        ;; tty
+       (:if IS-MAC macos)             ; MacOS-specific commands
 
        :config
        ;;literate
