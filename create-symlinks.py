@@ -30,8 +30,8 @@ def create_link(entry: os.DirEntry, dotconfig: bool):
 
     elif os.path.exists(dst):
         # Not a symlink, but file exists
-        logger.warn(f"Destination: {dst} already exists (dir)")
-        logger.warn(f"Moving {dst} to {dst}.backup")
+        logger.warning(f"Destination: {dst} already exists (dir)")
+        logger.warning(f"Moving {dst} to {dst}.backup")
         shutil.move(dst, dst + ".backup")
 
     # No case catched -> create symlink
@@ -73,4 +73,9 @@ if __name__ == "__main__":
     for entry in os.scandir(CONFIG_DIR):
         assert entry.is_dir(), f"'{entry.path}' is not a directory!"
         for f in os.scandir(entry):
+
+            # Skip .DS_store files on MacOS
+            if f.path.endswith(".DS_Store"):
+                continue
+
             link_config(f)
