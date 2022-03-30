@@ -24,6 +24,17 @@ export FZF_DEFAULT_COMMAND='ag -g .'
 # Fixes some terminal application colors
 export TERM="xterm-256color"
 
+# extend $PATH
+export PATH="$PATH:$HOME/.local/bin"
+export PATH="$PATH:$HOME/.cargo/bin"
+export PATH="$PATH:$HOME/dotbin"  # scripts from dotfiles
+export PATH="$HOME/bin:$PATH"  # local binaries
+export PATH="$PATH:$HOME/.emacs.d/bin" # doom binaries
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"  # yarn
+export PATH="$PATH:/opt/homebrew/bin"  # homebrew
+
+export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/lib/"
+
 
 ##################################
 #  EXPORTS end                   #
@@ -45,18 +56,18 @@ fi
 ##################################
 
 # Ensure pip is installed
-if ! command -v pip &> /dev/null; then
-  curl https://bootstrap.pypa.io/get-pip.py -o /tmp/get-pip.py
-  python3 /tmp/get-pip.py
-fi
+# if ! command -v pip &> /dev/null; then
+#   curl https://bootstrap.pypa.io/get-pip.py -o /tmp/get-pip.py
+#   python3 /tmp/get-pip.py
+# fi
 
 # Check if direnv is installed
-if [ ! -f $HOME/bin/direnv ]; then
-  echo "Direnv not found. Installing now ..."
-  mkdir -p $HOME/bin
-  wget -O $HOME/bin/direnv https://github.com/direnv/direnv/releases/download/v2.20.0/direnv.linux-amd64 > /dev/null
-  chmod +x $HOME/bin/direnv
-fi
+# if [ ! -f $HOME/bin/direnv ]; then
+#   echo "Direnv not found. Installing now ..."
+#   mkdir -p $HOME/bin
+#   wget -O $HOME/bin/direnv https://github.com/direnv/direnv/releases/download/v2.20.0/direnv.linux-amd64 > /dev/null
+#   chmod +x $HOME/bin/direnv
+# fi
 
 # Check if tpm is installed
 if [ ! -d $HOME/.tmux/plugins/tpm ]; then
@@ -220,3 +231,23 @@ function fix-wacom () {
 ##################################
 #  MISC end                      #
 ##################################
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/Users/steven/.conda/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/Users/steven/.conda/etc/profile.d/conda.sh" ]; then
+        . "/Users/steven/.conda/etc/profile.d/conda.sh"
+    else
+        export PATH="/Users/steven/.conda/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
