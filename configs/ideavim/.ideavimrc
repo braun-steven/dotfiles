@@ -1,0 +1,33 @@
+
+source ~/.intellimacs/spacemacs.vim
+
+" (Optional) Enable other Intellimacs modules
+source ~/.intellimacs/extra.vim
+source ~/.intellimacs/major.vim
+source ~/.intellimacs/hybrid.vim
+
+" (Optional) Enable which-key plugin
+source ~/.intellimacs/which-key.vim
+
+" (Optional) My own vim commands
+nnoremap Y y$
+
+" (Optional) Comma for major mode
+nmap , <leader>m
+vmap , <leader>m
+
+" (Optional) Add/edit actions
+nnoremap <leader>gl    :action Vcs.Show.Log<CR>
+vnoremap <leader>gl    :action Vcs.Show.Log<CR>
+
+nnoremap gcc :action CommentByLineComment<CR>
+vnoremap gc  :action CommentByLineComment<CR>
+
+set easymotion
+
+map sw <Plug>(easymotion-bd-w)
+map sj <Plug>(easymotion-j)
+map sk <Plug>(easymotion-k)
+
+# Black format
+map ,, :action me.lensvol.blackconnect.actions.ReformatWholeFileAction<CR>
