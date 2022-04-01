@@ -184,7 +184,6 @@ bindkey "^F" forward-char
 eval "$(direnv hook zsh)"
 
 
-source ~/.bash_aliases
 
 
 function maybe_activate_conda_env () {
@@ -223,11 +222,6 @@ add-zsh-hook -Uz chpwd maybe_activate_conda_env
 
 autopair-init
 
-# Function to fix Wacom Graphic tablet to HDMI-0 output
-function fix-wacom () {
-  xinput map-to-output $(xinput | grep stylus | awk -F= '{print $2}' | awk -F\[ '{ print $1 }') HDMI-0
-}
-
 ##################################
 #  MISC end                      #
 ##################################
@@ -248,6 +242,13 @@ unset __conda_setup
 # <<< conda initialize <<<
 
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# export NVM_DIR="$HOME/.nvm"
+# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+source /opt/homebrew/opt/chruby/share/chruby/chruby.sh
+source /opt/homebrew/opt/chruby/share/chruby/auto.sh
+chruby ruby-3.1.1
+
+
+# Source aliases finally
+source ~/.bash_aliases
