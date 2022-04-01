@@ -29,7 +29,7 @@ alias emacsclient-restart="systemctl --user restart emacs"
 
 # Better ls
 if hash exa 2>/dev/null; then
-  alias ls='exa -l --group-directories-first --git --color auto'
+  alias ls='exa -l --group-directories-first --color auto'
 else
   alias ls='ls -lh --color=auto --group-directories-first'
 fi
