@@ -107,7 +107,7 @@
 
 # open terminal, blazingly fast compared to iTerm/Hyper
 cmd - return : /Applications/kitty.app/Contents/MacOS/kitty --single-instance -d ~
-#cmd - return : alacritty msg create-window || alacritty
+# cmd - return : alacritty msg create-window || alacritty
 
 # ################################################################ #
 # THE FOLLOWING IS AN EXPLANATION OF THE GRAMMAR THAT SKHD PARSES. #
@@ -275,8 +275,8 @@ ctrl + alt - j : yabai -m window --resize top:0:25
 ctrl + alt - k : yabai -m window --resize bottom:0:-25
 
 # set insertion point in focused container
-cmd + shift - n : yabai -m window --insert east
-cmd + shift - v : yabai -m window --insert south
+cmd + shift - e : yabai -m window --insert east
+cmd + shift - s : yabai -m window --insert south
 
 # toggle window zoom
 # alt - d : yabai -m window --toggle zoom-parent
@@ -286,7 +286,7 @@ cmd + shift - f : yabai -m window --toggle zoom-fullscreen
 alt - e : yabai -m window --toggle split
 
 # float / unfloat window and center on screen
-ctrl + cmd - f : yabai -m window --toggle float;\
+cmd + ctrl - f : yabai -m window --toggle float;\
           yabai -m window --grid 4:4:1:1:2:2
 
 # toggle sticky(+float), topmost, picture-in-picture
@@ -299,6 +299,6 @@ alt - p : yabai -m window --toggle sticky;\
 cmd + ctrl - r : launchctl kickstart -k "gui/${UID}/homebrew.mxcl.yabai"
 
 # Stacking windows
-cmd + shift - w : yabai -m window --stack east || yabai -m window --stack west
-cmd + shift - e : yabai -m config layout bsp
+cmd + ctrl - w : yabai -m window --stack east || yabai -m window --stack west
+cmd + ctrl - e : yabai -m config layout bsp
 # cmd - e : yabai -m window --stack south || yabai -m window --stack north
