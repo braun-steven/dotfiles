@@ -104,17 +104,12 @@
 ;; Load custom functions
 (load! "+functions")
 
-;; Langtool
-(setq langtool-java-classpath
-      "/usr/share/languagetool:/usr/share/java/languagetool/*")
-
 ;; Enable rainbow delimiters in prog mode
 (use-package! rainbow-delimiters
   :config
   (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 
 (after! emacs-everywhere
-
   (add-to-list 'emacs-everywhere-markdown-windows "Mattermost"))
 
 ;; Make avy faces like vim-easymotion: no background, red to yellow foreground
@@ -125,17 +120,6 @@
     `(avy-lead-face-1 :weight bold :foreground "orange" :background ,(face-attribute 'default :background))
     `(avy-lead-face-2 :weight bold :foreground "gold" :background ,(face-attribute 'default :background))
     `(avy-lead-face-3 :weight bold :foreground "yellow" :background ,(face-attribute 'default :background))))
-
-;; ;; Fix doom modeline icons (only issue on arch emacs binary)
-;; (custom-set-faces!
-;;   ;; Flycheck check symbol and sim-card symbol (right-hand side)
-;;   '(doom-modeline-warning :inherit warning)
-;;   '(doom-modeline-debug :inherit font-lock-doc-face :slant normal)
-
-;;   ;; Insert/normal state (left-hand side)
-;;   '(doom-modeline-evil-emacs-state :inherit font-lock-builtin-face)
-;;   '(doom-modeline-evil-insert-state :inherit font-lock-keyword-face)
-;;   '(doom-modeline-info :inherit success))
 
 
 (use-package! doom-themes
@@ -162,9 +146,9 @@
 (use-package! powerthesaurus
   :after tex)
 
-(after! emacs-everywhere
-  (push "Mattermost" emacs-everywhere-markdown-apps)
-  (push "GitHub" emacs-everywhere-markdown-windows))
+;; (after! emacs-everywhere
+;;   (push "Mattermost" emacs-everywhere-markdown-apps)
+;;   (push "GitHub" emacs-everywhere-markdown-windows))
 
 (after! magit
   ;; Set magit log margin

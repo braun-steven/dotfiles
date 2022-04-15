@@ -2,6 +2,7 @@
 #  EXPORTS begin                 #
 ##################################
 
+
 # Check if nvim is available
 if command -v nvim &>/dev/null; then
   # Use nvim for manpages
