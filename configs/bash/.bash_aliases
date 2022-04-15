@@ -19,7 +19,8 @@ alias zshreload="source ~/.zshrc"
 alias i3config="$EDITOR ~/.config/i3/config"
 alias xresourcesconfig="$EDITOR ~/.Xresources"
 alias xresourcesreload="xrdb -merge ~/.Xresources"
-alias rsync="rsync --archive --compress-level=3 --copy-links --partial --inplace --info=progress2 --rsh=ssh -r"
+# alias rsync="rsync --archive --compress-level=3 --copy-links --partial --inplace --info=progress2 --rsh=ssh -r"
+alias rsync="rsync --archive --compress-level=3 --copy-links --partial --inplace --rsh=ssh -r"
 
 # Update all pip packages
 alias pipupdate="pip list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U"
