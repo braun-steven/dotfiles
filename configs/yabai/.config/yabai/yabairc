@@ -26,7 +26,7 @@ yabai -m config window_opacity_duration      0.0
 yabai -m config active_window_opacity        1.0
 yabai -m config normal_window_opacity        0.95
 yabai -m config window_border                off
-yabai -m config window_border_width          4
+yabai -m config window_border_width          5
 yabai -m config active_window_border_color   0xff4c7899
 yabai -m config normal_window_border_color   0x00555555
 yabai -m config insert_feedback_color        0xffd75f5f
@@ -58,18 +58,21 @@ yabai -m space 9 --label 9
 
 
 # float settings windows
-yabai -m rule --add title='Settings$' manage=off
-yabai -m rule --add app="^System Preferences$" manage=off
-yabai -m rule --add title="^Welcome to PyCharm$" manage=off  # PyCharm start window
-yabai -m rule --add app="^System Information$" manage=off
-yabai -m rule --add title="^Preferences$" manage=off
-yabai -m rule --add title="^Digital Colour Meter$" manage=off
-yabai -m rule --add title="^Evaluate$" manage=off  # PyCharm debugger evaluate window
-yabai -m rule --add title="^Merge Revisions.*" manage=off  # PyCharm merge window
-yabai -m rule --add title="^General.*" manage=off  # Calendar settings
-yabai -m rule --add title="^Quick Entry.*" manage=off  # Things 3 settings
-yabai -m rule --add title="^Accounts.*" manage=off  # MacOS Mail accounts
-yabai -m rule --add title="^Run/Debug Configurations.*" manage=off  # PyCharm
+yabai -m rule --add title='Settings$' manage=off 
+yabai -m rule --add app="^System Preferences$" manage=off 
+yabai -m rule --add title="^Welcome to PyCharm$" manage=off   # PyCharm start window
+yabai -m rule --add app="^System Information$" manage=off 
+yabai -m rule --add title="^Preferences$" manage=off 
+yabai -m rule --add title="^Digital Colour Meter$" manage=off 
+yabai -m rule --add title="^Evaluate$" manage=off   # PyCharm debugger evaluate window
+yabai -m rule --add title="^Merge Revisions.*" manage=off   # PyCharm merge window
+yabai -m rule --add title="^General.*" manage=off   # Calendar settings
+yabai -m rule --add title="^Quick Entry.*" manage=off   # Things 3 settings
+yabai -m rule --add title="^Accounts.*" manage=off   # MacOS Mail accounts
+yabai -m rule --add title="^Run/Debug Configurations.*" manage=off   # PyCharm
+yabai -m rule --add title="^Disk Utility$" manage=off   # MacOS Disk utility
+yabai -m rule --add title="^Rename$" manage=off   # PyCharm rename window
+yabai -m rule --add title="^Delete$" manage=off   # PyCharm delete window
 
 # Set padding for spacebar
 SPACEBAR_HEIGHT=$(spacebar -m config height)
