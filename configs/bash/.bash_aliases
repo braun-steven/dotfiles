@@ -1,9 +1,4 @@
-# Fedora dnf aliases
-alias dnfi="sudo dnf install"
-alias dnfs="dnf search"
-alias dnfr="sudo dnf remove"
-alias dnfu="sudo dnf update && flatpak update"
-
+alias python="python3"
 alias grep="grep --color=auto"
 alias eZ="$EDITOR ~/.zshrc"
 alias rZ="source ~/.zshrc"
