@@ -24,7 +24,7 @@ spacebar -m config space_icon                  •
 spacebar -m config space_icon_color            0xffffab91
 spacebar -m config space_icon_color_secondary  0xff78c4d4
 spacebar -m config space_icon_color_tertiary   0xfffff9b0
-spacebar -m config space_icon_strip            "1: web" "2: main" "3: misc" "4: misc" "5: org" "6: misc" "7: misc" "8: misc" "9: chat"
+spacebar -m config space_icon_strip            "1: web" "2: main" "3: misc" "4: misc" "5: misc" "6: misc" "7: org" "8: chat" "9: ssh" "10: results" # "11 (y)" "12 (u)" "13 (i)" "14 (o)" "15 (p)"
 spacebar -m config spaces_for_all_displays     off
 spacebar -m config clock_icon                  
 spacebar -m config dnd_icon                    
