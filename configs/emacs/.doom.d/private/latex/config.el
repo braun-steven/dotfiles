@@ -5,7 +5,12 @@
 
   ;; Set latex viewer
   ;; (setq +latex-viewers '(zathura))
-  (setq +latex-viewers '(pdf-tools))  ;; Results in wrong-type-argument bufferp, nil error for now
+  ;; (setq +latex-viewers '(skim.app))  ;; Results in wrong-type-argument bufferp, nil error for now
+
+  (setq TeX-view-program-selection nil)
+  (setq +latex-viewers '(skim))
+  (load! "~/.emacs.d/modules/lang/latex/+viewers")
+
   ;; (setq +latex-viewers '(evince))
 
  ;; to use pdfview with auctex
