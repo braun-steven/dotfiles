@@ -17,6 +17,7 @@ else
   export SUDO_EDITOR="vim"
 fi
 
+
 # FZF options
 export FZF_DEFAULT_OPTS='--height 40% --border'
 export FZF_DEFAULT_COMMAND='ag -g .'
@@ -222,6 +223,7 @@ autoload -U add-zsh-hook
 add-zsh-hook -Uz chpwd maybe_activate_conda_env
 
 autopair-init
+
 
 ##################################
 #  MISC end                      #
