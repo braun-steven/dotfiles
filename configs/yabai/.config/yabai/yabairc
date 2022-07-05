@@ -16,8 +16,10 @@ yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
 
 # global settings
 yabai -m config mouse_follows_focus          off
+# From: https://github.com/koekeishiya/yabai/wiki/Configuration#window-modifications
+# With focus follows mouse, you can also focus windows without having to click on them. This can be set to either autofocus (window gets focused, but not raised) or autoraise (window gets raised as if it was clicked on).
 yabai -m config focus_follows_mouse          off
-yabai -m config window_origin_display        focus
+yabai -m config window_origin_display        focused
 yabai -m config window_placement             second_child
 yabai -m config window_topmost               off
 yabai -m config window_shadow                on
@@ -39,11 +41,11 @@ yabai -m config mouse_drop_action            swap
 
 # general space settings
 yabai -m config layout                       bsp
-yabai -m config top_padding                  10
-yabai -m config bottom_padding               10
-yabai -m config left_padding                 10
-yabai -m config right_padding                10
-yabai -m config window_gap                   07
+yabai -m config top_padding                  3
+yabai -m config bottom_padding               3
+yabai -m config left_padding                 3
+yabai -m config right_padding                3
+yabai -m config window_gap                   6
 
 # label spaces
 yabai -m space 1 --label 1
@@ -55,24 +57,48 @@ yabai -m space 6 --label 6
 yabai -m space 7 --label 7
 yabai -m space 8 --label 8
 yabai -m space 9 --label 9
+yabai -m space 10 --label 10
+yabai -m space 11 --label 11
+yabai -m space 12 --label 12
+yabai -m space 13 --label 13
+yabai -m space 14 --label 14
+yabai -m space 15 --label 15
 
 
 # float settings windows
-yabai -m rule --add title='Settings$' manage=off 
+yabai -m rule --add title='Settings$' manage=off sticky=on 
 yabai -m rule --add app="^System Preferences$" manage=off 
-yabai -m rule --add title="^Welcome to PyCharm$" manage=off   # PyCharm start window
 yabai -m rule --add app="^System Information$" manage=off 
-yabai -m rule --add title="^Preferences$" manage=off 
+yabai -m rule --add title="^Preferences$" manage=off
 yabai -m rule --add title="^Digital Colour Meter$" manage=off 
-yabai -m rule --add title="^Evaluate$" manage=off   # PyCharm debugger evaluate window
-yabai -m rule --add title="^Merge Revisions.*" manage=off   # PyCharm merge window
 yabai -m rule --add title="^General.*" manage=off   # Calendar settings
 yabai -m rule --add title="^Quick Entry.*" manage=off   # Things 3 settings
 yabai -m rule --add title="^Accounts.*" manage=off   # MacOS Mail accounts
 yabai -m rule --add title="^Run/Debug Configurations.*" manage=off   # PyCharm
 yabai -m rule --add title="^Disk Utility$" manage=off   # MacOS Disk utility
-yabai -m rule --add title="^Rename$" manage=off   # PyCharm rename window
-yabai -m rule --add title="^Delete$" manage=off   # PyCharm delete window
+yabai -m rule --add app="^App Store$" manage=off   # MacOS App Store
+yabai -m rule --add app="^Signal$" manage=off   # Signal
+yabai -m rule --add app="^WhatsApp$" manage=off   # WhatsApp
+yabai -m rule --add app="^NordVPN$" manage=off   # NordVPN
+yabai -m rule --add app="^Notes$" manage=off   # Apple Notes
+yabai -m rule --add app="^Spotify$" manage=off   # Spotify
+yabai -m rule --add app="^Mattermost$" space=10   # Mattermost on space 10!
+yabai -m rule --add app="^Finder$" manage=off   # MacOS Finder
+
+
+# PyCharm
+yabai -m rule --add title="^Merge Revisions.*" manage=off
+yabai -m rule --add title="^Rename$" manage=off
+yabai -m rule --add title="^Delete$" manage=off
+yabai -m rule --add title="^Move$" manage=off
+yabai -m rule --add title="^Copy$" manage=off
+yabai -m rule --add title="^Evaluate$" manage=off
+yabai -m rule --add title="^Welcome to PyCharm$" manage=off
+yabai -m rule --add title="^Add File to Git$" manage=off
+
+# Zoom
+yabai -m rule --add app="^zoom.us$" manage=off   # Zoom
+yabai -m rule --add title="^Zoom Meeting$" manage=on
 
 # Set padding for spacebar
 SPACEBAR_HEIGHT=$(spacebar -m config height)
@@ -81,7 +107,5 @@ yabai -m config external_bar all:0:$SPACEBAR_HEIGHT
 # Focus window to mous when windows/application is destroyed
 yabai -m signal --add event=window_destroyed action="yabai -m query --windows --window &> /dev/null || yabai -m window --focus mouse"
 yabai -m signal --add event=application_terminated action="yabai -m query --windows --window &> /dev/null || yabai -m window --focus mouse"
-
-
 
 echo "yabai configuration loaded.."
