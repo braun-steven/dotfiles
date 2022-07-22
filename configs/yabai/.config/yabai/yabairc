@@ -78,12 +78,12 @@ yabai -m rule --add title="^Run/Debug Configurations.*" manage=off   # PyCharm
 yabai -m rule --add title="^Disk Utility$" manage=off   # MacOS Disk utility
 yabai -m rule --add app="^App Store$" manage=off   # MacOS App Store
 yabai -m rule --add app="^Signal$" manage=off   # Signal
+yabai -m rule --add app="^Messages$" manage=off   # Messages
 yabai -m rule --add app="^WhatsApp$" manage=off   # WhatsApp
 yabai -m rule --add app="^NordVPN$" manage=off   # NordVPN
 yabai -m rule --add app="^Notes$" manage=off   # Apple Notes
-yabai -m rule --add app="^Spotify$" manage=off   # Spotify
-yabai -m rule --add app="^Mattermost$" space=10   # Mattermost on space 10!
-yabai -m rule --add app="^Finder$" manage=off   # MacOS Finder
+# yabai -m rule --add app="^Spotify$" manage=off   # Spotify
+# yabai -m rule --add app="^Finder$" manage=off   # MacOS Finder
 
 
 # PyCharm
@@ -96,13 +96,10 @@ yabai -m rule --add title="^Evaluate$" manage=off
 yabai -m rule --add title="^Welcome to PyCharm$" manage=off
 yabai -m rule --add title="^Add File to Git$" manage=off
 
-# Zoom
-yabai -m rule --add app="^zoom.us$" manage=off   # Zoom
-yabai -m rule --add title="^Zoom Meeting$" manage=on
-
 # Set padding for spacebar
-SPACEBAR_HEIGHT=$(spacebar -m config height)
-yabai -m config external_bar all:0:$SPACEBAR_HEIGHT
+# SPACEBAR_HEIGHT=$(spacebar -m config height)
+# yabai -m config external_bar all:0:$SPACEBAR_HEIGHT
+yabai -m config external_bar all:0:34
 
 # Focus window to mous when windows/application is destroyed
 yabai -m signal --add event=window_destroyed action="yabai -m query --windows --window &> /dev/null || yabai -m window --focus mouse"
