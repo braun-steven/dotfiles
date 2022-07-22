@@ -4,5 +4,4 @@
 
 [[ -f ~/.bashrc ]] && . ~/.bashrc
 
-nvidia-settings --load-config-only
-
+export EA_EDITOR='/opt/homebrew/bin/emacsclient -a "" -c'
