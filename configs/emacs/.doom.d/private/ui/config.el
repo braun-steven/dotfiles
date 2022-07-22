@@ -16,7 +16,8 @@
   :init
   ;; Add all your customizations prior to loading the themes
   (setq modus-themes-italic-constructs t
-        modus-themes-syntax '(faint green-strings yellow-comments)
+        ;; modus-themes-syntax '(faint green-strings yellow-comments)
+        modus-themes-syntax '(green-strings yellow-comments)
         modus-themes-bold-constructs nil)
 
   ;; Load the theme files before enabling a theme
