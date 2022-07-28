@@ -139,7 +139,7 @@ if ! zgen saved; then
   # zgen prezto autosuggestions
   # zgen prezto prompt
 
-  zgen prezto utility safe-ops 'no'
+  # zgen prezto utility safe-ops 'no'
 
   # generate the init script from plugins above
   zgen save
@@ -229,25 +229,25 @@ autopair-init
 #  MISC end                      #
 ##################################
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/Users/steven/.conda/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/Users/steven/.conda/etc/profile.d/conda.sh" ]; then
-        . "/Users/steven/.conda/etc/profile.d/conda.sh"
-    else
-        export PATH="/Users/steven/.conda/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
+# # >>> conda initialize >>>
+# # !! Contents within this block are managed by 'conda init' !!
+# __conda_setup="$('/Users/steven/.conda/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+# if [ $? -eq 0 ]; then
+#     eval "$__conda_setup"
+# else
+#     if [ -f "/Users/steven/.conda/etc/profile.d/conda.sh" ]; then
+#         . "/Users/steven/.conda/etc/profile.d/conda.sh"
+#     else
+#         export PATH="/Users/steven/.conda/bin:$PATH"
+#     fi
+# fi
+# unset __conda_setup
+# # <<< conda initialize <<<
 
 
 # export NVM_DIR="$HOME/.nvm"
-# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+ [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+ [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 source /opt/homebrew/opt/chruby/share/chruby/chruby.sh
 source /opt/homebrew/opt/chruby/share/chruby/auto.sh
 chruby ruby-3.1.1
