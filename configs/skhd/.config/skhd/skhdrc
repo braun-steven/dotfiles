@@ -106,7 +106,8 @@
 # ]
 
 # open terminal, blazingly fast compared to iTerm/Hyper
-cmd - return : /Applications/kitty.app/Contents/MacOS/kitty --single-instance -d ~
+# cmd - return : /Applications/kitty.app/Contents/MacOS/kitty --single-instance -d ~
+cmd -return : /Users/steven/dotfiles/configs/dotbin/dotbin/skhd-iterm2-new-window.sh
 # cmd - return : /Applications/kitty.app/Contents/MacOS/kitty
 # cmd - return : alacritty msg create-window || alacritty
 # cmd - return : open -na /Applications/Alacritty.app
