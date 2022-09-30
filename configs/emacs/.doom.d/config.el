@@ -185,6 +185,11 @@
         (if (file-directory-p file)
                 (load! (concat file "/config.el"))))
 
+;; ;; Corfu completion-styles
+;; (use-package! corfu
+;;   :custom
+;;   (completion-styles '(flex)))
+
 
 ;; Projectile after switch cook
 (defun activate-project-conda-env-maybe ()
@@ -208,7 +213,14 @@
 
 ;; Ensure, that conda is loaded after projectile so that the hook works
 (after! projectile
+;; From `doom doctor'
+;; Checking Doom core for irregularities...
+;; ! Your $HOME is recognized as a project root
+;;   Emacs will assume $HOME is the root of any project living under $HOME. If this
+;;   isn't desired, you will need to remove ".git" from
+;;   `projectile-project-root-files-bottom-up' (a variable)
+  ;; (setq projectile-project-root-files-bottom-up (remove ".git"
+  ;;         projectile-project-root-files-bottom-up))
   (use-package! conda))
 
 (add-hook 'projectile-after-switch-project-hook #'activate-project-conda-env-maybe)
-
