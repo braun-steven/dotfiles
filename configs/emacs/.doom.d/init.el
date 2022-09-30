@@ -14,6 +14,10 @@
 ;;      Alternatively, press 'gd' (or 'C-c g d') on a module to browse its
 ;;      directory (for easy access to its source code).
 
+; (setq +word-wrap-disabled-modes '())
+; (setq +word-wrap-visual-modes '())
+; (setq +word-wrap-text-modes '())
+
 (doom! :input
        ;;chinese
        ;;japanese
@@ -22,8 +26,10 @@
        company            ; the ultimate code completion backend
        ;; (helm +fuzzy)              ; the *other* search engine for love and life
        ;;ido               ; the other *other* search engine...
-       (ivy +icons +prescient)               ; a search engine for love and life
-       ;; (vertico +icons)
+       ;; (ivy +icons +prescient)               ; a search engine for love and life
+       ;; corfu  ;; private module from https://git.sr.ht/~gagbo/doom-config/tree/master/item/README.md
+       ;; (corfu +orderless)  ;; private module from https://git.sr.ht/~gagbo/doom-config/tree/master/item/README.md
+       (vertico +icons)
 
        :ui
        ;; (ligatures +fira)
@@ -45,7 +51,7 @@
         +defaults)       ; default popup rules
        ;; (pretty-code +fira)       ; replace bits of code with pretty symbols
        ;; tabs              ; an tab bar for Emacs
-       treemacs          ; a project drawer, like neotree but cooler
+       (treemacs +lsp)          ; a project drawer, like neotree but cooler
        ;; unicode           ; extended unicode support for various languages
        vc-gutter         ; vcs diff in the fringe
        vi-tilde-fringe   ; fringe tildes to mark beyond EOB
@@ -146,6 +152,7 @@
        (org              ; organize your plain life in plain text
         ;; +dragndrop       ; drag & drop files/images into org buffers
         +roam2
+        +pretty
         ;; +journal
         ;;+hugo            ; use Emacs for hugo blogging
         ;;+jupyter        ; ipython/jupyter support for babel

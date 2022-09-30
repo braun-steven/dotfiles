@@ -5,8 +5,6 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. These are the defaults.
-;; (setq slang/theme-light 'modus-operandi)
-;; (setq slang/theme-dark 'modus-vivendi)
 (setq slang/theme-light 'modus-operandi)
 (setq slang/theme-dark 'doom-one)
 (setq doom-theme slang/theme-dark)
@@ -16,8 +14,10 @@
   :init
   ;; Add all your customizations prior to loading the themes
   (setq modus-themes-italic-constructs t
-        ;; modus-themes-syntax '(faint green-strings yellow-comments)
+        modus-themes-subtle-line-numbers nil
         modus-themes-syntax '(green-strings yellow-comments)
+        modus-themes-markup '(background)
+        ;; modus-themes-syntax '(faint green-strings yellow-comments)
         modus-themes-bold-constructs nil)
 
   ;; Load the theme files before enabling a theme
@@ -28,7 +28,7 @@
   )
 
 
-;; Theme based on daytime/long/lat
+;; ;; Theme based on daytime/long/lat
 ;; (use-package! circadian
 ;;         :config
 ;;         (setq calendar-latitude 49.9)
@@ -43,10 +43,10 @@
 ;;         ;;                 (remove-hook 'pdf-view-mode-hook 'slang/enable-pdf-view-midnight-minor-mode))
 ;;         ;;                 ))
 
-;;         ;; Set a global variable to the active theme set by circadian el
-;;         (add-hook 'circadian-after-load-theme-hook
-;;                 #'(lambda (theme)
-;;                         (setq slang/global-active-theme theme)))
+;;         ;; ;; Set a global variable to the active theme set by circadian el
+;;         ;; (add-hook 'circadian-after-load-theme-hook
+;;         ;;         #'(lambda (theme)
+;;         ;;                 (setq slang/global-active-theme theme)))
 
 
 ;;         (circadian-setup))
