@@ -31,6 +31,6 @@
 
   ;; Fix for confusing yasnippet results in completion
   (setq! +lsp-company-backends
-         (if (featurep! :editor snippets)
+         (if (modulep! :editor snippets)
              '(:separate company-yasnippet company-capf)
            'company-capf)))

@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# Source: https://gist.githubusercontent.com/yig/ba124dfbc8f63762f222/raw/825cbbf9fadf3595e35b9225fa5551dbed377c39/latexmk-fast
+
+## Simple draft mode followed by pdflatex once by using the print hook.
+## With no arguments, it will follow a 'latexmkrc' file if there is one.
+## You still get the nice error messages at the end:
+latexmk -pdf -pdflatex='pdflatex -draftmode %O %S && touch %D' -print=pdf -e '$lpr_pdf=q|pdflatex -interaction=batchmode -synctex=1 %R|' "$@"

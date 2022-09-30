@@ -1,0 +1,14 @@
+#!/usr/bin/env sh
+
+# Stop yabai
+brew services stop yabai
+
+# Upgrade yabai
+brew upgrade yabai
+
+# Update yabai sha256 sum in private yabai-sudoers file
+line="$USER ALL = (root) NOPASSWD: sha256:$(shasum -a 256 $(which yabai)) --load-sa"
+echo $line | sudo tee /private/etc/sudoers.d/yabai
+
+# Start yabai again
+brew services start yabai

@@ -118,6 +118,9 @@ Plug 'itchyny/lightline.vim'
 Plug 'tpope/vim-repeat'
 Plug 'godlygeek/tabular'
 
+" Auto dark mode
+" Plug 'f-person/auto-dark-mode.nvim'
+
 " Initialize plugin system
 call plug#end()
 
@@ -158,6 +161,23 @@ syntax on                 " Enable syntax highlighting
 " {{{ Colorscheme
 set background=dark
 colorscheme one
+
+" lua <<EOF
+" local auto_dark_mode = require('auto-dark-mode')
+
+" auto_dark_mode.setup({
+" 	update_interval = 1000,
+" 	set_dark_mode = function()
+" 		vim.api.nvim_set_option('background', 'dark')
+" 		vim.cmd('colorscheme one')
+" 	end,
+" 	set_light_mode = function()
+" 		vim.api.nvim_set_option('background', 'light')
+" 		vim.cmd('colorscheme gruvbox')
+" 	end,
+" })
+" auto_dark_mode.init()
+" EOF
 
 " }}}
 

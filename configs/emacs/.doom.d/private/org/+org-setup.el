@@ -47,7 +47,6 @@
 ;; ;; Make exports async by default
 ;; ;; (setq org-export-in-background t)
 
-
 ;; ;; Make TAB cycle all subtrees
 (after! evil-org
   (remove-hook 'org-tab-first-hook #'+org-cycle-only-current-subtree-h))

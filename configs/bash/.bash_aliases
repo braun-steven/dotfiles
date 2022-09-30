@@ -20,8 +20,8 @@ alias rsync="rsync --archive --compress-level=3 --copy-links --partial --inplace
 # Update all pip packages
 alias pipupdate="pip list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U"
 
-# ALIASES
-alias emacsclient-restart="systemctl --user restart emacs"
+# Emacsclient terminal
+alias em="emacsclient -t -a ''"
 
 # Better ls
 if hash exa 2>/dev/null; then
