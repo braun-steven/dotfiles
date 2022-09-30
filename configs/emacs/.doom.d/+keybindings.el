@@ -12,7 +12,7 @@
       "C-S-l" #'evil-window-right)
 
 ;; Completion at point
-(map! :nvi "C-SPC" #'company-capf)
+;; (map! :nvi "C-SPC" #'company-capf)
 
 (map! :leader
       ;; unmap first
