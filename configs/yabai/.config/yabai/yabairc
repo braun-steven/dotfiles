@@ -100,6 +100,7 @@ yabai -m rule --add title="^Copy$" manage=off
 yabai -m rule --add title="^Evaluate$" manage=off
 yabai -m rule --add title="^Welcome to PyCharm$" manage=off
 yabai -m rule --add title="^Add File to Git$" manage=off
+yabai -m rule --add title="^Emacs Everywhere.*" manage=off
 
 # Set padding for spacebar
 # SPACEBAR_HEIGHT=$(spacebar -m config height)

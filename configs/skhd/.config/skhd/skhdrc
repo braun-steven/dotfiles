@@ -108,7 +108,10 @@
 # open terminal, blazingly fast compared to iTerm/Hyper
 # cmd - return : /Applications/kitty.app/Contents/MacOS/kitty --single-instance -d ~
 cmd -return : /Users/steven/dotfiles/configs/dotbin/dotbin/skhd-iterm2-new-window.sh
-cmd+shift-return : emacsclient -c -n -a ''
+cmd+shift-return : emacsclient -c -n -a '' & sleep 0.5 && yabai -m window --focus $(yabai -m query --windows | jq '[.[] | select ( .title | contains("Emacs") )][0].id')
+
+cmd+shift-e : emacsclient --eval "(emacs-everywhere)"
+# cmd+shift-e : doom +everywhere
 # cmd - return : /Applications/kitty.app/Contents/MacOS/kitty
 # cmd - return : alacritty msg create-window || alacritty
 # cmd - return : open -na /Applications/Alacritty.app
