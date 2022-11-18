@@ -30,8 +30,8 @@ export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/lib/"
 # fi
 
 # Go into zsh
-# if [[ $(ps --no-header --pid=$PPID --format=cmd) != "zsh" ]]; then
-#   exec zsh
-# fi
+if [[ $(ps --no-header --pid=$PPID --format=cmd) != "zsh" ]] && [[ $SSH_CONNECTION ]]; then
+  exec zsh
+fi
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
