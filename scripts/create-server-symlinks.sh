@@ -14,12 +14,11 @@ do
     if [[ ! -f "$f_src" ]] && [[ ! -d "$f_src" ]]
     then
         echo "Source file $f_src does not exist! Skipping ..."
-        ls $f_src
         continue
     fi
 
     # If destination file already exist, make a backup
-    if [[ -f "$f_dst" ]]
+    if [[ -f "$f_dst" ]] || [[ -d "$f_dst" ]]
     then
         echo "File '$f_dst' already exists -- creating backup at $f_dst.backup"
         mv $f_dst $f_dst.backup
