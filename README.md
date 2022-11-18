@@ -2,8 +2,6 @@
 
 ![Screenshot](./scrot.png)
 
-Symlinks are managed with `GNU Stow`.
-
 Run the following in `$dotfiles` to setup all symlinks:
 
 ```bash
