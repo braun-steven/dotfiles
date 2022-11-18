@@ -9,19 +9,41 @@ Run the following in `$dotfiles` to setup all symlinks:
 ```
 
 The dotfiles contain configurations for:
+
+* Xresources
+* alacritty
 * bash
+* bat
+* black
 * compton
+* conda
 * ctags
+* dircolors
+* dircolors-gruvbox
+* dotbin
 * dunst
 * emacs
 * flake
+* flashfocus
+* git
 * i3
 * i3status
+* ideavim
+* kitty
+* latexmk
+* nvim
+* onedrive
+* pdbpp
+* picom
 * polybar
 * pylint
+* redshift
 * rofi
+* skhd
+* spacebar
 * termite
 * tmux
 * vim
+* yabai
 * zathura
 * zsh
