@@ -126,20 +126,20 @@ if ! zgen saved; then
 
   # Load Prezto Modules
   # zgen prezto git
-  # zgen prezto environment
-  # zgen prezto terminal
+  zgen prezto environment
+  zgen prezto terminal
   # zgen prezto editor
   zgen prezto history
   # zgen prezto directory
   # zgen prezto spectrum
-  # zgen prezto utility
+  zgen prezto utility
   zgen prezto completion  # Must be loaded after utility
   # zgen prezto syntax-highlighting
   # zgen prezto history-substring-search
   # zgen prezto autosuggestions
   # zgen prezto prompt
 
-  # zgen prezto utility safe-ops 'no'
+  zgen prezto utility safe-ops 'no'
 
   # generate the init script from plugins above
   zgen save
