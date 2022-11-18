@@ -1,8 +1,8 @@
 [push]
 	default = simple
 [user]
-	email = steven.lang.mz@gmail.com
-	name = Steven Lang
+	email = steven.braun.mz@gmail.com
+	name = Steven Braun
 [merge]
 	tool = vimdiff
 	conflictStyle = diff3
