@@ -11,19 +11,22 @@ do
     f_src="$src_dir/$f"
     f_dst="$dst_dir/$f"
 
-    if [[ ! -f "$f_src" ]];
+    if [[ ! -f "$f_src" ]] && [[ ! -d "$f_src" ]]
     then
         echo "Source file $f_src does not exist! Skipping ..."
+        ls $f_src
         continue
     fi
 
     # If destination file already exist, make a backup
-    if [[ -f "$f_dst" ]];
+    if [[ -f "$f_dst" ]]
     then
         echo "File '$f_dst' already exists -- creating backup at $f_dst.backup"
         mv $f_dst $f_dst.backup
     fi
-    #
+
+    # Perform symlink
     echo "Symlinking $f_src and $f_dst"
     echo "ln -s $src_dir/$f $dst_dir/$f"
+    ln -s $src_dir/$f $dst_dir/$f
 done
