@@ -4,7 +4,7 @@ src_dir=/storage-01/$USER
 dst_dir=$HOME
 
 # All files that should be linked from src_dir to the home
-files=( dotfiles .zgen .zsh_history projects results .netrc .bash_history )
+files=( dotfiles .zgen .zsh_history projects results .netrc .bash_history .tmux )
 
 for f in "${files[@]}"
 do
