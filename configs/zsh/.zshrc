@@ -12,7 +12,6 @@ if command -v nvim &>/dev/null; then
   export SUDO_EDITOR="nvim"
   alias vim=nvim
 else
-  # Emacsclient as (sudo-)editor
   export EDITOR="vim"
   export SUDO_EDITOR="vim"
 fi
@@ -21,7 +20,6 @@ fi
 # FZF options
 export FZF_DEFAULT_OPTS='--height 40% --border'
 export FZF_DEFAULT_COMMAND='ag -g .'
-
 
 # Fixes some terminal application colors
 export TERM="xterm-256color"
@@ -45,8 +43,10 @@ export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/lib/"
 
 # Start tmux in ssh connections
 if [[ $SSH_CONNECTION ]]; then
-  if [ "$TMUX" = "" ]; then
-    tmux
+
+# Try to attach to the ssh_tmux session, else create one
+  if [[ $- =~ i ]] && [[ -z "$TMUX" ]] && [[ -n "$SSH_TTY" ]]; then
+    tmux attach-session -t ssh_tmux || tmux new-session -s ssh_tmux
   fi
 fi
 
@@ -229,29 +229,16 @@ autopair-init
 #  MISC end                      #
 ##################################
 
-# # >>> conda initialize >>>
-# # !! Contents within this block are managed by 'conda init' !!
-# __conda_setup="$('/Users/steven/.conda/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-# if [ $? -eq 0 ]; then
-#     eval "$__conda_setup"
-# else
-#     if [ -f "/Users/steven/.conda/etc/profile.d/conda.sh" ]; then
-#         . "/Users/steven/.conda/etc/profile.d/conda.sh"
-#     else
-#         export PATH="/Users/steven/.conda/bin:$PATH"
-#     fi
-# fi
-# unset __conda_setup
-# # <<< conda initialize <<<
-
 
 # export NVM_DIR="$HOME/.nvm"
- [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
- [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-source /opt/homebrew/opt/chruby/share/chruby/chruby.sh
-source /opt/homebrew/opt/chruby/share/chruby/auto.sh
-chruby ruby-3.1.1
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+[ -f "/opt/homebrew/opt/chruby/share/chruby/chruby.sh" ] && source /opt/homebrew/opt/chruby/share/chruby/chruby.sh
+[ -f "/opt/homebrew/opt/chruby/share/chruby/auto.sh" ] && source /opt/homebrew/opt/chruby/share/chruby/auto.sh
+[ -f "/opt/homebrew/opt/chruby/share/chruby/chruby.sh" ] && chruby ruby-3.1.1
 
+autoload edit-command-line; zle -N edit-command-line
+bindkey "^X^E" edit-command-line
 
 # Source aliases finally
 source ~/.bash_aliases
