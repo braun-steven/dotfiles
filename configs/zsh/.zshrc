@@ -57,6 +57,12 @@ fi
 #  INSTALL BINARIES begin        #
 ##################################
 
+# Install neovim
+if ! command -v nvim &> /dev/null; then
+  curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage --output ~/bin/nvim
+  chmod u+x ~/bin/nvim
+fi
+
 # Ensure pip is installed
 # if ! command -v pip &> /dev/null; then
 #   curl https://bootstrap.pypa.io/get-pip.py -o /tmp/get-pip.py
