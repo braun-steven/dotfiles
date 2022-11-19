@@ -59,7 +59,7 @@ fi
 
 # Install neovim
 if ! command -v nvim &> /dev/null; then
-  curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage --output ~/bin/nvim
+  curl -L https://github.com/neovim/neovim/releases/latest/download/nvim.appimage --output ~/bin/nvim
   chmod u+x ~/bin/nvim
 fi
 
