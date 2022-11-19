@@ -63,14 +63,6 @@ fi
 #   python3 /tmp/get-pip.py
 # fi
 
-# Check if direnv is installed
-# if [ ! -f $HOME/bin/direnv ]; then
-#   echo "Direnv not found. Installing now ..."
-#   mkdir -p $HOME/bin
-#   wget -O $HOME/bin/direnv https://github.com/direnv/direnv/releases/download/v2.20.0/direnv.linux-amd64 > /dev/null
-#   chmod +x $HOME/bin/direnv
-# fi
-
 # Check if tpm is installed
 if [ ! -d $HOME/.tmux/plugins/tpm ]; then
   echo "Tmux plugin manager not found. Installing now ..."
@@ -114,6 +106,7 @@ if ! zgen saved; then
   zgen load agkozak/zsh-z
   zgen load mafredri/zsh-async
   zgen load junegunn/fzf shell
+  zgen load ptavares/zsh-direnv
 
   zgen load esc/conda-zsh-completion
 
@@ -181,11 +174,6 @@ bindkey "^F" forward-char
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 [ -f ~/.conda/etc/profile.d/conda.sh ] && source ~/.conda/etc/profile.d/conda.sh
-
-# Enable direnv
-eval "$(direnv hook zsh)"
-
-
 
 
 function maybe_activate_conda_env () {
