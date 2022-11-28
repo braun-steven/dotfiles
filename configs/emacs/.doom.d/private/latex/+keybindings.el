@@ -8,11 +8,11 @@
       :desc "Format Section" ","     #'LaTeX-fill-section
 
       (:prefix ("c" . "compile")
-      :desc "Project" "p"     #'slang/save-tex-file-and-compile
-      :desc "Buffer" "b"     #'slang/tex-compile-buffer
-      :desc "Region" "r"     #'slang/tex-compile-region
-      :desc "Section" "s"     #'slang/tex-compile-section
-      :desc "Environment" "e"     #'slang/tex-compile-environment
+      :desc "Project" "p"     #'sbraun/save-tex-file-and-compile
+      :desc "Buffer" "b"     #'sbraun/tex-compile-buffer
+      :desc "Region" "r"     #'sbraun/tex-compile-region
+      :desc "Section" "s"     #'sbraun/tex-compile-section
+      :desc "Environment" "e"     #'sbraun/tex-compile-environment
       )
 
 

@@ -82,7 +82,7 @@
 ;; (setq org-preview-latex-default-process 'imagemagick)
 
 
-;; (setq slang/doom-one-colors-alist '((red . "#ff6c6b")
+;; (setq sbraun/doom-one-colors-alist '((red . "#ff6c6b")
 ;;                                     (green . "#98be65")
 ;;                                     (yellow . "#ECBE7B")
 ;;                                     (blue . "#51afef")
