@@ -1,4 +1,4 @@
-(defun slang/switch-to-scratch ()
+(defun sbraun/switch-to-scratch ()
   "Switch to scratch buffer."
   (interactive)
   (switch-to-buffer "*scratch*"))
@@ -6,7 +6,7 @@
 
 
 ;; Close compilation buffer on succeed
-(defun slang/bury-compile-buffer-if-successful (buffer string)
+(defun sbraun/bury-compile-buffer-if-successful (buffer string)
   "Bury a compilation buffer if succeeded without warnings
 https://stackoverflow.com/questions/11043004/emacs-compile-buffer-auto-close/11059012#11059012"
   (when (and
@@ -31,22 +31,22 @@ https://stackoverflow.com/questions/11043004/emacs-compile-buffer-auto-close/110
            (delete-other-windows))))
 
 
-(defun slang/switch-other-buffer ()
+(defun sbraun/switch-other-buffer ()
   "Switch to other buffer."
   (interactive)
   (switch-to-buffer (other-buffer)))
 
 
-(defun slang/reload-config ()
+(defun sbraun/reload-config ()
   "Reload config."
   (interactive)
   (load! "config"))
 
-(defun slang/timestamp-today-string-plus-n-days (n)
+(defun sbraun/timestamp-today-string-plus-n-days (n)
   (format-time-string "%Y-%m-%d" (time-add (* 60 60 24 n) (current-time))))
 
 
-(defun slang/notify-send (title message)
+(defun sbraun/notify-send (title message)
   "Call notify-send with the given title and message to send
    a notification to the desktop environment."
   (call-process "notify-send"
