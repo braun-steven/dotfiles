@@ -4,7 +4,7 @@
   (load! "+keybindings")
 
 
-  (defun slang/enable-pdf-view-midnight-minor-mode ()
+  (defun sbraun/enable-pdf-view-midnight-minor-mode ()
     (pdf-view-midnight-minor-mode))
 
   ;; pdf-tools midnight colors

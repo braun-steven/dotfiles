@@ -8,7 +8,7 @@
 
 (map! :after org
       :map org-mode-map
-      :desc "Export Repeat" "<f5>" #'slang/org-export-dispatch-repeat-last-action)
+      :desc "Export Repeat" "<f5>" #'sbraun/org-export-dispatch-repeat-last-action)
 
 ;; (map! :after org
 ;;       :map org-mode-map
@@ -174,7 +174,7 @@
 
       "e"     #'org-agenda-set-effort
       "q"     #'org-agenda-quit
-      "p"     #'slang/org-agenda-process-inbox-item
+      "p"     #'sbraun/org-agenda-process-inbox-item
       "t"    #'org-agenda-todo
       (:prefix ("c" . "Clock")
        "i"    #'org-agenda-clock-in
@@ -183,8 +183,8 @@
       "s" nil
       (:prefix ("s" . "schedule")
        "s"  #'org-agenda-schedule
-       :desc "today" "0"  #'slang/org-agenda-schedule-today
-       :desc "tomorrow" "1"  #'slang/org-agenda-schedule-tomorrow))
+       :desc "today" "0"  #'sbraun/org-agenda-schedule-today
+       :desc "tomorrow" "1"  #'sbraun/org-agenda-schedule-tomorrow))
 
 
 (map! :after org
@@ -192,7 +192,7 @@
       :n "RET"   #'org-agenda-switch-to
       :n "q"     #'org-agenda-quit
       :n "t"    #'org-agenda-todo
-      :n "p"    #'slang/org-agenda-process-inbox-item
+      :n "p"    #'sbraun/org-agenda-process-inbox-item
       :n "I"    #'org-agenda-clock-in
       :n "O"    #'org-agenda-clock-out
       :n "P"    nil

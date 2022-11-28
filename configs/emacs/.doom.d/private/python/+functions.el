@@ -2,14 +2,14 @@
 
 
 
-(defun slang/conda-env-activate ()
+(defun sbraun/conda-env-activate ()
   "Wrapper for pyvenv-activate that also restarts the lsp-sessions."
   (interactive)
   (call-interactively 'conda-env-activate)
   (call-interactively 'lsp-restart-workspace))  ;; lsp-mode
   ;; (call-interactively 'eglot-reconnect))          ;; eglot-mode
 
-(defun slang/pdb-insert ()
+(defun sbraun/pdb-insert ()
   "Insert pdb statement."
   (interactive)
   (evil-open-above 1)

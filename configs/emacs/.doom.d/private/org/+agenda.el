@@ -57,19 +57,19 @@
 ;;   (setq org-pomodoro-clock-break t)  ;; Clock 30 minutes instead of 25
 ;;   (add-hook 'org-pomodoro-finished-hook
 ;;             (lambda ()
-;;               (slang/notify-send "Pomodoro completed!" "Time for a break.")))
+;;               (sbraun/notify-send "Pomodoro completed!" "Time for a break.")))
 
 ;;   (add-hook 'org-pomodoro-break-finished-hook
 ;;             (lambda ()
-;;               (slang/notify-send "Pomodoro Short Break Finished" "Ready for Another?")))
+;;               (sbraun/notify-send "Pomodoro Short Break Finished" "Ready for Another?")))
 
 ;;   (add-hook 'org-pomodoro-long-break-finished-hook
 ;;             (lambda ()
-;;               (slang/notify-send "Pomodoro Long Break Finished" "Ready for Another?")))
+;;               (sbraun/notify-send "Pomodoro Long Break Finished" "Ready for Another?")))
 
 ;;   (add-hook 'org-pomodoro-killed-hook
 ;;             (lambda ()
-;;               (slang/notify-send "Pomodoro Killed" "One does not simply kill a pomodoro!")))
+;;               (sbraun/notify-send "Pomodoro Killed" "One does not simply kill a pomodoro!")))
 ;;   )
 
 ;; Predefined tags
@@ -80,8 +80,8 @@
 (setq org-super-agenda-header-map (make-sparse-keymap))
 
 ;; Set org agenda todo view (open with <f1>)
-(setq slang/org-agenda-directory "~/org/gtd/")
-(setq slang/org-agenda-todo-view
+(setq sbraun/org-agenda-directory "~/org/gtd/")
+(setq sbraun/org-agenda-todo-view
       `("a" "Full Agenda"
         ;; Agenda 10-day view
         ((agenda ""
@@ -97,7 +97,7 @@
           '(todo)
           ((org-ql-block-header "Inbox")
            (org-super-agenda-groups '((:auto-outline-path t)))
-           (org-agenda-files '(,(concat slang/org-agenda-directory "inbox.org")))))
+           (org-agenda-files '(,(concat sbraun/org-agenda-directory "inbox.org")))))
 
          ;; TODAY
          (org-ql-block
@@ -107,7 +107,7 @@
                 (scheduled :on today))
           ((org-ql-block-header "Today")
            (org-super-agenda-groups '((:auto-outline-path t)))
-           (org-agenda-files '(,(concat slang/org-agenda-directory "gtd.org")))))
+           (org-agenda-files '(,(concat sbraun/org-agenda-directory "gtd.org")))))
 
          ;; TOMORROW
          (org-ql-block
@@ -117,7 +117,7 @@
                 (scheduled :on +1))
           ((org-ql-block-header "Tomorrow")
            (org-super-agenda-groups '((:auto-outline-path t)))
-           (org-agenda-files '(,(concat slang/org-agenda-directory "gtd.org")))))
+           (org-agenda-files '(,(concat sbraun/org-agenda-directory "gtd.org")))))
 
          ;; Next Actions Category
          (org-ql-block
@@ -129,7 +129,7 @@
           ;; Variables
           ((org-ql-block-header "Next Actions")
            (org-super-agenda-groups '((:auto-outline-path t)))
-           (org-agenda-files '(,(concat slang/org-agenda-directory "gtd.org")))))
+           (org-agenda-files '(,(concat sbraun/org-agenda-directory "gtd.org")))))
 
 
 
@@ -141,7 +141,7 @@
                 (scheduled :to -1)) ;; Scheduled until yesterday but still todo -> missed
           ((org-ql-block-header "Missed Items")
            (org-super-agenda-groups '((:auto-outline-path t)))
-           (org-agenda-files '(,(concat slang/org-agenda-directory "gtd.org")))))
+           (org-agenda-files '(,(concat sbraun/org-agenda-directory "gtd.org")))))
 
          ;; Waiting Category
          (org-ql-block
@@ -150,7 +150,7 @@
           ;; Variables
           ((org-ql-block-header "Waiting For")
            (org-super-agenda-groups '((:auto-outline-path t)))
-           (org-agenda-files '(,(concat slang/org-agenda-directory "gtd.org")))))
+           (org-agenda-files '(,(concat sbraun/org-agenda-directory "gtd.org")))))
 
          ;; Projects
          (org-ql-block
@@ -164,7 +164,7 @@
           ;; Variables
           ((org-ql-block-header "Projects")
            (org-super-agenda-groups '((:auto-outline-path t)))
-           (org-agenda-files '(,(concat slang/org-agenda-directory "gtd.org")))))
+           (org-agenda-files '(,(concat sbraun/org-agenda-directory "gtd.org")))))
 
          (org-ql-block
           ;; Query
@@ -174,7 +174,7 @@
           ;; Variables
           ((org-ql-block-header "Someday/Maybe")
            (org-super-agenda-groups '((:auto-outline-path t)))
-           (org-agenda-files '(,(concat slang/org-agenda-directory "gtd.org")))))
+           (org-agenda-files '(,(concat sbraun/org-agenda-directory "gtd.org")))))
 
          ;; Reference Material
          (org-ql-block
@@ -184,13 +184,13 @@
           ;; Variables
           ((org-ql-block-header "Reference Material")
            (org-super-agenda-groups '((:auto-outline-path t)))
-           (org-agenda-files '(,(concat slang/org-agenda-directory "reference-material.org"))))))
+           (org-agenda-files '(,(concat sbraun/org-agenda-directory "reference-material.org"))))))
         nil
         ("/tmp/org-agenda.html")))
 
 
 
-(defun slang/make-org-agenda-custom-view (tag key description)
+(defun sbraun/make-org-agenda-custom-view (tag key description)
     "Make a custom agenda view filtered by a specific context tag."
     `(,key ,description
         (
@@ -200,7 +200,7 @@
           '(todo)
           ((org-ql-block-header "Inbox")
            (org-super-agenda-groups '((:auto-outline-path t)))
-           (org-agenda-files '(,(concat slang/org-agenda-directory "inbox.org")))))
+           (org-agenda-files '(,(concat sbraun/org-agenda-directory "inbox.org")))))
 
 
          ;; TODAY
@@ -212,7 +212,7 @@
                 (scheduled :on today))
           ((org-ql-block-header "Today")
            (org-super-agenda-groups '((:auto-outline-path t)))
-           (org-agenda-files '(,(concat slang/org-agenda-directory "gtd.org")))))
+           (org-agenda-files '(,(concat sbraun/org-agenda-directory "gtd.org")))))
 
          ;; TOMORROW
          (org-ql-block
@@ -223,7 +223,7 @@
                 (scheduled :on +1))
           ((org-ql-block-header "Tomorrow")
            (org-super-agenda-groups '((:auto-outline-path t)))
-           (org-agenda-files '(,(concat slang/org-agenda-directory "gtd.org")))))
+           (org-agenda-files '(,(concat sbraun/org-agenda-directory "gtd.org")))))
 
          ;; Next Actions Category
          (org-ql-block
@@ -235,7 +235,7 @@
           ;; Variables
           ((org-ql-block-header "Next Actions")
            (org-super-agenda-groups '((:auto-outline-path t)))
-           (org-agenda-files '(,(concat slang/org-agenda-directory "gtd.org")))))
+           (org-agenda-files '(,(concat sbraun/org-agenda-directory "gtd.org")))))
 
 
 
@@ -248,7 +248,7 @@
                 (scheduled :to -1)) ;; Scheduled until yesterday but still todo -> missed
           ((org-ql-block-header "Missed Items")
            (org-super-agenda-groups '((:auto-outline-path t)))
-           (org-agenda-files '(,(concat slang/org-agenda-directory "gtd.org")))))
+           (org-agenda-files '(,(concat sbraun/org-agenda-directory "gtd.org")))))
 
          ;; Waiting for
          (org-ql-block
@@ -258,7 +258,7 @@
                 (tags ,tag))
           ((org-ql-block-header "Waiting For")
            (org-super-agenda-groups '((:auto-outline-path t)))
-           (org-agenda-files '(,(concat slang/org-agenda-directory "gtd.org")))))
+           (org-agenda-files '(,(concat sbraun/org-agenda-directory "gtd.org")))))
 
          ;; Projects
          (org-ql-block
@@ -272,7 +272,7 @@
           ;; Variables
           ((org-ql-block-header "Projects")
            (org-super-agenda-groups '((:auto-outline-path t)))
-           (org-agenda-files '(,(concat slang/org-agenda-directory "gtd.org")))))
+           (org-agenda-files '(,(concat sbraun/org-agenda-directory "gtd.org")))))
 
          (org-ql-block
           ;; Query
@@ -283,14 +283,14 @@
           ;; Variables
           ((org-ql-block-header "Someday/Maybe")
            (org-super-agenda-groups '((:auto-outline-path t)))
-           (org-agenda-files '(,(concat slang/org-agenda-directory "gtd.org")))))
+           (org-agenda-files '(,(concat sbraun/org-agenda-directory "gtd.org")))))
 
         )))
 
 ;; ;; Set to empty list is necessary or else org-agenda-custom-commands is not defined
 (setq org-agenda-custom-commands (list))
-(add-to-list 'org-agenda-custom-commands `,slang/org-agenda-todo-view)
-(add-to-list 'org-agenda-custom-commands `,(slang/make-org-agenda-custom-view "phd" "cp" "PhD"))
+(add-to-list 'org-agenda-custom-commands `,sbraun/org-agenda-todo-view)
+(add-to-list 'org-agenda-custom-commands `,(sbraun/make-org-agenda-custom-view "phd" "cp" "PhD"))
 
 
 ;; Enable super agenda mode
@@ -303,10 +303,10 @@
   `(lambda (&rest _rest)
      (funcall ,fnc)))
 
-(advice-add 'org-agenda-deadline       :after (η #'slang/org-save-all-org-buffers-silent))
-(advice-add 'org-agenda-schedule       :after (η #'slang/org-save-all-org-buffers-silent))
-(advice-add 'org-store-log-note :after (η #'slang/org-save-all-org-buffers-silent))
-(advice-add 'org-agenda-todo           :after (η #'slang/org-save-all-org-buffers-silent))
+(advice-add 'org-agenda-deadline       :after (η #'sbraun/org-save-all-org-buffers-silent))
+(advice-add 'org-agenda-schedule       :after (η #'sbraun/org-save-all-org-buffers-silent))
+(advice-add 'org-store-log-note :after (η #'sbraun/org-save-all-org-buffers-silent))
+(advice-add 'org-agenda-todo           :after (η #'sbraun/org-save-all-org-buffers-silent))
 
 
 

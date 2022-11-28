@@ -22,10 +22,10 @@
        company            ; the ultimate code completion backend
        ;; (helm +fuzzy)              ; the *other* search engine for love and life
        ;;ido               ; the other *other* search engine...
-       ;; (ivy +icons +prescient)               ; a search engine for love and life
+       (ivy +icons +prescient)               ; a search engine for love and life
        ;; corfu  ;; private module from https://git.sr.ht/~gagbo/doom-config/tree/master/item/README.md
        ;; (corfu +orderless)  ;; private module from https://git.sr.ht/~gagbo/doom-config/tree/master/item/README.md
-       (vertico +icons)
+       ;; (vertico +icons)
 
        :ui
        ;; (ligatures +fira)
