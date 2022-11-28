@@ -80,10 +80,10 @@
 
 (map! :map python-mode-map
       :localleader
-      ;; "v" #'slang/pyvenv-activate
-      "v" #'slang/conda-env-activate
+      ;; "v" #'sbraun/pyvenv-activate
+      "v" #'sbraun/conda-env-activate
       ","  #'+format/buffer
       "s"  #'lsp-ivy-workspace-symbol
       ;; "s"  #'helm-lsp-workspace-symbol
 
-      "b" #'slang/pdb-insert)
+      "b" #'sbraun/pdb-insert)

@@ -5,9 +5,9 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. These are the defaults.
-(setq slang/theme-light 'modus-operandi)
-(setq slang/theme-dark 'doom-one)
-(setq doom-theme slang/theme-dark)
+(setq sbraun/theme-light 'modus-operandi)
+(setq sbraun/theme-dark 'doom-one)
+(setq doom-theme sbraun/theme-dark)
 
 
 (use-package! modus-themes
@@ -33,20 +33,28 @@
 ;;         :config
 ;;         (setq calendar-latitude 49.9)
 ;;         (setq calendar-longitude 8.2)
-;;         (setq circadian-themes `((:sunrise . ,slang/theme-light)
-;;                                 (:sunset  . ,slang/theme-dark)))
+;;         (setq circadian-themes `((:sunrise . ,sbraun/theme-light)
+;;                                 (:sunset  . ,sbraun/theme-dark)))
 ;;         ;; ;; Add pdf view mode hook to enable pdf midnight mode on theme change
 ;;         ;; (add-hook 'circadian-after-load-theme-hook
 ;;         ;;         #'(lambda (theme)
-;;         ;;                 (if (eq theme slang/theme-dark )
-;;         ;;                 (add-hook 'pdf-view-mode-hook 'slang/enable-pdf-view-midnight-minor-mode)
-;;         ;;                 (remove-hook 'pdf-view-mode-hook 'slang/enable-pdf-view-midnight-minor-mode))
+;;         ;;                 (if (eq theme sbraun/theme-dark )
+;;         ;;                 (add-hook 'pdf-view-mode-hook 'sbraun/enable-pdf-view-midnight-minor-mode)
+;;         ;;                 (remove-hook 'pdf-view-mode-hook 'sbraun/enable-pdf-view-midnight-minor-mode))
 ;;         ;;                 ))
 
 ;;         ;; ;; Set a global variable to the active theme set by circadian el
-;;         ;; (add-hook 'circadian-after-load-theme-hook
-;;         ;;         #'(lambda (theme)
-;;         ;;                 (setq slang/global-active-theme theme)))
+;;         (add-hook 'circadian-after-load-theme-hook
+;;                 #'(lambda (theme)
+;;                         (setq sbraun/global-active-theme theme)))
 
 
 ;;         (circadian-setup))
+;;
+
+(use-package! auto-dark
+  :config
+  (setq auto-dark-dark-theme 'doom-one)
+  (setq auto-dark-light-theme 'modus-operandi)
+  (setq auto-dark-allow-osascript t)
+  (auto-dark-mode t))
