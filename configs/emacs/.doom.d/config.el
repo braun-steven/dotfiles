@@ -91,12 +91,12 @@
 (setq scroll-margin 3)
 
 ;; Set which-key delay
-(setq which-key-idle-delay 1.0)
+(setq which-key-idle-delay 0.75)
 (setq which-key-idle-secondary-delay 0.5)
 
 ;; Doom modeline
 ;; NOTE: Issues with emacsclient
- ;; (setq doom-modeline-major-mode-icon t)
+ (setq doom-modeline-major-mode-icon t)
 
 ;; Keybindings
 (load!  "+keybindings")
@@ -184,11 +184,6 @@
 (dolist (file (directory-files "~/.doom.d/private/" t directory-files-no-dot-files-regexp))
         (if (file-directory-p file)
                 (load! (concat file "/config.el"))))
-
-;; ;; Corfu completion-styles
-;; (use-package! corfu
-;;   :custom
-;;   (completion-styles '(flex)))
 
 
 ;; Projectile after switch cook
