@@ -164,6 +164,8 @@ export KEYTIMEOUT=1
 bindkey "^P" up-line-or-search
 bindkey "^N" down-line-or-search
 bindkey "^F" forward-char
+bindkey "^E" end-of-line
+bindkey "^A" beginning-of-line
 
 
 ##################################
@@ -236,3 +238,6 @@ bindkey "^X^E" edit-command-line
 
 # Source aliases finally
 source ~/.bash_aliases
+
+# Hook direnv
+eval "$(direnv hook zsh)"
