@@ -23,7 +23,7 @@
        ;; (helm +fuzzy)              ; the *other* search engine for love and life
        ;;ido               ; the other *other* search engine...
        ;; (ivy +icons +prescient)               ; a search engine for love and life
-       ;; corfu  ;; private module from https://git.sr.ht/~gagbo/doom-config/tree/master/item/README.md
+       ;; (corfu +orderless +icons +minibuffer) ;; private module from https://git.sr.ht/~gagbo/doom-config/tree/master/item/README.md
        ;; (corfu +orderless)  ;; private module from https://git.sr.ht/~gagbo/doom-config/tree/master/item/README.md
        (vertico +icons)
 

@@ -6,7 +6,7 @@
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. These are the defaults.
 (setq sbraun/theme-light 'modus-operandi)
-(setq sbraun/theme-dark 'doom-nord-light)
+(setq sbraun/theme-dark 'doom-one)
 (setq doom-theme sbraun/theme-dark)
 
 
@@ -55,6 +55,6 @@
 (use-package! auto-dark
   :config
   (setq auto-dark-dark-theme 'doom-one)
-  (setq auto-dark-light-theme 'doom-nord-light)
+  (setq auto-dark-light-theme 'modus-operandi)
   (setq auto-dark-allow-osascript t)
   (auto-dark-mode t))
