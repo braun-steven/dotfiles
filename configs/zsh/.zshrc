@@ -241,3 +241,5 @@ source ~/.bash_aliases
 
 # Hook direnv
 eval "$(direnv hook zsh)"
+
+setopt SHARE_HISTORY
