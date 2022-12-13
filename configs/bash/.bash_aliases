@@ -32,3 +32,7 @@ fi
 
 # Quicklook
 alias ql="qlmanage -p"
+
+# Fedora
+alias dnfs="dnf search"
+alias dnfi="sudo dnf install"

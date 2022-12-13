@@ -40,6 +40,7 @@ floating_modifier $mod
 #bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Return exec alacritty msg create-window
 # bindsym $mod+Shift+Return exec emacsclient -c
+bindsym $mod+Shift+Return exec emacs
 bindsym $mod+Shift+c exec org-capture
 # bindsym $mod+Return exec kitty
 # bindsym $mod+Return exec i3-sensible-terminal
