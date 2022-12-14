@@ -16,8 +16,11 @@ export PATH="$HOME/bin:$PATH"  # local binaries
 export PATH="$PATH:$HOME/.emacs.d/bin" # doom binaries
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"  # yarn
 export PATH="$PATH:/opt/homebrew/bin"  # homebrew
-
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/lib/"
+
+if [[ -z $SSH_CONNECTION ]]; then
+  export DOCKER_HOST="unix:///run/user/${id -u}/docker.sock"
+fi
 
 
 # If not running interactively, don't do anything
@@ -27,6 +30,7 @@ export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/lib/"
 # NOTE: This needs to be done after the interactive if-statement
 if [[ -z $SSH_CONNECTION ]]; then
   eval $(keychain --eval --quiet id_rsa id_ed25519)
+  eval `ssh-agent`
 fi
 
 # Go into zsh
