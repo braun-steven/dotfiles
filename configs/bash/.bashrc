@@ -18,7 +18,7 @@ export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH" 
 export PATH="$PATH:/opt/homebrew/bin"  # homebrew
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/lib/"
 
-if [[ -z $SSH_CONNECTION ]]; then
+if [[ ! -z $SSH_CONNECTION ]]; then
   export DOCKER_HOST="unix:///run/user/$(id -u)/docker.sock"
 fi
 
