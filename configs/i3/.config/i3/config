@@ -16,7 +16,7 @@ set $mod2 Mod1
 # is used in the bar {} block below.
 
 # font pango:monospace 12
-font pango:IBM Plex Mono 13
+font pango:IBM Plex Mono 12
 # font pango:DejaVu Sans Mono 12
 # font pango:Hack 12
 #font pango: Source Code Pro Semibold, FontAwesome Regular 11 
@@ -38,12 +38,9 @@ floating_modifier $mod
 
 # start a terminal
 #bindsym $mod+Return exec i3-sensible-terminal
-bindsym $mod+Return exec alacritty msg create-window
-# bindsym $mod+Shift+Return exec emacsclient -c
-bindsym $mod+Shift+Return exec emacs
-bindsym $mod+Shift+c exec org-capture
-# bindsym $mod+Return exec kitty
-# bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec alacritty msg create-window || alacritty
+bindsym $mod+Shift+Return exec emacsclient -c
+# bindsym $mod+Shift+Return exec emacs
 
 # mouse focus
 focus_follows_mouse yes 
@@ -108,7 +105,7 @@ bindsym $mod+Shift+f floating toggle
 bindsym $mod+space focus mode_toggle
 
 # focus the parent container
-bindsym $mod+a focus parent
+# bindsym $mod+a focus parent
 
 # focus the child container
 # bindsym $mod+d focus child
@@ -269,10 +266,7 @@ exec_always --no-startup-id feh --bg-fill Downloads/wallpaper-nz.jpg
 set $Locker i3lock -c 1d2026 && sleep 1
 
 # i3 lock
-# exec --no-startup-id xautolock -time 30 -locker $Locker -detectsleep &
-# exec --no-startup-id xautolock -time 15 -locker $Locker -notify 20 -notifier 'xset dpms force off' &
-# exec --no-startup-id xautolock -time 30 -locker "$Locker && systemctl suspend" &
-# exec --no-startup-id pulseaudio
+exec --no-startup-id xautolock -time 30 -locker "$Locker && systemctl suspend" &
 
 # nm-applet
 exec --no-startup-id nm-applet --tray --sm-disable & 
@@ -297,13 +291,14 @@ bindsym $mod+$mod2+Ctrl+l exec --no-startup-id $Locker
 # Emacs anywhere
 # bindsym $mod+Shift+e exec ~/.emacs_anywhere/bin/run
 # for_window [class="Emacs" title="\*Emacs Anywhere\*"] floating enable
-bindsym $mod+Shift+e exec doom everywhere
-# for_window [class="Emacs" title="^Emacs Everywhere.*"] floating enable
-# for_window [class="Emacs" title="^Emacs Everywhere.*"] resize set 800 680
-# for_window [class="Emacs" title="^Emacs Everywhere.*"] move absolute position center
+bindsym $mod+Shift+e exec doom +everywhere
+for_window [class="Emacs" title="^Emacs Everywhere.*"] floating enable
+for_window [class="Emacs" title="^Emacs Everywhere.*"] resize set 800 680
+for_window [class="Emacs" title="^Emacs Everywhere.*"] move absolute position center
 
 # Set default border size
 # border pixel 10
+# default_border pixel 0
 
 # for_window [class=".*"] border pixel 5
 
