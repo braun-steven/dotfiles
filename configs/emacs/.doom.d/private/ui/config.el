@@ -52,9 +52,9 @@
 ;;         (circadian-setup))
 ;;
 
-(use-package! auto-dark
-  :config
-  (setq auto-dark-dark-theme 'doom-one)
-  (setq auto-dark-light-theme 'modus-operandi)
-  (setq auto-dark-allow-osascript t)
-  (auto-dark-mode t))
+;; (use-package! auto-dark
+;;   :config
+;;   (setq auto-dark-dark-theme 'doom-one)
+;;   (setq auto-dark-light-theme 'modus-operandi)
+;;   (setq auto-dark-allow-osascript t)
+;;   (auto-dark-mode t))
