@@ -259,7 +259,7 @@ exec_always --no-startup-id setxkbmap us altgr-intl -option ctrl:nocaps
 
 # Wallpaper (needs hsetroot since xsetroot is incompatible with picom)
 # exec_always --no-startup-id hsetroot -solid "#1d2026"
-exec_always --no-startup-id feh --bg-fill Downloads/wallpaper-nz.jpg
+exec_always --no-startup-id feh --bg-fill /usr/share/backgrounds/f37/default/f37-01-day.png
 
 # locker shortcut
 # $Locker i3lock && sleep 1
@@ -292,22 +292,27 @@ bindsym $mod+$mod2+Ctrl+l exec --no-startup-id $Locker
 # bindsym $mod+Shift+e exec ~/.emacs_anywhere/bin/run
 # for_window [class="Emacs" title="\*Emacs Anywhere\*"] floating enable
 bindsym $mod+Shift+e exec doom +everywhere
-for_window [class="Emacs" title="^Emacs Everywhere.*"] floating enable
-for_window [class="Emacs" title="^Emacs Everywhere.*"] resize set 800 680
-for_window [class="Emacs" title="^Emacs Everywhere.*"] move absolute position center
+for_window [class="Emacs" title="^Emacs Everywhere.*"] floating enable, resize set 1280x768
+# for_window [class="Emacs" title="^Emacs Everywhere.*"] floating enable
+# for_window [class="Emacs" title="^Emacs Everywhere.*"] move absolute position center
 
-# Set default border size
-# border pixel 10
-# default_border pixel 0
 
 # for_window [class=".*"] border pixel 5
+#
+# Set default border size
+# border pixel 10
 
 # i3-gaps setup
-# for_window [class="^.*"] border pixel 3
+# for_window [class="^.*"] border pixel 5
+# default_border pixel 0
 # gaps inner 8
 # gaps outer 5
 # smart_gaps on
 # smart_borders on
+
+# Enforce borders (and thus also window title borders) for all apps
+# Without this, some apps like eye-of-gnome will be without a titlebar
+for_window [class=.*] border normal 4
 
 ## Base16 OneDark
 # Author: Lalit Magant (http://github.com/tilal6991)
@@ -436,9 +441,6 @@ bindsym XF86AudioMute        exec --no-startup-id $volumepath/volume -n -t $stat
 # Enable gsd xsettings such that applications can infer dark/light theme settings
 # exec --no-startup-id /usr/lib/gsd-xsettings
 
-# Enforce borders (and thus also window title borders) for all apps
-# Without this, some apps like eye-of-gnome will be without a titlebar
-for_window [class=.*] border normal 4
 
 # You can also use any non-zero value if you'd like to have a border
 # for_window [class=".*"] border pixel 4

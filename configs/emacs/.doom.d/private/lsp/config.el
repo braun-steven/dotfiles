@@ -8,7 +8,8 @@
   (push "[/\\\\]_pycache_\\'" lsp-file-watch-ignored-directories)
 
   ;; Enable lsp-header-breadcrumbs (similar to which-func mode but lsp wide)
-  (setq lsp-headerline-breadcrumb-enable nil)
+  (setq lsp-headerline-breadcrumb-enable-diagnostics nil)
+  (setq lsp-headerline-breadcrumb-enable t)
 
   ;; Set file-watcher higher
   (setq lsp-file-watch-threshold 2000)
