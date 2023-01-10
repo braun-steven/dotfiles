@@ -36,4 +36,8 @@ alias ql="qlmanage -p"
 # Fedora
 alias dnfs="dnf search"
 alias dnfi="sudo dnf install"
+alias dnfr="sudo dnf remove"
 alias dnfu="sudo dnf update && flatpak update"
+
+# Archlinux
+alias pacs="sudo pacman -S"

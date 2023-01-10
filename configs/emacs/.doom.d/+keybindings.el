@@ -32,6 +32,13 @@
 ;; (map! :leader
 ;;       "v"   #'er/expand-region)
 
+(defun sbraun/sync-project ()
+  "Sync the current project to the DGX servers"
+  (interactive)
+  (start-process-shell-command "Sync Project" "*Minibuf-0*" "./sync.sh dgxb"))
+
+(map! :leader (:prefix "p" :desc "Sync Project" "S" #'sbraun/sync-project))
+
 ;; More sophisticated "paste"
 (map! "M-p" #'helm-show-kill-ring)
 
