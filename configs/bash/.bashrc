@@ -30,12 +30,28 @@ fi
 # NOTE: This needs to be done after the interactive if-statement
 if [[ -z $SSH_CONNECTION ]]; then
   eval $(keychain --eval --quiet id_rsa id_ed25519)
-  eval `ssh-agent`
+  # eval `ssh-agent`
 fi
 
 # Go into zsh
-if [[ $(ps --no-header --pid=$PPID --format=cmd) != "zsh" ]] && [[ $SSH_CONNECTION ]]; then
+if [[ $(ps --no-header --pid=$PPID --format=cmd) != "zsh" ]] && [[ -z $SSH_CONNECTION ]]; then
   exec zsh
 fi
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/steven/.conda/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/steven/.conda/etc/profile.d/conda.sh" ]; then
+        . "/home/steven/.conda/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/steven/.conda/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+

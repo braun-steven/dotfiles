@@ -77,15 +77,15 @@
 (+global-word-wrap-mode)
 
 ;; Company config
-(setq
- company-minimum-prefix-length 2
- company-idle-delay 0.0
- company-tooltip-idle-delay 1.0)
+(after! company
+   :config
+        (setq
+        company-minimum-prefix-length 2
+        company-idle-delay 0.0
+        company-tooltip-idle-delay 1.0))
 
 ;; Emacs config location
 (setq emacs-dir (file-name-as-directory "~/.doom.d"))
-
-
 
 ;; Better scrolling
 (setq scroll-margin 3)
@@ -141,7 +141,8 @@
   ;; Corrects (and improves) org-mode's native fontification.
   (doom-themes-org-config))
 
-(use-package! ssh-agency)
+(use-package! ssh-agency
+  :after magit)
 
 (use-package! powerthesaurus
   :after tex)
@@ -163,6 +164,7 @@
 (auto-fill-mode 1)
 
 (use-package! vertico-directory
+  :after vertico
   ;; More convenient directory navigation commands
   :bind (:map vertico-map
               ("RET" . vertico-directory-enter)
