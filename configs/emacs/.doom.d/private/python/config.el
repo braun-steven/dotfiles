@@ -16,6 +16,8 @@
 
   (setq company-minimum-prefix-length 2)
 
+  (setq pyimport-pyflakes-path "~/.local/bin/pyflakes")
+
   ;; Set correct conda variables
   (use-package! conda
     :after python
