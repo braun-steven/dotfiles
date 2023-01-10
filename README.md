@@ -33,9 +33,10 @@ The dotfiles contain configurations for:
 * latexmk
 * nvim
 * onedrive
+* paru
 * pdbpp
 * picom
-* polybar
+* profile
 * pylint
 * redshift
 * rofi
