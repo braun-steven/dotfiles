@@ -20,10 +20,10 @@
     # dynamic width from 0 to 300
     # width = (0, 300)
     # constant width of 300
-    width = (400, 800)
+    width = (600, 1000)
 
     # The maximum height of a single notification, excluding the frame.
-    height = 200
+    height = 300
 
     # Position the notification in the top right corner
     origin = top-right
@@ -87,7 +87,7 @@
 
     ### Text ###
 
-    font = IBMPlex Mono 12
+    font = IBMPlex Mono 14
 
     # The spacing between lines.  If the height is smaller than the
     # font height, it will get raised to the font height.
@@ -164,7 +164,7 @@
     icon_position = left
 
     # Scale larger icons down to this size, set to 0 to disable
-    max_icon_size = 32
+    max_icon_size = 48
 
     # Paths to default icons.
     icon_path = /usr/share/icons/gnome/16x16/status/:/usr/share/icons/gnome/16x16/devices/

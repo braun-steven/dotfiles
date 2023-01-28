@@ -16,7 +16,7 @@ general { colors = true interval = 5
 # order += "read_file ORG_CLOCK"
 order += "memory"
 # order += "load"
-# order += "disk /"
+# order += "disk /swapfile"
 # order += "disk /home"
 order += "wireless _first_"
 #order += "ethernet _first_"
