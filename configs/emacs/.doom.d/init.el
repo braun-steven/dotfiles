@@ -19,7 +19,7 @@
        ;;japanese
 
        :completion
-       company            ; the ultimate code completion backend
+       (company +childframe)            ; the ultimate code completion backend
        ;; (helm +fuzzy)              ; the *other* search engine for love and life
        ;;ido               ; the other *other* search engine...
        ;; (ivy +icons +prescient)               ; a search engine for love and life
@@ -100,7 +100,7 @@
        (lookup           ; helps you navigate your code and documentation
         +docsets
         +dictionary)        ; ...or in Dash docsets locally
-       (lsp +peek)
+       (lsp +peek +eglot)
        magit             ; a git porcelain for Emacs
        ;;make              ; run make tasks from Emacs
        ;;pass              ; password manager for nerds

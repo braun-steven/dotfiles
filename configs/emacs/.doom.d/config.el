@@ -80,8 +80,8 @@
 (after! company
    :config
         (setq
-        company-minimum-prefix-length 2
-        company-idle-delay 0.0
+        company-minimum-prefix-length 3
+        company-idle-delay 0.2
         company-tooltip-idle-delay 1.0))
 
 ;; Emacs config location
