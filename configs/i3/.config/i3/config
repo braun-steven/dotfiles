@@ -259,7 +259,7 @@ exec_always --no-startup-id setxkbmap us altgr-intl -option ctrl:nocaps
 
 # Wallpaper (needs hsetroot since xsetroot is incompatible with picom)
 # exec_always --no-startup-id hsetroot -solid "#1d2026"
-exec_always --no-startup-id feh --bg-fill /usr/share/backgrounds/f37/default/f37-01-day.png
+exec_always --no-startup-id feh --bg-fill ~/Downloads/wallpaper.jpg
 
 # locker shortcut
 # $Locker i3lock && sleep 1
@@ -352,6 +352,7 @@ set $base0F #be5046
 # Basic bar configuration using the Base16 variables.
 bar {
     status_command i3status
+    # status_command i3status-rs
     position top
     tray_output primary
 
@@ -390,13 +391,19 @@ bar {
 # bindsym $mod+c exec bash ~/dotfiles/scripts/keys-cheat-sheet.sh
 
 # Some startup stuff
-exec redshift &  # Redshift
-exec pasystray &  # Pulseaudio control icon
-exec volumeicon &  
+exec redshift  # Redshift
+exec pasystray  # Pulseaudio control icon
+exec volumeicon  
 exec picom -b  # Picom for window compositions (shadows, transitions, etc)
 
 # Move to first workspace on startup
 exec i3-msg workspace 1 web
+
+# dbus notification service for earlyoom
+exec systembus-notify
+
+# Set key repeat rate
+exec --no-startup-id sleep 2 && xset r rate 200 40
 
 
 
