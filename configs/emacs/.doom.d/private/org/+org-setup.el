@@ -89,6 +89,8 @@
 ;;                                     (magenta . "#c678dd")
 ;;                                     (cyan . "#46D9FF")))
 
+;; Enable booktabs table export
+(setq org-latex-tables-booktabs t)
 
 (setq org-roam-capture-templates
       '(
