@@ -8,6 +8,20 @@ if command -v ruby &> /dev/null; then
   PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
 fi
 
+# Check if nvim is available
+if command -v nvim &>/dev/null; then
+  # Use nvim for manpages
+  # export MANPAGER="nvim -c 'set ft=man' -"
+  # Emacsclient as (sudo-)editor
+  export EDITOR="nvim"
+  export SUDO_EDITOR="nvim"
+  alias vim=nvim
+else
+  export EDITOR="vim"
+  export SUDO_EDITOR="vim"
+fi
+
+
 # Extend $PATH
 export PATH="$PATH:$HOME/.local/bin"
 export PATH="$PATH:$HOME/.cargo/bin"

@@ -11,9 +11,11 @@ if command -v nvim &>/dev/null; then
   export EDITOR="nvim"
   export SUDO_EDITOR="nvim"
   alias vim=nvim
+  export SYSTEMD_EDITOR="nvim"
 else
   export EDITOR="vim"
   export SUDO_EDITOR="vim"
+  export SYSTEMD_EDITOR="vim"
 fi
 
 
@@ -183,6 +185,9 @@ bindkey "^A" beginning-of-line
 
 [ -f ~/.conda/etc/profile.d/conda.sh ] && source ~/.conda/etc/profile.d/conda.sh
 
+function eog () {
+  command eog $1 & disown
+}
 
 function maybe_activate_conda_env () {
 

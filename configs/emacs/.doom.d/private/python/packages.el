@@ -7,3 +7,6 @@
 (package! py-pyment :recipe (:host github :repo "humitos/py-cmd-buffer.el"))
 (package! buftra :recipe (:host github :repo "humitos/buftra.el"))  ;; py-pyment dependency!
 (unpin! conda)
+
+(package! copilot
+  :recipe (:host github :repo "zerolfx/copilot.el" :files ("*.el" "dist")))
