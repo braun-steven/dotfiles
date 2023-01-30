@@ -22,7 +22,7 @@ order += "wireless _first_"
 #order += "ethernet _first_"
 # order += "run_watch VPN"
 order += "volume master"
-# order += "battery 1"
+order += "battery 1"
 order += "tztime local"
 # order += "ipv6"
 # order += "run_watch DHCP"
@@ -50,8 +50,8 @@ format = " /home %avail "
 }
 wireless _first_ {
 # format_up = "W: (%quality at %essid) %ip"
-# format_up = " %essid %quality "
-format_up = " W: connected at %quality "
+format_up = " %essid %quality "
+# format_up = " W: connected at %quality "
 format_down = " no wlan "
 }
 ethernet _first_ {
