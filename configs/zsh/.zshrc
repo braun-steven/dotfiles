@@ -189,6 +189,14 @@ function eog () {
   command eog $1 & disown
 }
 
+function evince () {
+  command evince $1 & disown
+}
+
+function pdf () {
+  command evince $1 & disown
+}
+
 function maybe_activate_conda_env () {
 
   # Check if "conda" command is available,

@@ -3,6 +3,7 @@
 ;; Place your private configuration here! Remember, you do not need to run 'doom
 ;; refresh' after modifying this file!
 
+
 ;; Set frame title
 (setq frame-title-format "%b - Emacs")
 
