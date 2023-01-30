@@ -1,5 +1,5 @@
 ! Font
-xterm*font: Hack-Regular 12
+!xterm*font: Hack-Regular 12
 
 ! These might also be useful depending on your monitor and personal preference:
 Xft.dpi:120

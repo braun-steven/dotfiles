@@ -154,8 +154,8 @@ assign [class="Signal"] 10 chat
 
 
 # Set workspaces to specific monitors
-set $firstmon DP-0
-set $secondmon HDMI-0
+set $firstmon DP-1
+set $secondmon HDMI-2
 workspace 1 output $firstmon
 workspace 2 output $firstmon
 workspace 3 output $firstmon
@@ -176,8 +176,9 @@ workspace 15 output $secondmon
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Ctrl+r restart
 
-bindsym $mod+Ctrl+1 exec "bash ~/.screenlayout/default.sh && sleep 1 && i3 'restart'"
-bindsym $mod+Ctrl+2 exec "bash ~/.screenlayout/home.sh && sleep 1 && i3 'restart'"
+bindsym $mod+Ctrl+1 exec "bash ~/.screenlayout/office-lid-closed.sh && sleep 1 && i3 'restart'"
+bindsym $mod+Ctrl+2 exec "bash ~/.screenlayout/thinkpad.sh && sleep 1 && i3 'restart'"
+bindsym $mod+Ctrl+3 exec "bash ~/.screenlayout/office-lid-open.sh && sleep 1 && i3 'restart'"
 
 # Menu for lock logout etc.
 set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
