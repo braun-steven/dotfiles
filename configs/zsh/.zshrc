@@ -1,49 +1,3 @@
-
-# Start tmux in ssh connections
-if [[ $SSH_CONNECTION ]]; then
-
-# Try to attach to the ssh_tmux session, else create one
-  if [[ $- =~ i ]] && [[ -z "$TMUX" ]] && [[ -n "$SSH_TTY" ]]; then
-    tmux attach-session -t ssh_tmux || tmux new-session -s ssh_tmux
-  fi
-fi
-
-
-
-
-##################################
-#  INSTALL BINARIES begin        #
-##################################
-
-# Install neovim
-if ! command -v nvim &> /dev/null; then
-  curl -L https://github.com/neovim/neovim/releases/latest/download/nvim.appimage --output ~/bin/nvim
-  chmod u+x ~/bin/nvim
-fi
-
-# Ensure pip is installed
-# if ! command -v pip &> /dev/null; then
-#   curl https://bootstrap.pypa.io/get-pip.py -o /tmp/get-pip.py
-#   python3 /tmp/get-pip.py
-# fi
-
-# Check if tpm is installed
-if [ ! -d $HOME/.tmux/plugins/tpm ]; then
-  echo "Tmux plugin manager not found. Installing now ..."
-  git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-fi
-
-
-# Download and install fzf
-if [[ ! -d $HOME/.fzf ]]; then
-  git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-  ~/.fzf/install
-fi
-
-##################################
-#  INSTALL BINARIES end          #
-##################################
-
 ##################################
 #  ZGEN begin                    #
 ##################################
@@ -102,9 +56,6 @@ if ! zgen saved; then
   zgen save
 fi
 
-
-ZSH_AUTOSUGGEST_STRATEGY=(history completion)
-
 ##################################
 #  ZGEN end                      #
 ##################################
@@ -114,6 +65,9 @@ ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 ##################################
 #  ZSH INTERNAL SETTINGS begin   #
 ##################################
+
+ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+
 
 # vi mode
 bindkey -v
@@ -125,94 +79,29 @@ bindkey "^F" forward-char
 bindkey "^E" end-of-line
 bindkey "^A" beginning-of-line
 
+setopt SHARE_HISTORY
 
 ##################################
 #  ZSH INTERNAL SETTINGS end   #
 ##################################
 
-
-
 ##################################
 #  MISC begin                    #
 ##################################
 
-# Enable fzf
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-[ -f ~/.conda/etc/profile.d/conda.sh ] && source ~/.conda/etc/profile.d/conda.sh
-
-function eog () {
-  command eog $1 & disown
-}
-
-function emacs () {
-  command emacs $1 & disown
-}
-
-function evince () {
-  command evince $1 & disown
-}
-
-function pdf () {
-  command evince $1 & disown
-}
-
-function maybe_activate_conda_env () {
-
-  # Check if "conda" command is available,
-  if ! command -v conda &>/dev/null; then
-    return
-  fi
-
-  # Check if conda env is set
-  if [ ! -z "${CONDA_DEFAULT_ENV}" ]; then
-    dirname=${PWD##*/}  # Get directory name without full path
-
-    # Check if conda env is part of current pwd (allows for PWD being a subdir)
-    if [[ "${PWD}" == *"${CONDA_DEFAULT_ENV}"* ]]; then
-      return
-    else
-      echo "Deactivating conda environment ${CONDA_DEFAULT_ENV}"
-      conda deactivate
-      return
-    fi
-  fi
-
-
-  # Get directory name without full path
-  dirname=${PWD##*/}
-  # If directory name can be found in conda evironments, activate it!
-  if grep -q $dirname <(command ls ~/.conda/envs/); then
-    echo "Conda environment '$dirname' found! Activating now ..."
-    conda activate $dirname
-  fi
-}
 # Add maybe_activate_conda_env as chpwd (change working directory) hook
 autoload -U add-zsh-hook
 add-zsh-hook -Uz chpwd maybe_activate_conda_env
 
 autopair-init
 
-
-##################################
-#  MISC end                      #
-##################################
-
-
-# export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-[ -f "/opt/homebrew/opt/chruby/share/chruby/chruby.sh" ] && source /opt/homebrew/opt/chruby/share/chruby/chruby.sh
-[ -f "/opt/homebrew/opt/chruby/share/chruby/auto.sh" ] && source /opt/homebrew/opt/chruby/share/chruby/auto.sh
-[ -f "/opt/homebrew/opt/chruby/share/chruby/chruby.sh" ] && chruby ruby-3.1.1
-
 autoload edit-command-line; zle -N edit-command-line
 bindkey "^X^E" edit-command-line
 
-# Source aliases finally
-source ~/.bash_aliases
 
 # Hook direnv
 eval "$(direnv hook zsh)"
 
-setopt SHARE_HISTORY
+##################################
+#  MISC end                      #
+##################################

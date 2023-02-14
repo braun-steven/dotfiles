@@ -11,6 +11,7 @@
 [core]
 	autocrlf = input
 	editor = nvim
+	pager = delta
 [commit]
 	template = ~/.gitmessage
 [filter "lfs"]
@@ -24,3 +25,11 @@
 	defaultBranch = main
 [status]
 	showUntrackedFiles = all
+[interactive]
+    diffFilter = delta --color-only
+[delta]
+    navigate = true    # use n and N to move between diff sections
+    light = false      # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
+	line-numbers = true
+[diff]
+    colorMoved = default
