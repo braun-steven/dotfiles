@@ -50,9 +50,15 @@ if [[ -z $SSH_CONNECTION ]]; then
   # eval `ssh-agent`
 fi
 
-# Go into zsh
-if [[ $(ps --no-header --pid=$PPID --format=cmd) != "zsh" ]] && [[ -z $SSH_CONNECTION ]]; then
-  exec zsh
+# # Go into zsh
+# if [[ $(ps --no-header --pid=$PPID --format=cmd) != "zsh" ]] && [[ -z $SSH_CONNECTION ]]; then
+#   exec zsh
+# fi
+
+# Go into fish
+if [[ $(ps --no-header --pid=$PPID --format=comm) != "fish" && -z ${BASH_EXECUTION_STRING} ]]
+then
+	exec fish
 fi
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
