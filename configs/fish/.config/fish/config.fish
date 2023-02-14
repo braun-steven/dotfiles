@@ -1,73 +1,9 @@
-
 if status is-interactive
     # Commands to run in interactive sessions can go here
 end
 
-# Aliases
-alias python="python3"
-alias grep="grep --color=auto"
-# alias eZ="$EDITOR ~/.zshrc"
-# alias rZ="source ~/.zshrc"
-alias reboot="sudo systemctl reboot"
-alias poweroff="sudo systemctl poweroff"
-alias :q="exit"
-alias vimupdate="vim +PlugClean +PlugUpdate +UpdateRemoteRepositories +qa"
-alias i3config="$EDITOR ~/.config/i3/config"
-# alias rsync="rsync --archive --compress-level=3 --copy-links --partial --inplace --info=progress2 --rsh=ssh -r"
-alias rsync="rsync --archive --compress-level=3 --copy-links --partial --inplace --rsh=ssh -r"
-
-# Emacsclient terminal
-alias em="emacsclient -t -a ''"
-
-# Better ls
-if type -q exa
-  alias ls='exa -l --group-directories-first --color auto'
-else
-  alias ls='ls -lh --color=auto --group-directories-first'
-end
-
-##################################
-#  EXPORTS begin                 #
-##################################
-
-
-# Check if nvim is available
-if type -q nvim 
-  # Use nvim for manpages
-  # set -x MANPAGER="nvim -c 'set ft man' -"
-  # Emacsclient as (sudo-)editor
-  set -x EDITOR "nvim"
-  set -x SUDO_EDITOR "nvim"
-  alias vim=nvim
-  set -x SYSTEMD_EDITOR "nvim"
-else
-  set -x EDITOR "vim"
-  set -x SUDO_EDITOR "vim"
-  set -x SYSTEMD_EDITOR "vim"
-end
-
-
-# FZF options
-set -x FZF_DEFAULT_OPTS '--height 40% --border'
-set -x FZF_DEFAULT_COMMAND 'ag -g .'
-
-set -x TERM "xterm-256color"
-
-# extend $PATH
-set -x PATH "$PATH:$HOME/.local/bin"
-set -x PATH "$PATH:$HOME/.cargo/bin"
-set -x PATH "$PATH:$HOME/dotbin"  # scripts from dotfiles
-set -x PATH "$HOME/bin:$PATH"  # local binaries
-set -x PATH "$PATH:$HOME/.emacs.d/bin" # doom binaries
-set -x PATH "$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"  # yarn
-set -x PATH "$PATH:/opt/homebrew/bin"  # homebrew
-
-set -x LD_LIBRARY_PATH "$LD_LIBRARY_PATH:/usr/lib/"
-
-
-##################################
-#  EXPORTS end                   #
-##################################
+# Exports can be found in .bashrc from which we start the fish shell
+# Aliases can be found in .bash_aliases which is sourced in .bashrc from which we start the fish shell
 
 # Enable direnv
 direnv hook fish | source

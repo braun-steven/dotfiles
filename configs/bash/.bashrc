@@ -2,8 +2,6 @@
 # ~/.bashrc
 #
 
-
-
 # Add ruby binaries to path if available
 if command -v ruby &> /dev/null; then
   PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
@@ -64,9 +62,6 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
-# Source aliases finally
-source ~/.bash_aliases
-
 # Start tmux in ssh connections
 if [[ $SSH_CONNECTION ]]; then
 
@@ -75,6 +70,9 @@ if [[ $SSH_CONNECTION ]]; then
     tmux attach-session -t ssh_tmux || tmux new-session -s ssh_tmux
   fi
 fi
+
+# Source aliases finally
+source ~/.bash_aliases
 
 # Go into fish
 if [[ $(ps --no-header --pid=$PPID --format=comm) != "fish" && -z ${BASH_EXECUTION_STRING} ]]
