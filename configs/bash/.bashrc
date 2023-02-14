@@ -1,7 +1,8 @@
 #
 # ~/.bashrc
 #
-# Go into zsh shell
+
+
 
 # Add ruby binaries to path if available
 if command -v ruby &> /dev/null; then
@@ -65,6 +66,8 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+# Source aliases finally
+source ~/.bash_aliases
 
 # Start tmux in ssh connections
 if [[ $SSH_CONNECTION ]]; then
