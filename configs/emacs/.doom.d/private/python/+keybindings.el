@@ -7,66 +7,66 @@
       "d"   #'py-pyment-region
 
       (:prefix ("D" . "DAP")
-       ;; transient state
-       "."  #'dap-hydra
+               ;; transient state
+               "."  #'dap-hydra
 
-       ;; repl
-       "d'"  #'dap-ui-repl
+               ;; repl
+               "d'"  #'dap-ui-repl
 
-       ;; abandon
-       "a"  #'dap-disconnect
-       "A"  #'dap-delete-all-sessions
+               ;; abandon
+               "a"  #'dap-disconnect
+               "A"  #'dap-delete-all-sessions
 
-       ;; stepping
-       "c"  #'dap-continue
-       "i"  #'dap-step-in
-       "o"  #'dap-step-out
-       "r"  #'dap-restart-frame
-       ;; "s"  #'dap-next
-       "v"  #'dap-ui-inspect-thing-at-point
+               ;; stepping
+               "c"  #'dap-continue
+               "i"  #'dap-step-in
+               "o"  #'dap-step-out
+               "r"  #'dap-restart-frame
+               ;; "s"  #'dap-next
+               "v"  #'dap-ui-inspect-thing-at-point
 
-       ;; breakpoints
-       (:prefix ("b" . "Breakpoints")
-        "b" #'dap-breakpoint-toggle
-        "c" #'dap-breakpoint-condition
-        "l" #'dap-breakpoint-log-message
-        "h" #'dap-breakpoint-hit-condition
-        "a" #'dap-breakpoint-add
-        "d" #'dap-breakpoint-delete
-        "D" #'dap-breakpoint-delete-all)
+               ;; breakpoints
+               (:prefix ("b" . "Breakpoints")
+                        "b" #'dap-breakpoint-toggle
+                        "c" #'dap-breakpoint-condition
+                        "l" #'dap-breakpoint-log-message
+                        "h" #'dap-breakpoint-hit-condition
+                        "a" #'dap-breakpoint-add
+                        "d" #'dap-breakpoint-delete
+                        "D" #'dap-breakpoint-delete-all)
 
-       (:prefix ("d" . "Debug")
-        ;; debuging/running
-        "d" #'dap-debug
-        "e" #'dap-debug-edit-template
-        "l" #'dap-debug-last
-        "r" #'dap-debug-recent)
+               (:prefix ("d" . "Debug")
+                        ;; debuging/running
+                        "d" #'dap-debug
+                        "e" #'dap-debug-edit-template
+                        "l" #'dap-debug-last
+                        "r" #'dap-debug-recent)
 
-       (:prefix ("e" . "Eval")
-        ;; eval
-        "e" #'dap-eval
-        "r" #'dap-eval-region
-        "t" #'dap-eval-thing-at-point)
+               (:prefix ("e" . "Eval")
+                        ;; eval
+                        "e" #'dap-eval
+                        "r" #'dap-eval-region
+                        "t" #'dap-eval-thing-at-point)
 
-       (:prefix ("I" . "Inspect")
-        ;; inspect
-        "i" #'dap-ui-inspect
-        "r" #'dap-ui-inspect-region
-        "t" #'dap-ui-inspect-thing-at-point)
+               (:prefix ("I" . "Inspect")
+                        ;; inspect
+                        "i" #'dap-ui-inspect
+                        "r" #'dap-ui-inspect-region
+                        "t" #'dap-ui-inspect-thing-at-point)
 
 
-       ;; switching
-       (:prefix ("s" . "Switch")
-        "s" #'dap-switch-session
-        "t" #'dap-switch-thread
-        "f" #'dap-switch-frame)
+               ;; switching
+               (:prefix ("s" . "Switch")
+                        "s" #'dap-switch-session
+                        "t" #'dap-switch-thread
+                        "f" #'dap-switch-frame)
 
-       (:prefix ("w" . "Windows")
-        ;; windows
-        "o" #'dap-go-to-output-buffer
-        "l" #'dap-ui-locals
-        "s" #'dap-ui-sessions
-        "b" #'dap-ui-breakpoints)))
+               (:prefix ("w" . "Windows")
+                        ;; windows
+                        "o" #'dap-go-to-output-buffer
+                        "l" #'dap-ui-locals
+                        "s" #'dap-ui-sessions
+                        "b" #'dap-ui-breakpoints)))
 
 
 
@@ -76,6 +76,14 @@
       :n "gr" #'+lookup/references
       :n "gd" #'+lookup/definition
       :n "C-k"  #'lsp-ui-doc-glance)
+
+;; (map! :map python-mode-map
+;;       "C-TAB"  #'copilot-accept-completion-by-word
+;;       "C-<tab>"  #'copilot-accept-completion-by-word
+;;       "C-p" #'copilot-accept-completion-by-word
+;;       :map copilot-completion-map
+;;       "<tab>" #'copilot-accept-completion
+;;       "TAB" #'copilot-accept-completion)
 
 
 (map! :map python-mode-map

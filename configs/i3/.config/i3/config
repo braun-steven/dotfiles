@@ -16,7 +16,7 @@ set $mod2 Mod1
 # is used in the bar {} block below.
 
 # font pango:monospace 12
-font pango:IBM Plex Mono 12
+font pango:IBM Plex Mono 10
 # font pango:DejaVu Sans Mono 12
 # font pango:Hack 12
 #font pango: Source Code Pro Semibold, FontAwesome Regular 11 
@@ -104,6 +104,9 @@ bindsym $mod+Shift+f floating toggle
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
 
+# Quick focus Todoist 
+bindsym $mod+t [class="Todoist"] focus 
+
 # focus the parent container
 # bindsym $mod+a focus parent
 
@@ -154,8 +157,8 @@ assign [class="Signal"] 10 chat
 
 
 # Set workspaces to specific monitors
-set $firstmon DP-1
-set $secondmon HDMI-2
+set $firstmon DP-4
+set $secondmon HDMI-0
 workspace 1 output $firstmon
 workspace 2 output $firstmon
 workspace 3 output $firstmon
@@ -226,6 +229,8 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
+# Todoist
+bindsym $mod+Shift+t exec ~/dotbin/rofi-todoist-new-task
 
 # Sreen brightness controls
 bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
@@ -237,7 +242,6 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightne
 
 # Enable worksapce back and forth
 workspace_auto_back_and_forth yes
-
 
 
 # Floating mod
@@ -253,6 +257,14 @@ for_window [window_role="menu"] floating enable
 for_window [window_role="Preferences"] floating enable
 for_window [title="Volume Control"] floating enable resize set 640 960
 for_window [title="doom-capture"] floating enable
+
+# Enable floating for everything in evolution except for the main window
+for_window [class="Evolution"] floating enable
+for_window [title="Calendar"] floating disable
+
+# Zoom, float everything except for the actual meeting window
+for_window [class="zoom"] floating enable
+for_window [class="zoom" title="Zoom Meeting"] floating disable
 
 
 # Set keyboardlayout 
@@ -392,7 +404,7 @@ bar {
 # bindsym $mod+c exec bash ~/dotfiles/scripts/keys-cheat-sheet.sh
 
 # Some startup stuff
-exec redshift  # Redshift
+# exec redshift  # Redshift
 exec pasystray  # Pulseaudio control icon
 exec volumeicon  
 exec picom -b  # Picom for window compositions (shadows, transitions, etc)
@@ -457,9 +469,3 @@ bindsym XF86AudioMute        exec --no-startup-id $volumepath/volume -n -t $stat
 # gaps outer current plus 5
 # gaps horizontal current plus 40
 # gaps outer current toggle 60
-
-# Zoom
-for_window [class="zoom" title="Settings"] floating enable, move position center
-for_window [class="zoom" title="Participants.*"] floating enable, move position center
-# for_window [class="zoom" title="^zoom$"] floating enable
-for_window [class="zoom" title="Chat"] floating enable, move position 70 ppt 80 ppt

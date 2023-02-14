@@ -189,6 +189,10 @@ function eog () {
   command eog $1 & disown
 }
 
+function emacs () {
+  command emacs $1 & disown
+}
+
 function evince () {
   command evince $1 & disown
 }

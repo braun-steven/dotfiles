@@ -3,6 +3,8 @@
 ;; Place your private configuration here! Remember, you do not need to run 'doom
 ;; refresh' after modifying this file!
 
+;; Set garbace collection threshold to 100MB
+(setq gc-cons-threshold 100000000)
 
 ;; Set frame title
 (setq frame-title-format "%b - Emacs")
@@ -30,7 +32,7 @@
 ;;
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
-(setq doom-font (font-spec :family "Hack" :size 13.0))
+(setq doom-font (font-spec :family "Hack" :size 11.0))
 ;; (setq doom-font (font-spec :family "Iosevka" :size 20))
 ;; (setq doom-font (font-spec :family "DejaVu Sans Mono" :size 19))
 ;; (setq doom-font (font-spec :family "IBM Plex Mono" :size 19))
@@ -79,11 +81,11 @@
 
 ;; Company config
 (after! company
-   :config
-        (setq
-        company-minimum-prefix-length 3
-        company-idle-delay 0.2
-        company-tooltip-idle-delay 1.0))
+  :config
+  (setq
+   company-minimum-prefix-length 3
+   company-idle-delay 0.2
+   company-tooltip-idle-delay 1.0))
 
 ;; Emacs config location
 (setq emacs-dir (file-name-as-directory "~/.doom.d"))
@@ -97,7 +99,7 @@
 
 ;; Doom modeline
 ;; NOTE: Issues with emacsclient
- (setq doom-modeline-major-mode-icon t)
+(setq doom-modeline-major-mode-icon t)
 
 ;; Keybindings
 (load!  "+keybindings")
@@ -115,12 +117,7 @@
 
 ;; Make avy faces like vim-easymotion: no background, red to yellow foreground
 (after! avy
-(custom-set-faces!
-    `(avy-lead-face :weight bold :foreground "red" :background ,(face-attribute 'default :background))
-    `(avy-lead-face-0 :weight bold :foreground "dark orange" :background ,(face-attribute 'default :background))
-    `(avy-lead-face-1 :weight bold :foreground "orange" :background ,(face-attribute 'default :background))
-    `(avy-lead-face-2 :weight bold :foreground "gold" :background ,(face-attribute 'default :background))
-    `(avy-lead-face-3 :weight bold :foreground "yellow" :background ,(face-attribute 'default :background))))
+  )
 
 
 (use-package! doom-themes
@@ -175,18 +172,12 @@
 ;; Disable loading all known projects when opening a single project. If set to true, this may greatly reduce performance.
 (setq lsp-pyright-multi-root nil)
 
-;; Avy settings
-(setq avy-orders-alist
-      '((avy-goto-char . avy-order-closest)
-        (avy-goto-word-0 . avy-order-closest)
-        (avy-goto-char-2 . avy-order-closest)
-        (avy-goto-char-timer . avy-order-closest)))
 
 
 ;; Load private modules
 (dolist (file (directory-files "~/.doom.d/private/" t directory-files-no-dot-files-regexp))
-        (if (file-directory-p file)
-                (load! (concat file "/config.el"))))
+  (if (file-directory-p file)
+      (load! (concat file "/config.el"))))
 
 
 ;; Projectile after switch cook
@@ -211,14 +202,30 @@
 
 ;; Ensure, that conda is loaded after projectile so that the hook works
 (after! projectile
-;; From `doom doctor'
-;; Checking Doom core for irregularities...
-;; ! Your $HOME is recognized as a project root
-;;   Emacs will assume $HOME is the root of any project living under $HOME. If this
-;;   isn't desired, you will need to remove ".git" from
-;;   `projectile-project-root-files-bottom-up' (a variable)
+  ;; From `doom doctor'
+  ;; Checking Doom core for irregularities...
+  ;; ! Your $HOME is recognized as a project root
+  ;;   Emacs will assume $HOME is the root of any project living under $HOME. If this
+  ;;   isn't desired, you will need to remove ".git" from
+  ;;   `projectile-project-root-files-bottom-up' (a variable)
   ;; (setq projectile-project-root-files-bottom-up (remove ".git"
   ;;         projectile-project-root-files-bottom-up))
   (use-package! conda))
 
 (add-hook 'projectile-after-switch-project-hook #'activate-project-conda-env-maybe)
+
+(use-package! avy
+  :config
+  ;; Avy settings
+(setq avy-orders-alist
+      '((avy-goto-char . avy-order-closest)
+        (avy-goto-word-0 . avy-order-closest)
+        (avy-goto-char-2 . avy-order-closest)
+        (avy-goto-char-timer . avy-order-closest)))
+(custom-set-faces!
+    `(avy-lead-face :weight bold :foreground "red" :background ,(face-attribute 'default :background))
+    `(avy-lead-face-0 :weight bold :foreground "dark orange" :background ,(face-attribute 'default :background))
+    `(avy-lead-face-1 :weight bold :foreground "orange" :background ,(face-attribute 'default :background))
+    `(avy-lead-face-2 :weight bold :foreground "gold" :background ,(face-attribute 'default :background))
+    `(avy-lead-face-3 :weight bold :foreground "yellow" :background ,(face-attribute 'default :background)))
+  )
