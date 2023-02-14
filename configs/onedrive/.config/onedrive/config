@@ -1,2 +1,3 @@
 sync_dir = "~/onedrive"
+skip_file = "~*"
 monitor_interval = "300"

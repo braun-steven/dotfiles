@@ -21,6 +21,7 @@
 
        :completion
        (company +childframe)            ; the ultimate code completion backend
+       company            ; the ultimate code completion backend
        ;; (helm +fuzzy)              ; the *other* search engine for love and life
        ;;ido               ; the other *other* search engine...
        ;; (ivy +icons +prescient)               ; a search engine for love and life
@@ -29,7 +30,8 @@
        (vertico +icons)
 
        :ui
-       (ligatures +fira)
+       ;; (emoji +ascii +github +unicode)
+       ;; (ligatures +fira)
        ;; deft              ; notational velocity for Emacs
        doom              ; what makes DOOM look the way it does
        doom-dashboard    ; a nifty splash screen for Emacs
@@ -37,7 +39,7 @@
        ;; fill-column       ; a `fill-column' indicator
        hl-todo           ; highlight TODO/FIXME/NOTE/DEPRECATED/HACK/REVIEW
        ;; hydra
-       indent-guides     ; highlighted indent columns
+       ;; indent-guides     ; highlighted indent columns
        ;;minimap           ; show a map of the code on the side
        modeline          ; snazzy, Atom-inspired modeline, plus API
        nav-flash         ; blink the current line after jumping
@@ -48,13 +50,13 @@
         +defaults)       ; default popup rules
        ;; (pretty-code +fira)       ; replace bits of code with pretty symbols
        ;; tabs              ; an tab bar for Emacs
-       (treemacs +lsp)          ; a project drawer, like neotree but cooler
+       ;; (treemacs +lsp)          ; a project drawer, like neotree but cooler
        ;; unicode           ; extended unicode support for various languages
-       (vc-gutter +pretty)         ; vcs diff in the fringe
-       vi-tilde-fringe   ; fringe tildes to mark beyond EOB
+       ;; (vc-gutter +pretty)         ; vcs diff in the fringe
+       ;; vi-tilde-fringe   ; fringe tildes to mark beyond EOB
        ;; (window-select +numbers)     ; visually switch windows
        workspaces        ; tab emulation, persistence & separate workspaces
-       zen               ; distraction-free coding or writing
+       ;; zen               ; distraction-free coding or writing
 
        :editor
        (evil +everywhere); come to the dark side, we have cookies
@@ -101,7 +103,7 @@
        (lookup           ; helps you navigate your code and documentation
         +docsets
         +dictionary)        ; ...or in Dash docsets locally
-       (lsp +peek +eglot)
+       (lsp +peek)
        magit             ; a git porcelain for Emacs
        ;;make              ; run make tasks from Emacs
        ;;pass              ; password manager for nerds

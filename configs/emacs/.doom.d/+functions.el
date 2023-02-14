@@ -56,3 +56,11 @@ https://stackoverflow.com/questions/11043004/emacs-compile-buffer-auto-close/110
                 "--expire-time" "300000" ; 5 minutes
                 "--app-name" "Emacs"
                 ))
+
+(defun sbraun/add-all-projects ()
+  "Add all projects in ~/projects to known projectile projects."
+  (interactive)
+        ;; Add all projects in ~/projects as known projects
+        (dolist (file (directory-files "~/projects/" t directory-files-no-dot-files-regexp))
+                (if (file-directory-p file)
+                        (projectile-add-known-project file))))

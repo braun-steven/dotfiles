@@ -1,6 +1,6 @@
 configuration {
 	modi: "combi";
-	font: "IBMPlex Mono 18";
+	font: "IBMPlex Mono 20";
 	show-icons: true;
 	terminal: "alacritty";
 	combi-modi: "drun,run,ssh";

@@ -2,7 +2,8 @@
 !xterm*font: Hack-Regular 12
 
 ! These might also be useful depending on your monitor and personal preference:
-Xft.dpi:120
+! 144 = 150% scaling
+Xft.dpi:144
 Xcursor.size: 32
 Xft.autohint: 0
 Xft.lcdfilter:  lcddefault
