@@ -3,7 +3,7 @@ set -euo pipefail
 set -x
 
 # Fish shell version
-FISH_VERSION=3.3.1
+FISH_VERSION=3.6.0
 
 # Create temp. directory
 tmp_dir=/tmp/fish_tmp_build

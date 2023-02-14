@@ -1,0 +1,2 @@
+#!/bin/bash
+kill $(ps aux | rofi -dmenu -i -p "Process to be killed" | tr -s ' ' |cut -d' ' -f 2)
