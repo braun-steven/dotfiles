@@ -1,3 +1,4 @@
+
 if status is-interactive
     # Commands to run in interactive sessions can go here
 end
@@ -50,7 +51,6 @@ end
 set -x FZF_DEFAULT_OPTS '--height 40% --border'
 set -x FZF_DEFAULT_COMMAND 'ag -g .'
 
-# Fixes some terminal application colors
 set -x TERM "xterm-256color"
 
 # extend $PATH
@@ -78,7 +78,6 @@ direnv hook fish | source
 bind -M insert \cp history-search-backward
 bind -M insert \cn history-search-forward
 bind -M insert \cf forward-char
-bind -k sright forward-bigword
 
 
 #########
@@ -123,3 +122,13 @@ set -U fish_color_option
 set -U fish_pager_color_secondary_prefix
 set -U fish_color_keyword
 set -U fish_pager_color_secondary_completion
+
+
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+if test -f $HOME/.conda/bin/conda
+    eval $HOME/.conda/bin/conda "shell.fish" "hook" $argv | source
+end
+# <<< conda initialize <<<
+
