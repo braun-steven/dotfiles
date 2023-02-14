@@ -16,9 +16,11 @@ if command -v nvim &>/dev/null; then
   export EDITOR="nvim"
   export SUDO_EDITOR="nvim"
   alias vim=nvim
+  export SYSTEMD_EDITOR="nvim"
 else
   export EDITOR="vim"
   export SUDO_EDITOR="vim"
+  export SYSTEMD_EDITOR="vim"
 fi
 
 
@@ -39,7 +41,6 @@ if [[ ! -z $SSH_CONNECTION ]]; then
   export DOCKER_HOST="unix:///run/user/$(id -u)/docker.sock"
 fi
 
-
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
@@ -47,34 +48,35 @@ fi
 # NOTE: This needs to be done after the interactive if-statement
 if [[ -z $SSH_CONNECTION ]]; then
   eval $(keychain --eval --quiet id_rsa id_ed25519)
-  # eval `ssh-agent`
 fi
 
-# # Go into zsh
-# if [[ $(ps --no-header --pid=$PPID --format=cmd) != "zsh" ]] && [[ -z $SSH_CONNECTION ]]; then
-#   exec zsh
-# fi
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('$HOME/.conda/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "$HOME/.conda/etc/profile.d/conda.sh" ]; then
+        . "$HOME/.conda/etc/profile.d/conda.sh"
+    else
+        export PATH="$HOME/.conda/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+
+# Start tmux in ssh connections
+if [[ $SSH_CONNECTION ]]; then
+
+# Try to attach to the ssh_tmux session, else create one
+  if [[ $- =~ i ]] && [[ -z "$TMUX" ]] && [[ -n "$SSH_TTY" ]]; then
+    tmux attach-session -t ssh_tmux || tmux new-session -s ssh_tmux
+  fi
+fi
 
 # Go into fish
 if [[ $(ps --no-header --pid=$PPID --format=comm) != "fish" && -z ${BASH_EXECUTION_STRING} ]]
 then
 	exec fish
 fi
-
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/steven/.conda/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/steven/.conda/etc/profile.d/conda.sh" ]; then
-        . "/home/steven/.conda/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/steven/.conda/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
-
