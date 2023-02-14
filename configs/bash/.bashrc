@@ -32,12 +32,10 @@ export PATH="$PATH:$HOME/dotbin"  # scripts from dotfiles
 export PATH="$HOME/bin:$PATH"  # local binaries
 export PATH="$PATH:$HOME/.emacs.d/bin" # doom binaries
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"  # yarn
-export PATH="$PATH:/opt/homebrew/bin"  # homebrew
+export PATH="$PATH:$HOME/homebrew/bin"  # local homebrew install
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/lib/"
 
-# Add homebrew
-export PATH="$PATH:/storage-01/$USER/homebrew/bin/"
-
+# If we have an ssh connection, export the docker host
 if [[ ! -z $SSH_CONNECTION ]]; then
   export DOCKER_HOST="unix:///run/user/$(id -u)/docker.sock"
 fi
