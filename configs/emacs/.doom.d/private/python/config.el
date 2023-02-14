@@ -12,9 +12,7 @@
 
   ;; Make word motions ignore snake case underscores
   (add-hook 'python-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
-  (add-hook 'python-mode-hook #'(lambda () (setq fill-column 100)))
-
-  (setq company-minimum-prefix-length 2)
+  ;; (add-hook 'python-mode-hook #'(lambda () (setq fill-column 100)))
 
   (setq pyimport-pyflakes-path "~/.local/bin/pyflakes")
 
@@ -32,17 +30,16 @@
     (setq py-pyment-options '("--output=google")))
 
   ;; Fix for confusing yasnippet results in completion
-  ;; (setq! +lsp-company-backends
-  ;;        (if (modulep! :editor snippets)
-  ;;            '(:separate company-yasnippet company-capf)
-  ;;          'company-capf))
-
+  (setq! +lsp-company-backends
+         (if (modulep! :editor snippets)
+             '(:separate company-capf company-yasnippet)
+           'company-capf))
 ;; accept completion from copilot and fallback to company
-;; (use-package! copilot
-;; :hook (prog-mode . copilot-mode)
-;; :bind (("C-TAB" . 'copilot-accept-completion-by-word)
-;;         ("C-<tab>" . 'copilot-accept-completion-by-word)
-;;         :map copilot-completion-map
-;;         ("<tab>" . 'copilot-accept-completion)
-;;         ("TAB" . 'copilot-accept-completion)))
-  )
+(use-package! copilot
+  :hook (prog-mode . copilot-mode)
+  :bind (("C-TAB" . 'copilot-accept-completion-by-word)
+         ("C-<tab>" . 'copilot-accept-completion-by-word)
+         :map copilot-completion-map
+         ("<tab>" . 'copilot-accept-completion)
+         ("TAB" . 'copilot-accept-completion)))
+)

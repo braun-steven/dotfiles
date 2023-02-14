@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-PATH="$PATH:/home/steven/dotbin"
+PATH="$PATH:/home/steven/dotbin:/home/steven/bin:/home/steven/.local/bin"
 
 if [ "$0" = "/etc/gdm/Xsession" -a "$DESKTOP_SESSION" = "i3" ]; then
     export $(gnome-keyring-daemon --start)

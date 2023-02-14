@@ -1,0 +1,36 @@
+#!/bin/bash
+
+# Quick entry add task
+task=$(rofi -dmenu -p "Task")
+
+# If no task string is given, exit early
+if [[ -z "$task" ]]; then
+    exit
+fi
+
+# Get projects and select project
+all_projects=$(todoist-cli projects | cut -d'#' -f2)
+project=$(echo "$all_projects" | rofi -dmenu -i -p "Project")
+# Cut by whitespace to select the first word (todoist api does not support whitespace here)
+project=$(echo "$project" | cut -d' ' -f1)
+
+# Get labels, appends an empty new line in the begging to select "no label" as well
+all_labels="\n$(todoist-cli labels | cut -d'@' -f2)"
+label=$(echo -e "$all_labels" | rofi -dmenu -i -p "Label")
+
+
+# If a project string is given, add it to the task
+if [[ ! -z "$project" ]]; then
+    task="#$project $task"
+fi
+
+# If label is not empty, add label
+if [[ ! -z "$label" ]]; then
+    task="$task @$label"
+fi
+
+# If task is empty, abort, else post new task
+if [[ ! -z "$task" ]]; then
+    echo "$task"
+    todoist-cli quick "$task"
+fi
