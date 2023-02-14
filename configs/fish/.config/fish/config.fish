@@ -59,7 +59,13 @@ set -U fish_pager_color_secondary_prefix
 set -U fish_color_keyword
 set -U fish_pager_color_secondary_completion
 
+# Load aliases
+source ~/.bash_aliases
 
+# Better ls
+if type -q exa
+  alias ls='exa -l --group-directories-first --color auto'
+end
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
