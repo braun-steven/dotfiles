@@ -152,7 +152,7 @@ unset __conda_setup
 # If we are in an ssh connection and we have installed the latest version of fish via homebrew
 # alias the fish command to the homebrew binary
 if [[ $SSH_CONNECTION ]]; then
-  if [[ -f $HOME/homebrew/bin/fish ]]; then
+  if [[ -f "$HOME/homebrew/bin/fish" ]]; then
     alias fish="$HOME/homebrew/bin/fish"
   fi
 fi
@@ -179,5 +179,15 @@ fi
 # Go into fish
 if [[ $(ps --no-header --pid=$PPID --format=comm) != "fish" && -z ${BASH_EXECUTION_STRING} ]]
 then
-	exec fish
+  # If we are in an ssh connection and we have installed the latest version of fish via homebrew
+  # then run the homebrew installed fish binary
+  if [[ $SSH_CONNECTION ]]; then
+    if [[ -f "$HOME/homebrew/bin/fish" ]]; then
+      exec "$HOME/homebrew/bin/fish"
+    else  # Homebrew fish not installed, use system fish
+      exec fish
+    fi
+  else  # Not in an ssh connection
+    exec fish
+  fi
 fi
