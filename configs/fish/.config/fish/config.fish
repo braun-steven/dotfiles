@@ -67,6 +67,62 @@ if type -q exa
   alias ls='exa -l --group-directories-first --color auto'
 end
 
+
+###################
+# FUNCTIONS BEGIN #
+###################
+
+
+function eog
+  command eog $1 & disown
+end
+
+function emacs
+  command emacs $1 & disown
+end
+
+function evince
+  command evince $1 & disown
+end
+
+function pdf
+  command evince $1 & disown
+end
+
+# Define maybe-activate-conda-env on variable change of PWD
+function __maybe_activate_conda_env --on-variable PWD
+  # Check if "conda" command is available,
+  if not type -q conda
+    return
+  end
+
+  # Check if conda env is set
+  # fish shell: check if $CONDA_DEFAULT_ENV is set
+  if test -n "$CONDA_DEFAULT_ENV"
+    set dirname (path basename $PWD)
+
+    # Check if current conda env is no longer part of current pwd
+    if not string match -q "*$CONDA_DEFAULT_ENV*" "$PWD"
+      echo "Deactivating conda environment $CONDA_DEFAULT_ENV"
+      conda deactivate
+      return
+    end
+  end
+
+
+  # Get directory name without full path
+  set dirname (path basename $PWD)
+  # If directory name can be found in conda evironments, activate it!
+  if command ls ~/.conda/envs/ | grep -q $dirname
+    echo "Conda environment '$dirname' found! Activating now ..."
+    conda activate $dirname
+  end
+end
+
+#################
+# FUNCTIONS END #
+#################
+
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 if test -f $HOME/.conda/bin/conda
