@@ -149,6 +149,16 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+# If we are in an ssh connection and we have installed the latest version of fish via homebrew
+# alias the fish command to the homebrew binary
+if [[ $SSH_CONNECTION ]]; then
+  if [[ -f $HOME/homebrew/bin/fish ]]; then
+    alias fish="$HOME/homebrew/bin/fish"
+  fi
+fi
+
+
+
 # Start tmux in ssh connections
 if [[ $SSH_CONNECTION ]]; then
 
