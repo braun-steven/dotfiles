@@ -5,12 +5,13 @@ end
 # Exports can be found in .bashrc from which we start the fish shell
 # Aliases can be found in .bash_aliases which is sourced in .bashrc from which we start the fish shell
 
-# Enable direnv
-direnv hook fish | source
-
 ##########################
 # Keybindings in vi-mode #
 ##########################
+
+# Enable fish vi mode
+fish_vi_key_bindings
+
 bind -M insert \cp history-search-backward
 bind -M insert \cn history-search-forward
 bind -M insert \cf forward-char
@@ -62,6 +63,11 @@ set -U fish_pager_color_secondary_completion
 # Load aliases
 source ~/.bash_aliases
 
+# If nvim is available, replace vim with nvim
+if type -q nvim
+  alias vim=nvim
+end
+
 # Better ls
 if type -q exa
   alias ls='exa -l --group-directories-first --color auto'
@@ -74,19 +80,19 @@ end
 
 
 function eog
-  command eog $1 & disown
+  command eog $argv[1] & disown
 end
 
 function emacs
-  command emacs $1 & disown
+  command emacs $argv[1] & disown
 end
 
 function evince
-  command evince $1 & disown
+  command evince $argv[1] & disown
 end
 
 function pdf
-  command evince $1 & disown
+  command evince $argv[1] & disown
 end
 
 # Define maybe-activate-conda-env on variable change of PWD
@@ -123,10 +129,29 @@ end
 # FUNCTIONS END #
 #################
 
+
+#############################
+# CUSTOM AUTOCOMPLETE BEGIN #
+#############################
+
+complete -c pdf -k -xa "(__fish_complete_suffix pdf)"
+complete -c evince -k -xa "(__fish_complete_suffix pdf)"
+complete -c eog -k -xa "(__fish_complete_suffix jpg)"
+complete -c eog -k -xa "(__fish_complete_suffix jpeg)"
+complete -c eog -k -xa "(__fish_complete_suffix png)"
+complete -c eog -k -xa "(__fish_complete_suffix gif)"
+
+############################
+# CUSTOM AUTOCOMPLETE END  #
+############################
+
+
+# Enable direnv
+direnv hook fish | source
+
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 if test -f $HOME/.conda/bin/conda
     eval $HOME/.conda/bin/conda "shell.fish" "hook" $argv | source
 end
 # <<< conda initialize <<<
-

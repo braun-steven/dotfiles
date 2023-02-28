@@ -15,7 +15,6 @@ set scrolloff=5
 
 " always show signcolumns
 set signcolumn=yes
-" set clipboard=unnamedplus
 set clipboard+=unnamedplus
 
 " Use global replace by default (/g) to revert
