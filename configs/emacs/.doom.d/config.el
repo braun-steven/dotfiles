@@ -35,7 +35,7 @@
 (setq doom-font (font-spec :family "Hack" :size 11.0))
 ;; (setq doom-font (font-spec :family "Iosevka" :size 20))
 ;; (setq doom-font (font-spec :family "DejaVu Sans Mono" :size 19))
-;; (setq doom-font (font-spec :family "IBM Plex Mono" :size 19))
+;; (setq doom-font (font-spec :family "IBM Plex Mono" :size 23))
 ;; (setq doom-font (font-spec :family "DroidSansMono Nerd Font" :size 20))
 ;; (setq doom-variable-pitch-font (font-spec :family "DejaVu Serif" :size 25 :weight 'semi-light))
 ;; (setq doom-variable-pitch-font (font-spec :family "Source Sans Pro" :size 28 :weight 'semi-light))
@@ -83,9 +83,17 @@
 (after! company
   :config
   (setq
-   company-minimum-prefix-length 3
-   company-idle-delay 0.2
+   company-minimum-prefix-length 2
+   company-idle-delay 0.0
    company-tooltip-idle-delay 1.0))
+
+
+(after! lsp
+  ;; Fix for confusing yasnippet results in completion
+  (setq! +lsp-company-backends
+         (if (modulep! :editor snippets)
+             '(:separate company-capf company-yasnippet)
+           'company-capf)))
 
 ;; Emacs config location
 (setq emacs-dir (file-name-as-directory "~/.doom.d"))
