@@ -30,15 +30,14 @@ fi
 # Add ruby binaries to path if available
 if command -v ruby &> /dev/null; then
   # export PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
-  export PATH="$HOME/.gem/ruby/2.6.0/bin:$PATH"
+  export PATH="$HOME/.gem/ruby/3.1.3/bin:$PATH"
 fi
 
 
 # Check if nvim is available
 if command -v nvim &>/dev/null; then
-  # Use nvim for manpages
-  # export MANPAGER="nvim -c 'set ft=man' -"
-  # Emacsclient as (sudo-)editor
+  # Use nvim as manpager
+  export MANPAGER="nvim +Man\!"
   export EDITOR="nvim"
   export SUDO_EDITOR="nvim"
   alias vim=nvim
@@ -126,7 +125,6 @@ fi
 
 # Source aliases finally
 source ~/.bash_aliases
-source ~/.bash_functions
 
 # Better ls
 if hash exa 2>/dev/null; then
