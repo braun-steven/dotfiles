@@ -29,11 +29,6 @@
     :config
     (setq py-pyment-options '("--output=google")))
 
-  ;; Fix for confusing yasnippet results in completion
-  (setq! +lsp-company-backends
-         (if (modulep! :editor snippets)
-             '(:separate company-capf company-yasnippet)
-           'company-capf))
 ;; accept completion from copilot and fallback to company
 (use-package! copilot
   :hook (prog-mode . copilot-mode)

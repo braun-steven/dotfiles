@@ -31,3 +31,4 @@ map sk <Plug>(easymotion-k)
 
 # Black format
 map ,, :action me.lensvol.blackconnect.actions.ReformatWholeFileAction<CR>
+set ideajoin

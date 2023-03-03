@@ -20,6 +20,8 @@
         ;; modus-themes-syntax '(faint green-strings yellow-comments)
         modus-themes-bold-constructs nil)
 
+
+
   ;; Load the theme files before enabling a theme
   ;; (modus-themes-load-themes)
   :config
