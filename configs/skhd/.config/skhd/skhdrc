@@ -110,7 +110,6 @@
 cmd -return : /Users/steven/dotfiles/configs/dotbin/dotbin/skhd-iterm2-new-window.sh
 cmd+shift-return : emacsclient -c -n -a '' & sleep 0.5 && yabai -m window --focus $(yabai -m query --windows | jq '[.[] | select ( .title | contains("Emacs") )][0].id')
 
-cmd+shift-e : emacsclient --eval "(emacs-everywhere)"
 # cmd+shift-e : doom +everywhere
 # cmd - return : /Applications/kitty.app/Contents/MacOS/kitty
 # cmd - return : alacritty msg create-window || alacritty
@@ -277,7 +276,7 @@ cmd + ctrl - r : /usr/bin/env osascript <<< \
 
 # Stacking windows
 cmd + shift - w : yabai -m window --stack east || yabai -m window --stack west
-cmd + ctrl - w : yabai -m config layout bsp
+cmd + shift - e : yabai -m config layout bsp
 # cmd - e : yabai -m window --stack south || yabai -m window --stack north
 
 
