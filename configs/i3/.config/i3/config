@@ -153,7 +153,8 @@ bindsym $mod+Shift+p move container to workspace number 15 (p) gtd
 
 # Assign specific applications to specific workspaces
 assign [class="Mattermost"] 10 chat
-assign [class="Signal"] 10 chat
+assign [class="Slack"] 10 chat
+assign [class="Todoist"] 15 (p) gtd
 
 
 # Set workspaces to specific monitors
@@ -302,26 +303,8 @@ bindsym $mod+$mod2+Ctrl+s exec --no-startup-id $Locker && systemctl suspend
 bindsym $mod+$mod2+Ctrl+l exec --no-startup-id $Locker
 
 # Emacs anywhere
-# bindsym $mod+Shift+e exec ~/.emacs_anywhere/bin/run
-# for_window [class="Emacs" title="\*Emacs Anywhere\*"] floating enable
 bindsym $mod+Shift+e exec doom +everywhere
 for_window [class="Emacs" title="^Emacs Everywhere.*"] floating enable, resize set 1280x768
-# for_window [class="Emacs" title="^Emacs Everywhere.*"] floating enable
-# for_window [class="Emacs" title="^Emacs Everywhere.*"] move absolute position center
-
-
-# for_window [class=".*"] border pixel 5
-#
-# Set default border size
-# border pixel 10
-
-# i3-gaps setup
-# for_window [class="^.*"] border pixel 5
-# default_border pixel 0
-# gaps inner 8
-# gaps outer 5
-# smart_gaps on
-# smart_borders on
 
 # Enforce borders (and thus also window title borders) for all apps
 # Without this, some apps like eye-of-gnome will be without a titlebar
@@ -398,10 +381,6 @@ bar {
 # finds out, if available)
 # Polybar
 # exec_always --no-startup-id $HOME/.config/polybar/launch.sh
-
-# Keyboard Cheat sheet
-# for_window [title="cheatsheet"] floating enable,resize set 1600 1300, move position center
-# bindsym $mod+c exec bash ~/dotfiles/scripts/keys-cheat-sheet.sh
 
 # Some startup stuff
 # exec redshift  # Redshift
