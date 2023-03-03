@@ -32,7 +32,7 @@
 ;;
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
-(setq doom-font (font-spec :family "Hack" :size 11.0))
+(setq doom-font (font-spec :family "Hack" :size 15.0))
 ;; (setq doom-font (font-spec :family "Iosevka" :size 20))
 ;; (setq doom-font (font-spec :family "DejaVu Sans Mono" :size 19))
 ;; (setq doom-font (font-spec :family "IBM Plex Mono" :size 19))

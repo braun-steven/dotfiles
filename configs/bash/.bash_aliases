@@ -16,10 +16,8 @@ alias zshreload="source ~/.zshrc"
 alias i3config="$EDITOR ~/.config/i3/config"
 alias xresourcesconfig="$EDITOR ~/.Xresources"
 alias xresourcesreload="xrdb -merge ~/.Xresources"
-# alias rsync="rsync --archive --compress-level=3 --copy-links --partial --inplace --info=progress2 --rsh=ssh -r"
 alias rsync="rsync --archive --compress-level=3 --copy-links --partial --inplace --rsh=ssh -r"
 
 # Emacsclient terminal
 alias em="emacsclient -t -a ''"
 
-alias ls='ls -lh --color=auto --group-directories-first'
