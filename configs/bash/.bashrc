@@ -29,7 +29,8 @@ fi
 
 # Add ruby binaries to path if available
 if command -v ruby &> /dev/null; then
-  export PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
+  # export PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
+  export PATH="$HOME/.gem/ruby/2.6.0/bin:$PATH"
 fi
 
 
@@ -58,6 +59,7 @@ export PATH="$PATH:$HOME/.emacs.d/bin" # doom binaries
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"  # yarn
 export PATH="$PATH:$HOME/homebrew/bin"  # local homebrew install
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/lib/"
+export PATH="$PATH:/opt/homebrew/bin"  # homebrew
 
 # If we have an ssh connection, export the docker host
 if [[ ! -z $SSH_CONNECTION ]]; then
@@ -84,9 +86,9 @@ fi
 
 # Eval keychain only locally
 # NOTE: This needs to be done after the interactive if-statement
-if [[ -z $SSH_CONNECTION ]]; then
-  eval $(keychain --eval --quiet id_rsa id_ed25519)
-fi
+# if [[ -z $SSH_CONNECTION ]]; then
+  # eval $(keychain --eval --quiet id_rsa id_ed25519)
+# fi
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
@@ -131,20 +133,16 @@ if hash exa 2>/dev/null; then
   alias ls='exa -l --group-directories-first --color auto'
 fi
 
-# Go into fish
-if [[ $(ps --no-header --pid=$PPID --format=comm) != "fish" && -z ${BASH_EXECUTION_STRING} ]]
-then
-  # If we are in an ssh connection and we have installed the latest version of fish via homebrew
-  # then run the homebrew installed fish binary
-  if [[ $SSH_CONNECTION ]]; then
-    if [[ -f "$HOME/homebrew/bin/fish" ]]; then
-      exec "$HOME/homebrew/bin/fish"
-    else  # Homebrew fish not installed, use system fish
-      exec fish
-    fi
-  else  # Not in an ssh connection
+# If we are in an ssh connection and we have installed the latest version of fish via homebrew
+# then run the homebrew installed fish binary
+if [[ $SSH_CONNECTION ]]; then
+  if [[ -f "$HOME/homebrew/bin/fish" ]]; then
+    exec "$HOME/homebrew/bin/fish"
+  else  # Homebrew fish not installed, use system fish
     exec fish
   fi
+else  # Not in an ssh connection
+  exec fish
 fi
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash

@@ -39,7 +39,7 @@ yabai -m config mouse_drop_action            swap
 
 # Border settings
 yabai -m config window_border                on
-yabai -m config window_border_width          4
+yabai -m config window_border_width          3
 yabai -m config window_border_hidpi          on
 yabai -m config window_border_blur           off
 yabai -m config window_border_radius         12
@@ -48,11 +48,11 @@ yabai -m config normal_window_border_color   0x00555555
 
 # general space settings
 yabai -m config layout                       bsp
-yabai -m config top_padding                  5
-yabai -m config bottom_padding               5
-yabai -m config left_padding                 5
-yabai -m config right_padding                5
-yabai -m config window_gap                   3
+yabai -m config top_padding                  3
+yabai -m config bottom_padding               3
+yabai -m config left_padding                 3
+yabai -m config right_padding                3
+yabai -m config window_gap                   1
 
 # label spaces
 yabai -m space 1 --label 1

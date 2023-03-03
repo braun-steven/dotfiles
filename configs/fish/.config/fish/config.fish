@@ -2,6 +2,7 @@ if status is-interactive
     # Commands to run in interactive sessions can go here
 end
 
+
 # Exports can be found in .bashrc from which we start the fish shell
 # Aliases can be found in .bash_aliases which is sourced in .bashrc from which we start the fish shell
 
