@@ -18,14 +18,14 @@ sudo yabai --load-sa
 yabai -m config mouse_follows_focus          off
 # From: https://github.com/koekeishiya/yabai/wiki/Configuration#window-modifications
 # With focus follows mouse, you can also focus windows without having to click on them. This can be set to either autofocus (window gets focused, but not raised) or autoraise (window gets raised as if it was clicked on).
-yabai -m config focus_follows_mouse          off
+yabai -m config focus_follows_mouse          autofocus
 yabai -m config window_topmost               off
 yabai -m config window_origin_display        default
 yabai -m config window_placement             second_child
 yabai -m config window_shadow                on
 yabai -m config window_opacity               off
-yabai -m config window_opacity_duration      0.0
-yabai -m config window_animation_duration    0.0
+yabai -m config window_opacity_duration      0.25
+yabai -m config window_animation_duration    0.00
 yabai -m config active_window_opacity        1.0
 yabai -m config normal_window_opacity        0.95
 yabai -m config insert_feedback_color        0xffd75f5f
