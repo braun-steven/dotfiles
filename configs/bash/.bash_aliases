@@ -21,3 +21,8 @@ alias rsync="rsync --archive --compress-level=3 --copy-links --partial --inplace
 # Emacsclient terminal
 alias em="emacsclient -t -a ''"
 
+
+# Better ls
+if hash exa 2>/dev/null; then
+  alias ls='exa -l --group-directories-first --color auto'
+fi

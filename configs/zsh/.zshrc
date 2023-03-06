@@ -1,120 +1,12 @@
-#
-# Copy of ~/.bashrc
-#
-
-#############################
-# INSTALLING BINARIES BEGIN #
-#############################
-
-# Check if tpm is installed
-if [ ! -d $HOME/.tmux/plugins/tpm ]; then
-  echo "Tmux plugin manager not found. Installing now ..."
-  git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-fi
-
-# Download and install fzf
-if [[ ! -d $HOME/.fzf ]]; then
-  git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-  ~/.fzf/install
-fi
-
-
-###########################
-# INSTALLING BINARIES END #
-###########################
-
-#################
-# EXPORTS BEGIN #
-#################
-
-# Add ruby binaries to path if available
-if command -v ruby &> /dev/null; then
-  # export PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
-  export PATH="$HOME/.gem/ruby/2.6.0/bin:$PATH"
-fi
-
-
-# Check if nvim is available
-if command -v nvim &>/dev/null; then
-  # Use nvim for manpages
-  # export MANPAGER="nvim -c 'set ft=man' -"
-  # Emacsclient as (sudo-)editor
-  export EDITOR="nvim"
-  export SUDO_EDITOR="nvim"
-  alias vim=nvim
-  export SYSTEMD_EDITOR="nvim"
-else
-  export EDITOR="vim"
-  export SUDO_EDITOR="vim"
-  export SYSTEMD_EDITOR="vim"
-fi
-
-
-# Extend $PATH
-export PATH="$PATH:$HOME/.local/bin"
-export PATH="$PATH:$HOME/.cargo/bin"
-export PATH="$PATH:$HOME/dotbin"  # scripts from dotfiles
-export PATH="$HOME/bin:$PATH"  # local binaries
-export PATH="$PATH:$HOME/.emacs.d/bin" # doom binaries
-export PATH="$PATH:$HOME/.config/emacs/bin"  # doom binaries new location
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"  # yarn
-export PATH="$PATH:$HOME/homebrew/bin"  # local homebrew install
-export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/lib/"
-export PATH="$PATH:/opt/homebrew/bin"  # homebrew
-
-# If we have an ssh connection, export the docker host
-if [[ ! -z $SSH_CONNECTION ]]; then
-  export DOCKER_HOST="unix:///run/user/$(id -u)/docker.sock"
-fi
-
-###############
-# EXPORTS END #
-###############
-
 ##################################
-#  MISC begin                    #
+#  EXPORTS begin                 #
 ##################################
 
-[ -f ~/.conda/etc/profile.d/conda.sh ] && source ~/.conda/etc/profile.d/conda.sh
+source ~/.bash_exports
 
-
-############
-# MISC END #
-############
-
-# If not running interactively, don't do anything
-[[ $- != *i* ]] && return
-
-# Eval keychain only locally
-# NOTE: This needs to be done after the interactive if-statement
-# if [[ -z $SSH_CONNECTION ]]; then
-  # eval $(keychain --eval --quiet id_rsa id_ed25519)
-# fi
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('$HOME/.conda/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "$HOME/.conda/etc/profile.d/conda.sh" ]; then
-        . "$HOME/.conda/etc/profile.d/conda.sh"
-    else
-        export PATH="$HOME/.conda/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
-
-# If we are in an ssh connection and we have installed the latest version of fish via homebrew
-# alias the fish command to the homebrew binary
-if [[ $SSH_CONNECTION ]]; then
-  if [[ -f "$HOME/homebrew/bin/fish" ]]; then
-    alias fish="$HOME/homebrew/bin/fish"
-  fi
-fi
-
-
+##################################
+#  EXPORTS end                   #
+##################################
 
 # Start tmux in ssh connections
 if [[ $SSH_CONNECTION ]]; then
@@ -125,30 +17,166 @@ if [[ $SSH_CONNECTION ]]; then
   fi
 fi
 
+
+##################################
+#  INSTALL BINARIES begin        #
+##################################
+
+# Install neovim
+if ! command -v nvim &> /dev/null; then
+  curl -L https://github.com/neovim/neovim/releases/latest/download/nvim.appimage --output ~/bin/nvim
+  chmod u+x ~/bin/nvim
+fi
+
+# Ensure pip is installed
+# if ! command -v pip &> /dev/null; then
+#   curl https://bootstrap.pypa.io/get-pip.py -o /tmp/get-pip.py
+#   python3 /tmp/get-pip.py
+# fi
+
+# Check if tpm is installed
+if [ ! -d $HOME/.tmux/plugins/tpm ]; then
+  echo "Tmux plugin manager not found. Installing now ..."
+  git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+fi
+
+
+# Download and install fzf
+if [[ ! -d $HOME/.fzf ]]; then
+  git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+  ~/.fzf/install
+fi
+
+##################################
+#  INSTALL BINARIES end          #
+##################################
+
+##################################
+#  ZGEN begin                    #
+##################################
+
+if [[ ! -d "${HOME}/.zgen" ]]; then
+  git clone https://github.com/tarjoilija/zgen.git "${HOME}/.zgen"
+fi
+
+# load zgen
+source "${HOME}/.zgen/zgen.zsh"
+
+AUTOPAIR_INHIBIT_INIT=1
+
+# if the init script doesn't exist
+if ! zgen saved; then
+
+  # specify plugins here
+  # prezto options
+  zgen prezto editor key-bindings 'emacs'
+  zgen prezto prompt theme 'pure'
+
+  # Load general plugins
+  zgen load hlissner/zsh-autopair
+  zgen load agkozak/zsh-z
+  zgen load mafredri/zsh-async
+  zgen load junegunn/fzf shell
+  zgen load ptavares/zsh-direnv
+
+  zgen load esc/conda-zsh-completion
+
+  zgen load zsh-users/zsh-autosuggestions
+  # zgen load zsh-users/zsh-syntax-highlighting
+  zgen load zdharma-continuum/fast-syntax-highlighting
+
+  # Load Prezto
+  zgen prezto
+
+  # Load Prezto Modules
+  # zgen prezto git
+  zgen prezto environment
+  zgen prezto terminal
+  # zgen prezto editor
+  zgen prezto history
+  # zgen prezto directory
+  # zgen prezto spectrum
+  zgen prezto utility
+  zgen prezto completion  # Must be loaded after utility
+  # zgen prezto syntax-highlighting
+  # zgen prezto history-substring-search
+  # zgen prezto autosuggestions
+  # zgen prezto prompt
+
+  zgen prezto utility safe-ops 'no'
+
+  # generate the init script from plugins above
+  zgen save
+fi
+
+##################################
+#  ZGEN end                      #
+##################################
+
+
+
+##################################
+#  ZSH INTERNAL SETTINGS begin   #
+##################################
+
+ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+
+# vi mode
+bindkey -v
+export KEYTIMEOUT=1
+
+bindkey "^P" up-line-or-search
+bindkey "^N" down-line-or-search
+bindkey "^F" forward-char
+bindkey "^E" end-of-line
+bindkey "^A" beginning-of-line
+
+setopt SHARE_HISTORY
+
+##################################
+#  ZSH INTERNAL SETTINGS end   #
+##################################
+
+##################################
+#  MISC begin                    #
+##################################
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+source $HOME/.bash_functions
+
+# Add maybe_activate_conda_env as chpwd (change working directory) hook
+autoload -U add-zsh-hook
+add-zsh-hook -Uz chpwd maybe_activate_conda_env
+
+autopair-init
+
+autoload edit-command-line; zle -N edit-command-line
+bindkey "^X^E" edit-command-line
+
 # Source aliases finally
 source ~/.bash_aliases
-source ~/.bash_functions
 
-# Ruby stuff
-# source /opt/homebrew/opt/chruby/share/chruby/chruby.sh
-# source /opt/homebrew/opt/chruby/share/chruby/auto.sh
-# chruby ruby-3.1.3
+# Hook direnv
+eval "$(direnv hook zsh)"
 
-# Better ls
-if hash exa 2>/dev/null; then
-  alias ls='exa -l --group-directories-first --color auto'
+##################################
+#  MISC end                      #
+##################################
+
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/Users/steven/.conda/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/Users/steven/.conda/etc/profile.d/conda.sh" ]; then
+        . "/Users/steven/.conda/etc/profile.d/conda.sh"
+    else
+        export PATH="/Users/steven/.conda/bin:$PATH"
+    fi
 fi
+unset __conda_setup
+# <<< conda initialize <<<
 
-# If we are in an ssh connection and we have installed the latest version of fish via homebrew
-# then run the homebrew installed fish binary
-if [[ $SSH_CONNECTION ]]; then
-  if [[ -f "$HOME/homebrew/bin/fish" ]]; then
-    exec "$HOME/homebrew/bin/fish"
-  else  # Homebrew fish not installed, use system fish
-    exec fish
-  fi
-else  # Not in an ssh connection
-  exec fish
-fi
-
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
