@@ -14,7 +14,7 @@
 
   (setq TeX-view-program-selection nil)
   (setq +latex-viewers '(pdf-tools))
-  (load! "~/.emacs.d/modules/lang/latex/+viewers")
+  (load! "~/.config/emacs/modules/lang/latex/+viewers")
 
  ;; to use pdfview with auctex
  ;; (setq TeX-view-program-selection '((output-pdf "PDF Tools"))
