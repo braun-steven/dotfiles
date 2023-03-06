@@ -1,0 +1,37 @@
+# Add ruby binaries to path if available
+if command -v ruby &> /dev/null; then
+  # export PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
+  export PATH="$HOME/.gem/ruby/3.1.3/bin:$PATH"
+fi
+
+
+# Check if nvim is available
+if command -v nvim &>/dev/null; then
+  # Use nvim as manpager
+  export MANPAGER="nvim +Man\!"
+  export EDITOR="nvim"
+  export SUDO_EDITOR="nvim"
+  alias vim=nvim
+  export SYSTEMD_EDITOR="nvim"
+else
+  export EDITOR="vim"
+  export SUDO_EDITOR="vim"
+  export SYSTEMD_EDITOR="vim"
+fi
+
+
+# Extend $PATH
+export PATH="$PATH:$HOME/.local/bin"
+export PATH="$PATH:$HOME/.cargo/bin"
+export PATH="$PATH:$HOME/dotbin"  # scripts from dotfiles
+export PATH="$HOME/bin:$PATH"  # local binaries
+export PATH="$PATH:$HOME/.emacs.d/bin" # doom binaries
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"  # yarn
+export PATH="$PATH:$HOME/homebrew/bin"  # local homebrew install
+export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/lib/"
+export PATH="$PATH:/opt/homebrew/bin"  # homebrew
+
+# If we have an ssh connection, export the docker host
+if [[ ! -z $SSH_CONNECTION ]]; then
+  export DOCKER_HOST="unix:///run/user/$(id -u)/docker.sock"
+fi
