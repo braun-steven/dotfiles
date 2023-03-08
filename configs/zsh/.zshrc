@@ -1,12 +1,4 @@
-##################################
-#  EXPORTS begin                 #
-##################################
-
 source ~/.bash_exports
-
-##################################
-#  EXPORTS end                   #
-##################################
 
 # Start tmux in ssh connections
 if [[ $SSH_CONNECTION ]]; then
