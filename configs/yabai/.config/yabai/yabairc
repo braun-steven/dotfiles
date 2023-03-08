@@ -41,7 +41,7 @@ yabai -m config mouse_drop_action            swap
 
 # Border settings
 yabai -m config window_border                on
-yabai -m config window_border_width          2
+yabai -m config window_border_width          3
 yabai -m config window_border_hidpi          on
 yabai -m config window_border_blur           off
 yabai -m config window_border_radius         12

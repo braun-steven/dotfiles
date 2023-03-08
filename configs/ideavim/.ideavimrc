@@ -1,3 +1,5 @@
+Plug 'easymotion/vim-easymotion'
+Plug 'tpope/vim-commentary'
 
 source ~/.intellimacs/spacemacs.vim
 
