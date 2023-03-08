@@ -23,26 +23,6 @@ fi
 # INSTALLING BINARIES END #
 ###########################
 
-#################
-# EXPORTS BEGIN #
-#################
-
-source ~/.bash_exports
-
-###############
-# EXPORTS END #
-###############
-
-##################################
-#  MISC begin                    #
-##################################
-
-[ -f ~/.conda/etc/profile.d/conda.sh ] && source ~/.conda/etc/profile.d/conda.sh
-
-
-############
-# MISC END #
-############
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
@@ -60,30 +40,16 @@ if [[ $SSH_CONNECTION ]]; then
 # Try to attach to the ssh_tmux session, else create one
   if [[ $- =~ i ]] && [[ -z "$TMUX" ]] && [[ -n "$SSH_TTY" ]]; then
     tmux attach-session -t ssh_tmux || tmux new-session -s ssh_tmux
+    exit  # Exit afterward
   fi
 fi
 
-# Source aliases finally
-source ~/.bash_aliases
-
 # Go into zsh
-if [[ $(ps --no-header --pid=$PPID --format=cmd) != "zsh" ]] && [[ -z $SSH_CONNECTION ]]; then
+# if [[ $(ps --no-header --pid=$PPID --format=cmd) != "zsh" ]] && [[ -z $SSH_CONNECTION ]]; then
+if [[ $(ps --no-header --pid=$PPID --format=cmd) != "zsh" ]]; then
   exec zsh
+  exit  # Exit afterward
 fi
 
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('$HOME/.conda/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "$HOME/.conda/etc/profile.d/conda.sh" ]; then
-        . "$HOME/.conda/etc/profile.d/conda.sh"
-    else
-        export PATH="$HOME/.conda/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
+source ~/.bash_exports
+source ~/.bash_aliases
