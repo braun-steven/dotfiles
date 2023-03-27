@@ -152,6 +152,8 @@ source ~/.bash_aliases
 # Hook direnv
 eval "$(direnv hook zsh)"
 
+export TERM=xterm-256color
+
 ##################################
 #  MISC end                      #
 ##################################

@@ -13,18 +13,20 @@
 #
 
 
-yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
+
+launchctl unload -F /System/Library/LaunchAgents/com.apple.WindowManager.plist > /dev/null 2>&1 &
+# yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
 sudo yabai --load-sa
 
 # global settings
 yabai -m config mouse_follows_focus          off
 # From: https://github.com/koekeishiya/yabai/wiki/Configuration#window-modifications
 # With focus follows mouse, you can also focus windows without having to click on them. This can be set to either autofocus (window gets focused, but not raised) or autoraise (window gets raised as if it was clicked on).
-yabai -m config focus_follows_mouse          autofocus
-yabai -m config window_topmost               off
+yabai -m config focus_follows_mouse          off
+yabai -m config window_topmost               on
 yabai -m config window_origin_display        default
 yabai -m config window_placement             second_child
-yabai -m config window_shadow                on
+yabai -m config window_shadow                off
 yabai -m config window_opacity               off
 yabai -m config window_opacity_duration      0.25
 yabai -m config window_animation_duration    0.00
@@ -41,7 +43,7 @@ yabai -m config mouse_drop_action            swap
 
 # Border settings
 yabai -m config window_border                on
-yabai -m config window_border_width          3
+yabai -m config window_border_width          2
 yabai -m config window_border_hidpi          on
 yabai -m config window_border_blur           off
 yabai -m config window_border_radius         12
@@ -107,9 +109,7 @@ yabai -m rule --add title="^Add File to Git$" manage=off
 yabai -m rule --add title="^Emacs Everywhere.*" manage=off
 
 # Set padding for spacebar
-# SPACEBAR_HEIGHT=$(spacebar -m config height)
-# yabai -m config external_bar all:0:$SPACEBAR_HEIGHT
-yabai -m config external_bar all:30:0
+yabai -m config external_bar all:33:0
 
 # Focus window to mous when windows/application is destroyed
 yabai -m signal --add event=window_destroyed action="yabai -m query --windows --window &> /dev/null || yabai -m window --focus mouse"
@@ -117,5 +117,7 @@ yabai -m signal --add event=application_terminated action="yabai -m query --wind
 yabai -m signal --add event=window_focused action="sketchybar --trigger window_focus"
 yabai -m signal --add event=window_created action="sketchybar --trigger windows_on_spaces"
 yabai -m signal --add event=window_destroyed action="sketchybar --trigger windows_on_spaces"
+
+# Necessary for fyabai fork
 
 echo "yabai configuration loaded.."
