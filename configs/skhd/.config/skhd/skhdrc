@@ -107,12 +107,13 @@
 
 # open terminal, blazingly fast compared to iTerm/Hyper
 # cmd - return : /Applications/kitty.app/Contents/MacOS/kitty --single-instance -d ~
-cmd -return : /Users/steven/dotfiles/configs/dotbin/dotbin/skhd-iterm2-new-window.sh
 cmd+shift-return : emacsclient -c -n -a '' & sleep 0.5 && yabai -m window --focus $(yabai -m query --windows | jq '[.[] | select ( .title | contains("Emacs") )][0].id')
 
 # cmd+shift-e : doom +everywhere
+cmd - return : /Users/steven/dotfiles/configs/dotbin/dotbin/skhd-iterm2-new-window.sh
 # cmd - return : /Applications/kitty.app/Contents/MacOS/kitty
 # cmd - return : alacritty msg create-window || alacritty
+# cmd - return : kitty --single-instance -d ~
 # cmd - return : open -na /Applications/Alacritty.app
 
 # ################################################################ #
@@ -254,10 +255,11 @@ shift + lctrl + cmd - l : yabai -m window --insert east
 # toggle window zoom
 # alt - d : yabai -m window --toggle zoom-parent
 # toggle fullscreen
-alt + ctrl - f : yabai -m window --toggle zoom-fullscreen
+cmd + ctrl - f : yabai -m window --toggle zoom-fullscreen
+cmd + ctrl + alt - f : yabai -m window --toggle native-fullscreen
 
 # toggle window split type
-alt - e : yabai -m window --toggle split
+cmd + ctrl - e : yabai -m window --toggle split
 
 # float / unfloat window and center on screen
 cmd + ctrl + shift - f : yabai -m window --toggle float;\

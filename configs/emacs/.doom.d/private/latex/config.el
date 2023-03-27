@@ -2,11 +2,11 @@
 (after! tex
   (load! "+functions")
   (load! "+keybindings")
-  (rainbow-delimiters-mode -1)
+  ;; (rainbow-delimiters-mode -1)
 
   ;; rainbow-delimiters mode messes up highlighting in latex
-  (after! TeX-mode
-    (add-hook 'latex-mode-hook (lambda () (rainbow-delimiters-mode -1))))
+  ;; (after! TeX-mode
+  ;;   (add-hook 'latex-mode-hook (lambda () (rainbow-delimiters-mode -1))))
 
   ;; Set latex viewer
   ;; (setq +latex-viewers '(zathura))
@@ -14,7 +14,7 @@
 
   (setq TeX-view-program-selection nil)
   (setq +latex-viewers '(pdf-tools))
-  (load! "~/.config/emacs/modules/lang/latex/+viewers")
+  (load! "~/.emacs.d/modules/lang/latex/+viewers")
 
  ;; to use pdfview with auctex
  ;; (setq TeX-view-program-selection '((output-pdf "PDF Tools"))

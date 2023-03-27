@@ -53,3 +53,6 @@ fi
 
 source ~/.bash_exports
 source ~/.bash_aliases
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+. "$HOME/.cargo/env"

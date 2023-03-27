@@ -15,9 +15,9 @@
   ;; Add all your customizations prior to loading the themes
   (setq modus-themes-italic-constructs t
         modus-themes-subtle-line-numbers nil
-        modus-themes-syntax '(green-strings yellow-comments)
+        modus-themes-common-palette-overrides '((comment yellow-cooler)
+                                                (string green-cooler))
         modus-themes-markup '(background)
-        ;; modus-themes-syntax '(faint green-strings yellow-comments)
         modus-themes-bold-constructs nil)
 
 
