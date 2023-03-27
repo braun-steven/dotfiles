@@ -48,6 +48,10 @@
 ;; `nil' to disable it:
 (setq display-line-numbers-type t)
 
+;; Titlebar dark
+(add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
+(add-to-list 'default-frame-alist '(ns-appearance . dark))
+
 
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
@@ -83,17 +87,17 @@
 (after! company
   :config
   (setq
-   company-minimum-prefix-length 2
+   company-minimum-prefix-length 3
    company-idle-delay 0.0
    company-tooltip-idle-delay 1.0))
 
 
-(after! lsp
-  ;; Fix for confusing yasnippet results in completion
-  (setq! +lsp-company-backends
-         (if (modulep! :editor snippets)
-             '(:separate company-capf company-yasnippet)
-           'company-capf)))
+;; (after! lsp
+;;   ;; Fix for confusing yasnippet results in completion
+;;   (setq! +lsp-company-backends
+;;          (if (modulep! :editor snippets)
+;;              '(:separate company-capf company-yasnippet)
+;;            'company-capf)))
 
 ;; Emacs config location
 (setq emacs-dir (file-name-as-directory "~/.doom.d"))
@@ -150,8 +154,9 @@
 (use-package! ssh-agency
   :after magit)
 
-(use-package! powerthesaurus
-  :after tex)
+;; (use-package! powerthesaurus)
+
+(use-package! powerthesaurus :after tex)
 
 ;; (after! emacs-everywhere
 ;;   (push "Mattermost" emacs-everywhere-markdown-apps)
@@ -237,3 +242,4 @@
     `(avy-lead-face-2 :weight bold :foreground "gold" :background ,(face-attribute 'default :background))
     `(avy-lead-face-3 :weight bold :foreground "yellow" :background ,(face-attribute 'default :background)))
   )
+
