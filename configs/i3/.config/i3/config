@@ -273,7 +273,8 @@ exec_always --no-startup-id setxkbmap us altgr-intl -option ctrl:nocaps
 
 # Wallpaper (needs hsetroot since xsetroot is incompatible with picom)
 # exec_always --no-startup-id hsetroot -solid "#1d2026"
-exec_always --no-startup-id feh --bg-fill ~/Downloads/wallpaper.jpg
+# exec_always --no-startup-id feh --bg-fill ~/Downloads/wallpaper.jpg
+exec_always --no-startup-id feh --bg-fill ~/Downloads/waves.jpg
 
 # locker shortcut
 # $Locker i3lock && sleep 1
@@ -448,3 +449,8 @@ bindsym XF86AudioMute        exec --no-startup-id $volumepath/volume -n -t $stat
 # gaps outer current plus 5
 # gaps horizontal current plus 40
 # gaps outer current toggle 60
+
+#Hide window title bar
+# default_border pixel 4
+# default_floating_border pixel 4
+# for_window [class="^.*"] border pixel 4

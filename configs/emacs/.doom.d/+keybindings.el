@@ -77,7 +77,7 @@
 
 
 ;; Use avy for buffer wide jumps
-(map! 
+(map!
  :nv "s" nil
  (:prefix ("s" .  "jump")
   :nv "s"   #'avy-goto-char-2
@@ -90,7 +90,8 @@
   :nv "c"   #'avy-goto-char
   :nv "t"   #'avy-goto-char-timer))
 
-
+(map!
+ :nv "gb" #'comment-box)
 
 ;; Helper function to realod the full config
 (map! :leader

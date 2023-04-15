@@ -9,6 +9,7 @@
   ;;   (add-hook 'latex-mode-hook (lambda () (rainbow-delimiters-mode -1))))
 
   ;; Set latex viewer
+  ;; (setq +latex-viewers '(evince))
   ;; (setq +latex-viewers '(zathura))
   ;; (setq +latex-viewers '(skim.app))  ;; Results in wrong-type-argument bufferp, nil error for now
 
@@ -32,7 +33,7 @@
   ;; (add-hook 'TeX-mode-hook #'(lambda () (push '("citeauthorandref" "[{") font-latex-match-reference-keywords)))
 
   (setq TeX-view-program-selection '(
-        ;; (output-pdf "Evince")
+        ;; (output-pdf "vince")
         ;; (output-pdf "Zathura")
         (output-pdf "PDF Tools")
         ((output-dvi has-no-display-manager)
