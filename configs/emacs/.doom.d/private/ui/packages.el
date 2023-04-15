@@ -10,5 +10,3 @@
 ;; (package! circadian)
 (package! auto-dark)
 
-;; ef-themes
-(package! ef-themes)

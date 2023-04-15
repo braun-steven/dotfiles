@@ -29,9 +29,10 @@ fi
 
 # Eval keychain only locally
 # NOTE: This needs to be done after the interactive if-statement
-# if [[ -z $SSH_CONNECTION ]]; then
-  # eval $(keychain --eval --quiet id_rsa id_ed25519)
-# fi
+if [[ -z $SSH_CONNECTION ]]; then
+  eval $(keychain --eval --quiet id_rsa id_ed25519)
+fi
+
 
 
 # Start tmux in ssh connections
