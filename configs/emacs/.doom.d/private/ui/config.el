@@ -9,7 +9,6 @@
 (setq sbraun/theme-dark 'doom-one)
 (setq doom-theme sbraun/theme-dark)
 
-
 (use-package! modus-themes
   :init
   ;; Add all your customizations prior to loading the themes

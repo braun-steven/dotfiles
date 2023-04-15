@@ -20,6 +20,10 @@ function pdf () {
   command evince $1 & disown
 }
 
+function loupe () {
+  command loupe $1 & disown
+}
+
 function maybe_activate_conda_env () {
 
   # Check if "conda" command is available,
