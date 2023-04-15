@@ -55,14 +55,14 @@
 ;; Misc
 ;; (package! s)
 
-;; (package! yasnippet-snippets)
+(package! yasnippet-snippets)
 (package! lorem-ipsum)
 (package! ssh-agency)
 (package! dockerfile-mode)
 (package! yaml-mode)
 
 ;; Julia LSP
-(package! lsp-julia :recipe (:host github :repo "non-jedi/lsp-julia"))
+;; (package! lsp-julia :recipe (:host github :repo "non-jedi/lsp-julia"))
 
 ;; Collection of Ridiculously Useful eXtensions for Emacs
 (package! crux)

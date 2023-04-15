@@ -423,7 +423,8 @@ nnoremap <silent> <Leader>ff :Files<CR>
 nnoremap <silent> <Leader>h :History<CR>
 
 " Jump motions
-map sw <Plug>(easymotion-bd-w)
+map sw <Plug>(easymotion-w)
+map sb <Plug>(easymotion-b)
 map sj <Plug>(easymotion-j)
 map sk <Plug>(easymotion-k)
 " }}
