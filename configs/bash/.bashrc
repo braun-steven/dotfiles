@@ -52,7 +52,17 @@ source ~/.bash_aliases
 # if [[ $(ps --no-header --pid=$PPID --format=cmd) != "zsh" ]] && [[ -z $SSH_CONNECTION ]]; then
 if [[ $(ps --no-header --pid=$PPID --format=cmd) != "fish" ]]; then
   # exec zsh
-  exec fish
+  if [[ ! -z $SSH_CONNECTION ]]; then
+    # Check if fish is available via homebrew
+    if [[ -f $HOME/homebrew/bin/fish ]]; then
+      exec $HOME/homebrew/bin/fish
+    else
+      echo "Fish shell via homebrew not found. Using zsh instead ..."
+      exec zsh
+    fi
+  else
+    exec fish
+  fi
   exit  # Exit afterward
 fi
 
