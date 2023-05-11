@@ -1,10 +1,8 @@
 #!/bin/bash
 
-# Check if an argument is provided
-if [ "$#" -ne 1 ]; then
-    echo "Usage: $0 [light|dark]"
-    exit 1
-fi
+THEME_DARK="doom_one.yaml"
+# THEME_LIGHT="solarized_light.yaml"
+THEME_LIGHT="papertheme.yaml"
 
 # Define the config file path
 CONFIG_FILE="$HOME/.config/alacritty/alacritty.yml"
@@ -15,14 +13,31 @@ if [ ! -f "$CONFIG_FILE" ]; then
     exit 1
 fi
 
-# Perform the sed replacement based on the argument
-if [ "$1" == "light" ]; then
-    sed -i 's/doom_one.yaml/papertheme.yaml/g' "$CONFIG_FILE"
-elif [ "$1" == "dark" ]; then
-    sed -i 's/papertheme.yaml/doom_one.yaml/g' "$CONFIG_FILE"
-else
-    echo "Invalid argument. Use 'light' or 'dark'."
-    exit 1
-fi
+# Function to set the theme
+set_theme() {
+    if [ "$1" == "light" ]; then
+        sed -i "s/$THEME_DARK/$THEME_LIGHT/g" "$CONFIG_FILE"
+    elif [ "$1" == "dark" ]; then
+        sed -i "s/$THEME_LIGHT/$THEME_DARK/g" "$CONFIG_FILE"
+    else
+        echo "Invalid argument. Use 'light' or 'dark'."
+        exit 1
+    fi
 
-echo "Theme changed to $1."
+    echo "Theme changed to $1."
+}
+
+# Check if an argument is provided
+if [ "$#" -eq 1 ]; then
+    set_theme "$1"
+else
+    # Get the current hour
+    current_hour=$(date +%H)
+
+    # Set the theme based on the current hour
+    if [ "$current_hour" -ge 8 ] && [ "$current_hour" -lt 21 ]; then
+        set_theme "light"
+    else
+        set_theme "dark"
+    fi
+fi

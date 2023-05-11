@@ -5,7 +5,9 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. These are the defaults.
-(setq sbraun/theme-light 'modus-operandi)
+;; (setq sbraun/theme-light 'modus-operandi)
+(setq sbraun/theme-dark 'doom-gruvbox)
+(setq doom-gruvbox-dark-variant "soft")
 (setq sbraun/theme-dark 'doom-one)
 (setq doom-theme sbraun/theme-dark)
 
@@ -13,10 +15,8 @@
   :init
   ;; Add all your customizations prior to loading the themes
   (setq modus-themes-italic-constructs t
-        modus-themes-subtle-line-numbers nil
         modus-themes-common-palette-overrides '((comment yellow-cooler)
                                                 (string green-cooler))
-        modus-themes-markup '(background)
         modus-themes-bold-constructs nil)
 
 
@@ -29,20 +29,22 @@
   )
 
 
-;; ;; Theme based on daytime/long/lat
+;; Theme based on daytime/long/lat
 ;; (use-package! circadian
 ;;         :config
-;;         (setq calendar-latitude 49.9)
-;;         (setq calendar-longitude 8.2)
-;;         (setq circadian-themes `((:sunrise . ,sbraun/theme-light)
-;;                                 (:sunset  . ,sbraun/theme-dark)))
+;;         ;; (setq calendar-latitude 49.9)
+;;         ;; (setq calendar-longitude 8.2)
+;;         ;; (setq circadian-themes `((:sunrise . ,sbraun/theme-light)
+;;         ;;                         (:sunset  . ,sbraun/theme-dark)))
+;;         (setq circadian-themes `(("8:00" . ,sbraun/theme-light)
+;;                                 ("19:30" . ,sbraun/theme-dark)))
 ;;         ;; ;; Add pdf view mode hook to enable pdf midnight mode on theme change
-;;         ;; (add-hook 'circadian-after-load-theme-hook
-;;         ;;         #'(lambda (theme)
-;;         ;;                 (if (eq theme sbraun/theme-dark )
-;;         ;;                 (add-hook 'pdf-view-mode-hook 'sbraun/enable-pdf-view-midnight-minor-mode)
-;;         ;;                 (remove-hook 'pdf-view-mode-hook 'sbraun/enable-pdf-view-midnight-minor-mode))
-;;         ;;                 ))
+;;         (add-hook 'circadian-after-load-theme-hook
+;;                 #'(lambda (theme)
+;;                         (if (eq theme sbraun/theme-dark )
+;;                         (add-hook 'pdf-view-mode-hook 'sbraun/enable-pdf-view-midnight-minor-mode)
+;;                         (remove-hook 'pdf-view-mode-hook 'sbraun/enable-pdf-view-midnight-minor-mode))
+;;                         ))
 
 ;;         ;; ;; Set a global variable to the active theme set by circadian el
 ;;         (add-hook 'circadian-after-load-theme-hook
@@ -51,7 +53,7 @@
 
 
 ;;         (circadian-setup))
-;;
+
 
 ;; (use-package! auto-dark
 ;;   :config

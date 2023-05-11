@@ -2,7 +2,7 @@
 
 # Import additional configuration files
 import:
-  - ~/.config/alacritty/themes/themes/papertheme.yaml
+  - ~/.config/alacritty/themes/themes/doom_one.yaml
 # Imports are loaded in order, skipping all missing files, with the importing
 # file being loaded last. If a field is already present in a previous import, it
 # will be replaced.

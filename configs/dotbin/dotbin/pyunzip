@@ -1,0 +1,38 @@
+#!/usr/bin/env python3
+#
+# Usage:
+# ./unzip.py path/to/your/zip/file.zip [path/to/destination/folder]
+
+import zipfile
+import argparse
+import os
+
+# Parse command-line arguments
+parser = argparse.ArgumentParser(description='Unzip a file.')
+parser.add_argument('zip_file_path', type=str, help='path to the zip file')
+parser.add_argument('destination_folder_path', type=str, nargs='?', default=os.getcwd(),
+                    help='path to the folder where the zip file will be extracted')
+args = parser.parse_args()
+
+# Open the zip file and extract its contents to the destination folder
+with zipfile.ZipFile(args.zip_file_path, 'r') as zip_ref:
+    zip_ref.extractall(args.destination_folder_path)
+
+print(f"Successfully unzipped {args.zip_file_path} to {args.destination_folder_path}.")
+
+import zipfile
+import argparse
+import os
+
+# Parse command-line arguments
+parser = argparse.ArgumentParser(description='Unzip a file.')
+parser.add_argument('zip_file_path', type=str, help='path to the zip file')
+parser.add_argument('destination_folder_path', type=str, nargs='?', default=os.getcwd(),
+                    help='path to the folder where the zip file will be extracted')
+args = parser.parse_args()
+
+# Open the zip file and extract its contents to the destination folder
+with zipfile.ZipFile(args.zip_file_path, 'r') as zip_ref:
+    zip_ref.extractall(args.destination_folder_path)
+
+print(f"Successfully unzipped {args.zip_file_path} to {args.destination_folder_path}.")
