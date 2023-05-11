@@ -2,11 +2,7 @@
 (after! tex
   (load! "+functions")
   (load! "+keybindings")
-  ;; (rainbow-delimiters-mode -1)
 
-  ;; rainbow-delimiters mode messes up highlighting in latex
-  ;; (after! TeX-mode
-  ;;   (add-hook 'latex-mode-hook (lambda () (rainbow-delimiters-mode -1))))
 
   ;; Set latex viewer
   ;; (setq +latex-viewers '(evince))
