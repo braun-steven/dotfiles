@@ -1,0 +1,2 @@
+#!/bin/bash
+i3lock -c 1d2026 && sleep 1 && systemctl suspend

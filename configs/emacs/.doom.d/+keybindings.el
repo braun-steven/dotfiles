@@ -105,3 +105,10 @@
       "fD"  nil
       :desc "Dotfiles"  "fD"  #'(lambda () (interactive) (doom-project-find-file "~/dotfiles"))
       :desc "PhD Org." "np" #'(lambda () (interactive) (doom-project-find-file "~/org/notes/phd")))
+
+(map! :leader
+      (:prefix ("P" . "powerthesaurus")
+       :desc "Synonyms" "s"  #'powerthesaurus-lookup-synonyms-dwim
+       :desc "Antonyms" "a"  #'powerthesaurus-lookup-antonyms-dwim
+       :desc "Sentence" "S"  #'powerthesaurus-lookup-sentences-dwim
+       :desc "Related" "r"  #'powerthesaurus-lookup-related-dwim))

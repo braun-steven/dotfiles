@@ -96,10 +96,16 @@ function pdf
   command evince $argv[1] & disown
 end
 
+function initconda
+  if test -f $HOME/.conda/bin/conda
+      eval $HOME/.conda/bin/conda "shell.fish" "hook" $argv | source
+  end
+end
+
 # Define maybe-activate-conda-env on variable change of PWD
 function __maybe_activate_conda_env --on-variable PWD
   # Check if "conda" command is available,
-  if not type -q conda
+  if not test -f $HOME/.conda/bin/conda
     return
   end
 
@@ -122,6 +128,7 @@ function __maybe_activate_conda_env --on-variable PWD
   # If directory name can be found in conda evironments, activate it!
   if command ls ~/.conda/envs/ | grep -q $dirname
     echo "Conda environment '$dirname' found! Activating now ..."
+    initconda
     conda activate $dirname
   end
 end
@@ -150,9 +157,3 @@ complete -c eog -k -xa "(__fish_complete_suffix gif)"
 # Enable direnv
 direnv hook fish | source
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-if test -f $HOME/.conda/bin/conda
-    eval $HOME/.conda/bin/conda "shell.fish" "hook" $argv | source
-end
-# <<< conda initialize <<<

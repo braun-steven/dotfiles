@@ -25,6 +25,6 @@ alias em="emacsclient -t -a ''"
 
 
 # Better ls
-if hash exa 2>/dev/null; then
-  alias ls='exa -l --group-directories-first --color auto'
-fi
+# if hash exa 2>/dev/null; then
+#   alias ls='exa -l --group-directories-first --color auto'
+# fi

@@ -59,3 +59,8 @@
 
         ;; Run latex on region file
         (TeX-command "LaTeX" 'TeX-region-file override-confirm)))
+
+(defun fix-latex-company ()
+  ;; from https://github.com/doomemacs/doomemacs/issues/6710
+        (interactive)
+        (setq-local company-backends '(company-reftex-labels company-reftex-citations (+latex-symbols-company-backend company-auctex-macros company-auctex-environments) (:separate company-dabbrev company-yasnippet))))
