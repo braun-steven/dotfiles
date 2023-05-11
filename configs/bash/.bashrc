@@ -45,15 +45,17 @@ if [[ $SSH_CONNECTION ]]; then
   fi
 fi
 
+source ~/.bash_exports
+source ~/.bash_aliases
+
 # Go into zsh
 # if [[ $(ps --no-header --pid=$PPID --format=cmd) != "zsh" ]] && [[ -z $SSH_CONNECTION ]]; then
-if [[ $(ps --no-header --pid=$PPID --format=cmd) != "zsh" ]]; then
-  exec zsh
+if [[ $(ps --no-header --pid=$PPID --format=cmd) != "fish" ]]; then
+  # exec zsh
+  exec fish
   exit  # Exit afterward
 fi
 
-source ~/.bash_exports
-source ~/.bash_aliases
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 . "$HOME/.cargo/env"

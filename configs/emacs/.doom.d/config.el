@@ -122,10 +122,6 @@
 ;; Load custom functions
 (load! "+functions")
 
-;; Enable rainbow delimiters in prog mode
-(use-package! rainbow-delimiters
-  :config
-  (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 
 (after! emacs-everywhere
   (add-to-list 'emacs-everywhere-markdown-windows "Mattermost"))
