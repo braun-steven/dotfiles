@@ -4,9 +4,9 @@
 
 # Set proper key repeat settings
 
-if [[ -z $SSH_CONNECTION ]]; then
-    xset r rate 250 30
-fi
+# if [[ -z $SSH_CONNECTION ]]; then
+#     xset r rate 250 30
+# fi
 
 [[ -f ~/.bashrc ]] && . ~/.bashrc
 

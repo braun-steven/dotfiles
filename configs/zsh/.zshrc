@@ -154,6 +154,8 @@ eval "$(direnv hook zsh)"
 
 export TERM=xterm-256color
 
+ulimit -n 30000  # Allow up to 30k open files at the same time
+
 ##################################
 #  MISC end                      #
 ##################################

@@ -272,9 +272,10 @@ cmd + alt - p : yabai -m window --toggle sticky;\
 
 
 # Restart yabai
-cmd + ctrl - r : /usr/bin/env osascript <<< \
-        "display notification \"Restarting Yabai\" with title \"Yabai\""; \
-        launchctl kickstart -k "gui/${UID}/homebrew.mxcl.yabai"
+# cmd + ctrl - r : /usr/bin/env osascript <<< \
+#         "display notification \"Restarting Yabai\" with title \"Yabai\""; \
+#         launchctl kickstart -k "gui/${UID}/homebrew.mxcl.yabai"
+cmd + ctrl - r : yabai --restart-service
 
 # Stacking windows
 cmd + shift - w : yabai -m window --stack east || yabai -m window --stack west
