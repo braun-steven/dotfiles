@@ -19,6 +19,7 @@ alias xresourcesconfig="$EDITOR ~/.Xresources"
 alias xresourcesreload="xrdb -merge ~/.Xresources"
 alias rsync="rsync --archive --compress-level=3 --copy-links --partial --inplace --rsh=ssh -r"
 alias ql="qlmanage -p"
+alias ipy="python -c 'import IPython; IPython.terminal.ipapp.launch_new_instance()'"
 
 # Emacsclient terminal
 alias em="emacsclient -t -a ''"

@@ -72,6 +72,9 @@
 
 (package! git-link)
 
+;; (package! typst-mode :recipe (:host github :repo "Ziqi-Yang/typst-mode.el"))
+
+
 ;; Load private module packages
 (dolist (file (directory-files "~/.doom.d/private/" t directory-files-no-dot-files-regexp))
         (load! (concat file "/packages.el")))

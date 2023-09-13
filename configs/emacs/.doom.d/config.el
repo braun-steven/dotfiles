@@ -128,9 +128,8 @@
 (after! emacs-everywhere
   (add-to-list 'emacs-everywhere-markdown-windows "Mattermost"))
 
-;; Make avy faces like vim-easymotion: no background, red to yellow foreground
-(after! avy
-  )
+;; ;; Make avy faces like vim-easymotion: no background, red to yellow foreground
+;; (after! avy)
 
 
 (use-package! doom-themes
@@ -173,7 +172,7 @@
 
 ;; Enable auto-fill-mode everywhere
 ;; TODO: Choose some sane defaults for specific modes?
-(auto-fill-mode 1)
+;; (auto-fill-mode 1)
 
 (use-package! vertico-directory
   :after vertico
@@ -185,7 +184,6 @@
 
 ;; Disable loading all known projects when opening a single project. If set to true, this may greatly reduce performance.
 (setq lsp-pyright-multi-root nil)
-
 
 
 ;; Load private modules
@@ -243,4 +241,3 @@
     `(avy-lead-face-2 :weight bold :foreground "gold" :background ,(face-attribute 'default :background))
     `(avy-lead-face-3 :weight bold :foreground "yellow" :background ,(face-attribute 'default :background)))
   )
-
