@@ -29,9 +29,9 @@ fi
 
 # Eval keychain only locally
 # NOTE: This needs to be done after the interactive if-statement
-if [[ -z $SSH_CONNECTION ]]; then
-  eval $(keychain --eval --quiet id_rsa id_ed25519)
-fi
+# if [[ -z $SSH_CONNECTION ]]; then
+#   eval $(keychain --eval --quiet id_rsa id_ed25519)
+# fi
 
 
 
@@ -50,7 +50,8 @@ source ~/.bash_aliases
 
 # Go into zsh
 # if [[ $(ps --no-header --pid=$PPID --format=cmd) != "zsh" ]] && [[ -z $SSH_CONNECTION ]]; then
-if [[ $(ps --no-header --pid=$PPID --format=cmd) != "fish" ]]; then
+if [[ $(ps -p $PPID -o command=) != "fish" ]]; then
+# if [[ $(ps --no-header --pid=$PPID --format=cmd) != "fish" ]]; then
   # exec zsh
   if [[ ! -z $SSH_CONNECTION ]]; then
     # Check if fish is available via homebrew
