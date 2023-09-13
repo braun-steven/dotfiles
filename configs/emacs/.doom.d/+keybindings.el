@@ -1,5 +1,3 @@
-;; Switch to other buffer with "SPC TAB"
-
 ;; Use F1 to open the agenda
 (map! "<f1>" #'sbraun/switch-to-agenda)
 
