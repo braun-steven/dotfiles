@@ -112,7 +112,14 @@ cmd+shift-return : emacsclient -c -n -a '' & sleep 0.5 && yabai -m window --focu
 # cmd+shift-e : doom +everywhere
 cmd - return : /Users/steven/dotfiles/configs/dotbin/dotbin/skhd-iterm2-new-window.sh
 # cmd - return : /Applications/kitty.app/Contents/MacOS/kitty
-# cmd - return : alacritty msg create-window || alacritty
+# Open alacritty window:
+# 1. try to use an exisiting alacritty server to create a new window (fastest)
+# 2. if that fails, open the alacritty app
+# 3. sleep shortly, such that yabai is able to detect the change (new window)
+# 4. focus on latest alacritty window (window with highest id). This fixes an issue where if the focus was previously not on an alacritty window (e.g. safari), the new window would open but the focus stays on the old window (e.g. safari)
+# cmd - return : alacritty msg create-window || open -na /Applications/Alacritty.app && sleep 0.5 && yabai -m window --focus $(yabai -m query --windows | jq '[.[] | select(.app == "Alacritty")] | max_by(.id) | .id')
+# cmd - return : alacritty msg create-window || open -na /Applications/Alacritty.app
+
 # cmd - return : kitty --single-instance -d ~
 # cmd - return : open -na /Applications/Alacritty.app
 
@@ -244,25 +251,28 @@ shift + cmd + alt - 8 : yabai -m window --space 13 && sketchybar --trigger windo
 shift + cmd + alt - 9 : yabai -m window --space 14 && sketchybar --trigger windows_on_spaces
 shift + cmd + alt - 0 : yabai -m window --space 15 && sketchybar --trigger windows_on_spaces
 
-cmd - q : yabai -m window --close # && yabai -m window --focus south
+cmd - q : yabai -m window --close  #  && yabai -m window --focus west
 
 # Set insertion point for focused container
-shift + lctrl + cmd - h : yabai -m window --insert west
-shift + lctrl + cmd - j : yabai -m window --insert south
-shift + lctrl + cmd - k : yabai -m window --insert north
-shift + lctrl + cmd - l : yabai -m window --insert east
+# shift + lctrl + cmd - h : yabai -m window --insert west
+# shift + lctrl + cmd - j : yabai -m window --insert south
+# shift + lctrl + cmd - k : yabai -m window --insert north
+# shift + lctrl + cmd - l : yabai -m window --insert east
+alt - h : yabai -m window --insert east
+alt - v : yabai -m window --insert south
 
 # toggle window zoom
 # alt - d : yabai -m window --toggle zoom-parent
 # toggle fullscreen
-cmd + ctrl - f : yabai -m window --toggle zoom-fullscreen
-cmd + ctrl + alt - f : yabai -m window --toggle native-fullscreen
+cmd + ctrl + shift - f : yabai -m window --toggle native-fullscreen
+# cmd + ctrl + shift - f : yabai -m window --toggle zoom-fullscreen
+# cmd + ctrl + alt - f : yabai -m window --toggle native-fullscreen
 
 # toggle window split type
 cmd + ctrl - e : yabai -m window --toggle split
 
 # float / unfloat window and center on screen
-cmd + ctrl + shift - f : yabai -m window --toggle float;\
+cmd + ctrl - f : yabai -m window --toggle float;\
           yabai -m window --grid 4:4:1:1:2:2
 
 # toggle sticky(+float), topmost, picture-in-picture
@@ -284,11 +294,11 @@ cmd + shift - e : yabai -m config layout bsp
 
 
 # Resize windows
-alt + cmd - h : yabai -m window --resize left:-100:0; \
+alt + cmd + shift - h : yabai -m window --resize left:-100:0; \
                   yabai -m window --resize right:-100:0
-alt + cmd - j : yabai -m window --resize bottom:0:100; \
+alt + cmd + shift - j : yabai -m window --resize bottom:0:100; \
                   yabai -m window --resize top:0:100
-alt + cmd - k : yabai -m window --resize top:0:-100; \
+alt + cmd + shift - k : yabai -m window --resize top:0:-100; \
                   yabai -m window --resize bottom:0:-100
-alt + cmd - l : yabai -m window --resize right:100:0; \
+alt + cmd + shift - l : yabai -m window --resize right:100:0; \
                   yabai -m window --resize left:100:0
