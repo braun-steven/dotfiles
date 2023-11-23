@@ -1,14 +1,20 @@
 #!/usr/bin/env sh
 
 # Stop yabai
-# brew services stop yabai
+brew services stop fyabai
+
+# Remove previous git directory
+rm -rf Library/Caches/Homebrew/fyabai--git/
 
 # Upgrade yabai
-# brew upgrade yabai
+brew reinstall fyabai
 
 # Update yabai sha256 sum in private yabai-sudoers file
-line="$USER ALL = (root) NOPASSWD: sha256:$(shasum -a 256 $(which yabai)) --load-sa"
+line="$USER ALL = (root) NOPASSWD: sha256:$(shasum -a 256 $(which yabai)) $(which yabai) --load-sa"
 echo $line | sudo tee /private/etc/sudoers.d/yabai
 
+# Codesign binary
+codesign -fs 'yabai-cert' /opt/homebrew/Cellar/fyabai/HEAD-*/bin/yabai
+
 # Start yabai again
-# brew services start yabai
+brew services start fyabai

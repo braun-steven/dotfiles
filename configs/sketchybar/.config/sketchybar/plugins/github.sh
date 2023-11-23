@@ -1,8 +1,8 @@
 #!/bin/bash
 
 update() {
-  source "$HOME/.config/sketchybar/colors.sh"
-  source "$HOME/.config/sketchybar/icons.sh"
+  source "$CONFIG_DIR/colors.sh"
+  source "$CONFIG_DIR/icons.sh"
 
   NOTIFICATIONS="$(gh api notifications)"
   COUNT="$(echo "$NOTIFICATIONS" | jq 'length')"
@@ -60,7 +60,7 @@ update() {
       position=popup.github.bell
       icon.background.color=$COLOR
       drawing=on
-      click_script="open $URL; sketchybar --set github.bell popup.drawing=off"
+      click_script="open \"$URL\"; sketchybar --set github.bell popup.drawing=off; sleep 5; sketchybar --trigger github.update"
     )
 
     args+=(--clone github.notification.$COUNTER github.template \
@@ -79,7 +79,9 @@ popup() {
 }
 
 case "$SENDER" in
-  "routine"|"forced") update
+  "routine"|"forced"|"github.update") update
+  ;;
+  "system_woke") sleep 10 && update # Wait for network to connect
   ;;
   "mouse.entered") popup on
   ;;
