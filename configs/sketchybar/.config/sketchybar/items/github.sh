@@ -3,9 +3,10 @@
 POPUP_CLICK_SCRIPT="sketchybar --set \$NAME popup.drawing=toggle"
 
 github_bell=(
+  padding_right=6
   update_freq=180
-  icon.font="$FONT:Bold:15.0"
   icon=$BELL
+  icon.font="$FONT:Bold:15.0"
   icon.color=$BLUE
   label=$LOADING
   label.highlight_color=$BLUE
@@ -23,11 +24,14 @@ github_template=(
   icon.background.y_offset=-12
 )
 
-sketchybar --add item github.bell right                 \
+sketchybar --add event github.update                    \
+           --add item github.bell right                 \
            --set github.bell "${github_bell[@]}"        \
            --subscribe github.bell  mouse.entered       \
                                     mouse.exited        \
                                     mouse.exited.global \
+                                    system_woke         \
+                                    github.update       \
                                                         \
            --add item github.template popup.github.bell \
            --set github.template "${github_template[@]}"

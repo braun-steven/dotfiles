@@ -26,6 +26,8 @@ spotify_cover=(
   background.image.scale=0.2
   background.image.drawing=on
   background.drawing=on
+  background.image.corner_radius=9
+  shadow=on
 )
 
 spotify_title=(
@@ -34,6 +36,7 @@ spotify_title=(
   padding_right=0
   width=0
   label.font="$FONT:Heavy:15.0"
+  label.max_chars=20
   y_offset=55
 )
 
@@ -43,6 +46,7 @@ spotify_artist=(
   padding_left=0
   padding_right=0
   width=0
+  label.max_chars=20
 )
 
 spotify_album=(
@@ -51,6 +55,7 @@ spotify_album=(
   padding_right=0
   y_offset=15
   width=0
+  label.max_chars=25
 )
 
 spotify_state=(
@@ -110,7 +115,6 @@ spotify_play=(
   background.drawing=on
   icon.padding_left=4
   icon.padding_right=5
-  icon.color=$WHITE
   updates=on
   label.drawing=off
   script="$PLUGIN_DIR/spotify.sh"
