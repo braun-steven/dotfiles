@@ -44,11 +44,11 @@ yabai -m config mouse_drop_action            swap
 
 # general space settings
 yabai -m config layout                       bsp
-yabai -m config top_padding                  3
-yabai -m config bottom_padding               3
-yabai -m config left_padding                 3
-yabai -m config right_padding                3
-yabai -m config window_gap                   7
+yabai -m config top_padding                  25
+yabai -m config bottom_padding               8
+yabai -m config left_padding                 8
+yabai -m config right_padding                8
+yabai -m config window_gap                   8
 
 # label spaces
 yabai -m space 1 --label 1
@@ -102,7 +102,7 @@ yabai -m rule --add title="^Emacs Everywhere.*" manage=off
 
 # Set padding for spacebar
 # yabai -m config external_bar all:30:0
-yabai -m config external_bar all:0:28
+yabai -m config external_bar all:3:28
 
 # Focus window to mous when windows/application is destroyed
 # yabai -m signal --add event=window_destroyed action="yabai -m query --windows --window &> /dev/null || yabai -m window --focus mouse"
@@ -118,6 +118,6 @@ yabai -m rule --add label="Safari" app="^Safari$" title="^(General|(Tab|Password
 yabai -m rule --add label="About This Mac" app="System Information" title="About This Mac" manage=off
 yabai -m rule --add label="Select file to save to" app="^Inkscape$" title="Select file to save to" manage=off
 
-borders active_color=0xff51afef inactive_color=0xff555555 width=3.0 style=round 2>/dev/null 1>&2 &
+borders active_color=0xff51afef inactive_color=0xff555555 width=4.0 style=round 2>/dev/null 1>&2 &
 
 echo "yabai configuration loaded.."
