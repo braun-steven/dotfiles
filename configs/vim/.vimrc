@@ -19,6 +19,7 @@ set clipboard+=unnamedplus
 
 " Use global replace by default (/g) to revert
 set gdefault
+
 " Set fixed popup menu height
 set pumheight=8
 
@@ -46,18 +47,8 @@ if empty(glob('~/.vim/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall | source $MYVIMRC
 endif
 
-if exists('g:started_by_firenvim')
-  set laststatus=0
-else
-  set laststatus=2
-endif
-
 " Swap file
 set directory=~/.vim/tmp
-
-
-" Disable latex-box from polyglot dependency to make vimtex usable
-let g:polyglot_disabled = ['latex', 'markdown']
 
 " Specify a directory for plugins
 " - For Neovim: ~/.local/share/nvim/plugged
@@ -66,9 +57,6 @@ let g:polyglot_disabled = ['latex', 'markdown']
 call plug#begin('~/.vim/plugged')
 " Highlight words under cursor
 Plug 'RRethy/vim-illuminate'
-
-" Make screenshots of code
-Plug 'segeljakt/vim-silicon'
 
 " Match-Up: vim matchit alternative
 Plug 'andymass/vim-matchup'
@@ -79,17 +67,11 @@ Plug 'romainl/vim-cool'
 " Additional targets
 Plug 'wellle/targets.vim'
 
-" Hex color preview
-Plug 'norcalli/nvim-colorizer.lua'
-
 " Bracket autocomplete
 Plug 'jiangmiao/auto-pairs'
 
 " Gruvbox colorscheme
 Plug 'rakr/vim-one'
-
-" Tex
-Plug 'lervag/vimtex'
 
 " Easier vim navigation
 Plug 'easymotion/vim-easymotion'
@@ -115,27 +97,10 @@ Plug 'itchyny/lightline.vim'
 
 " Add repeat support for plugins
 Plug 'tpope/vim-repeat'
-Plug 'godlygeek/tabular'
-
-" Auto dark mode
-" Plug 'f-person/auto-dark-mode.nvim'
 
 " Initialize plugin system
 call plug#end()
 
-
-"Credit joshdick
-"Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
-"If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
-"(see < http://sunaku.github.io/tmux-24bit-color.html#usage > for more information.)
-if (empty($TMUX))
-  "For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
-  "Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
-  " < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
-  if (has("termguicolors"))
-    set termguicolors
-  endif
-endif
 
 " General vim config {{{
 " Set leader key to <space> 
@@ -143,41 +108,10 @@ endif
 :let maplocalleader = ',' " Local leader key
 
 syntax on                 " Enable syntax highlighting
-" let g:gruvbox_italic=1
-" let g:gruvbox_bold=1
-" let g:gruvbox_contrast_dark='soft'
-" let g:gruvbox_contrast_light='medium'
-" if strftime('%H') >= 7 && strftime('%H') < 19
-"   set background=light
-" else
-"   set background=dark
-"   let g:oceanic_next_terminal_bold = 1
-"   let g:oceanic_next_terminal_italic = 1
-"   colorscheme OceanicNext
-" endif
-
 
 " {{{ Colorscheme
 set background=dark
 colorscheme one
-
-" lua <<EOF
-" local auto_dark_mode = require('auto-dark-mode')
-
-" auto_dark_mode.setup({
-" 	update_interval = 1000,
-" 	set_dark_mode = function()
-" 		vim.api.nvim_set_option('background', 'dark')
-" 		vim.cmd('colorscheme one')
-" 	end,
-" 	set_light_mode = function()
-" 		vim.api.nvim_set_option('background', 'light')
-" 		vim.cmd('colorscheme gruvbox')
-" 	end,
-" })
-" auto_dark_mode.init()
-" EOF
-
 " }}}
 
 " {{{ Native Editor Settings
@@ -207,9 +141,6 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
-" Duplicate line and comment out the upper one
-nmap yp yypkgcc
-
 " Keep visual mode while indenting
 vnoremap < <gv
 vnoremap > >gv
@@ -234,119 +165,14 @@ let g:lightline.subseparator = {
       \}
 " }}}
 
-" FZF {{{
-let g:fzf_colors =
-      \ { 'fg':      ['fg', 'Normal'],
-      \ 'bg':      ['bg', 'Normal'],
-      \ 'hl':      ['fg', 'Comment'],
-      \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-      \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-      \ 'hl+':     ['fg', 'Statement'],
-      \ 'info':    ['fg', 'PreProc'],
-      \ 'border':  ['fg', 'Ignore'],
-      \ 'prompt':  ['fg', 'Conditional'],
-      \ 'pointer': ['fg', 'Exception'],
-      \ 'marker':  ['fg', 'Keyword'],
-      \ 'spinner': ['fg', 'Label'],
-      \ 'header':  ['fg', 'Comment'] }
-
-" Insert mode completion
-imap <c-x><c-k> <plug>(fzf-complete-word)
-imap <c-x><c-f> <plug>(fzf-complete-path)
-imap <c-x><c-j> <plug>(fzf-complete-file-ag)
-imap <c-x><c-l> <plug>(fzf-complete-line)
-
-
-" floating fzf
-if has('nvim')
-  " let $FZF_DEFAULT_OPTS .= ' --layout=reverse'
-
-  function! FloatingFZF()
-    let buf = nvim_create_buf(v:false, v:true)
-
-   " here be dragoons
-    let height = &lines
-    let width = float2nr(&columns - (&columns * 2 / 10))
-    let col = float2nr((&columns - width) / 2)
-    let col_offset = &columns / 10
-    let opts = {
-          \ 'relative': 'editor',
-          \ 'row': height / 2,
-          \ 'col': col + col_offset,
-          \ 'width': width * 2 / 1,
-          \ 'height': height / 2
-          \ }
-
-    let win = nvim_open_win(buf, v:true, opts)
-   " uncomment this if you want a normal background color for the fzf window
-    "call setwinvar(win, '&winhighlight', 'NormalFloat:Normal')
-    call setwinvar(win, '&winhl', 'NormalFloat:Pmenu')
-
-  " this is to remove all line numbers and so on from the window
-    setlocal
-          \ buftype=nofile
-          \ nobuflisted
-          \ bufhidden=hide
-          \ nonumber
-          \ norelativenumber
-          \ signcolumn=no
-  endfunction
-
-  let g:fzf_layout = { 'window': 'call FloatingFZF()' }
-endif
-
-function! s:fzf_statusline()
-  " Override statusline as you like
-  highlight fzf1 ctermfg=161 ctermbg=251
-  highlight fzf2 ctermfg=23 ctermbg=251
-  highlight fzf3 ctermfg=237 ctermbg=251
-  setlocal statusline=%#fzf1#\ >\ %#fzf2#fz%#fzf3#f
-endfunction
-
-autocmd! User FzfStatusLine call <SID>fzf_statusline()
-" }}}
-
-
-" Use arrow keys for resizing
-nnoremap <Up>    :resize +2<CR>
-nnoremap <Down>  :resize -2<CR>
-nnoremap <Left>  :vertical resize +2<CR>
-nnoremap <Right> :vertical resize -2<CR>
-
 
 " EasyMotion {{{
 let g:EasyMotion_do_mapping = 0 " Disable default mappings
 let g:EasyMotion_smartcase = 1
 " }}}
 
-" Customize fzf colors to match your color scheme
-autocmd! FileType fzf
-autocmd  FileType fzf set laststatus=0 noshowmode noruler
-      \| autocmd BufLeave <buffer> set laststatus=2 noshowmode ruler
-
-
 " Disable trailing spaces warning
 let g:python_highlight_space_errors=0
-
-" LaTeX {{{
-
-let g:tex_flavor='latex'
-let g:vimtex_view_method='zathura'
-let g:vimtex_quickfix_mode=0
-" set conceallevel=1
-" let g:tex_conceal='abdmg'
-
-
-" LaTeX bindings {{{
-augroup latexbindings
-  autocmd! latexbindings
-  autocmd Filetype tex inoremap <buffer> <silent> _ _{}<Left>
-  autocmd Filetype tex inoremap <buffer> <silent> ^ ^{}<Left>
-
-  " autocmd BufWritePost *.tex execute ':!pdflatex %'
-augroup end
-" }}}
-
 
 " Run make on <F9>
 nnoremap <F9> :make<CR>
@@ -379,16 +205,6 @@ augroup pythonbindings
 augroup end
 " }}}
 
-" UtilSnips {{{
-let g:UltiSnipsExpandTrigger = '<c-s>'
-let g:UltiSnipsJumpForwardTrigger = '<c-b>'
-let g:UltiSnipsJumpBackwardTrigger = '<c-z>'
-let g:UltiSnipsSnippetDirectories=["UltiSnips"]
-let g:ultisnips_python_style="google"
-" If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit="vertical"
-" }}}
-
 
 " CTRL-C doesn't trigger the InsertLeave autocmd . map to <ESC> instead.
 inoremap <c-c> <ESC>
@@ -414,6 +230,10 @@ nnoremap <silent> <Leader>bb :Buffers<CR>
 nnoremap <silent> <Leader>bd :bd<CR>
 nnoremap <silent> <Leader>w/ :vsplit<CR>
 nnoremap <silent> <Leader>w- :split<CR>
+nnoremap <silent> <Leader>wl <C-W><C-L>
+nnoremap <silent> <Leader>wj <C-W><C-J>
+nnoremap <silent> <Leader>wk <C-W><C-K>
+nnoremap <silent> <Leader>wh <C-W><C-H>
 nnoremap <silent> <Leader>/ :Ag<CR>
 nnoremap <silent> <Leader>sp :Lines<CR>
 nnoremap <silent> <Leader>sb :BLines<CR>
@@ -434,126 +254,13 @@ nnoremap n nzz
 nnoremap N Nzz
 " }}}
 
-" Vim workspace {{{
-nnoremap <leader>s :ToggleWorkspace<CR>
-let g:workspace_session_directory = $HOME . '/.vim/sessions/'
-let g:workspace_autosave = 0
-let g:workspace_autosave_untrailspaces = 0
-" }}}
-
 " Vim cool{{{
 let g:CoolTotalMatches = 1
 " }}}
 
-" function! s:check_back_space() abort "{{{
-"   let col = col('.') - 1
-"   return !col || getline('.')[col - 1]  =~ '\s'
-" endfunction"}}}
-" inoremap <silent><expr> <TAB>
-"       \ pumvisible() ? "\<C-n>" :
-"       \ <SID>check_back_space() ? "\<TAB>" :
-"       \ deoplete#manual_complete()
-" inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-" " Deoplete {{{
-" let g:deoplete#enable_at_startup = 1
-" let g:deoplete#enable_ignore_case = 1
-" let g:deoplete#enable_smart_case = 1
-" let g:deoplete#sources#jedi#enable_typeinfo = 1
-" let g:deoplete#sources#jedi#show_docstring = 1
-" " Disable autocompletion (using deoplete instead)
-" let g:jedi#completions_enabled = 0
-" set completeopt-=preview
-let g:python_host_prog = '/usr/bin/python'
-let g:python3_host_prog = '/usr/bin/python3'
-" " }}}
-" " Echodoc {{{
-" let g:echodoc#enable_at_startup = 1
-" let g:echodoc#type = "floating"
-" " }}}
-" " Jedi {{{
-" let g:jedi#rename_command = "<leader>r"
-" let g:jedi#auto_close_doc = 1
-" let g:jedi#usages_command = "gu"
-" let g:jedi#goto_command = "gd"
-" " Disable since deoplete is enabled
-" let g:jedi#auto_initialization = 1
-" let g:jedi#completions_enabled = 0
-" let g:jedi#auto_vim_configuration = 0
-" let g:jedi#smart_auto_mappings = 0
-" let g:jedi#popup_on_dot = 0
-" let g:jedi#completions_command = ""
-" let g:jedi#show_call_signatures = "1"
-" let g:jedi#show_call_signatures_modes = 'ni'  " ni = also in normal mode
-" " }}}
-
-if has('nvim')
-  lua require'colorizer'.setup()
-endif
-
-
-" Doge document generator {{{
-let g:doge_doc_standard_python = 'google'
-let g:doge_mapping='<Leader>d'
-" }}}
-
-" Silicon {{{
-let g:silicon = {
-      \ 'theme':              'TwoDark',
-      \ 'font':                  'Hack',
-      \ 'background':         '#7c6f64',
-      \ 'shadow-color':       '#555555',
-      \ 'line-pad':                   2,
-      \ 'pad-horiz':                 10,
-      \ 'pad-vert':                 20,
-      \ 'shadow-blur-radius':         0,
-      \ 'shadow-offset-x':            0,
-      \ 'shadow-offset-y':            0,
-      \ 'line-number':           v:true,
-      \ 'round-corner':          v:true,
-      \ 'window-controls':       v:false,
-      \ }
-" }}}
-
-
-" Gradle syntax highlighting
-au BufNewFile,BufRead *.gradle setf groovy
-
-" Sync
-nnoremap <leader><leader>s :w<CR>:!./sync.sh<CR>
-" Run
-nnoremap <leader><leader>r :w<CR>:!./run.sh<CR>
-
-" {{{ Enable CUDA filetype
-au BufNewFile,BufRead *.cu set ft=cuda
-au BufNewFile,BufRead *.cuh set ft=cuda
-" }}}
 
 " {{{ Vim Illuminate 
 " Time in milliseconds (default 250)
 let g:Illuminate_delay = 250
 let g:Illuminate_ftblacklist = ['nerdtree', 'python']
 " }}}
-
-
-
-function MyCustomHighlights()
-    hi semshiGlobal      ctermfg=red guifg=#BF616A
-    hi semshiLocal           ctermfg=209 guifg=#D08770
-    hi semshiGlobal          ctermfg=214 guifg=#EBCB8B
-    hi semshiImported        ctermfg=214 guifg=#EBCB8B 
-    hi semshiParameter       ctermfg=75  guifg=#B48EAD
-    hi semshiParameterUnused ctermfg=117 guifg=#6d7991 cterm=underline gui=underline
-    hi semshiFree            ctermfg=218 guifg=#B48EAD
-    hi semshiBuiltin         ctermfg=207 guifg=#88C0D0
-    hi semshiAttribute       ctermfg=49  guifg=#8FBCBB
-    hi semshiSelf            ctermfg=249 guifg=#D8DEE9
-    hi semshiUnresolved      ctermfg=226 guifg=#EBCB8B cterm=underline gui=underline
-    hi semshiSelected        ctermfg=231 guifg=#ECEFF4 ctermbg=161 guibg=#6d7991
-
-    hi semshiErrorSign       ctermfg=231 guifg=#ECEFF4 ctermbg=160 guibg=#BF616A
-    hi semshiErrorChar       ctermfg=231 guifg=#ECEFF4 ctermbg=160 guibg=#BF616A
-    sign define semshiError text=E> texthl=semshiErrorSign
-endfunction
-autocmd FileType python call MyCustomHighlights()
-autocmd ColorScheme * call MyCustomHighlights()
