@@ -124,7 +124,7 @@ bindsym $mod+7 workspace number 7 zoom
 bindsym $mod+8 workspace number 8 spotify
 bindsym $mod+9 workspace number 9 mail+cal
 bindsym $mod+0 workspace number 10 chat
-bindsym $mod+y workspace number 11 (y)
+bindsym $mod+y workspace number 11 ChatGPT (y)
 bindsym $mod+u workspace number 12 (u)
 bindsym $mod+i workspace number 13 (i)
 bindsym $mod+o workspace number 14 (o)
@@ -144,7 +144,7 @@ bindsym $mod+Shift+7 move container to workspace number 7 zoom
 bindsym $mod+Shift+8 move container to workspace number 8 spotify
 bindsym $mod+Shift+9 move container to workspace number 9 mail+cal
 bindsym $mod+Shift+0 move container to workspace number 10 chat
-bindsym $mod+Shift+y move container to workspace number 11 (y)
+bindsym $mod+Shift+y move container to workspace number 11 ChatGPT (y)
 bindsym $mod+Shift+u move container to workspace number 12 (u)
 bindsym $mod+Shift+i move container to workspace number 13 (i) 
 bindsym $mod+Shift+o move container to workspace number 14 (o) 
@@ -288,7 +288,7 @@ exec --no-startup-id blueberry-tray &
 # Start pulseaudio controls with mod+p in floating mode
 # Use create-window to reduce alacritty startup time
 # Use -t "Pulse" after "create-window" to correctly set title
-bindsym $mod+Ctrl+p exec --no-startup-id alacritty msg create-window -t "PULSE" -e 'pulsemixer'
+bindsym $mod+Ctrl+p exec --no-startup-id alacritty msg create-window -t "PULSE" -e 'pulsemixer' || alacritty -t "PULSE" -e 'pulsemixer'
 bindsym $mod+Ctrl+s exec --no-startup-id rofi-set-audio-sink
 # bindsym $mod+Ctrl+N exec --no-startup-id pactl set-default-sink alsa_output.pci-0000_08_00.4.analog-stereo
 
