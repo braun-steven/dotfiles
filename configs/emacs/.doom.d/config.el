@@ -91,7 +91,7 @@
 ;; Company config
 (after! company
   (setq
-   company-minimum-prefix-length 3
+   company-minimum-prefix-length 2
    company-idle-delay 0.0
    company-tooltip-idle-delay 1.0)
   ;; Set text mode backends to yasnippet only (removes company-dabbrev and company-ispell since they spam the completion list)
