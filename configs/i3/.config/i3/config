@@ -180,10 +180,6 @@ workspace 15 output $secondmon
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Ctrl+r restart
 
-bindsym $mod+Ctrl+1 exec "bash ~/.screenlayout/office-lid-closed.sh && sleep 1 && i3 'restart'"
-bindsym $mod+Ctrl+2 exec "bash ~/.screenlayout/thinkpad.sh && sleep 1 && i3 'restart'"
-bindsym $mod+Ctrl+3 exec "bash ~/.screenlayout/office-lid-open.sh && sleep 1 && i3 'restart'"
-
 # Menu for lock logout etc.
 set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
 mode "$mode_system" {
@@ -274,7 +270,7 @@ exec_always --no-startup-id setxkbmap us altgr-intl -option ctrl:nocaps
 # Wallpaper (needs hsetroot since xsetroot is incompatible with picom)
 # exec_always --no-startup-id hsetroot -solid "#1d2026"
 # exec_always --no-startup-id feh --bg-fill ~/Downloads/wallpaper.jpg
-exec_always --no-startup-id feh --bg-fill ~/Downloads/waves.jpg
+exec_always --no-startup-id feh --bg-fill ~/blobs-d.jpg
 
 # locker shortcut
 # $Locker i3lock && sleep 1
@@ -343,7 +339,7 @@ for_window [class=.*] border normal 4
 bar {
     status_command i3status
     position top
-    tray_output primary
+    tray_output DP-4
 }
 
 # Some startup stuff
@@ -413,7 +409,13 @@ bindsym XF86AudioMute        exec --no-startup-id $volumepath/volume -n -t $stat
 # gaps horizontal current plus 40
 # gaps outer current toggle 60
 
-#Hide window title bar
+# Hide window title bar
 # default_border pixel 4
 # default_floating_border pixel 4
 # for_window [class="^.*"] border pixel 4
+
+# Set keyboard layout
+exec_always --no-startup-id setxkbmap us altgr-intl
+
+# Set keyboard repeat rate
+exec_always --no-startup-id xset r rate 200 40
