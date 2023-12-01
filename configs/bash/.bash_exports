@@ -33,6 +33,9 @@ export PATH="$PATH:/opt/homebrew/bin"  # homebrew
 export PATH="$PATH:$HOME/Library/Python/3.9/bin"  # homebrew
 export PATH="$PATH:/Library/TeX/texbin"  # latex stuff (latexmk)
 
+# Fix QT Apps on High DPI screens (e.g. Zoom)
+export QT_SCALE_FACTOR=0.75
+
 # If we have an ssh connection, export the docker host
 if [[ ! -z $SSH_CONNECTION ]]; then
   export DOCKER_HOST="unix:///run/user/$(id -u)/docker.sock"

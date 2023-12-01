@@ -4,6 +4,7 @@
 ! These might also be useful depending on your monitor and personal preference:
 ! 144 = 150% scaling
 Xft.dpi:144
+/* Xft.dpi:120 */
 Xcursor.size: 32
 Xft.autohint: 0
 Xft.lcdfilter:  lcddefault
