@@ -52,6 +52,14 @@
  '(pdf-view-midnight-colors (cons "#bbc2cf" "#282c34"))
  '(rustic-ansi-faces
    ["#282c34" "#ff6c6b" "#98be65" "#ECBE7B" "#51afef" "#c678dd" "#46D9FF" "#bbc2cf"])
+ '(safe-local-variable-values
+   '((org-roam-graph-exclude-patterns "session_notes")
+     (org-roam-graph-exclude-patterns quote
+      ("session_notes"))
+     (org-roam-graph-exclude-patterns
+      '("session_notes"))
+     (org-roam-db-location . "/Users/steven/org/pathfinder-blood-lords/org-roam.db")
+     (org-roam-directory . "/Users/steven/org/pathfinder-blood-lords")))
  '(vc-annotate-background "#282c34")
  '(vc-annotate-background-mode nil)
  '(vc-annotate-color-map

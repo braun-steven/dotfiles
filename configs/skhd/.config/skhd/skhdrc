@@ -251,15 +251,15 @@ shift + cmd + alt - 8 : yabai -m window --space 13
 shift + cmd + alt - 9 : yabai -m window --space 14
 shift + cmd + alt - 0 : yabai -m window --space 15
 
-cmd - q : yabai -m window --close  #  && yabai -m window --focus west
+cmd - q : yabai -m window --close
 
 # Set insertion point for focused container
 # shift + lctrl + cmd - h : yabai -m window --insert west
 # shift + lctrl + cmd - j : yabai -m window --insert south
 # shift + lctrl + cmd - k : yabai -m window --insert north
 # shift + lctrl + cmd - l : yabai -m window --insert east
-alt - h : yabai -m window --insert east
-alt - v : yabai -m window --insert south
+cmd + alt - h : yabai -m window --insert east
+cmd + alt - v : yabai -m window --insert south
 
 # toggle window zoom
 # alt - d : yabai -m window --toggle zoom-parent
