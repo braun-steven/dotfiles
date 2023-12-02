@@ -1,40 +1,35 @@
 #!/bin/sh
 
-text=$1
-curr_number=$(i3-msg -t get_workspaces  | jq '.[] | select(.focused==true).name' | cut -d"\"" -f2 | cut -d" " -f1)
-new_name=$(rofi -dmenu -lines 0 -p 'New name')
+# Fetch the current workspace number
+current_workspace_number=$(i3-msg -t get_workspaces | jq '.[] | select(.focused==true).name' | cut -d"\"" -f2 | cut -d" " -f1)
 
-# Exit early if new_name is empty
-if [ -z "$new_name" ]; then
+# Prompt for a new workspace name
+new_workspace_name=$(rofi -dmenu -lines 0 -p 'New name')
+
+# Check if the input from rofi is empty and exit early if it is
+if [ -z "$new_workspace_name" ]; then
+    echo "No new name provided. Exiting."
     exit 0
 fi
 
+# Function to append a specific character based on the workspace number
+get_appendix_for_workspace() {
+    local workspace_number=$1
+    case $workspace_number in
+        11) echo " (y)" ;;
+        12) echo " (u)" ;;
+        13) echo " (i)" ;;
+        14) echo " (o)" ;;
+        15) echo " (p)" ;;
+        *) echo "" ;;
+    esac
+}
 
-# Appending specific character based on workspace number
-case $curr_number in
-    11)
-        append="(y)"
-        ;;
-    12)
-        append="(u)"
-        ;;
-    13)
-        append="(i)"
-        ;;
-    14)
-        append="(o)"
-        ;;
-    15)
-        append="(p)"
-        ;;
-    *)
-        append=""
-        ;;
-esac
+# Determine the character to append
+appendix=$(get_appendix_for_workspace "$current_workspace_number")
 
-# Constructing the new workspace name
-full_name="${curr_number} ${new_name} ${append}"
+# Construct the new workspace name
+full_workspace_name="${current_workspace_number} ${new_workspace_name}${appendix}"
 
-echo "current number: $curr_number"
-echo "new name: $full_name"
-i3-msg "rename workspace to \"$full_name\""
+# Rename the workspace
+i3-msg "rename workspace to \"$full_workspace_name\""
