@@ -109,6 +109,8 @@ call plug#end()
 
 syntax on                 " Enable syntax highlighting
 
+set termguicolors
+
 " {{{ Colorscheme
 set background=dark
 colorscheme one
