@@ -21,7 +21,24 @@
          :unnarrowed t)
         ))
 
+
 (after! org-roam
+        (use-package! websocket
+        :after org-roam)
+
+        (use-package! org-roam-ui
+        :after org-roam ;; or :after org
+        ;;         normally we'd recommend hooking orui after org-roam, but since org-roam does not have
+        ;;         a hookable mode anymore, you're advised to pick something yourself
+        ;;         if you don't care about startup time, use
+        ;;  :hook (after-init . org-roam-ui-mode)
+        :config
+        (setq org-roam-ui-sync-theme t
+                org-roam-ui-follow t
+                org-roam-ui-update-on-save t
+                org-roam-ui-open-on-start t))
+
+
         (defcustom org-roam-graph-exclude-patterns '()
         "List of patterns to exclude from the Org-roam graph.
         Nodes with file names or titles matching any pattern in this list will be excluded."
@@ -49,6 +66,7 @@
                 (if (or (matches-exclude-pattern file)
                         (matches-exclude-pattern title))
                 (push id excluded-nodes) ;; Add to excluded list
+                (message "Excluding node: %s" title)
                 (puthash id (org-roam-node-create :file file :id id :title title) nodes-table))) ;; Add to nodes table
 
         (with-temp-buffer
@@ -80,3 +98,10 @@
                 (insert "}")
                 (buffer-string)))))
         )
+
+(defun sbraun/open-pathfinder-session-notes ()
+  "Open the Pathfinder 2E Blood Lords session notes."
+  (interactive)
+  (let ((file-path (expand-file-name "org/pathfinder-blood-lords/20231124162340-pathfinder_2e_blood_lords_session_notes.org"
+                                     (getenv "HOME"))))
+    (find-file file-path)))
