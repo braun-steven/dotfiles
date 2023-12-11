@@ -1,14 +1,3 @@
-;; Use F1 to open the agenda
-(map! "<f1>" #'sbraun/switch-to-agenda)
-
-;; Use F2 to open agenda selection
-(map! "<f2>" #'sbraun/switch-to-agenda-phd)
-
-(map! "C-S-h" #'evil-window-left
-      "C-S-j" #'evil-window-down
-      "C-S-k" #'evil-window-up
-      "C-S-l" #'evil-window-right)
-
 ;; Completion at point
 ;; (map! :nvi "C-SPC" #'company-capf)
 
@@ -37,19 +26,6 @@
 
 (map! :leader (:prefix "p" :desc "Sync Project" "S" #'sbraun/sync-project))
 
-;; More sophisticated "paste"
-(map! "M-p" #'helm-show-kill-ring)
-
-;; Utils
-(map! :leader
-      "U" nil ;; unbind first
-
-      (:prefix ("U" . "utils")
-       :desc "Search Google" "g" #'counsel-search ;; needs 'surfraw' binary
-       ;; :desc "Search Google" "g" #'helm-google-suggest ;; needs 'surfraw' binary
-       :desc "top" "t" #'helm-top
-       :desc "kill-ring" "y" #'helm-show-kill-ring))
-
 ;; Buffers
 (map!
  ;; :leader (:prefix "b" "m" nil)
@@ -57,11 +33,6 @@
 
       :leader (:prefix "b" "s" nil)
       :leader (:prefix "b" :desc "Messages" "s" #'(lambda () (interactive) (switch-to-buffer "*scratch*"))))
-
-;;       :leader (:prefix "b" "b" nil)
-;;       :leader (:prefix "b" :desc "Workspace Buffers" "b" #'+ivy/switch-workspace-buffer)
-;;       :leader (:prefix "b" :desc "All Buffers" "a" #'+ivy/switch-buffer))
-
 
 ;; Windows
 (map! :leader
