@@ -98,6 +98,13 @@ Plug 'itchyny/lightline.vim'
 " Add repeat support for plugins
 Plug 'tpope/vim-repeat'
 
+" Github Copilot
+Plug 'github/copilot.vim'
+
+" Neovim lsp config
+Plug 'neovim/nvim-lspconfig'
+
+
 " Initialize plugin system
 call plug#end()
 
