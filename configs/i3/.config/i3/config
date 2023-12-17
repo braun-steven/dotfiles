@@ -288,7 +288,7 @@ bindsym $mod+$mod2+Ctrl+s exec --no-startup-id systemctl suspend  # Calling $Loc
 bindsym $mod+$mod2+Ctrl+l exec --no-startup-id $Locker
 
 # Emacs anywhere
-bindsym $mod+Shift+e exec doom +everywhere
+bindsym $mod+Shift+e exec ~/.emacs.d/bin/doom +everywhere
 for_window [class="Emacs" title="^Emacs Everywhere.*"] floating enable, resize set 1280x768
 
 # Basic bar configuration using the Base16 variables.
