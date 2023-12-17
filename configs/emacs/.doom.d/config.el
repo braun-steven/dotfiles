@@ -33,9 +33,9 @@
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
 (if (eq system-type 'darwin)
-        (setq doom-font (font-spec :family "Hack" :size 14.0))  ;; MacOS
-        (setq doom-font (font-spec :family "Hack" :size 11.0))  ;; Linux
-)
+    (setq doom-font (font-spec :family "Hack" :size 14.0))  ;; MacOS
+  (setq doom-font (font-spec :family "Hack" :size 11.0))  ;; Linux
+  )
 ;; (setq doom-font (font-spec :family "Consolas" :size 12.0))
 ;; (setq doom-font (font-spec :family "Inconsolata" :size 13.0))
 ;; (setq doom-font (font-spec :family "Iosevka" :size 20))
@@ -51,7 +51,7 @@
 
 ;; If you want to change the style of line numbers, change this to `relative' or
 ;; `nil' to disable it:
-(setq display-line-numbers-type t)
+(setq display-line-numbers-type nil)
 
 ;; Titlebar dark
 (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
@@ -227,18 +227,33 @@
 
 (add-hook 'projectile-after-switch-project-hook #'activate-project-conda-env-maybe)
 
+(use-package! evil-motion-trainer
+  :config
+  (global-evil-motion-trainer-mode 1)
+  (setq evil-motion-trainer-threshold 5))
+
+;; Typst
+(use-package! typst-ts-mode
+  :custom
+  (typst-ts-mode-watch-options "--open"))
+
 (use-package! avy
   :config
   ;; Avy settings
-(setq avy-orders-alist
-      '((avy-goto-char . avy-order-closest)
-        (avy-goto-word-0 . avy-order-closest)
-        (avy-goto-char-2 . avy-order-closest)
-        (avy-goto-char-timer . avy-order-closest)))
-(custom-set-faces!
+  (setq avy-orders-alist
+        '((avy-goto-char . avy-order-closest)
+          (avy-goto-word-0 . avy-order-closest)
+          (avy-goto-char-2 . avy-order-closest)
+          (avy-goto-char-timer . avy-order-closest)))
+  (setq avy-single-candidate-jump t)
+  (custom-set-faces!
     `(avy-lead-face :weight bold :foreground "red" :background ,(face-attribute 'default :background))
     `(avy-lead-face-0 :weight bold :foreground "dark orange" :background ,(face-attribute 'default :background))
     `(avy-lead-face-1 :weight bold :foreground "orange" :background ,(face-attribute 'default :background))
     `(avy-lead-face-2 :weight bold :foreground "gold" :background ,(face-attribute 'default :background))
     `(avy-lead-face-3 :weight bold :foreground "yellow" :background ,(face-attribute 'default :background)))
   )
+
+(after! lsp-mode
+  ;; https://github.com/emacs-lsp/lsp-mode/issues/3577#issuecomment-1709232622
+  (delete 'lsp-terraform lsp-client-packages))

@@ -2,8 +2,8 @@ import pdb
 class Config(pdb.DefaultConfig):
     sticky_by_default = True
     editor = "vim"
-    # pygments_formatter_class = "pygments.formatters.TerminalTrueColorFormatter"
-    # pygments_formatter_kwargs = {"style": "solarized-light"}
+    pygments_formatter_class = "pygments.formatters.TerminalTrueColorFormatter"
+    pygments_formatter_kwargs = {"style": "solarized-light"}
 
     def __init__(self):
         try:
