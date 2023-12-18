@@ -229,7 +229,9 @@
 
 (use-package! evil-motion-trainer
   :config
-  (global-evil-motion-trainer-mode 1)
+
+  ;; Enable evil-motion-trainer-mode for all programming modes
+  (add-hook 'prog-mode-hook 'evil-motion-trainer-mode)
   (setq evil-motion-trainer-threshold 5))
 
 ;; Typst
