@@ -80,7 +80,7 @@
   ;; :custom
   ;; (typst-ts-mode-watch-options "--open"))
 
-(package! evil-motion-trainer :recipe (:host github :repo "martinbaillie/evil-motion-trainer"))
+;; (package! evil-motion-trainer :recipe (:host github :repo "martinbaillie/evil-motion-trainer"))
 
 ;; Load private module packages
 (dolist (file (directory-files "~/.doom.d/private/" t directory-files-no-dot-files-regexp))
