@@ -1,1 +1,0 @@
-/home/steven/dotfiles/configs/vim/.vimrc
