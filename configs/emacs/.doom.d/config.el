@@ -227,12 +227,9 @@
 
 (add-hook 'projectile-after-switch-project-hook #'activate-project-conda-env-maybe)
 
-(use-package! evil-motion-trainer
-  :config
-
-  ;; Enable evil-motion-trainer-mode for all programming modes
-  (add-hook 'prog-mode-hook 'evil-motion-trainer-mode)
-  (setq evil-motion-trainer-threshold 5))
+(use-package! magit-todos
+  :after magit
+  :config (magit-todos-mode 1))
 
 ;; Typst
 (use-package! typst-ts-mode

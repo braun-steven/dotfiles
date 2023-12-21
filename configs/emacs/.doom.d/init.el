@@ -20,8 +20,8 @@
        ;;japanese
 
        :completion
-       (company +childframe)            ; the ultimate code completion backend
-       ;; corfu
+       ;; (company +childframe)            ; the ultimate code completion backend
+       (corfu +icons +dict)
        ;; (helm +fuzzy)              ; the *other* search engine for love and life
        ;;ido               ; the other *other* search engine...
        ;; (ivy +icons +prescient)               ; a search engine for love and life
