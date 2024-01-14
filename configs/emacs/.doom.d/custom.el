@@ -53,32 +53,19 @@
  '(rustic-ansi-faces
    ["#282c34" "#ff6c6b" "#98be65" "#ECBE7B" "#51afef" "#c678dd" "#46D9FF" "#bbc2cf"])
  '(safe-local-variable-values
-   '((org-roam-graph-exclude-patterns quote
-                                      ("Session"))
+   '((eval setq org-roam-db-location
+      (expand-file-name "org/notes/org-roam.db"
+       (getenv "HOME")))
+     (eval setq org-roam-directory
+      (expand-file-name "org/notes"
+                        (getenv "HOME")))
      (org-roam-graph-exclude-patterns "Session")
      (eval setq org-roam-db-location
-           (expand-file-name "org/notes/org-roam.db"
-                             (getenv "HOME")))
+      (expand-file-name "org/pathfinder-blood-lords/org-roam.db"
+                        (getenv "HOME")))
      (eval setq org-roam-directory
-           (expand-file-name "org/notes"
-                             (getenv "HOME")))
-     (org-roam-graph-exclude-patterns "session_notes" "campaign")
-     (eval setq org-roam-db-location
-           (expand-file-name "org/pathfinder-blood-lords/org-roam.db"
-                             (getenv "HOME")))
-     (eval setq org-roam-directory
-           (expand-file-name "org/pathfinder-blood-lords"
-                             (getenv "HOME")))
-     (org-roam-graph-exclude-patterns "session_notes" "pathfinder")
-     (org-roam-db-location . "/home/steven/org/pathfinder-blood-lords/org-roam.db")
-     (org-roam-directory . "/home/steven/org/pathfinder-blood-lords")
-     (org-roam-graph-exclude-patterns "session_notes")
-     (org-roam-graph-exclude-patterns quote
-                                      ("session_notes"))
-     (org-roam-graph-exclude-patterns
-      '("session_notes"))
-     (org-roam-db-location . "/Users/steven/org/pathfinder-blood-lords/org-roam.db")
-     (org-roam-directory . "/Users/steven/org/pathfinder-blood-lords")))
+      (expand-file-name "org/pathfinder-blood-lords"
+                        (getenv "HOME")))))
  '(vc-annotate-background "#282c34")
  '(vc-annotate-background-mode nil)
  '(vc-annotate-color-map
