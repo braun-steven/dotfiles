@@ -20,6 +20,7 @@
        ;;japanese
 
        :completion
+       ;; company            ; the ultimate code completion backend
        ;; (company +childframe)            ; the ultimate code completion backend
        (corfu +icons +dict)
        ;; (helm +fuzzy)              ; the *other* search engine for love and life
@@ -48,9 +49,9 @@
         +defaults)       ; default popup rules
        ;; (pretty-code +fira)       ; replace bits of code with pretty symbols
        ;; tabs              ; an tab bar for Emacs
-       ;; (treemacs +lsp)          ; a project drawer, like neotree but cooler
-       ;; unicode           ; extended unicode support for various languages
-       ;; (vc-gutter +pretty)         ; vcs diff in the fringe
+       (treemacs +lsp)          ; a project drawer, like neotree but cooler
+       unicode           ; extended unicode support for various languages
+       (vc-gutter +pretty)         ; vcs diff in the fringe
        ;; vi-tilde-fringe   ; fringe tildes to mark beyond EOB
        ;; (window-select +numbers)     ; visually switch windows
        workspaces        ; tab emulation, persistence & separate workspaces
@@ -60,7 +61,7 @@
        (evil +everywhere); come to the dark side, we have cookies
        file-templates    ; auto-snippets for empty files
        fold              ; (nigh) universal code folding
-       format  ; automated prettiness
+       (format +onsave)  ; automated prettiness
        ;;god               ; run Emacs commands without modifier keys
        ;;lispy             ; vim for lisp, for people who don't like vim
        ;; multiple-cursors  ; editing in many places at once
@@ -71,7 +72,7 @@
        word-wrap         ; soft wrapping with language-aware indent
 
        :emacs
-       dired             ; making dired pretty [functional]
+       (dired +icons +ranger)             ; making dired pretty [functional]
        electric          ; smarter, keyword-based electric-indent
        undo
        ;; (ibuffer +icons)           ; interactive buffer management
@@ -92,7 +93,7 @@
        ;;ansible
        biblio
        (debugger +lsp)          ; FIXME stepping through code, to help you add bugs
-       ;;direnv
+       ;; direnv
        ;;docker
        ;;editorconfig      ; let someone else argue about tabs vs spaces
        ;; ein               ; tame Jupyter notebooks with emacs
@@ -201,5 +202,5 @@
 
 ;; Let j and k go over visual lines
 (setq evil-respect-visual-line-mode t)
-;; Remove fram decorations
-(add-to-list 'default-frame-alist '(undecorated-round . t))
+;; ;; Remove fram decorations
+;; (add-to-list 'default-frame-alist '(undecorated-round . t))

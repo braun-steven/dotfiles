@@ -52,9 +52,6 @@
                                         ;(package! builtin-package :recipe (:branch "develop"))
 
 
-;; Misc
-;; (package! s)
-
 (package! yasnippet-snippets)
 (package! lorem-ipsum)
 (package! ssh-agency)
@@ -75,13 +72,8 @@
 ;; (package! typst-mode :recipe (:host github :repo "Ziqi-Yang/typst-mode.el"))
 (package! typst-ts-mode :recipe (:host sourcehut :repo "meow_king/typst-ts-mode"))
 (package! super-save)
-;; (package! typst-ts-mode :receipe (:host nil :repo "https://git.sr.ht/~meow_king/typst-ts-mode"))
-  ;; :elpaca (:type git :host sourcehut :repo "meow_king/typst-ts-mode")
-  ;; :custom
-  ;; (typst-ts-mode-watch-options "--open"))
-
-;; (package! evil-motion-trainer :recipe (:host github :repo "martinbaillie/evil-motion-trainer"))
+(package! orderless)
 
 ;; Load private module packages
 (dolist (file (directory-files "~/.doom.d/private/" t directory-files-no-dot-files-regexp))
-        (load! (concat file "/packages.el")))
+  (load! (concat file "/packages.el")))
