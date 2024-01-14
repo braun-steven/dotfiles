@@ -77,21 +77,10 @@
       :n "gd" #'+lookup/definition
       :n "C-k"  #'lsp-ui-doc-glance)
 
-;; (map! :map python-mode-map
-;;       "C-TAB"  #'copilot-accept-completion-by-word
-;;       "C-<tab>"  #'copilot-accept-completion-by-word
-;;       "C-p" #'copilot-accept-completion-by-word
-;;       :map copilot-completion-map
-;;       "<tab>" #'copilot-accept-completion
-;;       "TAB" #'copilot-accept-completion)
-
-
 (map! :map python-mode-map
       :localleader
-      ;; "v" #'sbraun/pyvenv-activate
       "v" #'sbraun/conda-env-activate
       ","  #'+format/buffer
       "s"  #'lsp-ivy-workspace-symbol
-      ;; "s"  #'helm-lsp-workspace-symbol
 
       "b" #'sbraun/pdb-insert)
