@@ -1,0 +1,25 @@
+import = ["/home/steven/.config/alacritty/themes/themes/doom_one.toml"]
+live_config_reload = true
+
+[font]
+size = 10.0
+
+[font.normal]
+family = "Hack"
+
+[font.offset]
+x = 0
+y = 0
+
+[shell]
+program = "/bin/bash"
+
+[window]
+decorations = "Full"
+decorations_theme_variant = "Dark"
+dynamic_title = true
+title = "Alacritty"
+
+[window.padding]
+x = 3
+y = 5
