@@ -89,14 +89,32 @@
 (+global-word-wrap-mode)
 
 ;; Company config
-(after! company
-  (setq
-   company-minimum-prefix-length 2
-   company-idle-delay 0.0
-   company-tooltip-idle-delay 1.0)
-  ;; Set text mode backends to yasnippet only (removes company-dabbrev and company-ispell since they spam the completion list)
-  (setf (cdr (assoc 'text-mode +company-backend-alist))
-        '(:separate company-yasnippet)))
+;; (after! company
+;;   (setq
+;;    company-minimum-prefix-length 3
+;;    company-idle-delay 0.25
+;;    company-tooltip-idle-delay 1.0)
+;;   ;; Set text mode backends to yasnippet only (removes company-dabbrev and company-ispell since they spam the completion list)
+;;   (setf (cdr (assoc 'text-mode +company-backend-alist))
+;;         '(:separate company-yasnippet)))
+
+(use-package! orderless
+  :custom
+  (completion-styles '(orderless basic))
+  (completion-category-overrides '((file (styles basic partial-completion))))
+  (orderless-matching-styles '(orderless-flex orderless-literal orderless-regexp)))
+
+
+
+(after! corfu
+  (setq corfu-auto-delay 0.0))
+
+(after! cape
+  (add-to-list 'completion-at-point-functions #'cape-dabbrev)
+  (add-to-list 'completion-at-point-functions #'cape-file))
+
+(after! marginalia
+  (setq marginalia-field-width 120))
 
 ;; (after! lsp
 ;;   ;; Fix for confusing yasnippet results in completion
@@ -227,10 +245,6 @@
 
 (add-hook 'projectile-after-switch-project-hook #'activate-project-conda-env-maybe)
 
-(use-package! magit-todos
-  :after magit
-  :config (magit-todos-mode 1))
-
 ;; Typst
 (use-package! typst-ts-mode
   :custom
@@ -256,3 +270,19 @@
 (after! lsp-mode
   ;; https://github.com/emacs-lsp/lsp-mode/issues/3577#issuecomment-1709232622
   (delete 'lsp-terraform lsp-client-packages))
+
+
+
+;; If pressing tab to complete sometimes doesn't work you might want to bind completion to another key or try:
+(after! (evil copilot)
+  ;; Define the custom function that either accepts the completion or does the default behavior
+  (defun my/copilot-tab-or-default ()
+    (interactive)
+    (if (and (bound-and-true-p copilot-mode)
+             ;; Add any other conditions to check for active copilot suggestions if necessary
+             )
+        (copilot-accept-completion)
+      (evil-insert 1))) ; Default action to insert a tab. Adjust as needed.
+
+  ;; Bind the custom function to <tab> in Evil's insert state
+  (evil-define-key 'insert 'global (kbd "<tab>") 'my/copilot-tab-or-default))
