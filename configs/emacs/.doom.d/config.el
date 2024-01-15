@@ -53,11 +53,6 @@
 ;; `nil' to disable it:
 (setq display-line-numbers-type nil)
 
-;; Titlebar dark
-(add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
-(add-to-list 'default-frame-alist '(ns-appearance . dark))
-
-
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
 ;; - `load!' for loading external *.el files relative to this one
@@ -98,22 +93,18 @@
 ;;   (setf (cdr (assoc 'text-mode +company-backend-alist))
 ;;         '(:separate company-yasnippet)))
 
-(use-package! orderless
-  :custom
-  (completion-styles '(orderless basic))
-  (completion-category-overrides '((file (styles basic partial-completion))))
-  (orderless-matching-styles '(orderless-flex orderless-literal orderless-regexp)))
 
-
-
-(after! corfu
+(use-package! corfu
+  :config
   (setq corfu-auto-delay 0.0))
 
-(after! cape
+(use-package! cape
+  :config
   (add-to-list 'completion-at-point-functions #'cape-dabbrev)
   (add-to-list 'completion-at-point-functions #'cape-file))
 
-(after! marginalia
+(use-package! marginalia
+  :config
   (setq marginalia-field-width 120))
 
 ;; (after! lsp
@@ -170,16 +161,11 @@
   ;; Corrects (and improves) org-mode's native fontification.
   (doom-themes-org-config))
 
-(use-package! ssh-agency
-  :after magit)
+(use-package! ssh-agency :after magit)
 
 ;; (use-package! powerthesaurus)
 
 (use-package! powerthesaurus :after tex)
-
-;; (after! emacs-everywhere
-;;   (push "Mattermost" emacs-everywhere-markdown-apps)
-;;   (push "GitHub" emacs-everywhere-markdown-windows))
 
 (after! magit
   ;; Set magit log margin
@@ -188,10 +174,6 @@
   ;; Set magit status margin
   (setq magit-status-margin '(t age magit-log-margin-width t 18)))
 
-
-;; Enable auto-fill-mode everywhere
-;; TODO: Choose some sane defaults for specific modes?
-;; (auto-fill-mode 1)
 
 (use-package! vertico-directory
   :after vertico
@@ -205,31 +187,7 @@
 (setq lsp-pyright-multi-root nil)
 
 
-;; Load private modules
-(dolist (file (directory-files "~/.doom.d/private/" t directory-files-no-dot-files-regexp))
-  (if (file-directory-p file)
-      (load! (concat file "/config.el"))))
 
-
-;; Projectile after switch cook
-(defun activate-project-conda-env-maybe ()
-  "Perform some action after switching Projectile projects."
-  (message "Project changed...")
-  ;; Do something interesting here...
-  ;;
-  ;; `projectile-current-project-files', and `projectile-current-project-dirs' can be used
-  ;; to get access to the new project's files, and directories.
-  (message "Project root:")
-  (setq conda-env-name-candidate (nth 1 (reverse (s-split "/" (projectile-project-root)))))
-
-  (if (member conda-env-name-candidate (conda-env-candidates))
-      ;; (message "Yes")
-      ;; (message "No")
-      (progn
-        (message (concat "Found conda environment: " conda-env-name-candidate))
-        (conda-env-activate conda-env-name-candidate))
-    )
-  )
 
 ;; Ensure, that conda is loaded after projectile so that the hook works
 (after! projectile
@@ -241,9 +199,9 @@
   ;;   `projectile-project-root-files-bottom-up' (a variable)
   ;; (setq projectile-project-root-files-bottom-up (remove ".git"
   ;;         projectile-project-root-files-bottom-up))
-  (use-package! conda))
+  (use-package! conda)
+  (add-hook 'projectile-after-switch-project-hook #'activate-project-conda-env-maybe))
 
-(add-hook 'projectile-after-switch-project-hook #'activate-project-conda-env-maybe)
 
 ;; Typst
 (use-package! typst-ts-mode
@@ -272,7 +230,6 @@
   (delete 'lsp-terraform lsp-client-packages))
 
 
-
 ;; If pressing tab to complete sometimes doesn't work you might want to bind completion to another key or try:
 (after! (evil copilot)
   ;; Define the custom function that either accepts the completion or does the default behavior
@@ -286,3 +243,8 @@
 
   ;; Bind the custom function to <tab> in Evil's insert state
   (evil-define-key 'insert 'global (kbd "<tab>") 'my/copilot-tab-or-default))
+
+;; Load private modules
+(dolist (file (directory-files "~/.doom.d/private/" t directory-files-no-dot-files-regexp))
+  (if (file-directory-p file)
+      (load! (concat file "/config.el"))))

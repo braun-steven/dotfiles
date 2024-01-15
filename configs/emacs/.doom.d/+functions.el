@@ -51,3 +51,23 @@ current buffer's, reload dir-locals."
   (let ((file-path (expand-file-name "org/pathfinder-blood-lords/20231124162340-pathfinder_2e_blood_lords_session_notes.org"
                                      (getenv "HOME"))))
     (find-file file-path)))
+
+;; Projectile after switch cook
+(defun activate-project-conda-env-maybe ()
+  "Perform some action after switching Projectile projects."
+  (message "Project changed...")
+  ;; Do something interesting here...
+  ;;
+  ;; `projectile-current-project-files', and `projectile-current-project-dirs' can be used
+  ;; to get access to the new project's files, and directories.
+  (message "Project root:")
+  (setq conda-env-name-candidate (nth 1 (reverse (s-split "/" (projectile-project-root)))))
+
+  (if (member conda-env-name-candidate (conda-env-candidates))
+      ;; (message "Yes")
+      ;; (message "No")
+      (progn
+        (message (concat "Found conda environment: " conda-env-name-candidate))
+        (conda-env-activate conda-env-name-candidate))
+    )
+  )
