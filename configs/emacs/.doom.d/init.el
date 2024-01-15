@@ -22,11 +22,11 @@
        :completion
        ;; company            ; the ultimate code completion backend
        ;; (company +childframe)            ; the ultimate code completion backend
-       (corfu +icons +dict)
+       (corfu +icons)
        ;; (helm +fuzzy)              ; the *other* search engine for love and life
        ;;ido               ; the other *other* search engine...
        ;; (ivy +icons +prescient)               ; a search engine for love and life
-       (vertico +icons)
+       (vertico +icons +childframe)
 
        :ui
        ;; (emoji +ascii +github +unicode)
@@ -55,12 +55,12 @@
        ;; vi-tilde-fringe   ; fringe tildes to mark beyond EOB
        ;; (window-select +numbers)     ; visually switch windows
        workspaces        ; tab emulation, persistence & separate workspaces
-       zen               ; distraction-free coding or writing
+       ;; zen               ; distraction-free coding or writing
 
        :editor
        (evil +everywhere); come to the dark side, we have cookies
        file-templates    ; auto-snippets for empty files
-       fold              ; (nigh) universal code folding
+       ;; fold              ; (nigh) universal code folding
        (format +onsave)  ; automated prettiness
        ;;god               ; run Emacs commands without modifier keys
        ;;lispy             ; vim for lisp, for people who don't like vim
@@ -72,11 +72,11 @@
        word-wrap         ; soft wrapping with language-aware indent
 
        :emacs
-       (dired +icons +ranger)             ; making dired pretty [functional]
+       (dired +icons)             ; making dired pretty [functional]
        electric          ; smarter, keyword-based electric-indent
        undo
        ;; (ibuffer +icons)           ; interactive buffer management
-       vc                ; version-control and Emacs, sitting in a tree
+       ;; vc                ; version-control and Emacs, sitting in a tree
 
        :term
        ;; eshell            ; a consistent, cross-platform shell (WIP)
@@ -92,12 +92,12 @@
        :tools
        ;;ansible
        biblio
-       (debugger +lsp)          ; FIXME stepping through code, to help you add bugs
+       ;; (debugger +lsp)          ; FIXME stepping through code, to help you add bugs
        ;; direnv
        ;;docker
        ;;editorconfig      ; let someone else argue about tabs vs spaces
        ;; ein               ; tame Jupyter notebooks with emacs
-       (eval +overlay)     ; run code, run (also, repls)
+       ;; (eval +overlay)     ; run code, run (also, repls)
        ;;gist              ; interacting with github gists
        (lookup           ; helps you navigate your code and documentation
         +docsets
@@ -190,7 +190,7 @@
        ;; irc               ; how neckbeards socialize
        ;;(rss +org)        ; emacs as an RSS reader
        ;;twitter           ; twitter client https://twitter.com/vnought
-       everywhere
+       ;; everywhere
 
        :os
        ;; tty
