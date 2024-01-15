@@ -10,22 +10,22 @@
 (setq sbraun/theme-light 'modus-operandi)
 (setq doom-theme sbraun/theme-dark)
 
-(use-package! modus-themes
-  :init
-  ;; Add all your customizations prior to loading the themes
-  (setq modus-themes-italic-constructs t
-        modus-themes-common-palette-overrides '((comment yellow-cooler)
-                                                (string green-cooler))
-        modus-themes-bold-constructs nil)
+;; (use-package! modus-themes
+;;   :init
+;;   ;; Add all your customizations prior to loading the themes
+;;   (setq modus-themes-italic-constructs t
+;;         modus-themes-common-palette-overrides '((comment yellow-cooler)
+;;                                                 (string green-cooler))
+;;         modus-themes-bold-constructs nil)
 
 
 
-  ;; Load the theme files before enabling a theme
-  ;; (modus-themes-load-themes)
-  :config
-  ;; Load the theme of your choice:
-  ;; :bind ("<f5>" . modus-themes-toggle)
-  )
+;;   ;; Load the theme files before enabling a theme
+;;   ;; (modus-themes-load-themes)
+;;   :config
+;;   ;; Load the theme of your choice:
+;;   ;; :bind ("<f5>" . modus-themes-toggle)
+;;   )
 
 
 ;; Theme based on daytime/long/lat
