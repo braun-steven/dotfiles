@@ -96,12 +96,7 @@
 
 (use-package! corfu
   :config
-  (setq corfu-auto-delay 0.0))
-
-(use-package! cape
-  :config
-  (add-to-list 'completion-at-point-functions #'cape-dabbrev)
-  (add-to-list 'completion-at-point-functions #'cape-file))
+  (setq corfu-auto-delay 0.1))
 
 (use-package! marginalia
   :config
