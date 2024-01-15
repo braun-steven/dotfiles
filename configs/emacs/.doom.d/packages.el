@@ -71,8 +71,7 @@
 
 ;; (package! typst-mode :recipe (:host github :repo "Ziqi-Yang/typst-mode.el"))
 (package! typst-ts-mode :recipe (:host sourcehut :repo "meow_king/typst-ts-mode"))
-(package! super-save)
-(package! orderless)
+;; (package! super-save)
 
 ;; Load private module packages
 (dolist (file (directory-files "~/.doom.d/private/" t directory-files-no-dot-files-regexp))
