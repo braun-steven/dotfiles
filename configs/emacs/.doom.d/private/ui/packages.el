@@ -1,7 +1,7 @@
 ;; -*- no-byte-compile: t; -*-
 
 ;; Themes
-;; (package! modus-themes)
+(package! modus-themes)
 
 ;; Show colors as character background
 (package! rainbow-mode)
