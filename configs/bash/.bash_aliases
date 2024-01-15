@@ -24,6 +24,12 @@ alias ipy="python -c 'import IPython; IPython.terminal.ipapp.launch_new_instance
 # Emacsclient terminal
 alias em="emacsclient -t -a ''"
 
+# DNF on Fedora
+alias dnfi="sudo dnf install"
+alias dnfr="sudo dnf remove"
+alias dnfs="dnf search"
+alias dnfu="sudo dnf update"
+
 
 # Better ls
 # if hash exa 2>/dev/null; then
