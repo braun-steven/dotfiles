@@ -26,7 +26,7 @@
        ;; (helm +fuzzy)              ; the *other* search engine for love and life
        ;;ido               ; the other *other* search engine...
        ;; (ivy +icons +prescient)               ; a search engine for love and life
-       (vertico +icons +childframe)
+       (vertico +icons)
 
        :ui
        ;; (emoji +ascii +github +unicode)
