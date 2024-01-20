@@ -231,4 +231,3 @@
 (dolist (file (directory-files "~/.doom.d/private/" t directory-files-no-dot-files-regexp))
   (if (file-directory-p file)
       (load! (concat file "/config.el"))))
-
