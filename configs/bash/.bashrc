@@ -2,6 +2,8 @@
 # ~/.bashrc
 #
 
+source ~/.bash_exports
+
 #############################
 # INSTALLING BINARIES BEGIN #
 #############################
@@ -11,6 +13,34 @@ if [ ! -d $HOME/.tmux/plugins/tpm ]; then
   echo "Tmux plugin manager not found. Installing now ..."
   git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 fi
+
+# Check if Zellij is installed
+if ! command -v zellij &> /dev/null
+then
+    # Download and install Zellij
+    echo "Installing Zellij..."
+
+    # Create ~/dotbin if it doesn't exist
+    mkdir -p ~/dotbin
+
+    # Navigate to ~/dotbin
+    cd ~/dotbin
+
+    # Download the latest Zellij binary (assuming a standard URL format for releases)
+    wget $(curl -s https://api.github.com/repos/zellij-org/zellij/releases/latest | grep 'browser_download_url' | grep 'x86_64-unknown-linux-musl' | cut -d '"' -f 4)
+
+    # Extract the downloaded tar file
+    tar -xvf zellij*.tar.gz
+
+    # Ensure Zellij is executable
+    chmod +x zellij
+
+    # Cleanup downloaded tar file
+    rm zellij*.tar.gz
+
+    echo "Zellij installed successfully."
+fi
+
 
 # Download and install fzf
 if [[ ! -d $HOME/.fzf ]]; then
@@ -35,17 +65,27 @@ fi
 
 
 
-# Start tmux in ssh connections
+# # Start tmux in ssh connections
+# if [[ $SSH_CONNECTION ]]; then
+
+# # Try to attach to the ssh_tmux session, else create one
+#   if [[ $- =~ i ]] && [[ -z "$TMUX" ]] && [[ -n "$SSH_TTY" ]]; then
+#     tmux attach-session -t ssh_tmux || tmux new-session -s ssh_tmux
+#     exit  # Exit afterward
+#   fi
+# fi
+
+# Start Zellij in ssh connections
 if [[ $SSH_CONNECTION ]]; then
 
-# Try to attach to the ssh_tmux session, else create one
-  if [[ $- =~ i ]] && [[ -z "$TMUX" ]] && [[ -n "$SSH_TTY" ]]; then
-    tmux attach-session -t ssh_tmux || tmux new-session -s ssh_tmux
+  # Try to attach to the ssh_zellij session, else create one
+  if [[ $- =~ i ]] && [[ -z "$ZELLIJ" ]] && [[ -n "$SSH_TTY" ]]; then
+    zellij attach ssh_zellij || zellij -s ssh_zellij
     exit  # Exit afterward
   fi
 fi
 
-source ~/.bash_exports
+
 source ~/.bash_aliases
 
 # Go into zsh
