@@ -113,48 +113,65 @@ bindsym $mod+t [class="Todoist"] focus
 # focus the child container
 # bindsym $mod+d focus child
 
+
+set $w1 1 web
+set $w2 2 main
+set $w3 3 sub
+set $w4 4
+set $w5 5
+set $w6 6
+set $w7 7 zoom
+set $w8 8 spotify
+set $w9 9 mail+cal
+set $w0 10 chat
+set $wy 11 (y)
+set $wu 12 (u)
+set $wi 13 (i)
+set $wo 14 (o)
+set $wp 15 (p) gtd
+
 # switch to workspace
-bindsym $mod+1 workspace number 1 web
-bindsym $mod+2 workspace number 2 main
-bindsym $mod+3 workspace number 3 sub
-bindsym $mod+4 workspace number 4
-bindsym $mod+5 workspace number 5
-bindsym $mod+6 workspace number 6
-bindsym $mod+7 workspace number 7 zoom
-bindsym $mod+8 workspace number 8 spotify
-bindsym $mod+9 workspace number 9 mail+cal
-bindsym $mod+0 workspace number 10 chat
-bindsym $mod+y workspace number 11 ChatGPT (y)
-bindsym $mod+u workspace number 12 (u)
-bindsym $mod+i workspace number 13 (i)
-bindsym $mod+o workspace number 14 (o)
-bindsym $mod+p workspace number 15 (p) gtd
+bindsym $mod+1 workspace number $w1
+bindsym $mod+2 workspace number $w2
+bindsym $mod+3 workspace number $w3
+bindsym $mod+4 workspace number $w4
+bindsym $mod+5 workspace number $w5
+bindsym $mod+6 workspace number $w6
+bindsym $mod+7 workspace number $w7
+bindsym $mod+8 workspace number $w8
+bindsym $mod+9 workspace number $w9
+bindsym $mod+0 workspace number $w0
+bindsym $mod+y workspace number $wy
+bindsym $mod+u workspace number $wu
+bindsym $mod+i workspace number $wi
+bindsym $mod+o workspace number $wo
+bindsym $mod+p workspace number $wp
 
 # Allow workspace renaming
 bindsym $mod+Shift+r exec --no-startup-id i3-rename-workspace
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace number 1 web
-bindsym $mod+Shift+2 move container to workspace number 2 main
-bindsym $mod+Shift+3 move container to workspace number 3 sub
-bindsym $mod+Shift+4 move container to workspace number 4
-bindsym $mod+Shift+5 move container to workspace number 5
-bindsym $mod+Shift+6 move container to workspace number 6
-bindsym $mod+Shift+7 move container to workspace number 7 zoom
-bindsym $mod+Shift+8 move container to workspace number 8 spotify
-bindsym $mod+Shift+9 move container to workspace number 9 mail+cal
-bindsym $mod+Shift+0 move container to workspace number 10 chat
-bindsym $mod+Shift+y move container to workspace number 11 ChatGPT (y)
-bindsym $mod+Shift+u move container to workspace number 12 (u)
-bindsym $mod+Shift+i move container to workspace number 13 (i) 
-bindsym $mod+Shift+o move container to workspace number 14 (o) 
-bindsym $mod+Shift+p move container to workspace number 15 (p) gtd
+bindsym $mod+Shift+1 move container to workspace number $w1
+bindsym $mod+Shift+2 move container to workspace number $w2
+bindsym $mod+Shift+3 move container to workspace number $w3
+bindsym $mod+Shift+4 move container to workspace number $w4
+bindsym $mod+Shift+5 move container to workspace number $w5
+bindsym $mod+Shift+6 move container to workspace number $w6
+bindsym $mod+Shift+7 move container to workspace number $w7
+bindsym $mod+Shift+8 move container to workspace number $w8
+bindsym $mod+Shift+9 move container to workspace number $w9
+bindsym $mod+Shift+0 move container to workspace number $w0
+bindsym $mod+Shift+y move container to workspace number $wy
+bindsym $mod+Shift+u move container to workspace number $wu
+bindsym $mod+Shift+i move container to workspace number $wi
+bindsym $mod+Shift+o move container to workspace number $wo
+bindsym $mod+Shift+p move container to workspace number $wp
 
 
 # Assign specific applications to specific workspaces
-assign [class="Mattermost"] 10 chat
-assign [class="Slack"] 10 chat
-assign [class="Todoist"] 15 (p) gtd
+assign [class="Mattermost"] $w0
+assign [class="Slack"] $w0
+assign [class="Todoist"] $wp
 
 
 # Set workspaces to specific monitors
@@ -266,7 +283,7 @@ exec_always --no-startup-id feh --bg-fill ~/blobs-d.jpg
 set $Locker betterlockscreen -l dim
 
 # i3 lock
-exec --no-startup-id xautolock -time 10 -locker "systemctl suspend" &
+exec --no-startup-id xautolock -time 20 -locker "systemctl suspend" &
 # nm-applet
 exec --no-startup-id nm-applet --tray --sm-disable & 
 # Bluetooth
@@ -305,7 +322,7 @@ exec volumeicon
 exec picom -b  # Picom for window compositions (shadows, transitions, etc)
 
 # Move to first workspace on startup
-exec i3-msg workspace 1 web
+exec i3-msg workspace $w1
 
 # dbus notification service for earlyoom
 exec systembus-notify
@@ -358,7 +375,7 @@ bindsym XF86AudioMute        exec --no-startup-id $volumepath/volume -n -t $stat
 
 
 # You can also use any non-zero value if you'd like to have a border
-for_window [class=".*"] border pixel 4
+for_window [class=".*"] border pixel 5
 # smart_gaps on
 # gaps inner 8
 # gaps outer current plus 5
