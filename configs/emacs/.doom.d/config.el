@@ -96,11 +96,12 @@
 
 (use-package! corfu
   :config
+  (global-corfu-mode)
   (setq corfu-auto-delay 0.1))
 
-(use-package! marginalia
-  :config
-  (setq marginalia-field-width 120))
+;; (use-package! marginalia
+;;   :config
+;;   (setq marginalia-field-width 80))
 
 ;; (after! lsp
 ;;   ;; Fix for confusing yasnippet results in completion
@@ -164,7 +165,7 @@
 
 (after! magit
   ;; Set magit log margin
-  (setq magit-log-margin '(t age magit-log-margin-width t 18))
+  (setq magit-log-margin '(t "%Y-%m-%d" magit-log-margin-width t 18))
 
   ;; Set magit status margin
   (setq magit-status-margin '(t age magit-log-margin-width t 18)))
