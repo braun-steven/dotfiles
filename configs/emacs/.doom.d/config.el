@@ -84,20 +84,20 @@
 (+global-word-wrap-mode)
 
 ;; Company config
-;; (after! company
-;;   (setq
-;;    company-minimum-prefix-length 3
-;;    company-idle-delay 0.25
-;;    company-tooltip-idle-delay 1.0)
-;;   ;; Set text mode backends to yasnippet only (removes company-dabbrev and company-ispell since they spam the completion list)
-;;   (setf (cdr (assoc 'text-mode +company-backend-alist))
-;;         '(:separate company-yasnippet)))
+(after! company
+  (setq
+   company-minimum-prefix-length 3
+   company-idle-delay 0.25
+   company-tooltip-idle-delay 1.0)
+  ;; Set text mode backends to yasnippet only (removes company-dabbrev and company-ispell since they spam the completion list)
+  (setf (cdr (assoc 'text-mode +company-backend-alist))
+        '(:separate company-yasnippet)))
 
 
-(use-package! corfu
-  :config
-  (global-corfu-mode)
-  (setq corfu-auto-delay 0.1))
+                                        ; (use-package! corfu
+                                        ;   :config
+                                        ;   (global-corfu-mode)
+                                        ;   (setq corfu-auto-delay 0.1))
 
 ;; (use-package! marginalia
 ;;   :config
@@ -215,18 +215,18 @@
 
 
 ;; If pressing tab to complete sometimes doesn't work you might want to bind completion to another key or try:
-(after! (evil copilot)
-  ;; Define the custom function that either accepts the completion or does the default behavior
-  (defun my/copilot-tab-or-default ()
-    (interactive)
-    (if (and (bound-and-true-p copilot-mode)
-             ;; Add any other conditions to check for active copilot suggestions if necessary
-             )
-        (copilot-accept-completion)
-      (evil-insert 1))) ; Default action to insert a tab. Adjust as needed.
+;; (after! (evil copilot)
+;;   ;; Define the custom function that either accepts the completion or does the default behavior
+;;   (defun my/copilot-tab-or-default ()
+;;     (interactive)
+;;     (if (and (bound-and-true-p copilot-mode)
+;;              ;; Add any other conditions to check for active copilot suggestions if necessary
+;;              )
+;;         (copilot-accept-completion)
+;;       (evil-insert 1))) ; Default action to insert a tab. Adjust as needed.
 
-  ;; Bind the custom function to <tab> in Evil's insert state
-  (evil-define-key 'insert 'global (kbd "<tab>") 'my/copilot-tab-or-default))
+;;   ;; Bind the custom function to <tab> in Evil's insert state
+;;   (evil-define-key 'insert 'global (kbd "<tab>") 'my/copilot-tab-or-default))
 
 ;; Load private modules
 (dolist (file (directory-files "~/.doom.d/private/" t directory-files-no-dot-files-regexp))
