@@ -13,7 +13,8 @@
   :init
   ;; Add all your customizations prior to loading the themes
   (setq modus-themes-italic-constructs t
+        modus-themes-bold-constructs nil
         modus-themes-common-palette-overrides '((comment yellow-cooler)
                                                 (string green-cooler))
-        modus-themes-bold-constructs nil))
-
+        )
+  )
