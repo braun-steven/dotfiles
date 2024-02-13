@@ -17,17 +17,33 @@ fi
 # Check if Zellij is installed
 if ! command -v zellij &> /dev/null
 then
-    # Download and install Zellij
-    echo "Installing Zellij..."
+    echo "Checking for Zellij compatibility..."
 
+    # Check system architecture
+    ARCH=$(uname -m)
+    case "$ARCH" in
+        x86_64)
+            BINARY_TAG="x86_64-unknown-linux-musl"
+            ;;
+        aarch64)
+            BINARY_TAG="aarch64-unknown-linux-musl"
+            ;;
+        *)
+            # Unsupported architecture, do nothing
+            echo "Unsupported architecture: $ARCH. Zellij installation is skipped."
+            exit 0
+            ;;
+    esac
+
+    echo "Installing Zellij..."
     # Create ~/dotbin if it doesn't exist
     mkdir -p ~/dotbin
 
     # Navigate to ~/dotbin
     cd ~/dotbin
 
-    # Download the latest Zellij binary (assuming a standard URL format for releases)
-    wget $(curl -s https://api.github.com/repos/zellij-org/zellij/releases/latest | grep 'browser_download_url' | grep 'x86_64-unknown-linux-musl' | cut -d '"' -f 4)
+    # Download the latest Zellij binary for the detected architecture
+    wget $(curl -s https://api.github.com/repos/zellij-org/zellij/releases/latest | grep 'browser_download_url' | grep "$BINARY_TAG" | cut -d '"' -f 4)
 
     # Extract the downloaded tar file
     tar -xvf zellij*.tar.gz
