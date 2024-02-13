@@ -14,27 +14,12 @@ if [ ! -d $HOME/.tmux/plugins/tpm ]; then
   git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 fi
 
-# Check if Zellij is installed
-if ! command -v zellij &> /dev/null
-then
-    echo "Checking for Zellij compatibility..."
+# Define a function to download and install Zellij
+install_zellij() {
+    local BINARY_TAG=$1  # Pass the binary tag as an argument to the function
 
-    # Check system architecture
-    ARCH=$(uname -m)
-    case "$ARCH" in
-        x86_64)
-            BINARY_TAG="x86_64-unknown-linux-musl"
-            ;;
-        aarch64)
-            BINARY_TAG="aarch64-unknown-linux-musl"
-            ;;
-        *)
-            # Unsupported architecture, do nothing
-            echo "Unsupported architecture: $ARCH. Zellij installation is skipped."
-            ;;
-    esac
+    echo "Installing Zellij for architecture: $BINARY_TAG..."
 
-    echo "Installing Zellij..."
     # Create ~/dotbin if it doesn't exist
     mkdir -p ~/dotbin
 
@@ -54,6 +39,27 @@ then
     rm zellij*.tar.gz
 
     echo "Zellij installed successfully."
+}
+
+# Check if Zellij is installed
+if ! command -v zellij &> /dev/null
+then
+    echo "Checking for Zellij compatibility..."
+
+    # Check system architecture
+    ARCH=$(uname -m)
+    case "$ARCH" in
+        x86_64)
+            install_zellij "x86_64-unknown-linux-musl"
+            ;;
+        aarch64)
+            install_zellij "aarch64-unknown-linux-musl"
+            ;;
+        *)
+            # Unsupported architecture, do nothing but print a message
+            echo "Unsupported architecture: $ARCH. Zellij installation is skipped."
+            ;;
+    esac
 fi
 
 
