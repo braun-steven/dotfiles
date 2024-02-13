@@ -70,7 +70,7 @@ if type -q nvim
 end
 
 # Better ls
-if type -q exa
+if type -q eza
   alias ls='exa -l --group-directories-first --color auto'
 end
 
@@ -105,7 +105,7 @@ end
 # Define maybe-activate-conda-env on variable change of PWD
 function __maybe_activate_conda_env --on-variable PWD
   # Check if "conda" command is available,
-  if not test -f $HOME/.conda/bin/conda
+  if not type -q conda
     return
   end
 
