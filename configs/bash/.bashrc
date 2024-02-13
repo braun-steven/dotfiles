@@ -31,7 +31,6 @@ then
         *)
             # Unsupported architecture, do nothing
             echo "Unsupported architecture: $ARCH. Zellij installation is skipped."
-            exit 0
             ;;
     esac
 
