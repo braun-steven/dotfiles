@@ -122,10 +122,10 @@ if [[ $(ps -p $PPID -o command=) != "fish" ]]; then
   # exec zsh
   if [[ ! -z $SSH_CONNECTION ]]; then
     # Check if fish is available via homebrew
-    if [[ -f $HOME/homebrew/bin/fish ]]; then
-      exec $HOME/homebrew/bin/fish
+    if command -v fish &> /dev/null; then
+        exec fish
     else
-      echo "Fish shell via homebrew not found. Using zsh instead ..."
+      echo "Fish shell not found. Using zsh instead ..."
       exec zsh
     fi
   else
