@@ -84,20 +84,26 @@ fi
 # # Start tmux in ssh connections
 # if [[ $SSH_CONNECTION ]]; then
 
-# # Try to attach to the ssh_tmux session, else create one
-#   if [[ $- =~ i ]] && [[ -z "$TMUX" ]] && [[ -n "$SSH_TTY" ]]; then
-#     tmux attach-session -t ssh_tmux || tmux new-session -s ssh_tmux
-#     exit  # Exit afterward
-#   fi
-# fi
-
-# Start Zellij in ssh connections
+# Start Zellij or tmux in SSH connections
 if [[ $SSH_CONNECTION ]]; then
-
-  # Try to attach to the ssh_zellij session, else create one
-  if [[ $- =~ i ]] && [[ -z "$ZELLIJ" ]] && [[ -n "$SSH_TTY" ]]; then
-    zellij attach ssh_zellij || zellij -s ssh_zellij
-    exit  # Exit afterward
+  if [[ $- =~ i ]] && [[ -n "$SSH_TTY" ]]; then
+    # Check if Zellij is installed and use it
+    if command -v zellij &> /dev/null; then
+      # Try to attach to the ssh_zellij session, else create one
+      if [[ -z "$ZELLIJ" ]]; then
+        zellij attach --name ssh_zellij || zellij new --name ssh_zellij
+        exit  # Exit afterward
+      fi
+    # Fallback to tmux if Zellij is not available
+    elif command -v tmux &> /dev/null; then
+      # Try to attach to the ssh_tmux session, else create one
+      if [[ -z "$TMUX" ]]; then
+        tmux attach-session -t ssh_tmux || tmux new-session -s ssh_tmux
+        exit  # Exit afterward
+      fi
+    else
+      echo "Neither Zellij nor tmux is available."
+    fi
   fi
 fi
 
