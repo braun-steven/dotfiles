@@ -32,15 +32,15 @@
 ;;
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
-(if (eq system-type 'darwin)
-    (setq doom-font (font-spec :family "Hack" :size 14.0))  ;; MacOS
-  (setq doom-font (font-spec :family "Hack" :size 11.0))  ;; Linux
-  )
+;; (if (eq system-type 'darwin)
+;;     (setq doom-font (font-spec :family "Hack" :size 14.0))  ;; MacOS
+;;   (setq doom-font (font-spec :family "Hack" :size 11.0))  ;; Linux
+;;   )
 ;; (setq doom-font (font-spec :family "Consolas" :size 12.0))
 ;; (setq doom-font (font-spec :family "Inconsolata" :size 13.0))
 ;; (setq doom-font (font-spec :family "Iosevka" :size 20))
 ;; (setq doom-font (font-spec :family "DejaVu Sans Mono" :size 19))
-;; (setq doom-font (font-spec :family "IBM Plex Mono" :size 22))
+(setq doom-font (font-spec :family "IBM Plex Mono" :size 22))
 ;; (setq doom-font (font-spec :family "DroidSansMono Nerd Font" :size 20))
 ;; (setq doom-variable-pitch-font (font-spec :family "DejaVu Serif" :size 25 :weight 'semi-light))
 ;; (setq doom-variable-pitch-font (font-spec :family "Source Sans Pro" :size 28 :weight 'semi-light))
@@ -87,7 +87,7 @@
 (after! company
   (setq
    company-minimum-prefix-length 3
-   company-idle-delay 0.25
+   company-idle-delay 0.0
    company-tooltip-idle-delay 1.0)
   ;; Set text mode backends to yasnippet only (removes company-dabbrev and company-ispell since they spam the completion list)
   (setf (cdr (assoc 'text-mode +company-backend-alist))
@@ -215,18 +215,18 @@
 
 
 ;; If pressing tab to complete sometimes doesn't work you might want to bind completion to another key or try:
-;; (after! (evil copilot)
-;;   ;; Define the custom function that either accepts the completion or does the default behavior
-;;   (defun my/copilot-tab-or-default ()
-;;     (interactive)
-;;     (if (and (bound-and-true-p copilot-mode)
-;;              ;; Add any other conditions to check for active copilot suggestions if necessary
-;;              )
-;;         (copilot-accept-completion)
-;;       (evil-insert 1))) ; Default action to insert a tab. Adjust as needed.
+(after! (evil copilot)
+  ;; Define the custom function that either accepts the completion or does the default behavior
+  (defun my/copilot-tab-or-default ()
+    (interactive)
+    (if (and (bound-and-true-p copilot-mode)
+             ;; Add any other conditions to check for active copilot suggestions if necessary
+             )
+        (copilot-accept-completion)
+      (evil-insert 1))) ; Default action to insert a tab. Adjust as needed.
 
-;;   ;; Bind the custom function to <tab> in Evil's insert state
-;;   (evil-define-key 'insert 'global (kbd "<tab>") 'my/copilot-tab-or-default))
+  ;; Bind the custom function to <tab> in Evil's insert state
+  (evil-define-key 'insert 'global (kbd "<tab>") 'my/copilot-tab-or-default))
 
 ;; Load private modules
 (dolist (file (directory-files "~/.doom.d/private/" t directory-files-no-dot-files-regexp))
