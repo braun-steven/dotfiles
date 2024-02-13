@@ -113,22 +113,23 @@ bindsym $mod+t [class="Todoist"] focus
 # focus the child container
 # bindsym $mod+d focus child
 
+# Load default screen layout
 
-set $w1 1 web
-set $w2 2 main
-set $w3 3 sub
+set $w1 "1 web"
+set $w2 "2 main"
+set $w3 "3 sub"
 set $w4 4
 set $w5 5
 set $w6 6
-set $w7 7 zoom
-set $w8 8 spotify
-set $w9 9 mail+cal
-set $w0 10 chat
-set $wy 11 (y)
-set $wu 12 (u)
-set $wi 13 (i)
-set $wo 14 (o)
-set $wp 15 (p) gtd
+set $w7 "7 zoom"
+set $w8 "8 spotify"
+set $w9 "9 mail+cal"
+set $w0 "10 chat"
+set $wy "11 (y)"
+set $wu "12 (u)"
+set $wi "13 (i)"
+set $wo "14 (o)"
+set $wp "15 (p) gtd"
 
 # switch to workspace
 bindsym $mod+1 workspace number $w1
@@ -173,25 +174,27 @@ assign [class="Mattermost"] $w0
 assign [class="Slack"] $w0
 assign [class="Todoist"] $wp
 
+# Load default desktop xrandr layout
+exec_always "bash ~/dotbin/xrandr-enable-monitors.sh"
 
 # Set workspaces to specific monitors
-set $firstmon DP-0
-set $secondmon HDMI-0
-workspace 1 output $firstmon
-workspace 2 output $firstmon
-workspace 3 output $firstmon
-workspace 4 output $firstmon
-workspace 5 output $firstmon
-workspace 6 output $firstmon
-workspace 7 output $firstmon
-workspace 8 output $firstmon
-workspace 9 output $firstmon
-workspace 10 output $firstmon
-workspace 11 output $secondmon
-workspace 12 output $secondmon
-workspace 13 output $secondmon
-workspace 14 output $secondmon
-workspace 15 output $secondmon
+set $firstmon DisplayPort-1
+set $secondmon DisplayPort-0
+workspace $w1 output $firstmon
+workspace $w2 output $firstmon
+workspace $w3 output $firstmon
+workspace $w4 output $firstmon
+workspace $w5 output $firstmon
+workspace $w6 output $firstmon
+workspace $w7 output $firstmon
+workspace $w8 output $firstmon
+workspace $w9 output $firstmon
+workspace $w0 output $firstmon
+workspace $wy output $secondmon
+workspace $wu output $secondmon
+workspace $wi output $secondmon
+workspace $wo output $secondmon
+workspace $wp output $secondmon
 
 # reload the configuration file
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
@@ -213,8 +216,6 @@ mode "$mode_system" {
 }
 bindsym $mod+Ctrl+e mode "$mode_system"
 
-# Load default screen layout
-exec "bash ~/.screenlayout/default.sh"
 
 
 # resize window (you can also use the mouse for that)
@@ -247,8 +248,8 @@ bindsym $mod+r mode "resize"
 bindsym $mod+Shift+t exec ~/dotbin/rofi-todoist-new-task
 
 # Sreen brightness controls
-bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
-bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
+bindsym XF86MonBrightnessUp exec light -A 20 # increase screen brightness
+bindsym XF86MonBrightnessDown exec light -U 20 # decrease screen brightness
 
 # Enable worksapce back and forth
 workspace_auto_back_and_forth yes
@@ -276,11 +277,10 @@ for_window [class="zoom" title="Zoom Meeting"] floating disable
 # Set keyboardlayout
 exec_always --no-startup-id setxkbmap us altgr-intl -option ctrl:nocaps
 
-# Wallpaper
-exec_always --no-startup-id feh --bg-fill ~/blobs-d.jpg
 
 # locker shortcut
-set $Locker betterlockscreen -l dim
+# set $Locker betterlockscreen -l dim
+set $Locker i3lock
 
 # i3 lock
 exec --no-startup-id xautolock -time 20 -locker "systemctl suspend" &
@@ -300,8 +300,8 @@ bindsym $mod+Ctrl+s exec --no-startup-id rofi-set-audio-sink
 for_window [title="PULSE"] floating enable
 
 # suspend/lock shortcuts
-bindsym $mod+$mod2+Ctrl+s exec --no-startup-id systemctl suspend  # Calling $Locker is not necessary with `betterlockscreen` since there is a systemctl service that starts betterlockscreen whenever the system suspends
-# bindsym $mod+$mod2+Ctrl+s exec --no-startup-id $Locker && systemctl suspend
+# bindsym $mod+$mod2+Ctrl+s exec --no-startup-id systemctl suspend  # Calling $Locker is not necessary with `betterlockscreen` since there is a systemctl service that starts betterlockscreen whenever the system suspends
+bindsym $mod+$mod2+Ctrl+s exec --no-startup-id $Locker && systemctl suspend
 bindsym $mod+$mod2+Ctrl+l exec --no-startup-id $Locker
 
 # Emacs anywhere
@@ -312,13 +312,13 @@ for_window [class="Emacs" title="^Emacs Everywhere.*"] floating enable, resize s
 bar {
     status_command i3status
     position top
-    tray_output DP-0
+    tray_output $firstmon
 }
 
 # Some startup stuff
 # exec redshift  # Redshift
 exec pasystray  # Pulseaudio control icon
-exec volumeicon  
+exec volumeicon
 exec picom -b  # Picom for window compositions (shadows, transitions, etc)
 
 # Move to first workspace on startup
@@ -330,14 +330,6 @@ exec systembus-notify
 # Set key repeat rate
 exec --no-startup-id sleep 2 && xset r rate 200 40
 
-
-
-# Startup
-# exec --no-startup-id i3-msg 'mattermost'
-# exec --no-startup-id i3-msg 'spotify'
-# Start gmail and calendar on workspace 9 in horizontal split
-# exec --no-startup-id i3-msg 'workspace 9 mail+cal; split h; exec firefox --new-window mail.google.com; exec firefox --new-window calendar.google.com; exec sleep 1; workspace 1 web'
-#
 
 ## Volume control
 
@@ -364,9 +356,9 @@ set $volumestep 5
 #set $sinkname alsa_output.pci-0000_00_1b.0.analog-stereo
 
 # Using pulseaudio-utils (append "-s $sinkname" without quotes to override default sink)
-bindsym XF86AudioRaiseVolume exec --no-startup-id $volumepath/volume -n -t $statuscmd -u $statussig up $volumestep
-bindsym XF86AudioLowerVolume exec --no-startup-id $volumepath/volume -n -t $statuscmd -u $statussig down $volumestep
-bindsym XF86AudioMute        exec --no-startup-id $volumepath/volume -n -t $statuscmd -u $statussig mute
+bindsym XF86AudioRaiseVolume exec --no-startup-id amixer set Master $volumestep%+
+bindsym XF86AudioLowerVolume exec --no-startup-id amixer set Master $volumestep%-
+bindsym XF86AudioMute        exec --no-startup-id amixer set Master toggle
 
 # exec_always --no-startup-id flashfocus
 
@@ -395,3 +387,6 @@ exec_always --no-startup-id setxkbmap us altgr-intl
 
 # Set keyboard repeat rate
 exec_always --no-startup-id xset r rate 200 40
+
+# Wallpaper
+exec_always --no-startup-id feh --bg-fill ~/Downloads/plasma-workspace-wallpapers/Mountain/contents/images_dark/5120x2880.png

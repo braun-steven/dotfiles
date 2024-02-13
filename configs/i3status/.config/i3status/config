@@ -70,12 +70,12 @@ battery 1 {
 	status_chr = "⚡"
 	#status_bat = "🔋"
 	status_bat = "bat"
-#	status_bat = "☉"
-#	status_full = ""
+	# status_bat = "☉"
+	# status_full = ""
 	status_full = "☻"
-        low_threshold = 15
+    low_threshold = 15
 	threshold_type = time
-	path = /sys/class/power_supply/macsmc-battery/uevent
+	path = /sys/class/power_supply/BAT0/uevent
 }
 tztime local {
 #        format = "%Y-%m-%d %H:%M:%S"
@@ -88,11 +88,6 @@ format = " %d.%m. %H:%M "
 run_watch VPN {
         format = " %title: %status "
         pidfile = "/var/run/vpnc/pid"
-}
-
-read_file ORG_CLOCK {
-        format = " task: %content "
-        path = "/home/tak/tmp/org-clock-current-task"
 }
 
 volume master {
