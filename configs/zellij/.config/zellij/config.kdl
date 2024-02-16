@@ -157,6 +157,33 @@ keybinds {
         bind "Alt [" { PreviousSwapLayout; }
         bind "Alt ]" { NextSwapLayout; }
     }
+    shared_except "locked" {
+        unbind "Ctrl h" // was Move, now Alt-v
+        unbind "Ctrl o" // was Session, now Alt-w
+        unbind "Ctrl s" // was Scroll, now Alt-s
+        unbind "Ctrl n" // was Resize, now Alt-z
+        unbind "Ctrl p" // was Pane, now Alt-a
+        unbind "Ctrl t" // was Tab, now Alt-b
+        unbind "Ctrl g" // was Locked, now Alt-g
+        unbind "Ctrl q" // was Quit, now Alt-q
+        bind "Alt g" { SwitchToMode "locked"; }
+        bind "Alt q" { Quit; }
+        bind "Alt t" { NewTab; }
+        bind "Alt n" { NewTab; }
+        bind "Alt -" { NewPane "down";}
+        bind "Alt /" { NewPane "right"; }
+        bind "Alt f" { ToggleFloatingPanes; }
+        bind "Alt 1" { GoToTab 1; }
+        bind "Alt 2" { GoToTab 2; }
+        bind "Alt 3" { GoToTab 3; }
+        bind "Alt 4" { GoToTab 4; }
+        bind "Alt 5" { GoToTab 5; }
+        bind "Alt 6" { GoToTab 6; }
+        bind "Alt 7" { GoToTab 7; }
+        bind "Alt 8" { GoToTab 8; }
+        bind "Alt 9" { GoToTab 9; }
+        bind "Alt 0" { GoToTab 10; }
+    }
     shared_except "normal" "locked" {
         bind "Enter" "Esc" { SwitchToMode "Normal"; }
     }
