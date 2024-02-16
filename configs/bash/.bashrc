@@ -21,10 +21,10 @@ install_zellij() {
     echo "Installing Zellij for architecture: $BINARY_TAG..."
 
     # Create ~/dotbin if it doesn't exist
-    mkdir -p ~/dotbin
+    mkdir -p ~/.local/bin
 
     # Navigate to ~/dotbin
-    cd ~/dotbin
+    cd ~/.local/bin
 
     # Download the latest Zellij binary for the detected architecture
     wget $(curl -s https://api.github.com/repos/zellij-org/zellij/releases/latest | grep 'browser_download_url' | grep "$BINARY_TAG" | cut -d '"' -f 4)

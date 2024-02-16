@@ -33,14 +33,14 @@
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
 ;; (if (eq system-type 'darwin)
-;;     (setq doom-font (font-spec :family "Hack" :size 14.0))  ;; MacOS
-;;   (setq doom-font (font-spec :family "Hack" :size 11.0))  ;; Linux
+;; (setq doom-font (font-spec :family "Hack" :size 14.0))  ;; MacOS
+(setq doom-font (font-spec :family "Hack" :size 11.0))  ;; Linux
 ;;   )
 ;; (setq doom-font (font-spec :family "Consolas" :size 12.0))
 ;; (setq doom-font (font-spec :family "Inconsolata" :size 13.0))
 ;; (setq doom-font (font-spec :family "Iosevka" :size 20))
 ;; (setq doom-font (font-spec :family "DejaVu Sans Mono" :size 19))
-(setq doom-font (font-spec :family "IBM Plex Mono" :size 22))
+;; (setq doom-font (font-spec :family "IBM Plex Mono" :size 22))
 ;; (setq doom-font (font-spec :family "DroidSansMono Nerd Font" :size 20))
 ;; (setq doom-variable-pitch-font (font-spec :family "DejaVu Serif" :size 25 :weight 'semi-light))
 ;; (setq doom-variable-pitch-font (font-spec :family "Source Sans Pro" :size 28 :weight 'semi-light))
