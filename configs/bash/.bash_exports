@@ -6,22 +6,17 @@ fi
 
 
 # Check if nvim is available
-if command -v emacsclient &> /dev/null; then
-   export EDITOR="emacsclient -nw -c"
-   export VISUAL="emacsclient -c"
+if command -v nvim &>/dev/null; then
+    # Use nvim as manpager
+    export MANPAGER="nvim +Man\!"
+    export EDITOR="nvim"
+    export SUDO_EDITOR="nvim"
+    alias vim=nvim
+    export SYSTEMD_EDITOR="nvim"
 else
-    if command -v nvim &>/dev/null; then
-        # Use nvim as manpager
-        export MANPAGER="nvim +Man\!"
-        export EDITOR="nvim"
-        export SUDO_EDITOR="nvim"
-        alias vim=nvim
-        export SYSTEMD_EDITOR="nvim"
-    else
-        export EDITOR="vim"
-        export SUDO_EDITOR="vim"
-        export SYSTEMD_EDITOR="vim"
-    fi
+    export EDITOR="vim"
+    export SUDO_EDITOR="vim"
+    export SYSTEMD_EDITOR="vim"
 fi
 
 

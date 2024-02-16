@@ -2,11 +2,11 @@ import = ["/home/steven/.config/alacritty/themes/themes/doom_one.toml"]
 live_config_reload = true
 
 [font]
-size = 10.0
+size = 11.0
 
 [font.normal]
-family = "IBM Plex Mono"
-# family = "Hack"
+# family = "IBM Plex Mono"
+family = "Hack"
 
 [font.offset]
 x = 0
