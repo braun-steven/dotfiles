@@ -15,16 +15,11 @@ The dotfiles contain configurations for:
 * bash
 * bat
 * black
-* compton
 * conda
-* ctags
-* dircolors
-* dircolors-gruvbox
 * dotbin
 * dunst
 * emacs
 * flake
-* flashfocus
 * git
 * i3
 * i3status
@@ -32,7 +27,6 @@ The dotfiles contain configurations for:
 * kitty
 * latexmk
 * nvim
-* onedrive
 * paru
 * pdbpp
 * picom
@@ -41,10 +35,7 @@ The dotfiles contain configurations for:
 * redshift
 * rofi
 * skhd
-* spacebar
-* termite
 * tmux
 * vim
-* yabai
 * zathura
 * zsh
