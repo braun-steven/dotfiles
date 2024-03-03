@@ -34,7 +34,7 @@
 ;; font string. You generally only need these two:
 ;; (if (eq system-type 'darwin)
 ;; (setq doom-font (font-spec :family "Hack" :size 14.0))  ;; MacOS
-(setq doom-font (font-spec :family "Hack" :size 14))  ;; Linux
+(setq doom-font (font-spec :family "Hack" :size 15))  ;; Linux
 ;;   )
 ;; (setq doom-font (font-spec :family "Consolas" :size 12.0))
 ;; (setq doom-font (font-spec :family "Inconsolata" :size 13.0))
@@ -93,15 +93,6 @@
   (setf (cdr (assoc 'text-mode +company-backend-alist))
         '(:separate company-yasnippet)))
 
-
-                                        ; (use-package! corfu
-                                        ;   :config
-                                        ;   (global-corfu-mode)
-                                        ;   (setq corfu-auto-delay 0.1))
-
-;; (use-package! marginalia
-;;   :config
-;;   (setq marginalia-field-width 80))
 
 ;; (after! lsp
 ;;   ;; Fix for confusing yasnippet results in completion

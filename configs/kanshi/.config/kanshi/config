@@ -5,5 +5,5 @@ profile "desktop" {
 }
 
 profile "mobile" {
-    output eDP-1 scale 1.5 mode 2880x1800@60Hz
+    output eDP-1 scale 1.5 mode 2880x1800@120Hz
 }
