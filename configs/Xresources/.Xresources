@@ -5,7 +5,6 @@
 ! 144 = 150% scaling
 /* Xft.dpi:192 */
 Xft.dpi:144
-/* Xft.dpi:144 */
 /* Xft.dpi:120 */
 Xcursor.size: 32
 
