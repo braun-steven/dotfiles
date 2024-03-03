@@ -1,5 +1,5 @@
 configuration {
-	modi: "drun";
+	modi: "combi";
 	font: "IBMPlex Mono 14";
 	show-icons: true;
 	terminal: "alacritty";
