@@ -34,7 +34,7 @@
 ;; font string. You generally only need these two:
 ;; (if (eq system-type 'darwin)
 ;; (setq doom-font (font-spec :family "Hack" :size 14.0))  ;; MacOS
-(setq doom-font (font-spec :family "Hack" :size 11.0))  ;; Linux
+(setq doom-font (font-spec :family "Hack" :size 14))  ;; Linux
 ;;   )
 ;; (setq doom-font (font-spec :family "Consolas" :size 12.0))
 ;; (setq doom-font (font-spec :family "Inconsolata" :size 13.0))
@@ -86,7 +86,7 @@
 ;; Company config
 (after! company
   (setq
-   company-minimum-prefix-length 3
+   company-minimum-prefix-length 2
    company-idle-delay 0.0
    company-tooltip-idle-delay 1.0)
   ;; Set text mode backends to yasnippet only (removes company-dabbrev and company-ispell since they spam the completion list)

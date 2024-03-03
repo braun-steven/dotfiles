@@ -3,13 +3,9 @@
 
 ! These might also be useful depending on your monitor and personal preference:
 ! 144 = 150% scaling
+/* Xft.dpi:192 */
 Xft.dpi:144
+/* Xft.dpi:144 */
 /* Xft.dpi:120 */
 Xcursor.size: 32
-Xft.autohint: 0
-Xft.lcdfilter:  lcddefault
-Xft.hintstyle:  hintslight
-Xft.hinting: 1
-Xft.antialias: 1
-Xft.rgba: rgb
 

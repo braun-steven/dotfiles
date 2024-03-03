@@ -106,7 +106,7 @@ end
 function __maybe_activate_conda_env --on-variable PWD
   # Check if "conda" command is available,
   if not type -q conda
-    return
+     initconda
   end
 
   # Check if conda env is set
