@@ -15,16 +15,13 @@ set scrolloff=5
 
 " always show signcolumns
 set signcolumn=yes
-set clipboard+=unnamedplus
+set clipboard=unnamedplus
 
 " Use global replace by default (/g) to revert
 set gdefault
 
 " Set fixed popup menu height
 set pumheight=8
-
-" Avoid escape
-imap jj <ESC>
 
 if has('nvim')
   " Use pum as wildmenu
@@ -70,8 +67,10 @@ Plug 'wellle/targets.vim'
 " Bracket autocomplete
 Plug 'jiangmiao/auto-pairs'
 
-" Gruvbox colorscheme
+" Colorscheme
 Plug 'rakr/vim-one'
+Plug 'romgrk/doom-one.vim'
+Plug 'arcticicestudio/nord-vim'
 
 " Easier vim navigation
 Plug 'easymotion/vim-easymotion'
@@ -120,7 +119,8 @@ set termguicolors
 
 " {{{ Colorscheme
 set background=dark
-colorscheme one
+colorscheme nord
+" colorscheme doom-one
 " }}}
 
 " {{{ Native Editor Settings

@@ -8,6 +8,11 @@
 ;; Enable booktabs table export
 (setq org-latex-tables-booktabs t)
 
+(set-face-attribute 'org-link nil
+                    :foreground "#81A1C1"  ;; Nord blue
+                    :italic t
+                    :underline t)
+
 (setq org-roam-capture-templates
       '(
         ("d" "default" plain "%?"
@@ -52,7 +57,7 @@
 
   (defun org-roam-graph--dot (&optional edges all-nodes)
     "Build the graphviz given the EDGES of the graph.
-        If ALL-NODES, include also nodes without edges."
+If ALL-NODES, include also nodes without edges."
     (let ((org-roam-directory-temp org-roam-directory)
           (nodes-table (make-hash-table :test #'equal))
           (seen-nodes (list))
@@ -67,10 +72,11 @@
         ;; First, identify nodes to exclude
         (pcase-dolist (`(,id ,file ,title)
                        (org-roam-db-query [:select [id file title] :from nodes]))
+          (message title)
+          (message file)
           (if (or (matches-exclude-pattern file)
                   (matches-exclude-pattern title))
               (push id excluded-nodes) ;; Add to excluded list
-            (message "Excluding node: %s" title)
             (puthash id (org-roam-node-create :file file :id id :title title) nodes-table))) ;; Add to nodes table
 
         (with-temp-buffer
@@ -89,6 +95,12 @@
             (unless (or (member source excluded-nodes)
                         (member dest excluded-nodes)
                         (member type org-roam-graph-link-hidden-types))
+              (pcase-dolist (`(,node ,node-type) `((,source "id")
+                                                   (,dest ,type)))
+                (unless (member node seen-nodes)
+                  (insert (org-roam-graph--format-node
+                           (or (gethash node nodes-table) node) node-type))
+                  (push node seen-nodes)))
               (insert (format "  \"%s\" -> \"%s\";\n"
                               (xml-escape-string source)
                               (xml-escape-string dest)))))

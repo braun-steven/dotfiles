@@ -4,14 +4,14 @@
   (load! "+keybindings")
 
 
+  ;; (use-package! evil-easymotion)
+
   ;; Enable evil motion trainer everywhere
   ;; (global-evil-motion-trainer-mode 1)
   ;; (setq evil-motion-trainer-threshold 5)
 
   ;; Make evil substute (:s/foo/bar/) global by default (-> s/foo/bar/g)
-  (use-package! evil
-    :config
-    (setq evil-ex-substitute-global t))
+  (setq evil-ex-substitute-global t)
 
 
   ;; this macro was copied from here: https://stackoverflow.com/a/22418983/4921402

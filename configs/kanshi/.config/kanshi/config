@@ -1,0 +1,9 @@
+profile "desktop" {
+    output DP-2 scale 1.5 position 0,0
+    output DP-1 scale 1.5 position 2560,0
+    output eDP-1 disable
+}
+
+profile "mobile" {
+    output eDP-1 scale 1.5 mode 2880x1800@60Hz
+}
