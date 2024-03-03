@@ -6,7 +6,7 @@
   "Wrapper for pyvenv-activate that also restarts the lsp-sessions."
   (interactive)
   (call-interactively 'conda-env-activate)
-  (call-interactively 'lsp-restart-workspace))  ;; lsp-mode
+  (call-interactively 'lsp))  ;; lsp-mode
   ;; (call-interactively 'eglot-reconnect))          ;; eglot-mode
 
 (defun sbraun/pdb-insert ()

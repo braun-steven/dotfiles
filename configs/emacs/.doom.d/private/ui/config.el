@@ -6,7 +6,7 @@
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. These are the defaults.
 ;; (setq sbraun/theme-light 'modus-operandi)
-(setq sbraun/theme-dark 'doom-one)
+(setq sbraun/theme-dark 'doom-nord)
 (setq doom-theme sbraun/theme-dark)
 
 (use-package! modus-themes
