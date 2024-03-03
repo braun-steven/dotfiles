@@ -9,6 +9,11 @@
 (setq sbraun/theme-dark 'doom-nord)
 (setq doom-theme sbraun/theme-dark)
 
+;; Add set-frame-opacity to doom-switch-frame-hook
+;; Necessary for new emacsclient frames
+(add-hook! 'doom-switch-frame-hook
+  (doom/set-frame-opacity 85))
+
 (use-package! modus-themes
   :init
   ;; Add all your customizations prior to loading the themes
