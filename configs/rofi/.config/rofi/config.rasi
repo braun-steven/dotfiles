@@ -1,9 +1,9 @@
 configuration {
-	modi: "combi";
-	font: "IBMPlex Mono 22";
+	modi: "drun";
+	font: "IBMPlex Mono 14";
 	show-icons: true;
 	terminal: "alacritty";
-	combi-modi: "drun,run,ssh";
+	combi-modi: "drun,run";
 	kb-remove-char-back: "BackSpace";
 	kb-remove-to-eol: "Control+Shift+e";
 	kb-accept-entry: "Control+m,Return,KP_Enter";
@@ -12,4 +12,13 @@ configuration {
 	kb-row-up: "Up,Control+k,Shift+Tab,Shift+ISO_Left_Tab";
 	kb-row-down: "Down,Control+j";
 }
-@theme "Arc-Dark"
+
+
+@theme "nord"
+
+
+
+element-icon {
+    size: 1.5em;
+	horizontal-align: 0.5;
+}

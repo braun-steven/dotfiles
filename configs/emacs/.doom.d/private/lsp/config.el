@@ -16,6 +16,13 @@
   (setq lsp-enable-folding t)
 
   (setq lsp-ui-doc-enable nil)
+
+  (add-hook 'lsp-after-apply-edits-hook
+            (lambda (operation)
+              (when (eq operation 'rename)
+                (save-some-buffers t))))
+
+
   ;; (setq lsp-ui-doc-show-with-cursor t)
   ;; (setq lsp-ui-doc-delay 0.5)
   ;; (setq lsp-ui-doc-position 'at-point)
