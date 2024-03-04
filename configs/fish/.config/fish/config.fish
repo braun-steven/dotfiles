@@ -13,8 +13,8 @@ end
 # Enable fish vi mode
 fish_vi_key_bindings
 
-bind -M insert \cp history-search-backward
-bind -M insert \cn history-search-forward
+bind -M insert \cp up-or-search
+bind -M insert \cn down-or-search
 bind -M insert \cf forward-char
 
 
