@@ -22,15 +22,14 @@
         "sway/workspaces",
         "sway/mode",
     ],
-     "modules-center": [
-          "sway/window"
-     ],
+     // "modules-center": [
+     //      "sway/window"
+     // ],
     "modules-right": [
         "network",
         "custom/sep",
         "memory",
-        "custom/sep",
-        "cpu",
+        // "cpu",
         // "temperature",
         // "custom/keyboard-layout",
         "custom/sep",

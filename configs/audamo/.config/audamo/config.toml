@@ -1,0 +1,31 @@
+# Specify location by latitude and longitude
+latitude = ""
+longitude = ""
+
+# Time in the format "%H:%M"
+sunrise = "08:00"
+sunset = "20:00"
+
+# Theme mode:
+#  - "location": sets the theme based on sunrise/sunset at given location
+#  - "time": sets the theme
+mode = "location"
+
+# Custom script that also gets executed with a single argument which is either "light" or "dark"
+# This script may contain user specified `sed` instructions to e.g. replace the vim theme like "sed -i s/colorscheme dark/colorscheme light/g ~/.vimrc" or similar
+# Make sure that the script has a proper shebang, e.g. "#!/bin/sh" for shell scripts
+custom-script-path = ""
+
+# Light theme elements
+# Set values to "" if they should not be changed
+[light]
+theme="Adwaita"
+icon="Adwaita"
+cursor="Adwaita"
+
+# Dark theme elements
+# Set values to "" if they should not be changed
+[dark]
+theme="Adwaita-dark"
+icon="Adwaita"
+cursor="Adwaita"

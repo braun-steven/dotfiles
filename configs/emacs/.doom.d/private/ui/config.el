@@ -11,8 +11,10 @@
 
 ;; Add set-frame-opacity to doom-switch-frame-hook
 ;; Necessary for new emacsclient frames
+(setq! opacity 90)
+(doom/set-frame-opacity opacity)
 (add-hook! 'doom-switch-frame-hook
-  (doom/set-frame-opacity 85))
+  (doom/set-frame-opacity opacity))
 
 (use-package! modus-themes
   :init
