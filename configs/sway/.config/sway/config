@@ -9,6 +9,10 @@ output * bg ~/wallpaper.png fill
 # output DP-2 scale 1.5 pos 0 0
 # output DP-1 scale 1.5 pos 2560 0
 
+exec_always gsettings set org.gnome.desktop.interface text-scaling-factor 1.0
+# exec_always gsettings set org.gnome.settings-daemon.plugins.xsettings overrides "[{'Gdk/WindowScalingFactor', <1>}]"
+# exec_always gsettings set org.gnome.desktop.interface scaling-factor 1
+
 
 input type:touchpad {
     tap enabled
@@ -45,18 +49,33 @@ exec_always {
   waybar &
 }
 
+set $Locker swaylock \
+      --screenshots \
+      --indicator \
+      --indicator-radius 100 \
+      --indicator-thickness 7 \
+      --effect-blur 10x10 \
+      --effect-vignette 0.5:0.5 \
+      --ring-color 667f99 \
+      --key-hl-color a3be8c \
+      --line-color 00000000 \
+      --inside-color 00000088 \
+      --separator-color 00000000 \
+      --grace 2 \
+      --fade-in 0.2
+
 
 ### Idle configuration
-exec swayidle -w \
-         timeout 600 'systemctl suspend' \
-         before-sleep 'swaylock -f -c 888888'
+# exec swayidle -w timeout 1200 'systemctl suspend'
+exec swayidle -w timeout 1200 'systemctl suspend' before-sleep '$Locker'
+
 
 # ---------- SwayFX
 
 blur enable
 blur_passes 2
 blur_radius 10
-corner_radius 10
+corner_radius 9
 shadows enable
 shadows_on_csd enable
 shadow_blur_radius 10
@@ -66,7 +85,37 @@ titlebar_separator enable
 
 layer_effects "waybar" blur enable; shadows enable; shadow_blur_radius 10; corner_radius 0
 layer_effects "rofi" blur enable; shadows enable; shadow_blur_radius 10; corner_radius 20
-# layer_effects "rofi" blur enable; shadows enable; shadow_blur_radius 10; corner_radius 20
+
+# ---------- Theme
+
+# Nord colors
+#
+# nord0: #2e3440;
+# nord1: #3b4252;
+# nord2: #434c5e;
+# nord3: #4c566a;
+# nord4: #d8dee9;
+# nord5: #e5e9f0;
+# nord6: #eceff4;
+# nord7: #8fbcbb;
+# nord8: #88c0d0;
+# nord9: #81a1c1;
+# nord10: #5e81ac;
+# nord11: #bf616a;
+# nord12: #d08770;
+# nord13: #ebcb8b;
+# nord14: #a3be8c;
+# nord15: #b48ead;
+
+# Window color settings
+# class                 border  backgr. text    indicator
+client.focused          #4c566a #667f99cc #ffffff #667f99
+client.unfocused        #2e3440 #1f222dcc #888888 #1f222d
+client.focused_inactive #2e3440 #4c566a #ffffff #1f222d
+client.placeholder      #2e3440 #1f222d #888888 #1f222d
+client.urgent           #900000 #900000 #ffffff #900000
+
+client.background       #242424
 
 # ---------- i3
 
@@ -77,23 +126,7 @@ set $mod2 Mod1
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
 
-# font pango:monospace 12
 font pango:IBM Plex Mono 10
-# font pango:DejaVu Sans Mono 12
-# font pango:Hack 12
-#font pango: Source Code Pro Semibold, FontAwesome Regular 11
-#font pango:DejaVu Sans Mono, Terminus Bold Semi-Condensed 11
-#font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
-# This font is widely installed, provides lots of unicode glyphs, right-to-left
-# text rendering and scalability on retina/hidpi displays (thanks to pango).
-#font pango:DejaVu Sans Mono 8, Awesome 8
-
-# Before i3 v4.8, we used to recommend this one as the default:
-# font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
-# The font above is very space-efficient, that is, it looks good, sharp and
-# clear in small sizes. However, its unicode glyph coverage is limited, the old
-# X core fonts rendering does not support right-to-left and this being a bitmap
-# font, it doesn’t scale on retina/hidpi displays.
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -156,26 +189,22 @@ bindsym $mod+space focus mode_toggle
 # focus the parent container
 bindsym $mod+a focus parent
 
-# focus the child container
-# bindsym $mod+d focus child
-
 # Load default screen layout
-
-set $w1 "1 web"
-set $w2 "2 main"
-set $w3 "3 sub"
+set $w1 "1 󰖟 web"
+set $w2 "2 󰆍 main"
+set $w3 "3 󰞷 sub"
 set $w4 4
 set $w5 5
 set $w6 6
-set $w7 "7 zoom"
-set $w8 "8 spotify"
-set $w9 "9 mail+cal"
-set $w0 "10 chat"
+set $w7 7
+set $w8 "8  spotify"
+set $w9 "9 󰊫 mail+cal"
+set $w0 "10 󰻞 chat"
 set $wy "11 (y)"
 set $wu "12 (u)"
 set $wi "13 (i)"
 set $wo "14 (o)"
-set $wp "15 (p) gtd"
+set $wp "15  (p) gtd"
 
 # switch to workspace
 bindsym $mod+1 workspace number $w1
@@ -295,8 +324,8 @@ bindsym $mod+r mode "resize"
 bindsym $mod+Shift+t exec ~/dotbin/rofi-todoist-new-task
 
 # Sreen brightness controls
-bindsym XF86MonBrightnessUp exec light -A 20 # increase screen brightness
-bindsym XF86MonBrightnessDown exec light -U 20 # decrease screen brightness
+bindsym XF86MonBrightnessUp exec light -A 10 # increase screen brightness
+bindsym XF86MonBrightnessDown exec light -U 10 # decrease screen brightness
 
 # Enable worksapce back and forth
 workspace_auto_back_and_forth yes
@@ -380,7 +409,7 @@ bindsym XF86AudioMute        exec --no-startup-id amixer set Master toggle
 
 
 # You can also use any non-zero value if you'd like to have a border
-for_window [class=".*"] border pixel 1
+for_window [class=".*"] border pixel 2
 # default_border pixel 1
 # smart_borders on  # issues with firefox
 # smart_gaps on
@@ -423,12 +452,3 @@ exec --no-startup-id dunst
 # Enable gsd xsettings such that applications can infer dark/light theme settings
 exec --no-startup-id /usr/lib/gsd-xsettings
 
-# Window color settings
-# class                 border  backgr. text    indicator
-client.focused          #4c566a #667f99 #ffffff #667f99
-client.unfocused        #2e3440 #1f222d #888888 #1f222d
-client.focused_inactive #2e3440 #4c566a #ffffff #1f222d
-client.placeholder      #2e3440 #1f222d #888888 #1f222d
-client.urgent           #900000 #900000 #ffffff #900000
-
-client.background       #242424
