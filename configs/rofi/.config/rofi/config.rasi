@@ -3,7 +3,7 @@ configuration {
 	font: "IBMPlex Mono 14";
 	show-icons: true;
 	terminal: "alacritty";
-	combi-modi: "drun,run";
+	combi-modi: "drun,run,bookmarks:/home/steven/dotbin/rofi-bookmarks.py";
 	kb-remove-char-back: "BackSpace";
 	kb-remove-to-eol: "Control+Shift+e";
 	kb-accept-entry: "Control+m,Return,KP_Enter";
@@ -13,10 +13,7 @@ configuration {
 	kb-row-down: "Down,Control+j";
 }
 
-
 @theme "nord"
-
-
 
 element-icon {
     size: 1.5em;
