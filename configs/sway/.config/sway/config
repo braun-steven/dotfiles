@@ -13,12 +13,17 @@ exec_always gsettings set org.gnome.desktop.interface text-scaling-factor 1.0
 # exec_always gsettings set org.gnome.settings-daemon.plugins.xsettings overrides "[{'Gdk/WindowScalingFactor', <1>}]"
 # exec_always gsettings set org.gnome.desktop.interface scaling-factor 1
 
-
 input type:touchpad {
     tap enabled
     natural_scroll enabled
     scroll_factor 0.35
 }
+
+# input type:pointer {
+    # scroll_factor 0.35
+    # accel_profile "adaptive" # disable mouse acceleration (enabled by default; to set it manually, use "adaptive" instead of "flat")
+    # pointer_accel 0.0 # set mouse sensitivity (between -1 and 1)
+# }
 
 input type:keyboard {
   # Capslock key should work as escape key
@@ -250,9 +255,6 @@ assign [class="Slack"] $w0
 assign [class="Todoist"] $wp
 assign [class="thunderbird"] $w9
 
-# Load default desktop xrandr layout
-exec_always "bash ~/dotbin/xrandr-enable-monitors.sh"
-
 # Set workspaces to specific monitors
 set $firstmon DP-2
 set $secondmon DP-1
@@ -412,7 +414,7 @@ bindsym XF86AudioMute        exec --no-startup-id amixer set Master toggle
 for_window [class=".*"] border pixel 2
 # default_border pixel 1
 # smart_borders on  # issues with firefox
-# smart_gaps on
+smart_gaps on
 gaps inner 8
 gaps outer 5
 
@@ -431,7 +433,7 @@ gaps outer 5
 # The Autostart directories in order of preference are:
 #    user-specific: $XDG_CONFIG_HOME/autostart (~/.config/autostart by default)
 #    system-wide: $XDG_CONFIG_DIRS/autostart (/etc/xdg/autostart by default) [1]
-exec --no-startup-id dex-autostart --autostart --environment sway
+exec --no-startup-id dex --autostart --environment sway
 
 # The combination of xss-lock, nm-applet and pactl is a popular choice, so
 # they are included here as an example. Modify as you see fit.
