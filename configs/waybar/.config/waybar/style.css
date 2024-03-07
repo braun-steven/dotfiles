@@ -49,6 +49,7 @@
 /* The whole bar */
 #waybar {
     background: #1f222d;
+    opacity: 1.00;
     color: white;
     /* font-family: Cantarell, Noto Sans, sans-serif; */
     font-family: IBM Plex Mono, Hack, Roboto, Helvetica, Arial, sans-serif;
@@ -213,6 +214,11 @@ button:hover {
     border-color: #4c566a;
     color: #eceff4;
     background-color: #667f99;
+}
+
+#workspaces button.visible:not(.focused) {
+    background-color: #4c566a;
+    border-color: #667f99;
 }
 
 #workspaces button.urgent {

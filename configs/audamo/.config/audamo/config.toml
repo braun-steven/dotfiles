@@ -1,4 +1,5 @@
 # Specify location by latitude and longitude
+[general]
 latitude = ""
 longitude = ""
 
@@ -19,13 +20,13 @@ custom-script-path = ""
 # Light theme elements
 # Set values to "" if they should not be changed
 [light]
-theme="Adwaita"
-icon="Adwaita"
-cursor="Adwaita"
+theme = "Nordic"
+icon = "Qogir"
+cursor = "Adwaita"
 
 # Dark theme elements
 # Set values to "" if they should not be changed
 [dark]
-theme="Adwaita-dark"
-icon="Adwaita"
-cursor="Adwaita"
+theme = "Nordic"
+icon = "Qogir"
+cursor = "Adwaita"
