@@ -6,6 +6,7 @@ size = 11.0
 
 [font.normal]
 family = "Hack"
+# family = "IBM Plex Mono"
 
 [font.offset]
 x = 0
@@ -19,7 +20,7 @@ decorations = "Full"
 decorations_theme_variant = "Dark"
 dynamic_title = true
 title = "Alacritty"
-opacity = 0.9
+opacity = 0.95
 
 [window.padding]
 x = 5
