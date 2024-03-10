@@ -6,6 +6,23 @@
  *
  * =========================================================================== */
 
+/*
+ * Default colors for i3 status bar
+ * bar {
+    colors {
+        background #000000
+        statusline #ffffff
+        separator #666666
+
+        focused_workspace  #4c7899 #285577 #ffffff
+        active_workspace   #333333 #5f676a #ffffff
+        inactive_workspace #333333 #222222 #888888
+        urgent_workspace   #2f343a #900000 #ffffff
+        binding_mode       #2f343a #900000 #ffffff
+    }
+}
+ */
+
 /* -----------------------------------------------------------------------------
  * Keyframes
  * -------------------------------------------------------------------------- */
@@ -48,7 +65,7 @@
 
 /* The whole bar */
 #waybar {
-    background: #1f222d;
+    background: #000000;
     opacity: 1.00;
     color: white;
     /* font-family: Cantarell, Noto Sans, sans-serif; */
@@ -133,8 +150,8 @@
 }
 
 #mode {
-    background: #667f99;
-    border-top: 2px solid white;
+    background: #900000;
+    border-top: 2px solid #2f343a;
     /* To compensate for the top border and still have vertical centering */
     padding-bottom: 2px;
 }
@@ -183,42 +200,46 @@
 }
 
 #workspaces button {
-    border-top: 2px solid transparent;
-    border-bottom: 2px solid transparent;
-    border-left: 2px solid transparent;
-    border-right: 2px solid transparent;
+    border-top: 1px solid transparent;
+    border-bottom: 1px solid transparent;
+    border-left: 1px solid transparent;
+    border-right: 1px solid transparent;
     /* To compensate for the top border and still have vertical centering */
     padding-bottom: 2px;
     padding-left: 5px;
     padding-right: 5px;
-    color: #eceff4;
-    background-color: #2e3440;
+    color: #ffffff;
+    background-color: #333333;
     border-color: #1f222d;
 }
 
 /*
  * Disable button hover
  */
-button {
-    border: none;
-    border-radius: 0;
+#workspaces button {
+    /* border: none; */
+    /* border-radius: 0; */
+    border-color: #333333;
+    color: #888888;
+    background-color: #222222;
 
 }
-button:hover {
+#workspaces button:hover {
     box-shadow: inherit;
     text-shadow: inherit;
     background: inherit;
 }
 
 #workspaces button.focused {
-    border-color: #4c566a;
+    border-color: #4c7899;
     color: #eceff4;
-    background-color: #667f99;
+    background-color: #285577;
 }
 
 #workspaces button.visible:not(.focused) {
-    background-color: #4c566a;
-    border-color: #667f99;
+    background-color: #5f676a;
+    border-color: #333333;
+    color: #ffffff;
 }
 
 #workspaces button.urgent {
