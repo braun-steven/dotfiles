@@ -1,4 +1,4 @@
-import = ["/home/steven/.config/alacritty/themes/themes/nord.toml"]
+import = ["/home/steven/.config/alacritty/themes/themes/doom_one.toml"]
 live_config_reload = true
 
 [font]
@@ -20,7 +20,7 @@ decorations = "Full"
 decorations_theme_variant = "Dark"
 dynamic_title = true
 title = "Alacritty"
-opacity = 0.95
+# opacity = 0.95
 
 [window.padding]
 x = 5

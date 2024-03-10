@@ -19,24 +19,22 @@
 
     spacing: 2;
     background-color: transparent;
-    // background-color: rgba(59, 66, 82, 35%);
 
     background: transparent;
-    // background: rgba(59, 66, 82, 35%);
     foreground: var(nord4);
 
     normal-background: var(background);
     normal-foreground: var(foreground);
     alternate-normal-background: var(background);
     alternate-normal-foreground: var(foreground);
-    selected-normal-background: var(nord9);
+    selected-normal-background: #285577;
     selected-normal-foreground: var(background);
 
     active-background: var(background);
     active-foreground: var(nord10);
     alternate-active-background: var(background);
     alternate-active-foreground: var(nord10);
-    selected-active-background: var(nord10);
+    selected-active-background: #285577;
     selected-active-foreground: var(background);
 
     urgent-background: var(background);
@@ -54,40 +52,31 @@ element {
     background-color: rgba(0, 0, 0, 0%);
 }
 element normal.normal {
-    // background-color: var(normal-background);
     text-color: var(normal-foreground);
 }
 element normal.urgent {
-    // background-color: var(urgent-background);
     text-color: var(urgent-foreground);
 }
 element normal.active {
-    // background-color: var(active-background);
     text-color: var(active-foreground);
 }
 element selected.normal {
     background-color: var(selected-normal-background);
     text-color: var(nord6);
-    // text-color: var(selected-normal-foreground);
 }
 element selected.urgent {
-    // background-color: var(selected-urgent-background);
     text-color: var(selected-urgent-foreground);
 }
 element selected.active {
-    // background-color: var(selected-active-background);
     text-color: var(selected-active-foreground);
 }
 element alternate.normal {
-    // background-color: var(alternate-normal-background);
     text-color: var(alternate-normal-foreground);
 }
 element alternate.urgent {
-    // background-color: var(alternate-urgent-background);
     text-color: var(alternate-urgent-foreground);
 }
 element alternate.active {
-    // background-color: var(alternate-active-background);
     text-color: var(alternate-active-foreground);
 }
 element-text {
@@ -106,9 +95,7 @@ element-icon {
 window {
     padding: 10;
     border: 0;
-//    background-color: var(background-color);
-    background-color: rgba(59, 66, 82, 100%);
-    // background-color: rgba(0, 0, 0, 0%);
+    background-color: #222222;
     border-radius: 0px;
 }
 mainbox {
