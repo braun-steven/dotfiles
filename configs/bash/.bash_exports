@@ -43,4 +43,3 @@ fi
 
 export PROJECTS="$HOME/projects"
 export DOTFILES="$HOME/dotfiles"
-export PYTHONBREAKPOINT=pdbp.set_trace
