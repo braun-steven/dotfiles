@@ -261,7 +261,8 @@ assign [class="Todoist"] $wp
 assign [class="thunderbird"] $w9
 
 # Set workspaces to specific monitors
-set $firstmon DP-2
+set $firstmon HDMI-A-1
+# set $firstmon DP-2
 set $secondmon DP-1
 workspace $w1 output $firstmon
 workspace $w2 output $firstmon
