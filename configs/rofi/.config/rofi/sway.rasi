@@ -96,7 +96,13 @@ window {
     padding: 10;
     border: 0;
     background-color: #222222;
-    border-radius: 0px;
+    border-radius: 20px;
+    width: 25%;
+
+}
+
+listview {
+    lines:      5;
 }
 mainbox {
     padding: 0;
