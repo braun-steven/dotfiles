@@ -214,7 +214,7 @@
     # corners.
     # The radius will be automatically lowered if it exceeds half of the
     # notification height to avoid clipping text and/or icons.
-    corner_radius = 10
+    corner_radius = 0
 
     ### Legacy
 
@@ -278,17 +278,17 @@
 [urgency_low]
    # IMPORTANT: colors have to be defined in quotation marks.
    # Otherwise the "#" and following would be interpreted as a comment.
-   background = "#1f222d"
+   background = "#222222"
    foreground = "#888888"
-   frame_color = "#2e3440"
+   frame_color = "#333333"
    timeout = 4
    # Icon for notifications with low urgency, uncomment to enable
    #icon = /path/to/icon
 
 [urgency_normal]
-   background = "#667f99"
+   background = "#285577"
    foreground = "#ffffff"
-   frame_color = "#2e3440"
+   frame_color = "#4c7899"
    timeout = 4
    # Icon for notifications with normal urgency, uncomment to enable
    #icon = /path/to/icon
