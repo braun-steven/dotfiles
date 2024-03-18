@@ -156,4 +156,3 @@ complete -c eog -k -xa "(__fish_complete_suffix gif)"
 
 # Enable direnv
 direnv hook fish | source
-
