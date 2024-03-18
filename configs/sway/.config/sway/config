@@ -9,6 +9,7 @@ output * bg ~/wallpaper.png fill
 # output DP-2 scale 1.5 pos 0 0
 # output DP-1 scale 1.5 pos 2560 0
 
+exec_always export PATH=$PATH:~/dotbin
 exec_always gsettings set org.gnome.desktop.interface text-scaling-factor 1.0
 # exec_always gsettings set org.gnome.settings-daemon.plugins.xsettings overrides "[{'Gdk/WindowScalingFactor', <1>}]"
 # exec_always gsettings set org.gnome.desktop.interface scaling-factor 1
@@ -16,7 +17,7 @@ exec_always gsettings set org.gnome.desktop.interface text-scaling-factor 1.0
 input type:touchpad {
     tap enabled
     natural_scroll enabled
-    scroll_factor 0.35
+    scroll_factor 0.15
 }
 
 # input type:pointer {
@@ -40,13 +41,13 @@ input type:keyboard {
 for_window [shell="xwayland"] title_format "[XWayland] %title"
 
 # Enable clipboard
-exec wl-paste -t text --watch clipman store --no-persist
+exec wl-paste -pw wl-copy
 
 # Run kanshi: detect correct monitors
-exec_always killall kanshi && sleep 0.1 && kanshi &
+exec_always killall kanshi & sleep 0.5 && kanshi &
 
 # Run waybar as bar
-exec_always killall waybar && sleep 0.1 && waybar &
+exec_always killall waybar & sleep 0.5 && waybar &
 
 
 set $Locker swaylock \
@@ -67,7 +68,7 @@ set $Locker swaylock \
 
 ### Idle configuration
 # exec swayidle -w timeout 1200 'systemctl suspend'
-exec swayidle -w timeout 1200 'systemctl suspend' before-sleep '$Locker'
+exec swayidle -w timeout 1200 'systemctl suspend-then-hibernate' before-sleep '$Locker'
 
 
 # ---------- SwayFX
@@ -261,8 +262,8 @@ assign [class="Todoist"] $wp
 assign [class="thunderbird"] $w9
 
 # Set workspaces to specific monitors
-set $firstmon HDMI-A-1
-# set $firstmon DP-2
+# set $firstmon HDMI-A-1
+set $firstmon DP-2
 set $secondmon DP-1
 workspace $w1 output $firstmon
 workspace $w2 output $firstmon
@@ -289,7 +290,7 @@ set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) re
 mode "$mode_system" {
     bindsym l exec --no-startup-id $Locker, mode "default"
     bindsym e exec --no-startup-id swaymsg exit, mode "default"
-    bindsym s exec --no-startup-id $Locker && systemctl suspend, mode "default"
+    bindsym s exec --no-startup-id $Locker && systemctl suspend-then-hibernate, mode "default"
     bindsym h exec --no-startup-id $Locker && systemctl hibernate, mode "default"
     bindsym r exec --no-startup-id systemctl reboot, mode "default"
     bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"
@@ -332,8 +333,8 @@ bindsym $mod+r mode "resize"
 bindsym $mod+Shift+t exec ~/dotbin/rofi-todoist-new-task
 
 # Sreen brightness controls
-bindsym XF86MonBrightnessUp exec light -A 10 # increase screen brightness
-bindsym XF86MonBrightnessDown exec light -U 10 # decrease screen brightness
+bindsym XF86MonBrightnessUp exec brightnessctl set +10% # increase screen brightness
+bindsym XF86MonBrightnessDown exec brightnessctl set 10%- # decrease screen brightness
 
 # Enable worksapce back and forth
 workspace_auto_back_and_forth yes
@@ -373,7 +374,7 @@ for_window [title="PULSE"] floating enable
 for_window [class="Pavucontrol"] floating enable, resize set 1280 768
 
 # suspend/lock shortcuts
-bindsym $mod+$mod2+Ctrl+s exec --no-startup-id systemctl suspend  # Calling $Locker is not necessary with `betterlockscreen` since there is a systemctl service that starts betterlockscreen whenever the system suspends
+bindsym $mod+$mod2+Ctrl+s exec --no-startup-id systemctl suspend-then-hibernate  # Calling $Locker is not necessary with `betterlockscreen` since there is a systemctl service that starts betterlockscreen whenever the system suspends
 bindsym $mod+$mod2+Ctrl+l exec --no-startup-id $Locker
 
 # Emacs anywhere (doesn't work on wayland)
@@ -381,13 +382,10 @@ bindsym $mod+$mod2+Ctrl+l exec --no-startup-id $Locker
 # for_window [class="Emacs" title="^Emacs Everywhere.*"] floating enable, resize set 1280x768
 
 # Some startup stuff
-exec redshift  # Redshift
+exec gammastep  # Redshift wayland alternative
 
 # Move to first workspace on startup
 exec swaymsg workspace $w1
-
-# dbus notification service for earlyoom
-exec systembus-notify
 
 ## Volume control
 
@@ -439,13 +437,6 @@ for_window [class=".*"] border pixel 3
 #    user-specific: $XDG_CONFIG_HOME/autostart (~/.config/autostart by default)
 #    system-wide: $XDG_CONFIG_DIRS/autostart (/etc/xdg/autostart by default) [1]
 exec --no-startup-id dex --autostart --environment sway
-
-# The combination of xss-lock, nm-applet and pactl is a popular choice, so
-# they are included here as an example. Modify as you see fit.
-
-# xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
-# screen before suspend. Use loginctl lock-session to lock your screen.
-# exec --no-startup-id xss-lock --transfer-sleep-lock -- betterlockscreen -l dim
 
 # Enable polit (e.g. polkit-gnome) authentication agent to get GUI password prompts
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
