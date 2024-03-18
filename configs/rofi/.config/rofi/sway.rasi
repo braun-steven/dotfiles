@@ -94,7 +94,8 @@ element-icon {
 }
 window {
     padding: 10;
-    border: 0;
+    border: 3;
+    border-color: #285577;
     background-color: #222222;
     border-radius: 20px;
     width: 25%;

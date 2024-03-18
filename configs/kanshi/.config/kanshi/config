@@ -1,14 +1,14 @@
 profile "desktop" {
-    # output DP-2 enable scale 1.5 position 0,0
-    output HDMI-A-1 enable scale 1.5 position 0,0
+    output DP-2 enable scale 1.5 position 0,0
+    # output HDMI-A-1 enable scale 1.5 position 0,0
     output DP-1 enable scale 1.5 position 2560,0
     output eDP-1 disable
 }
 
 profile "desktop-2" {
     output eDP-1 enable scale 1.5
-    # output DP-2 enable scale 1.5
-    output HDMI-A-1 enable scale 1.5
+    output DP-2 enable scale 1.5
+    # output HDMI-A-1 enable scale 1.5
 }
 
 profile "desktop-1" {
