@@ -204,6 +204,9 @@
   ;; https://github.com/emacs-lsp/lsp-mode/issues/3577#issuecomment-1709232622
   (delete 'lsp-terraform lsp-client-packages))
 
+;; Add typst to list
+(add-to-list 'treesit-language-source-alist
+             '(typst "https://github.com/uben0/tree-sitter-typst"))
 
 ;; If pressing tab to complete sometimes doesn't work you might want to bind completion to another key or try:
 (after! (evil copilot)
