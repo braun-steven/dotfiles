@@ -8,10 +8,10 @@
 ;; Enable booktabs table export
 (setq org-latex-tables-booktabs t)
 
-(set-face-attribute 'org-link nil
-                    :foreground "#81A1C1"  ;; Nord blue
-                    :italic t
-                    :underline t)
+;; (set-face-attribute 'org-link nil
+;;                     :foreground "#81A1C1"  ;; Nord blue
+;;                     :italic t
+;;                     :underline t)
 
 (setq org-roam-capture-templates
       '(

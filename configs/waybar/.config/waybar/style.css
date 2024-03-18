@@ -199,6 +199,8 @@
     padding-right: 5px;
 }
 
+
+/* Button */
 #workspaces button {
     border-top: 1px solid transparent;
     border-bottom: 1px solid transparent;
@@ -208,45 +210,40 @@
     padding-bottom: 2px;
     padding-left: 5px;
     padding-right: 5px;
-    color: #ffffff;
-    background-color: #333333;
-    border-color: #1f222d;
-}
-
-/*
- * Disable button hover
- */
-#workspaces button {
-    /* border: none; */
-    /* border-radius: 0; */
     border-color: #333333;
     color: #888888;
     background-color: #222222;
-
-}
-#workspaces button:hover {
-    box-shadow: inherit;
-    text-shadow: inherit;
-    background: inherit;
 }
 
+/* Focused button */
 #workspaces button.focused {
     border-color: #4c7899;
     color: #eceff4;
     background-color: #285577;
 }
 
+/* Focused button but on inactive monitor */
 #workspaces button.visible:not(.focused) {
-    background-color: #5f676a;
     border-color: #333333;
     color: #ffffff;
+    background-color: #5f676a;
 }
+
 
 #workspaces button.urgent {
     border-color: #c9545d;
-    color: #c9545d;
+    /* color: #c9545d; */
 }
 
 #custom-sep {
     color: #888888;
+}
+
+/*
+ * Disable button hover
+ */
+#workspaces button:hover {
+    box-shadow: inherit;
+    text-shadow: inherit;
+    background: inherit;
 }

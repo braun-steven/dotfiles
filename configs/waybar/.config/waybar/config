@@ -20,6 +20,7 @@
 
     "modules-left": [
         "sway/workspaces",
+//        "sway/window",
         "sway/mode",
     ],
      // "modules-center": [
@@ -127,8 +128,10 @@
     },
 
     "sway/window": {
-        "format": "{}",
+        "format": "{title}",
+        "icon": true,
         "max-length": 120
+
     },
 
     // "sway/workspaces": {
