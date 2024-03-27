@@ -1,0 +1,21 @@
+#!/bin/sh
+
+# Source: https://github.com/ericmurphyxyz/dotfiles/blob/4ffe32c628e6973fcd8d80e6cfc60184e2b2ede8/.local/bin/backlight
+
+# Use brillo to naturally adjust laptop screen brightness and send a notification
+
+send_notification() {
+	brightness=$(printf "%.0f\n" "$(brillo -Gq)")
+	dunstify -a "Backlight" -u low -r 9994 -h int:value:"$brightness" -i "brightness" "Brightness" "Currently at $brightness%" -t 1000
+}
+
+case $1 in
+	up)
+		pkexec /usr/bin/brillo -A 10 -q -u 100000
+		send_notification "$1"
+		;;
+	down)
+		pkexec /usr/bin/brillo -U 10 -q -u 100000
+		send_notification "$1"
+		;;
+esac
