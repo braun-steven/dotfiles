@@ -9,6 +9,7 @@
 # fi
 
 [[ -f ~/.bashrc ]] && . ~/.bashrc
+[[ -f ~/.profile ]] && . ~/.profile
 
 export EA_EDITOR='/opt/homebrew/bin/emacsclient -a "" -c'
 # . "$HOME/.cargo/env"

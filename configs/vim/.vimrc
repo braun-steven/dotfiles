@@ -119,8 +119,8 @@ set termguicolors
 
 " {{{ Colorscheme
 set background=dark
-" colorscheme nord
-colorscheme doom-one
+colorscheme nord
+" colorscheme doom-one
 " }}}
 
 " {{{ Native Editor Settings
