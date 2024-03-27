@@ -9,7 +9,9 @@ output * bg ~/wallpaper.png fill
 # output DP-2 scale 1.5 pos 0 0
 # output DP-1 scale 1.5 pos 2560 0
 
-exec_always export PATH=$PATH:~/dotbin
+exec_always systemctl --user import-environment PATH
+
+# exec_always export PATH=$PATH:~/dotbin
 exec_always gsettings set org.gnome.desktop.interface text-scaling-factor 1.0
 # exec_always gsettings set org.gnome.settings-daemon.plugins.xsettings overrides "[{'Gdk/WindowScalingFactor', <1>}]"
 # exec_always gsettings set org.gnome.desktop.interface scaling-factor 1
@@ -17,7 +19,7 @@ exec_always gsettings set org.gnome.desktop.interface text-scaling-factor 1.0
 input type:touchpad {
     tap enabled
     natural_scroll enabled
-    scroll_factor 0.15
+    scroll_factor 0.10
 }
 
 # input type:pointer {
@@ -50,25 +52,32 @@ exec_always killall kanshi & sleep 0.5 && kanshi &
 exec_always killall waybar & sleep 0.5 && waybar &
 
 
+# set $Locker swaylock \
+#       --screenshots \
+#       --indicator \
+#       --indicator-radius 100 \
+#       --indicator-thickness 7 \
+#       --effect-blur 10x10 \
+#       --effect-vignette 0.5:0.5 \
+#       --ring-color 285577 \
+#       --key-hl-color 4c7899 \
+#       --line-color 00000000 \
+#       --inside-color 00000088 \
+#       --separator-color 00000000 \
+#       --grace 2 \
+#       --fade-in 0.2
+
 set $Locker swaylock \
-      --screenshots \
-      --indicator \
-      --indicator-radius 100 \
-      --indicator-thickness 7 \
-      --effect-blur 10x10 \
-      --effect-vignette 0.5:0.5 \
-      --ring-color 667f99 \
-      --key-hl-color a3be8c \
-      --line-color 00000000 \
+      --image ~/wallpaper-dimblur.png \
       --inside-color 00000088 \
-      --separator-color 00000000 \
-      --grace 2 \
-      --fade-in 0.2
+      --ring-color 285577
+
 
 
 ### Idle configuration
 # exec swayidle -w timeout 1200 'systemctl suspend'
 exec swayidle -w timeout 1200 'systemctl suspend-then-hibernate' before-sleep '$Locker'
+exec swayidle -w timeout 60 "swaydim idle" resume "swaydim resume"
 
 
 # ---------- SwayFX
@@ -262,9 +271,10 @@ assign [class="Todoist"] $wp
 assign [class="thunderbird"] $w9
 
 # Set workspaces to specific monitors
-# set $firstmon HDMI-A-1
 set $firstmon DP-2
 set $secondmon DP-1
+# set $firstmon DP-1
+# set $secondmon HDMI-A-1
 workspace $w1 output $firstmon
 workspace $w2 output $firstmon
 workspace $w3 output $firstmon
@@ -333,8 +343,10 @@ bindsym $mod+r mode "resize"
 bindsym $mod+Shift+t exec ~/dotbin/rofi-todoist-new-task
 
 # Sreen brightness controls
-bindsym XF86MonBrightnessUp exec brightnessctl set +10% # increase screen brightness
-bindsym XF86MonBrightnessDown exec brightnessctl set 10%- # decrease screen brightness
+# bindsym XF86MonBrightnessUp exec brightnessctl set +10% # increase screen brightness
+# bindsym XF86MonBrightnessDown exec brightnessctl set 10%- # decrease screen brightness
+bindsym XF86MonBrightnessUp exec backlight up
+bindsym XF86MonBrightnessDown exec backlight down
 
 # Enable worksapce back and forth
 workspace_auto_back_and_forth yes
