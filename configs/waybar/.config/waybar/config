@@ -30,6 +30,8 @@
         "network",
         "custom/sep",
         "memory",
+        "custom/sep",
+        "custom/vram",
         // "cpu",
         // "temperature",
         // "custom/keyboard-layout",
@@ -116,7 +118,7 @@
 
     "network": {
         "interval": 5,
-        "format-wifi": " Wifi {signalStrength}%", // Icon: wifi
+        "format-wifi": "  Wifi {signalStrength}%", // Icon: wifi
         "format-ethernet": "  {ifname}: {ipaddr}/{cidr}", // Icon: ethernet
         "format-disconnected": "⚠  Disconnected",
         "tooltip-format": "{ifname}: {ipaddr}"
@@ -133,6 +135,15 @@
         "max-length": 120
 
     },
+    "custom/vram":{
+        "exec": "echo $(( 100 * $(cat /sys/class/drm/card1/device/mem_info_vram_used) / $(cat /sys/class/drm/card1/device/mem_info_vram_total) ))",
+        "format": " 󰍛 VMem. {}% ",
+        "interval": "5",
+        "states": {
+            "warning": 70,
+            "critical": 90
+        }
+},
 
     // "sway/workspaces": {
     //     "all-outputs": false,
