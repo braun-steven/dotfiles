@@ -94,13 +94,6 @@
         '(:separate company-yasnippet)))
 
 
-;; (after! lsp
-;;   ;; Fix for confusing yasnippet results in completion
-;;   (setq! +lsp-company-backends
-;;          (if (modulep! :editor snippets)
-;;              '(:separate company-capf company-yasnippet)
-;;            'company-capf)))
-
 ;; Emacs config location
 (setq emacs-dir (file-name-as-directory "~/.doom.d"))
 
@@ -148,11 +141,13 @@
   ;; Corrects (and improves) org-mode's native fontification.
   (doom-themes-org-config))
 
-(use-package! ssh-agency :after magit)
+(use-package! ssh-agency
+  :after magit)
 
 ;; (use-package! powerthesaurus)
 
-(use-package! powerthesaurus :after tex)
+(use-package! powerthesaurus
+  :after tex)
 
 (after! magit
   ;; Set magit log margin
@@ -200,27 +195,31 @@
     `(avy-lead-face-3 :weight bold :foreground "yellow" :background ,(face-attribute 'default :background)))
   )
 
-(after! lsp-mode
-  ;; https://github.com/emacs-lsp/lsp-mode/issues/3577#issuecomment-1709232622
-  (delete 'lsp-terraform lsp-client-packages))
+
+
+;; (after! lsp-mode
+;;   ;; https://github.com/emacs-lsp/lsp-mode/issues/3577#issuecomment-1709232622
+;;   (delete 'lsp-terraform lsp-client-packages)
+;;   )
 
 ;; Add typst to list
 (add-to-list 'treesit-language-source-alist
              '(typst "https://github.com/uben0/tree-sitter-typst"))
 
 ;; If pressing tab to complete sometimes doesn't work you might want to bind completion to another key or try:
-;; (after! (evil copilot)
-;;   ;; Define the custom function that either accepts the completion or does the default behavior
-;;   (defun my/copilot-tab-or-default ()
-;;     (interactive)
-;;     (if (and (bound-and-true-p copilot-mode)
-;;              ;; Add any other conditions to check for active copilot suggestions if necessary
-;;              )
-;;         (copilot-accept-completion)
-;;       (evil-insert 1))) ; Default action to insert a tab. Adjust as needed.
+(after! (evil copilot)
+  ;; Define the custom function that either accepts the completion or does the default behavior
+  (defun my/copilot-tab-or-default ()
+    (interactive)
+    (if (and (bound-and-true-p copilot-mode)
+             ;; Add any other conditions to check for active copilot suggestions if necessary
+             )
+        (copilot-accept-completion)
+      (evil-insert 1))) ; Default action to insert a tab. Adjust as needed.
 
-;;   ;; Bind the custom function to <tab> in Evil's insert state
-;;   (evil-define-key 'insert 'global (kbd "<tab>") 'my/copilot-tab-or-default))
+  ;; Bind the custom function to <tab> in Evil's insert state
+  (evil-define-key 'insert 'global (kbd "<tab>") 'my/copilot-tab-or-default))
+
 
 ;; Load private modules
 (dolist (file (directory-files "~/.doom.d/private/" t directory-files-no-dot-files-regexp))
