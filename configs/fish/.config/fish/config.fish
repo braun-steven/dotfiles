@@ -79,7 +79,6 @@ end
 # FUNCTIONS BEGIN #
 ###################
 
-
 function eog
   command eog $argv[1] & disown
 end
