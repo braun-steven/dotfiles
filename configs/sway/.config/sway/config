@@ -1,7 +1,8 @@
 # -------------- Sway
 include /etc/sway/config.d/*
 
-output * bg ~/wallpaper.png fill
+output * bg ~/lakesidedeer-light.png fill
+# output * bg ~/wallpaper.png fill
 
 # The following is now handled by kanshi
 # output eDP-1 scale 1.5 mode 2880x1800@60Hz
@@ -9,7 +10,7 @@ output * bg ~/wallpaper.png fill
 # output DP-2 scale 1.5 pos 0 0
 # output DP-1 scale 1.5 pos 2560 0
 
-exec_always systemctl --user import-environment PATH
+exec systemctl --user import-environment PATH
 
 # exec_always export PATH=$PATH:~/dotbin
 exec_always gsettings set org.gnome.desktop.interface text-scaling-factor 1.0
@@ -49,7 +50,8 @@ exec wl-paste -pw wl-copy
 exec_always killall kanshi & sleep 0.5 && kanshi &
 
 # Run waybar as bar
-exec_always killall waybar & sleep 0.5 && waybar &
+exec_always killall waybar & sleep 0.5 && ~/Waybar/build/waybar &
+# exec_always killall waybar & sleep 0.5 && waybar &
 
 
 # set $Locker swaylock \
@@ -67,8 +69,9 @@ exec_always killall waybar & sleep 0.5 && waybar &
 #       --grace 2 \
 #       --fade-in 0.2
 
-set $Locker swaylock \
-      --image ~/wallpaper-dimblur.png \
+# Swaylock with options. "-f" daemonizes swaylock to work with systemd suspend afterwards
+set $Locker swaylock -f \
+      --image ~/lakesidedeer-dark-dimblur.png \
       --inside-color 00000088 \
       --ring-color 285577
 
@@ -76,9 +79,18 @@ set $Locker swaylock \
 
 ### Idle configuration
 # exec swayidle -w timeout 1200 'systemctl suspend'
-exec swayidle -w timeout 1200 'systemctl suspend-then-hibernate' before-sleep '$Locker'
-exec swayidle -w timeout 60 "swaydim idle" resume "swaydim resume"
+exec swayidle -w timeout 1200 '$Locker && systemctl suspend-then-hibernate' 
+# exec swayidle -w timeout 1200 'systemctl suspend-then-hibernate' before-sleep '$Locker'
+# exec swayidle -w timeout 1200 'systemctl suspend-then-hibernate' before-sleep '$Locker'
 
+# Dim screen after inactivity
+# brillo -O: save current brightness
+# brillo -S 0 -u 150000: set brightness to 0 (150us fade out)
+# brillo -I -u 150000: restore brightness (150us fade in)
+exec swayidle -w timeout 30 "brillo -O && brillo -S 0 -u 150000" resume "brillo -I -u 150000"
+
+# Turn off screen after inactivity of 3 minutes
+exec swayidle -w timeout 180 'swaymsg "output eDP-1 dpms off"' resume 'swaymsg "output eDP-1 dpms on"'
 
 # ---------- SwayFX
 
@@ -213,10 +225,10 @@ bindsym $mod+a focus parent
 set $w1 "1 󰖟 web"
 set $w2 "2 󰆍 main"
 set $w3 "3 󰞷 sub"
-set $w4 4
-set $w5 5
-set $w6 6
-set $w7 7
+set $w4 "4"
+set $w5 "5"
+set $w6 "6"
+set $w7 "7"
 set $w8 "8  spotify"
 set $w9 "9 󰊫 mail+cal"
 set $w0 "10 󰻞 chat"
@@ -265,10 +277,10 @@ bindsym $mod+Shift+p move container to workspace number $wp
 
 
 # Assign specific applications to specific workspaces
-assign [class="Mattermost"] $w0
-assign [class="Slack"] $w0
-assign [class="Todoist"] $wp
-assign [class="thunderbird"] $w9
+assign [app_id="Mattermost"] $w0
+assign [app_id="Slack"] $w0
+assign [app_id="Todoist"] $wp
+assign [app_id="thunderbird"] $w9
 
 # Set workspaces to specific monitors
 set $firstmon DP-2
@@ -364,10 +376,10 @@ for_window [window_role="Preferences"] floating enable
 for_window [title="Volume Control"] floating enable resize set 640 960
 
 # Zoom, float everything except for the actual meeting window
-for_window [class="zoom"] floating enable
-for_window [class="Zoom"] floating enable
-for_window [class="zoom" title="Zoom Meeting"] floating disable
-for_window [class="Zoom" title="Zoom Meeting"] floating disable
+for_window [app_id="zoom"] floating enable
+for_window [app_id="Zoom"] floating enable
+for_window [app_id="zoom" title="Zoom Meeting"] floating disable
+for_window [app_id="Zoom" title="Zoom Meeting"] floating disable
 
 exec --no-startup-id nm-applet --tray --sm-disable &
 
@@ -383,7 +395,7 @@ bindsym $mod+Ctrl+s exec --no-startup-id rofi-set-audio-sink
 
 # Floating window rules
 for_window [title="PULSE"] floating enable
-for_window [class="Pavucontrol"] floating enable, resize set 1280 768
+for_window [app_id="Pavucontrol"] floating enable, resize set 1280 768
 
 # suspend/lock shortcuts
 bindsym $mod+$mod2+Ctrl+s exec --no-startup-id systemctl suspend-then-hibernate  # Calling $Locker is not necessary with `betterlockscreen` since there is a systemctl service that starts betterlockscreen whenever the system suspends
