@@ -1,0 +1,30 @@
+#!/bin/bash
+
+# The interface name for your VPN connection
+VPN_INTERFACE="ml-slang_mlwg1"
+
+# Function to start the VPN
+connect_vpn() {
+    echo "Connecting to VPN..."
+    sudo wg-quick up "$VPN_INTERFACE"
+}
+
+# Function to stop the VPN
+disconnect_vpn() {
+    echo "Disconnecting from VPN..."
+    sudo wg-quick down "$VPN_INTERFACE"
+}
+
+# Main script logic
+case "$1" in
+    c|connect)
+        connect_vpn
+        ;;
+    d|disconnect)
+        disconnect_vpn
+        ;;
+    *)
+        echo "Usage: $0 {c/connect|d/disconnect}"
+        exit 1
+        ;;
+esac
