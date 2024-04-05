@@ -10,6 +10,7 @@ import argparse
 
 
 def create_link(entry: os.DirEntry):
+    assert entry.is_file(), f"'{entry.path}' is not a file!"
     src = entry.path
 
     # Replace $HOME/dotfiles/configs/<CONFIG>/ with $HOME
@@ -19,41 +20,37 @@ def create_link(entry: os.DirEntry):
     # Create parent directories if they don't exist
     dst.parent.mkdir(parents=True, exist_ok=True)
 
-    # If dst is a symlink
-    if os.path.islink(dst):
-        # If dst links to src, all is good
-        if Path(os.readlink(dst)) == Path(src):
-            logger.debug(f"{dst} already linked correctly, skipping ...")
-            return
-        elif ARGS.remove_symlinks:
-            # Remove symlinks if arg is set
-            logger.info(f"Removing {dst}")
-            os.remove(dst)
+    # Check if dst already exists
+    if dst.exists():
+        # Check if dst is a symlink
+        if os.path.islink(dst):
+            # If dst links to src, all is good
+            if Path(os.readlink(dst)) == Path(src):
+                logger.debug(f"{dst} already linked correctly, skipping ...")
+                return
+            elif ARGS.remove_symlinks:
+                # Remove symlinks if arg is set
+                logger.info(f"Removing {dst}")
+                os.remove(dst)
+        else:
+            # Not a symlink, but file exists
+            logger.warning(f"Destination: {dst} already exists")
+            logger.warning(f"Moving {dst} to {dst}.backup")
+            shutil.move(dst, str(dst) + ".backup")
 
-    elif os.path.exists(dst):
-        breakpoint()
-        # Not a symlink, but file exists
-        logger.warning(f"Destination: {dst} already exists (dir)")
-        logger.warning(f"Moving {dst} to {dst}.backup")
-        shutil.move(dst, str(dst) + ".backup")
 
-    # No case catched -> create symlink
-    os.symlink(src, dst, target_is_directory=entry.is_dir())
+    # Create symlink
+    os.symlink(src, dst)
     logger.info(f"{src} -> {dst}")
+
 
 
 def link_config(entry: os.DirEntry):
     if entry.is_dir():
         for e in os.scandir(entry):
-            create_link(e)
+            link_config(e)
     else:
         create_link(entry)
-
-    # if entry.name == ".config":
-    #     for e in os.scandir(entry):
-    #         create_link(e, True)
-    # else:
-    #     create_link(entry, False)
 
 
 if __name__ == "__main__":
