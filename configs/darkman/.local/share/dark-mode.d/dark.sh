@@ -2,14 +2,14 @@
 
 # Sway
 swaymsg "output * bg ~/lakesidedeer-dark.png fill"
-sed -i 's/theme-light/theme-dark/g' ~/.config/sway/config
+sed -i --follow-symlinks 's/theme-light/theme-dark/g' ~/.config/sway/config
 swaymsg reload
 
 # Alacritty
-        sed -i 's/github_light/nord/g' ~/.config/alacritty/alacritty.toml
+sed -i --follow-symlinks 's/github_light/nord/g' ~/.config/alacritty/alacritty.toml
 
 # Vim
-sed -i 's/background=light/background=dark/g' ~/.vimrc
+sed -i --follow-symlinks 's/background=light/background=dark/g' ~/.vimrc
 
 # Gnome
 gsettings set org.gnome.desktop.interface gtk-theme Adwaita-dark
