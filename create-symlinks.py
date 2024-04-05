@@ -9,12 +9,15 @@ import logging
 import argparse
 
 
-def create_link(entry: os.DirEntry, dotconfig: bool):
+def create_link(entry: os.DirEntry):
     src = entry.path
-    if dotconfig:
-        dst = os.path.join(DOT_CONFIG, entry.name)
-    else:
-        dst = os.path.join(HOME, entry.name)
+
+    # Replace $HOME/dotfiles/configs/<CONFIG>/ with $HOME
+    rplc = "/".join(src.split("/")[:6])
+    dst = Path(src.replace(rplc, HOME))
+
+    # Create parent directories if they don't exist
+    dst.parent.mkdir(parents=True, exist_ok=True)
 
     # If dst is a symlink
     if os.path.islink(dst):
@@ -27,12 +30,12 @@ def create_link(entry: os.DirEntry, dotconfig: bool):
             logger.info(f"Removing {dst}")
             os.remove(dst)
 
-
     elif os.path.exists(dst):
+        breakpoint()
         # Not a symlink, but file exists
         logger.warning(f"Destination: {dst} already exists (dir)")
         logger.warning(f"Moving {dst} to {dst}.backup")
-        shutil.move(dst, dst + ".backup")
+        shutil.move(dst, str(dst) + ".backup")
 
     # No case catched -> create symlink
     os.symlink(src, dst, target_is_directory=entry.is_dir())
@@ -40,11 +43,17 @@ def create_link(entry: os.DirEntry, dotconfig: bool):
 
 
 def link_config(entry: os.DirEntry):
-    if entry.name == ".config":
+    if entry.is_dir():
         for e in os.scandir(entry):
-            create_link(e, True)
+            create_link(e)
     else:
-        create_link(entry, False)
+        create_link(entry)
+
+    # if entry.name == ".config":
+    #     for e in os.scandir(entry):
+    #         create_link(e, True)
+    # else:
+    #     create_link(entry, False)
 
 
 if __name__ == "__main__":
