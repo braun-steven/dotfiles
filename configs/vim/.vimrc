@@ -100,9 +100,8 @@ Plug 'tpope/vim-repeat'
 " Github Copilot
 Plug 'github/copilot.vim'
 
-" Neovim lsp config
-Plug 'neovim/nvim-lspconfig'
-
+" Modus theme
+Plug 'ishan9299/modus-theme-vim', {'branch': 'stable'}
 
 " Initialize plugin system
 call plug#end()

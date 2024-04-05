@@ -215,6 +215,8 @@
     background-color: #222222;
 }
 
+/* START SWAY */
+
 /* Focused button */
 #workspaces button.focused {
     border-color: #4c7899;
@@ -229,6 +231,25 @@
     background-color: #5f676a;
 }
 
+/* END SWAY */
+
+/* START HYPRLAND */
+
+/* /\* Focused button but on inactive monitor *\/ */
+/* #workspaces button.visible { */
+/*     border-color: #333333; */
+/*     color: #ffffff; */
+/*     background-color: #5f676a; */
+/* } */
+
+/* /\* Active button *\/ */
+/* #workspaces button.active { */
+/*     border-color: #4c7899; */
+/*     color: #eceff4; */
+/*     background-color: #285577; */
+/* } */
+
+/* END HYPRLAND */
 
 #workspaces button.urgent {
     border-color: #c9545d;
