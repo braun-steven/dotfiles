@@ -19,7 +19,8 @@
     "height": 20,
 
     "modules-left": [
-        "sway/workspaces",
+     //   "hyprland/workspaces",
+         "sway/workspaces",
 //        "sway/window",
         "sway/mode",
     ],
@@ -144,6 +145,32 @@
             "critical": 90
         }
 },
+
+     "hyprland/workspaces": {
+         "all-outputs": false,
+         "disable-scroll": true,
+         "format": "{name}{icon}",
+         "format-icons": {
+             "1": " 󰖟 web",
+             "2": " 󰆍 main",
+             "3": " 󰞷 sub",
+             "4": "",
+             "5": "",
+             "6": "",
+             "7": "",
+             "8": "  spotify",
+             "9": " 󰊫 mail+cal",
+             "10": " 󰻞 chat",
+             "11": " (y)",
+             "12": " (u)",
+             "13": " (i)",
+             "14": " (o)",
+             "15": "  (p) gtd",
+             "urgent": "",
+            "focused": "",
+            "default": ""
+         }
+     },
 
     // "sway/workspaces": {
     //     "all-outputs": false,

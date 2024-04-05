@@ -15,18 +15,4 @@ mode = "location"
 # Custom script that also gets executed with a single argument which is either "light" or "dark"
 # This script may contain user specified `sed` instructions to e.g. replace the vim theme like "sed -i s/colorscheme dark/colorscheme light/g ~/.vimrc" or similar
 # Make sure that the script has a proper shebang, e.g. "#!/bin/sh" for shell scripts
-custom-script-path = ""
-
-# Light theme elements
-# Set values to "" if they should not be changed
-[light]
-theme = "Adwaita"
-icon = "Adwaita"
-cursor = "Adwaita"
-
-# Dark theme elements
-# Set values to "" if they should not be changed
-[dark]
-theme = "Adwaita-dark"
-icon = "Adwaita"
-cursor = "Adwaita"
+custom-script-path = "~/dotbin/audamo-custom-script.sh"

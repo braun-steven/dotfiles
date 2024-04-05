@@ -1,0 +1,58 @@
+// Dark
+{
+  "awayIndicator": "#d08770",
+  "buttonBg": "#81a1c1",
+  "buttonColor": "#d8dee9",
+  "centerChannelBg": "#3b4252",
+  "centerChannelColor": "#ffffff",
+  "codeTheme": "github",
+  "dndIndicator": "#bf616a",
+  "errorTextColor": "#fd5960",
+  "linkColor": "#81a1c1",
+  "mentionBg": "#81a1c1",
+  "mentionBj": "#ffffff",
+  "mentionColor": "#ffffff",
+  "mentionHighlightBg": "#81a1c1",
+  "mentionHighlightLink": "#2e3440",
+  "newMessageSeparator": "#81a1c1",
+  "onlineIndicator": "#a3be8c",
+  "sidebarBg": "#2e3440",
+  "sidebarHeaderBg": "#3b4252",
+  "sidebarHeaderTextColor": "#d8dee9",
+  "sidebarTeamBarBg": "#4c566a",
+  "sidebarText": "#d8dee9",
+  "sidebarTextActiveBorder": "#81a1c1",
+  "sidebarTextActiveColor": "#81a1c1",
+  "sidebarTextHoverBg": "#3b4252",
+  "sidebarUnreadText": "#d8dee9"
+}
+
+
+// Light
+{
+  "awayIndicator": "#d08770",
+  "buttonBg": "#81a1c1",
+  "buttonColor": "#d8dee9",
+  "centerChannelBg": "#eceff4",
+  "centerChannelColor": "#3b4252",
+  "codeTheme": "github",
+  "dndIndicator": "#bf616a",
+  "errorTextColor": "#fd5960",
+  "linkColor": "#5e81ac",
+  "mentionBg": "#81a1c1",
+  "mentionBj": "#2e3440",
+  "mentionColor": "#2e3440",
+  "mentionHighlightBg": "#81a1c1",
+  "mentionHighlightLink": "#eceff4",
+  "newMessageSeparator": "#81a1c1",
+  "onlineIndicator": "#a3be8c",
+  "sidebarBg": "#2e3440",
+  "sidebarHeaderBg": "#3b4252",
+  "sidebarHeaderTextColor": "#d8dee9",
+  "sidebarTeamBarBg": "#4c566a",
+  "sidebarText": "#d8dee9",
+  "sidebarTextActiveBorder": "#81a1c1",
+  "sidebarTextActiveColor": "#81a1c1",
+  "sidebarTextHoverBg": "#3b4252",
+  "sidebarUnreadText": "#d8dee9"
+}
