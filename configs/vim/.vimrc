@@ -101,7 +101,7 @@ Plug 'tpope/vim-repeat'
 Plug 'github/copilot.vim'
 
 " Modus theme
-Plug 'ishan9299/modus-theme-vim', {'branch': 'stable'}
+Plug 'miikanissi/modus-themes.nvim'
 
 " Initialize plugin system
 call plug#end()
@@ -117,8 +117,8 @@ syntax on                 " Enable syntax highlighting
 set termguicolors
 
 " {{{ Colorscheme
-set background=dark
-colorscheme nord
+set background=light
+colorscheme modus
 " colorscheme doom-one
 " }}}
 
