@@ -98,7 +98,7 @@ window {
     border-color: #285577;
     background-color: #222222;
     border-radius: 20px;
-    width: 25%;
+    width: 35%;
 
 }
 
