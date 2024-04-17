@@ -26,10 +26,10 @@ alias ipy="python -c 'import IPython; IPython.terminal.ipapp.launch_new_instance
 alias em="emacsclient -t -a ''"
 
 # DNF on Fedora
-alias dnfi="sudo dnf install"
-alias dnfr="sudo dnf remove"
-alias dnfs="dnf search"
-alias dnfu="echo '<-[Updating dnf]->' && sudo dnf update && echo -e '\n\n<-[Updating flatpaks]->' && flatpak update && echo -e '\n\n<-[Updating snaps]->' && sudo snap refresh"
+alias dnfi="sudo dnf5 install"
+alias dnfr="sudo dnf5 remove"
+alias dnfs="dnf5 search"
+alias dnfu="echo '<-[Updating dnf]->' && sudo dnf5 update && echo -e '\n\n<-[Updating flatpaks]->' && flatpak update && echo -e '\n\n<-[Updating snaps]->' && sudo snap refresh"
 
 alias gemma2b="~/gemma.cpp/build/gemma -- --tokenizer ~/gemma.cpp/build/tokenizer.spm --compressed_weights ~/gemma.cpp/build/2b-it-sfp.sbs --model 2b-it --verbosity 0"
 alias gemma7b="~/gemma.cpp/build/gemma -- --tokenizer ~/gemma.cpp/build/tokenizer.spm --compressed_weights ~/gemma.cpp/build/7b-it-sfp.sbs --model 7b-it --verbosity 0"
