@@ -34,7 +34,7 @@
 ;; font string. You generally only need these two:
 ;; (if (eq system-type 'darwin)
 ;; (setq doom-font (font-spec :family "Hack" :size 14.0))  ;; MacOS
-(setq doom-font (font-spec :family "Hack" :size 15))  ;; Linux
+(setq doom-font (font-spec :family "Hack" :size 12))  ;; Linux
 ;;   )
 ;; (setq doom-font (font-spec :family "Consolas" :size 12.0))
 ;; (setq doom-font (font-spec :family "Inconsolata" :size 13.0))
@@ -142,7 +142,10 @@
   (doom-themes-org-config))
 
 (use-package! ssh-agency
+
   :after magit)
+
+(map! :after corfu :map corfu-map :i [tab] #'corfu-next)
 
 ;; (use-package! powerthesaurus)
 

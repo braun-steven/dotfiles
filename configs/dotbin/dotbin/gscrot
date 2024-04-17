@@ -1,3 +1,3 @@
 #!/bin/bash
 
-/usr/share/sway-contrib/grimshot save anything
+~/sway-contrib/grimshot save anything

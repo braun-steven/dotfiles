@@ -11,10 +11,15 @@ output * bg ~/lakesidedeer-light.png fill
 
 exec systemctl --user import-environment PATH
 
+seat seat0 xcursor_theme Adwaita 20
+
+
 # exec_always export PATH=$PATH:~/dotbin
 exec_always gsettings set org.gnome.desktop.interface text-scaling-factor 1.0
-# exec_always gsettings set org.gnome.settings-daemon.plugins.xsettings overrides "[{'Gdk/WindowScalingFactor', <1>}]"
-# exec_always gsettings set org.gnome.desktop.interface scaling-factor 1
+exec_always gsettings set org.gnome.nm-applet disable-disconnected-notifications "true"
+exec_always gsettings set org.gnome.nm-applet disable-connected-notifications "true"
+exec_always gsettings set org.gnome.desktop.interface document-font-name 'Inter 11'
+exec_always gsettings set org.gnome.desktop.interface font-name 'Inter 11'
 
 input type:touchpad {
     tap enabled
@@ -43,30 +48,17 @@ input type:keyboard {
 for_window [shell="xwayland"] title_format "[XWayland] %title"
 
 # Enable clipboard
-exec wl-paste -pw wl-copy
+exec wl-paste -t text --watch clipman store --no-persist
 
 # Run kanshi: detect correct monitors
-exec_always killall kanshi & sleep 0.5 && kanshi &
+exec_always killall kanshi & sleep 0.5 && kanshi & 
+#& sleep 0.5 && $HOME/dotbin/update-sway-monitors.sh &
+
+# exec_always --no-startup-id $HOME/dotbin/update-sway-monitors.sh
 
 # Run waybar as bar
-exec_always killall waybar & sleep 0.5 && ~/Waybar/build/waybar &
-# exec_always killall waybar & sleep 0.5 && waybar &
-
-
-# set $Locker swaylock \
-#       --screenshots \
-#       --indicator \
-#       --indicator-radius 100 \
-#       --indicator-thickness 7 \
-#       --effect-blur 10x10 \
-#       --effect-vignette 0.5:0.5 \
-#       --ring-color 285577 \
-#       --key-hl-color 4c7899 \
-#       --line-color 00000000 \
-#       --inside-color 00000088 \
-#       --separator-color 00000000 \
-#       --grace 2 \
-#       --fade-in 0.2
+# exec_always killall waybar & sleep 0.5 && ~/Waybar/build/waybar &
+exec_always killall waybar & sleep 0.5 && waybar &
 
 # Swaylock with options. "-f" daemonizes swaylock to work with systemd suspend afterwards
 set $Locker swaylock -f \
@@ -78,7 +70,8 @@ set $Locker swaylock -f \
 
 ### Idle configuration
 # exec swayidle -w timeout 1200 'systemctl suspend'
-exec swayidle -w timeout 1200 '$Locker && systemctl suspend-then-hibernate' 
+exec swayidle -w timeout 1200 '$Locker && systemctl suspend' before-sleep 'playerctl pause'
+# exec swayidle -w timeout 1200 '$Locker && systemctl suspend-then-hibernate' before-sleep 'playerctl pause'
 # exec swayidle -w timeout 1200 'systemctl suspend-then-hibernate' before-sleep '$Locker'
 # exec swayidle -w timeout 1200 'systemctl suspend-then-hibernate' before-sleep '$Locker'
 
@@ -149,7 +142,7 @@ exec swayidle -w timeout 180 'swaymsg "output eDP-1 dpms off"' resume 'swaymsg "
 
 # client.background       #ffffff
 
-include /home/steven/.config/sway/theme-light
+include /home/steven/.config/sway/theme-dark
 # # ---------- i3
 
 
@@ -159,7 +152,7 @@ set $mod2 Mod1
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
 
-font pango:IBM Plex Mono 10
+font pango:IBM Plex Mono 8
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -284,8 +277,8 @@ assign [app_id="Todoist"] $wp
 assign [app_id="thunderbird"] $w9
 
 # Set workspaces to specific monitors
-set $firstmon DP-2
-set $secondmon DP-1
+
+include $HOME/.config/sway/monitors
 # set $firstmon DP-1
 # set $secondmon HDMI-A-1
 workspace $w1 output $firstmon
@@ -313,7 +306,8 @@ set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) re
 mode "$mode_system" {
     bindsym l exec --no-startup-id $Locker, mode "default"
     bindsym e exec --no-startup-id swaymsg exit, mode "default"
-    bindsym s exec --no-startup-id $Locker && systemctl suspend-then-hibernate, mode "default"
+    bindsym s exec --no-startup-id $Locker && systemctl suspend, mode "default"
+    # bindsym s exec --no-startup-id $Locker && systemctl suspend-then-hibernate, mode "default"
     bindsym h exec --no-startup-id $Locker && systemctl hibernate, mode "default"
     bindsym r exec --no-startup-id systemctl reboot, mode "default"
     bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"
@@ -399,7 +393,8 @@ for_window [title="PULSE"] floating enable
 for_window [app_id="Pavucontrol"] floating enable, resize set 1280 768
 
 # suspend/lock shortcuts
-bindsym $mod+$mod2+Ctrl+s exec --no-startup-id systemctl suspend-then-hibernate  # Calling $Locker is not necessary with `betterlockscreen` since there is a systemctl service that starts betterlockscreen whenever the system suspends
+bindsym $mod+$mod2+Ctrl+s exec --no-startup-id systemctl suspend  # Calling $Locker is not necessary with `betterlockscreen` since there is a systemctl service that starts betterlockscreen whenever the system suspends
+# bindsym $mod+$mod2+Ctrl+s exec --no-startup-id systemctl suspend-then-hibernate  # Calling $Locker is not necessary with `betterlockscreen` since there is a systemctl service that starts betterlockscreen whenever the system suspends
 bindsym $mod+$mod2+Ctrl+l exec --no-startup-id $Locker
 
 # Emacs anywhere (doesn't work on wayland)
@@ -439,12 +434,16 @@ bindsym XF86AudioMute        exec --no-startup-id amixer set Master toggle
 
 
 # You can also use any non-zero value if you'd like to have a border
-for_window [class=".*"] border pixel 3
+for_window [class=".*"] border pixel 2
 # default_border pixel 1
 # smart_borders on  # issues with firefox
 # smart_gaps on
 # gaps inner 8
 # gaps outer 5
+
+titlebar_border_thickness 1
+titlebar_padding 2 2
+# smart_borders no_gaps
 
 # Enforce borders (and thus also window title borders) for all apps
 # Without this, some apps like eye-of-gnome will be without a titlebar
@@ -464,7 +463,8 @@ for_window [class=".*"] border pixel 3
 exec --no-startup-id dex --autostart --environment sway
 
 # Enable polit (e.g. polkit-gnome) authentication agent to get GUI password prompts
-exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec --no-startup-id /usr/libexec/polkit-gnome-authentication-agent-1  # Fedora
+# exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
 # move tiling windows via drag & drop by left-clicking into the title bar,
 # or left-clicking anywhere into the window while holding the floating modifier.
@@ -473,5 +473,5 @@ exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id dunst
 
 # Enable gsd xsettings such that applications can infer dark/light theme settings
-exec --no-startup-id /usr/lib/gsd-xsettings
-
+exec --no-startup-id /usr/libexec/gsd-xsettings  # Fedora
+# exec --no-startup-id /usr/lib/gsd-xsettings

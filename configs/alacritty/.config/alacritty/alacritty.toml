@@ -1,11 +1,13 @@
-import = ["/home/steven/.config/alacritty/themes/themes/github_light.toml"]
+import = ["/home/steven/.config/alacritty/themes/themes/nord.toml"]
+# import = ["/home/steven/.config/alacritty/themes/themes/github_light.toml"]
 live_config_reload = true
 
 [font]
-size = 11.0
+size = 9.0
 
 [font.normal]
 family = "Hack"
+# family = "Source Code Pro"
 # family = "IBM Plex Mono"
 
 [font.offset]
