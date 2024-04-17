@@ -16,10 +16,10 @@
     "position": "top",
 
     // If height property would be not present, it'd be calculated dynamically
-    "height": 20,
+    "height": 14,
 
     "modules-left": [
-     //   "hyprland/workspaces",
+      //  "hyprland/workspaces",
          "sway/workspaces",
 //        "sway/window",
         "sway/mode",
@@ -57,7 +57,9 @@
             "critical": 15
         },
         // Connected to AC
-        "format": "  {icon}  {capacity}%", // Icon: bolt
+        "format": "{icon}  {capacity}%",
+        "format-not-charging": "{icon}  {capacity}%",  // Same as format
+        "format-charging": "  {icon}  {capacity}%", // Icon: bolt
         // Not connected to AC
         "format-discharging": "{icon}  {capacity}%",
         "format-icons": [
@@ -67,7 +69,7 @@
             "", // Icon: battery-quarter
             ""  // Icon: battery-empty
         ],
-        "tooltip": true
+        "tooltip": false
     },
 
     "clock#time": {
@@ -220,7 +222,7 @@
     },
 
     "tray": {
-        "icon-size": 21,
+        "icon-size": 16,
         "spacing": 10
     }
 

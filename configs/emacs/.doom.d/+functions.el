@@ -62,6 +62,7 @@ current buffer's, reload dir-locals."
   ;; to get access to the new project's files, and directories.
   (message "Project root:")
   (setq conda-env-name-candidate (nth 1 (reverse (s-split "/" (projectile-project-root)))))
+  (message conda-env-name-candidate)
 
   (if (member conda-env-name-candidate (conda-env-candidates))
       ;; (message "Yes")

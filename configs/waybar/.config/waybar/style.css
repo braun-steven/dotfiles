@@ -68,9 +68,8 @@
     background: #000000;
     opacity: 1.00;
     color: white;
-    /* font-family: Cantarell, Noto Sans, sans-serif; */
-    font-family: IBM Plex Mono, Hack, Roboto, Helvetica, Arial, sans-serif;
-    font-size: 13px;
+    font-family: IBM Plex Mono, Hack, Inter, Cantarell;
+    font-size: 10px;
 }
 
 /* Each module */

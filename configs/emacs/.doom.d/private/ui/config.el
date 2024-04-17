@@ -6,28 +6,19 @@
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. These are the defaults.
 ;; (setq sbraun/theme-light 'modus-operandi)
-(setq sbraun/theme-dark 'doom-one)
+(setq sbraun/theme-dark 'doom-nord)
 (setq doom-theme sbraun/theme-dark)
-
-(defun set-doom-theme-based-on-file ()
-  "Sets the Doom theme based on the content of the /tmp/audamo_current-theme file."
-  (let ((theme-file "/tmp/audamo_current-theme"))
-    (when (file-exists-p theme-file)
-      (with-temp-buffer
-        (insert-file-contents theme-file)
-        (let ((content (string-trim (buffer-string))))
-          (setq doom-theme (if (string= content "light") 'modus-operandi 'modus-vivendi)))))))
 
 ;; (set-doom-theme-based-on-file)
 
-(use-package! circadian
-  :ensure t
-  :config
-  (setq calendar-latitude 49.992)
-  (setq calendar-longitude 8.247)
-  (setq circadian-themes '((:sunrise . modus-operandi)
-                           (:sunset  . modus-vivendi)))
-  (circadian-setup))
+;; (use-package! circadian
+;;   :ensure t
+;;   :config
+;;   (setq calendar-latitude 49.992)
+;;   (setq calendar-longitude 8.247)
+;;   (setq circadian-themes '((:sunrise . modus-operandi)
+;;                            (:sunset  . doom-nord)))
+;;   (circadian-setup))
 
 
 ;; Add set-frame-opacity to doom-switch-frame-hook

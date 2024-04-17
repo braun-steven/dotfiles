@@ -1,28 +1,29 @@
 profile "desktop" {
-    output DP-2 enable scale 1.5 position 0,0
-    # output HDMI-A-1 enable scale 1.5 position 0,0
-    output DP-1 enable scale 1.5 position 2560,0
+    output DP-2 enable scale 2 position 0,0
+    # output HDMI-A-1 enable scale 2 position 0,0
+    output DP-1 enable scale 2 position 1920,0
     output eDP-1 disable
 }
 
 profile "desktop-2" {
-    output eDP-1 enable scale 1.5 adaptive_sync on
-    output DP-2 enable scale 1.5
-    # output HDMI-A-1 enable scale 1.5
+    output eDP-1 enable scale 2 adaptive_sync on
+    output DP-2 enable scale 2
+    # output HDMI-A-1 enable scale 2
 }
 
 profile "desktop-1" {
-    output eDP-1 enable scale 1.5 adaptive_sync on
-    output DP-1 enable scale 1.5
+    output eDP-1 enable scale 2 adaptive_sync on
+    output DP-1 enable scale 2
 }
 
 profile "mobile" {
-    output eDP-1 enable scale 1.5 adaptive_sync on
+    output eDP-1 enable scale 2 adaptive_sync on
 }
 
 profile "work-patricks" {
-    output DP-1 enable scale 1.5 position 0,0
-    # output HDMI-A-1 enable scale 1.5 position 0,0
-    output HDMI-A-1 enable scale 1.5 position 2560,0
+    output DP-1 enable scale 2 position 1920,0
+    output HDMI-A-1 enable scale 2 position 0,0
+    # output HDMI-A-1 enable scale 2 position 1920,0
+    # output DP-1 enable scale 2 position 0,0
     output eDP-1 disable
 }
