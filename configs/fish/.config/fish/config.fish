@@ -130,7 +130,7 @@ end
 
 # Better ls
 if type -q eza
-  alias ls='exa -l --group-directories-first --color auto'
+  alias ls='eza -l --group-directories-first --color auto'
 end
 
 
