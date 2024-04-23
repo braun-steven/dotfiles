@@ -74,7 +74,7 @@
 ;; (package! super-save)
 
 ;; Grammarly
-(package! lsp-grammarly)
+;; (package! lsp-grammarly)
 
 ;; Load private module packages
 (dolist (file (directory-files "~/.doom.d/private/" t directory-files-no-dot-files-regexp))
