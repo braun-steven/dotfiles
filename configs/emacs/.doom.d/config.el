@@ -34,7 +34,9 @@
 ;; font string. You generally only need these two:
 ;; (if (eq system-type 'darwin)
 ;; (setq doom-font (font-spec :family "Hack" :size 14.0))  ;; MacOS
-(setq doom-font (font-spec :family "Hack" :size 12))  ;; Linux
+;; (setq doom-font (font-spec :family "Hack" :size 12))  ;; Linux
+(setq doom-font (font-spec :family "CommitMono" :size 12))  ;; Linux
+
 ;;   )
 ;; (setq doom-font (font-spec :family "Consolas" :size 12.0))
 ;; (setq doom-font (font-spec :family "Inconsolata" :size 13.0))
@@ -172,7 +174,7 @@
 (setq lsp-pyright-multi-root nil)
 
 
-(after! (projectile)
+(after! (projectile conda)
   (add-hook 'projectile-after-switch-project-hook #'activate-project-conda-env-maybe))
 
 
