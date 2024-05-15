@@ -1,0 +1,45 @@
+#!/bin/bash
+
+CACHE_FILE="/tmp/kbd-brightness.cache"
+BRIGHTNESS_FILE="/sys/class/leds/white:kbd_backlight/brightness"
+
+function set_brightness {
+    # Check if the input is 0, 1, or 2
+    if [[ "$1" =~ ^[012]$ ]]; then
+        # Cache the current brightness value before changing it
+        current_brightness=$(cat $BRIGHTNESS_FILE)
+        echo $current_brightness > $CACHE_FILE
+        
+        # Use echo with sudo to set the new brightness
+        echo "$1" | sudo tee $BRIGHTNESS_FILE > /dev/null
+    else
+        echo "Invalid brightness setting. Please use 0, 1, or 2."
+        exit 1
+    fi
+}
+
+function restore_brightness {
+    if [ -f $CACHE_FILE ]; then
+        # Read the cached brightness value
+        cached_value=$(cat $CACHE_FILE)
+        # Restore the brightness using the cached value
+        echo $cached_value | sudo tee $BRIGHTNESS_FILE > /dev/null
+    else
+        echo "No cached brightness value found."
+        exit 1
+    fi
+}
+
+# Parse command line options
+case "$1" in
+    --set)
+        set_brightness "$2"
+        ;;
+    --restore)
+        restore_brightness
+        ;;
+    *)
+        echo "Usage: $0 --set {0,1,2} or $0 --restore"
+        exit 1
+        ;;
+esac

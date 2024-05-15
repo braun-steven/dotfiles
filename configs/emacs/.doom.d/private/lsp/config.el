@@ -40,20 +40,4 @@
 
 
   (delete 'lsp-terraform lsp-client-packages)
-
-
-;;(use-package! lsp-grammarly
-;;  :defer t
-;;  :hook ((text-mode . lsp)
-;;         ;; (org-mode . lsp)
-;;         (markdown-mode . lsp)
-;;                (gfm-mode . lsp)
-;;                (TeX-mode . lsp)
-;;         )
-;;  :config
-;;  (add-to-list 'lsp-grammarly-active-modes 'gfm-mode) ;; Add github format markdown mode to grammarly list
-;;  )
-;;
-;;  ;; From https://emacs-lsp.github.io/lsp-mode/page/faq/#how-do-i-force-lsp-mode-to-forget-the-workspace-folders-for-multi-root
-;;  ;; (advice-add 'lsp :before (lambda (&rest _args) (eval '(setf (lsp-session-server-id->folders (lsp-session)) (ht)))))
   )

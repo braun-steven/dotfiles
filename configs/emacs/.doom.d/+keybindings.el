@@ -81,3 +81,14 @@
        :desc "Antonyms" "a"  #'powerthesaurus-lookup-antonyms-dwim
        :desc "Sentence" "S"  #'powerthesaurus-lookup-sentences-dwim
        :desc "Related" "r"  #'powerthesaurus-lookup-related-dwim))
+
+
+  ;; accept completion from copilot
+  (use-package! copilot
+    :hook (prog-mode . copilot-mode)
+    :bind (:map copilot-completion-map
+                ("<tab>" . 'copilot-accept-completion)
+                ("TAB" . 'copilot-accept-completion)
+                ("C-TAB" . 'copilot-accept-completion-by-word)
+                ("C-<tab>" . 'copilot-accept-completion-by-word))
+    :config (setq copilot-indent-offset-warning-disable t))
