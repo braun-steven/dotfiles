@@ -5,7 +5,6 @@ output * bg ~/lakesidedeer-light.png fill
 
 # The following is now handled by kanshi
 # output eDP-1 scale 1.5 mode 2880x1800@60Hz
-
 # output DP-2 scale 1.5 pos 0 0
 # output DP-1 scale 1.5 pos 2560 0
 
@@ -14,25 +13,26 @@ exec systemctl --user import-environment PATH
 
 
 # exec_always export PATH=$PATH:~/dotbin
-exec_always gsettings set org.gnome.desktop.interface text-scaling-factor 1.0
+exec_always gsettings set org.gnome.desktop.interface text-scaling-factor 1.5
 exec_always gsettings set org.gnome.nm-applet disable-disconnected-notifications "true"
 exec_always gsettings set org.gnome.nm-applet disable-connected-notifications "true"
 exec_always gsettings set org.gnome.desktop.interface document-font-name 'Inter 11'
 exec_always gsettings set org.gnome.desktop.interface font-name 'Inter 11'
-exec_always gsettings set org.gnome.desktop.interface cursor-size 16
-seat seat0 xcursor_theme Adwaita 16
+exec_always gsettings set org.gnome.desktop.interface cursor-size 32
+seat seat0 xcursor_theme Adwaita 32
 
 input type:touchpad {
     tap enabled
     natural_scroll enabled
     scroll_factor 0.10
+    pointer_accel 0.35
 }
 
-# input type:pointer {
+input type:pointer {
     # scroll_factor 0.35
     # accel_profile "adaptive" # disable mouse acceleration (enabled by default; to set it manually, use "adaptive" instead of "flat")
-    # pointer_accel 0.0 # set mouse sensitivity (between -1 and 1)
-# }
+    pointer_accel 0.75 # set mouse sensitivity (between -1 and 1)
+}
 
 input type:keyboard {
   # Capslock key should work as escape key
@@ -44,6 +44,11 @@ input type:keyboard {
   repeat_delay 200
   repeat_rate 40
 }
+
+bindsym Mod1+h exec wtype -k left
+bindsym Mod1+j exec wtype -k down
+bindsym Mod1+k exec wtype -k up
+bindsym Mod1+l exec wtype -k right
 
 # Mark XWayland windows
 for_window [shell="xwayland"] title_format "[XWayland] %title"
@@ -58,32 +63,34 @@ exec_always killall kanshi & sleep 0.5 && kanshi &
 # exec_always --no-startup-id $HOME/dotbin/update-sway-monitors.sh
 
 # Run waybar as bar
-exec_always killall waybar & sleep 0.5 && ~/Waybar/build/waybar &
-# exec_always killall waybar & sleep 0.5 && waybar &
+# exec_always killall waybar & sleep 0.5 && ~/Waybar/build/waybar &
+exec_always killall waybar & sleep 0.5 && waybar &
 
 # Swaylock with options. "-f" daemonizes swaylock to work with systemd suspend afterwards
 set $Locker swaylock -f \
       --image ~/lakesidedeer-dark-dimblur.png \
       --inside-color 00000088 \
-      --ring-color 285577
-
-
+      --ring-color 285577 \
+      --indicator-radius 100 \
+      --indicator-thickness 20
 
 ### Idle configuration
-# exec swayidle -w timeout 1200 'systemctl suspend'
 exec swayidle -w timeout 1200 '$Locker && systemctl suspend' before-sleep 'playerctl pause'
-# exec swayidle -w timeout 1200 '$Locker && systemctl suspend-then-hibernate' before-sleep 'playerctl pause'
-# exec swayidle -w timeout 1200 'systemctl suspend-then-hibernate' before-sleep '$Locker'
-# exec swayidle -w timeout 1200 'systemctl suspend-then-hibernate' before-sleep '$Locker'
+exec swayidle -w before-sleep 'loginctl lock-session $XDG_SESSION_ID' lock 'playerctl -a pause; $Locker'
 
-# Dim screen after inactivity
+# Dim screen after inactivity of 1 minute
 # brillo -O: save current brightness
+# brillo -S $(( $(brillo) / 2 )) -u 150000: set brightness to half of what it is now (150us fade out)
 # brillo -S 0 -u 150000: set brightness to 0 (150us fade out)
 # brillo -I -u 150000: restore brightness (150us fade in)
-exec swayidle -w timeout 30 "brillo -O && brillo -S 0 -u 150000" resume "brillo -I -u 150000"
+exec swayidle -w timeout 60 'brillo -O && brillo -S $(echo "$(brillo)" / 3 | bc) -u 150000' resume 'brillo -I -u 150000'
+
+# Turn off keyboard backlight after inactivity of 1 minute
+exec swayidle -w timeout 60 "sudo kbd-brightness --set 0" resume "sudo kbd-brightness --restore"
 
 # Turn off screen after inactivity of 3 minutes
-exec swayidle -w timeout 180 'swaymsg "output eDP-1 dpms off"' resume 'swaymsg "output eDP-1 dpms on"'
+exec swayidle -w timeout 180 'swaymsg "output eDP-1 power off"' resume 'swaymsg "output eDP-1 power on"'
+# note: "dpms" is deprecated, use "power" instead
 
 # ---------- SwayFX
 
@@ -143,7 +150,7 @@ exec swayidle -w timeout 180 'swaymsg "output eDP-1 dpms off"' resume 'swaymsg "
 
 # client.background       #ffffff
 
-include /home/steven/.config/sway/theme-dark
+include /home/steven/.config/sway/theme-light
 # # ---------- i3
 
 
@@ -153,8 +160,8 @@ set $mod2 Mod1
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
 
-font pango:CommitMono 8
-# font pango:IBM Plex Mono 8
+# font pango:CommitMono 16
+font pango:IBM Plex Mono 16
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -395,7 +402,7 @@ for_window [title="PULSE"] floating enable
 for_window [app_id="Pavucontrol"] floating enable, resize set 1280 768
 
 # suspend/lock shortcuts
-bindsym $mod+$mod2+Ctrl+s exec --no-startup-id systemctl suspend  # Calling $Locker is not necessary with `betterlockscreen` since there is a systemctl service that starts betterlockscreen whenever the system suspends
+bindsym $mod+$mod2+Ctrl+s exec --no-startup-id $Locker && systemctl suspend  # Calling $Locker is not necessary with `betterlockscreen` since there is a systemctl service that starts betterlockscreen whenever the system suspends
 # bindsym $mod+$mod2+Ctrl+s exec --no-startup-id systemctl suspend-then-hibernate  # Calling $Locker is not necessary with `betterlockscreen` since there is a systemctl service that starts betterlockscreen whenever the system suspends
 bindsym $mod+$mod2+Ctrl+l exec --no-startup-id $Locker
 
@@ -404,7 +411,8 @@ bindsym $mod+$mod2+Ctrl+l exec --no-startup-id $Locker
 # for_window [class="Emacs" title="^Emacs Everywhere.*"] floating enable, resize set 1280x768
 
 # Some startup stuff
-exec gammastep  # Redshift wayland alternative
+# exec gammastep  # Redshift wayland alternative
+exec wlsunset -t 4000 -T 6500 -l 49.98 -L 8.27  # Handles dpms on/off better than gammastep
 
 # Move to first workspace on startup
 exec swaymsg workspace $w1
@@ -436,7 +444,7 @@ bindsym XF86AudioMute        exec --no-startup-id amixer set Master toggle
 
 
 # You can also use any non-zero value if you'd like to have a border
-for_window [class=".*"] border pixel 3
+for_window [class=".*"] border pixel 5
 default_floating_border none
 # default_border pixel 1
 # smart_borders on  # issues with firefox
@@ -444,8 +452,8 @@ default_floating_border none
 # gaps inner 8
 # gaps outer 5
 
-titlebar_border_thickness 1
-titlebar_padding 3 3
+titlebar_border_thickness 2
+titlebar_padding 5 5
 # smart_borders no_gaps
 
 # Enforce borders (and thus also window title borders) for all apps
@@ -475,6 +483,12 @@ exec --no-startup-id /usr/libexec/polkit-gnome-authentication-agent-1  # Fedora
 
 exec --no-startup-id dunst
 
+exec --no-startup-id pasystray
+exec --no-startup-id blueman-applet
+
 # Enable gsd xsettings such that applications can infer dark/light theme settings
 exec --no-startup-id /usr/libexec/gsd-xsettings  # Fedora
 # exec --no-startup-id /usr/lib/gsd-xsettings
+
+# Enables inhibit_idle when playing audio
+exec sway-audio-idle-inhibit

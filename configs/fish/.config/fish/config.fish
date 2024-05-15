@@ -17,7 +17,11 @@ bind -M insert \cp up-or-search
 bind -M insert \cn down-or-search
 bind -M insert \cf forward-char
 
+bind -M insert \ch backward-char
+bind -M insert \cl forward-char
+
 # Fzf
+# set -U FZF_DEFAULT_OPTS "--height 40% --layout=reverse --border --prompt='Search> '"
 fzf_configure_bindings --directory=\ct
 set fzf_history_time_format
 
@@ -109,15 +113,13 @@ function set_dark_theme
   set -U fish_pager_color_secondary_completion
 end
 
-set_dark_theme
-
-# # Read value of /tmp/audamo_current-theme
-# set current_theme (darkman get)
-# if test $current_theme = "light"
-#   set_light_theme
-# else
-#   set_dark_theme
-# end
+# Read value of /tmp/audamo_current-theme
+set current_theme (darkman get)
+if test $current_theme = "light"
+  set_light_theme
+else
+  set_dark_theme
+end
 
 
 # Load aliases
