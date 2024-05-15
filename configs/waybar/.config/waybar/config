@@ -16,7 +16,7 @@
     "position": "top",
 
     // If height property would be not present, it'd be calculated dynamically
-    "height": 14,
+    "height": 28,
 
     "modules-left": [
       //  "hyprland/workspaces",
@@ -24,13 +24,16 @@
 //        "sway/window",
         "sway/mode",
     ],
-     // "modules-center": [
-     //      "sway/window"
-     // ],
+//     "modules-center": [
+//     //      "sway/window"
+//     ],
     "modules-right": [
+        "custom/audio_idle_inhibitor",
         "network",
         "custom/sep",
         "memory",
+        "custom/sep",
+        "pulseaudio",
         // "custom/sep",
         // "custom/vram",
         // "cpu",
@@ -106,7 +109,7 @@
 
     "memory": {
         "interval": 5,
-        "format": "󰍛 Mem. {}%", // Icon: memory
+        "format": "󰍛 Mem {}%", // Icon: memory
         "states": {
             "warning": 70,
             "critical": 90
@@ -190,22 +193,22 @@
     //     }
     // },
 
-    //"pulseaudio": {
-    //    //"scroll-step": 1,
-    //    "format": "{icon}  {volume}%",
-    //    "format-bluetooth": "{icon}  {volume}%",
-    //    "format-muted": "",
-    //    "format-icons": {
-    //        "headphones": "",
-    //        "handsfree": "",
-    //        "headset": "",
-    //        "phone": "",
-    //        "portable": "",
-    //        "car": "",
-    //        "default": ["", ""]
-    //    },
-    //    "on-click": "pavucontrol"
-    //},
+    "pulseaudio": {
+        //"scroll-step": 1,
+        "format": "{icon}  {volume}%",
+        "format-bluetooth": "{icon}  {volume}%",
+        "format-muted": "",
+        "format-icons": {
+            "headphones": "",
+            "handsfree": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", ""]
+        },
+        "on-click": "pavucontrol"
+    },
 
     "temperature": {
       "critical-threshold": 80,
@@ -220,9 +223,21 @@
       ],
       "tooltip": true
     },
+	"custom/audio_idle_inhibitor": {
+		"format": " {icon} ",
+		"exec": "sway-audio-idle-inhibit --dry-print-both-waybar",
+		"exec-if": "which sway-audio-idle-inhibit",
+		"return-type": "json",
+		"format-icons": {
+			"output": "  |",
+			"input": "  |",
+			"output-input": "    |",
+			"none": ""
+		}
+	},
 
     "tray": {
-        "icon-size": 16,
+        "icon-size": 28,
         "spacing": 10
     }
 

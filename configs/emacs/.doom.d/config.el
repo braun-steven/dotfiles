@@ -35,7 +35,7 @@
 ;; (if (eq system-type 'darwin)
 ;; (setq doom-font (font-spec :family "Hack" :size 14.0))  ;; MacOS
 ;; (setq doom-font (font-spec :family "Hack" :size 12))  ;; Linux
-(setq doom-font (font-spec :family "CommitMono" :size 12))  ;; Linux
+(setq doom-font (font-spec :family "CommitMono" :size 25))  ;; Linux
 
 ;;   )
 ;; (setq doom-font (font-spec :family "Consolas" :size 12.0))
@@ -181,7 +181,11 @@
 ;; Typst
 (use-package! typst-ts-mode
   :custom
-  (typst-ts-mode-watch-options "--open"))
+
+  (typst-ts-mode-watch-options "--open")
+  ;; experimental settings (I'm the main dev, so I enable these)
+  (typst-ts-mode-enable-raw-blocks-highlight t)
+  (typst-ts-mode-highlight-raw-blocks-at-startup t))
 
 (use-package! avy
   :config
@@ -212,18 +216,18 @@
              '(typst "https://github.com/uben0/tree-sitter-typst"))
 
 ;; If pressing tab to complete sometimes doesn't work you might want to bind completion to another key or try:
-(after! (evil copilot)
-  ;; Define the custom function that either accepts the completion or does the default behavior
-  (defun my/copilot-tab-or-default ()
-    (interactive)
-    (if (and (bound-and-true-p copilot-mode)
-             ;; Add any other conditions to check for active copilot suggestions if necessary
-             )
-        (copilot-accept-completion)
-      (evil-insert 1))) ; Default action to insert a tab. Adjust as needed.
+;; (after! (evil copilot)
+;;   ;; Define the custom function that either accepts the completion or does the default behavior
+;;   (defun my/copilot-tab-or-default ()
+;;     (interactive)
+;;     (if (and (bound-and-true-p copilot-mode)
+;;              ;; Add any other conditions to check for active copilot suggestions if necessary
+;;              )
+;;         (copilot-accept-completion)
+;;       (evil-insert 1))) ; Default action to insert a tab. Adjust as needed.
 
-  ;; Bind the custom function to <tab> in Evil's insert state
-  (evil-define-key 'insert 'global (kbd "<tab>") 'my/copilot-tab-or-default))
+;;   ;; Bind the custom function to <tab> in Evil's insert state
+;;   (evil-define-key 'insert 'global (kbd "<tab>") 'my/copilot-tab-or-default))
 
 
 ;; Load private modules
