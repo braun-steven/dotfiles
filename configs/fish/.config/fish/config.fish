@@ -113,8 +113,13 @@ function set_dark_theme
   set -U fish_pager_color_secondary_completion
 end
 
-# Read value of /tmp/audamo_current-theme
-set current_theme (darkman get)
+# Read value of darkman if available
+if type -q darkman
+  set current_theme (darkman get)
+else
+  set current_theme dark
+end
+
 if test $current_theme = "light"
   set_light_theme
 else

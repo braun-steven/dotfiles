@@ -32,6 +32,13 @@ if [ ! -d $HOME/.tmux/plugins/tpm ]; then
   git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 fi
 
+# Check if eza is installed
+if ! command -v eza &> /dev/null; then
+  curl -L https://github.com/eza-community/eza/releases/latest/download/eza_x86_64-unknown-linux-gnu.zip --output /tmp/eza.zip
+  unzip /tmp/eza.zip -d ~/.local/bin
+  chmod u+x ~/.local/bin/eza
+fi
+
 
 # Download and install fzf
 if [[ ! -d $HOME/.fzf ]]; then
