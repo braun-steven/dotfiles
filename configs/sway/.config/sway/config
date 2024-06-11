@@ -1,7 +1,13 @@
 # -------------- Sway
-include /etc/sway/config.d/*
+# include /etc/sway/config.d/*
+include /etc/sway/config.d/55-openSUSE-windows.conf
 
-output * bg ~/lakesidedeer-light.png fill
+exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
+exec hash dbus-update-activation-environment 2>/dev/null && \
+     dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP=sway
+
+output * bg ~/opensuse-wallpaper.png fill
+# output * bg ~/lakesidedeer-light.png fill
 
 # The following is now handled by kanshi
 # output eDP-1 scale 1.5 mode 2880x1800@60Hz
@@ -68,14 +74,14 @@ exec_always killall waybar & sleep 0.5 && waybar &
 
 # Swaylock with options. "-f" daemonizes swaylock to work with systemd suspend afterwards
 set $Locker swaylock -f \
-      --image ~/lakesidedeer-dark-dimblur.png \
+      --image ~/opensuse-wallpaper-blur.png \
       --inside-color 00000088 \
       --ring-color 285577 \
       --indicator-radius 100 \
       --indicator-thickness 20
 
 ### Idle configuration
-exec swayidle -w timeout 1200 '$Locker && systemctl suspend' before-sleep 'playerctl pause'
+exec swayidle -w timeout 1200 '$Locker && systemctl suspend-then-hibernate' before-sleep 'playerctl pause'
 exec swayidle -w before-sleep 'loginctl lock-session $XDG_SESSION_ID' lock 'playerctl -a pause; $Locker'
 
 # Dim screen after inactivity of 1 minute
@@ -150,7 +156,7 @@ exec swayidle -w timeout 180 'swaymsg "output eDP-1 power off"' resume 'swaymsg 
 
 # client.background       #ffffff
 
-include /home/steven/.config/sway/theme-light
+include /home/steven/.config/sway/theme-dark
 # # ---------- i3
 
 
@@ -315,8 +321,8 @@ set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) re
 mode "$mode_system" {
     bindsym l exec --no-startup-id $Locker, mode "default"
     bindsym e exec --no-startup-id swaymsg exit, mode "default"
-    bindsym s exec --no-startup-id $Locker && systemctl suspend, mode "default"
-    # bindsym s exec --no-startup-id $Locker && systemctl suspend-then-hibernate, mode "default"
+    #bindsym s exec --no-startup-id $Locker && systemctl suspend, mode "default"
+    bindsym s exec --no-startup-id $Locker && systemctl suspend-then-hibernate, mode "default"
     bindsym h exec --no-startup-id $Locker && systemctl hibernate, mode "default"
     bindsym r exec --no-startup-id systemctl reboot, mode "default"
     bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"
@@ -402,8 +408,8 @@ for_window [title="PULSE"] floating enable
 for_window [app_id="Pavucontrol"] floating enable, resize set 1280 768
 
 # suspend/lock shortcuts
-bindsym $mod+$mod2+Ctrl+s exec --no-startup-id $Locker && systemctl suspend  # Calling $Locker is not necessary with `betterlockscreen` since there is a systemctl service that starts betterlockscreen whenever the system suspends
-# bindsym $mod+$mod2+Ctrl+s exec --no-startup-id systemctl suspend-then-hibernate  # Calling $Locker is not necessary with `betterlockscreen` since there is a systemctl service that starts betterlockscreen whenever the system suspends
+# bindsym $mod+$mod2+Ctrl+s exec --no-startup-id $Locker && systemctl suspend  # Calling $Locker is not necessary with `betterlockscreen` since there is a systemctl service that starts betterlockscreen whenever the system suspends
+bindsym $mod+$mod2+Ctrl+s exec --no-startup-id systemctl suspend-then-hibernate
 bindsym $mod+$mod2+Ctrl+l exec --no-startup-id $Locker
 
 # Emacs anywhere (doesn't work on wayland)
@@ -474,7 +480,7 @@ titlebar_padding 5 5
 exec --no-startup-id dex --autostart --environment sway
 
 # Enable polit (e.g. polkit-gnome) authentication agent to get GUI password prompts
-exec --no-startup-id /usr/libexec/polkit-gnome-authentication-agent-1  # Fedora
+exec --no-startup-id /usr/libexec/polkit-gnome-authentication-agent-1  # Fedora/OpenSUSE
 # exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
 # move tiling windows via drag & drop by left-clicking into the title bar,
