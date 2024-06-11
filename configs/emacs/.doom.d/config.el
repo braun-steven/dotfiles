@@ -3,6 +3,12 @@
 ;; Place your private configuration here! Remember, you do not need to run 'doom
 ;; refresh' after modifying this file!
 
+(use-package! benchmark-init
+  :ensure t
+  :config
+  ;; To disable collection of benchmark data after init is done.
+  (add-hook 'after-init-hook 'benchmark-init/deactivate))
+
 ;; Set garbace collection threshold to 100MB
 (setq gc-cons-threshold 100000000)
 
@@ -85,17 +91,6 @@
 ;; Enable word wrap mode
 (+global-word-wrap-mode)
 
-;; Company config
-(after! company
-  (setq
-   company-minimum-prefix-length 2
-   company-idle-delay 0.0
-   company-tooltip-idle-delay 1.0)
-  ;; Set text mode backends to yasnippet only (removes company-dabbrev and company-ispell since they spam the completion list)
-  (setf (cdr (assoc 'text-mode +company-backend-alist))
-        '(:separate company-yasnippet)))
-
-
 ;; Emacs config location
 (setq emacs-dir (file-name-as-directory "~/.doom.d"))
 
@@ -111,45 +106,23 @@
 (setq doom-modeline-major-mode-icon t)
 
 ;; Keybindings
-(load!  "+keybindings")
+(load! "+keybindings")
 
 ;; Load custom functions
 (load! "+functions")
-
-
-(after! emacs-everywhere
-  (add-to-list 'emacs-everywhere-markdown-windows "Mattermost"))
-
-;; ;; Make avy faces like vim-easymotion: no background, red to yellow foreground
-;; (after! avy)
-
 
 (use-package! doom-themes
   :config
   ;; Global settings (defaults)
   (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
         doom-themes-enable-italic t) ; if nil, italics is universally disabled
-  ;; (load-theme 'doom-one t)
-
-  ;; Enable flashing mode-line on errors
-  ;; (doom-themes-visual-bell-config)
-
-  ;; Enable custom neotree theme (all-the-icons must be installed!)
-  ;; (doom-themes-neotree-config)
-  ;; or for treemacs users
-  ;; (setq doom-themes-treemacs-theme "doom-colors") ; use the colorful treemacs theme
-  ;; (doom-themes-treemacs-config)
 
   ;; Corrects (and improves) org-mode's native fontification.
   (doom-themes-org-config))
 
 (use-package! ssh-agency
-
   :after magit)
 
-(map! :after corfu :map corfu-map :i [tab] #'corfu-next)
-
-;; (use-package! powerthesaurus)
 
 (use-package! powerthesaurus
   :after tex)
@@ -178,16 +151,9 @@
   (add-hook 'projectile-after-switch-project-hook #'activate-project-conda-env-maybe))
 
 
-;; Typst
-(use-package! typst-ts-mode
-  :custom
-
-  (typst-ts-mode-watch-options "--open")
-  ;; experimental settings (I'm the main dev, so I enable these)
-  (typst-ts-mode-enable-raw-blocks-highlight t)
-  (typst-ts-mode-highlight-raw-blocks-at-startup t))
 
 (use-package! avy
+  :defer t
   :config
   ;; Avy settings
   (setq avy-orders-alist
@@ -205,15 +171,17 @@
   )
 
 
+;; accept completion from copilot
+(use-package! copilot
+    :defer t
+    :hook (prog-mode . copilot-mode)
+    :bind (:map copilot-completion-map
+            ("<tab>" . 'copilot-accept-completion)
+            ("TAB" . 'copilot-accept-completion)
+            ("C-TAB" . 'copilot-accept-completion-by-word)
+            ("C-<tab>" . 'copilot-accept-completion-by-word))
+    :config (setq copilot-indent-offset-warning-disable t))
 
-;; (after! lsp-mode
-;;   ;; https://github.com/emacs-lsp/lsp-mode/issues/3577#issuecomment-1709232622
-;;   (delete 'lsp-terraform lsp-client-packages)
-;;   )
-
-;; Add typst to list
-(add-to-list 'treesit-language-source-alist
-             '(typst "https://github.com/uben0/tree-sitter-typst"))
 
 ;; If pressing tab to complete sometimes doesn't work you might want to bind completion to another key or try:
 ;; (after! (evil copilot)

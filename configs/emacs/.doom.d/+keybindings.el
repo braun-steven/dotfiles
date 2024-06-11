@@ -15,17 +15,6 @@
        "-"  #'doom/decrease-font-size
        "+"  #'doom/increase-font-size))
 
-;; Expand region with "SPC v"
-;; (map! :leader
-;;       "v"   #'er/expand-region)
-
-(defun sbraun/sync-project ()
-  "Sync the current project to the DGX servers"
-  (interactive)
-  (start-process-shell-command "Sync Project" "*Minibuf-0*" "./sync.sh dgxb"))
-
-(map! :leader (:prefix "p" :desc "Sync Project" "S" #'sbraun/sync-project))
-
 ;; Buffers
 (map!
  ;; :leader (:prefix "b" "m" nil)
@@ -83,12 +72,4 @@
        :desc "Related" "r"  #'powerthesaurus-lookup-related-dwim))
 
 
-  ;; accept completion from copilot
-  (use-package! copilot
-    :hook (prog-mode . copilot-mode)
-    :bind (:map copilot-completion-map
-                ("<tab>" . 'copilot-accept-completion)
-                ("TAB" . 'copilot-accept-completion)
-                ("C-TAB" . 'copilot-accept-completion-by-word)
-                ("C-<tab>" . 'copilot-accept-completion-by-word))
-    :config (setq copilot-indent-offset-warning-disable t))
+(map! :after corfu :map corfu-map :i [tab] #'corfu-next)
