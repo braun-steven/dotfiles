@@ -21,6 +21,12 @@ if [[ ! -d $HOME/.fzf ]]; then
   ~/.fzf/install
 fi
 
+# Check if zoxide is installed
+if ! command -v zoxide &> /dev/null; then
+  echo "Zoxide not found. Installing now ..."
+  curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
+fi
+
 
 ###########################
 # INSTALLING BINARIES END #
@@ -84,3 +90,4 @@ fi
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 . "$HOME/.cargo/env"
+

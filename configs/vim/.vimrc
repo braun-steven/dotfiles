@@ -117,7 +117,7 @@ syntax on                 " Enable syntax highlighting
 set termguicolors
 
 " {{{ Colorscheme
-" set background=light
+set background=dark
 colorscheme modus
 "colorscheme nord
 
@@ -136,7 +136,7 @@ function! SetBackgroundFromDarkman()
 endfunction
 
 " Call the function at Vim startup
-autocmd VimEnter * call SetBackgroundFromDarkman()
+" autocmd VimEnter * call SetBackgroundFromDarkman()
 " }}}
 
 " {{{ Native Editor Settings

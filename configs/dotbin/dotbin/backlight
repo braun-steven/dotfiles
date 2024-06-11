@@ -11,11 +11,11 @@ send_notification() {
 
 case $1 in
 	up)
-		pkexec /usr/bin/brillo -A 10 -q -u 100000
+		brillo -A 10 -q -u 100000
 		send_notification "$1"
 		;;
 	down)
-		pkexec /usr/bin/brillo -U 10 -q -u 100000
+		brillo -U 10 -q -u 100000
 		send_notification "$1"
 		;;
 esac
