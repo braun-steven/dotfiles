@@ -66,7 +66,7 @@ exec wl-paste -t text --watch clipman store --no-persist
 exec_always killall kanshi & sleep 0.5 && kanshi & 
 #& sleep 0.5 && $HOME/dotbin/update-sway-monitors.sh &
 
-# exec_always --no-startup-id $HOME/dotbin/update-sway-monitors.sh
+# exec_always $HOME/dotbin/update-sway-monitors.sh
 
 # Run waybar as bar
 # exec_always killall waybar & sleep 0.5 && ~/Waybar/build/waybar &
@@ -265,7 +265,7 @@ bindsym $mod+o workspace number $wo
 bindsym $mod+p workspace number $wp
 
 # Allow workspace renaming
-bindsym $mod+Shift+r exec --no-startup-id ~/dotbin/sway-rename-workspace
+bindsym $mod+Shift+r exec ~/dotbin/sway-rename-workspace
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace number $w1
@@ -319,13 +319,13 @@ bindsym $mod+Ctrl+r exec swaymsg reload
 # Menu for lock logout etc.
 set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
 mode "$mode_system" {
-    bindsym l exec --no-startup-id $Locker, mode "default"
-    bindsym e exec --no-startup-id swaymsg exit, mode "default"
-    #bindsym s exec --no-startup-id $Locker && systemctl suspend, mode "default"
-    bindsym s exec --no-startup-id $Locker && systemctl suspend-then-hibernate, mode "default"
-    bindsym h exec --no-startup-id $Locker && systemctl hibernate, mode "default"
-    bindsym r exec --no-startup-id systemctl reboot, mode "default"
-    bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"
+    bindsym l exec $Locker, mode "default"
+    bindsym e exec swaymsg exit, mode "default"
+    #bindsym s exec $Locker && systemctl suspend, mode "default"
+    bindsym s exec $Locker && systemctl suspend-then-hibernate, mode "default"
+    bindsym h exec $Locker && systemctl hibernate, mode "default"
+    bindsym r exec systemctl reboot, mode "default"
+    bindsym Shift+s exec systemctl poweroff -i, mode "default"
 
     # back to normal: Enter or Escape
     bindsym Return mode "default"
@@ -367,8 +367,8 @@ bindsym $mod+Shift+t exec ~/dotbin/rofi-todoist-new-task
 # Sreen brightness controls
 # bindsym XF86MonBrightnessUp exec brightnessctl set +10% # increase screen brightness
 # bindsym XF86MonBrightnessDown exec brightnessctl set 10%- # decrease screen brightness
-bindsym XF86MonBrightnessUp exec backlight up
-bindsym XF86MonBrightnessDown exec backlight down
+bindsym XF86MonBrightnessUp exec brillo -A 10 -q -u 100000
+bindsym XF86MonBrightnessDown exec brillo -U 10 -q -u 100000
 
 # Enable worksapce back and forth
 workspace_auto_back_and_forth yes
@@ -391,16 +391,16 @@ for_window [app_id="Zoom"] floating enable
 for_window [app_id="zoom" title="Zoom Meeting"] floating disable
 for_window [app_id="Zoom" title="Zoom Meeting"] floating disable
 
-exec --no-startup-id nm-applet --tray --sm-disable &
+exec nm-applet --tray --sm-disable &
 
 # Bluetooth
-exec --no-startup-id blueberry-tray &
+exec blueberry-tray &
 
 # Start pulseaudio controls with mod+p in floating mode
 # Use create-window to reduce alacritty startup time
 # Use -t "Pulse" after "create-window" to correctly set title
-bindsym $mod+Ctrl+p exec --no-startup-id alacritty msg create-window -t "PULSE" -e 'pulsemixer' || alacritty -t "PULSE" -e 'pulsemixer'
-bindsym $mod+Ctrl+s exec --no-startup-id rofi-set-audio-sink
+bindsym $mod+Ctrl+p exec alacritty msg create-window -t "PULSE" -e 'pulsemixer' || alacritty -t "PULSE" -e 'pulsemixer'
+bindsym $mod+Ctrl+s exec rofi-set-audio-sink
 
 
 # Floating window rules
@@ -408,9 +408,9 @@ for_window [title="PULSE"] floating enable
 for_window [app_id="Pavucontrol"] floating enable, resize set 1280 768
 
 # suspend/lock shortcuts
-# bindsym $mod+$mod2+Ctrl+s exec --no-startup-id $Locker && systemctl suspend  # Calling $Locker is not necessary with `betterlockscreen` since there is a systemctl service that starts betterlockscreen whenever the system suspends
-bindsym $mod+$mod2+Ctrl+s exec --no-startup-id systemctl suspend-then-hibernate
-bindsym $mod+$mod2+Ctrl+l exec --no-startup-id $Locker
+# bindsym $mod+$mod2+Ctrl+s exec $Locker && systemctl suspend  # Calling $Locker is not necessary with `betterlockscreen` since there is a systemctl service that starts betterlockscreen whenever the system suspends
+bindsym $mod+$mod2+Ctrl+s exec systemctl suspend-then-hibernate
+bindsym $mod+$mod2+Ctrl+l exec $Locker
 
 # Emacs anywhere (doesn't work on wayland)
 # bindsym $mod+Shift+e exec ~/.emacs.d/bin/doom +everywhere
@@ -441,11 +441,11 @@ set $volumestep 5
 #set $sinkname alsa_output.pci-0000_00_1b.0.analog-stereo
 
 # Using pulseaudio-utils (append "-s $sinkname" without quotes to override default sink)
-bindsym XF86AudioRaiseVolume exec --no-startup-id amixer set Master $volumestep%+
-bindsym XF86AudioLowerVolume exec --no-startup-id amixer set Master $volumestep%-
-bindsym XF86AudioMute        exec --no-startup-id amixer set Master toggle
+bindsym XF86AudioRaiseVolume exec amixer set Master $volumestep%+
+bindsym XF86AudioLowerVolume exec amixer set Master $volumestep%-
+bindsym XF86AudioMute        exec amixer set Master toggle
 
-# exec_always --no-startup-id flashfocus
+# exec_always flashfocus
 
 
 
@@ -477,24 +477,24 @@ titlebar_padding 5 5
 # The Autostart directories in order of preference are:
 #    user-specific: $XDG_CONFIG_HOME/autostart (~/.config/autostart by default)
 #    system-wide: $XDG_CONFIG_DIRS/autostart (/etc/xdg/autostart by default) [1]
-exec --no-startup-id dex --autostart --environment sway
+exec dex --autostart --environment sway
 
 # Enable polit (e.g. polkit-gnome) authentication agent to get GUI password prompts
-exec --no-startup-id /usr/libexec/polkit-gnome-authentication-agent-1  # Fedora/OpenSUSE
-# exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec /usr/libexec/polkit-gnome-authentication-agent-1  # Fedora/OpenSUSE
+# exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
 # move tiling windows via drag & drop by left-clicking into the title bar,
 # or left-clicking anywhere into the window while holding the floating modifier.
 # tiling_drag modifier titlebar
 
-exec --no-startup-id dunst
+exec dunst
 
-exec --no-startup-id pasystray
-exec --no-startup-id blueman-applet
+exec pasystray
+exec blueman-applet
 
 # Enable gsd xsettings such that applications can infer dark/light theme settings
-exec --no-startup-id /usr/libexec/gsd-xsettings  # Fedora
-# exec --no-startup-id /usr/lib/gsd-xsettings
+exec /usr/libexec/gsd-xsettings  # Fedora
+# exec /usr/lib/gsd-xsettings
 
 # Enables inhibit_idle when playing audio
 exec sway-audio-idle-inhibit
