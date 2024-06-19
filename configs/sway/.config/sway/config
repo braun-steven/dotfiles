@@ -81,22 +81,22 @@ set $Locker swaylock -f \
       --indicator-thickness 20
 
 ### Idle configuration
-exec swayidle -w timeout 1200 '$Locker && systemctl suspend-then-hibernate' before-sleep 'playerctl pause'
-exec swayidle -w before-sleep 'loginctl lock-session $XDG_SESSION_ID' lock 'playerctl -a pause; $Locker'
-
 # Dim screen after inactivity of 1 minute
 # brillo -O: save current brightness
 # brillo -S $(( $(brillo) / 2 )) -u 150000: set brightness to half of what it is now (150us fade out)
 # brillo -S 0 -u 150000: set brightness to 0 (150us fade out)
 # brillo -I -u 150000: restore brightness (150us fade in)
-exec swayidle -w timeout 60 'brillo -O && brillo -S $(echo "$(brillo)" / 3 | bc) -u 150000' resume 'brillo -I -u 150000'
-
+#
 # Turn off keyboard backlight after inactivity of 1 minute
-exec swayidle -w timeout 60 "sudo kbd-brightness --set 0" resume "sudo kbd-brightness --restore"
-
+#
 # Turn off screen after inactivity of 3 minutes
-exec swayidle -w timeout 180 'swaymsg "output eDP-1 power off"' resume 'swaymsg "output eDP-1 power on"'
-# note: "dpms" is deprecated, use "power" instead
+exec swayidle -w \
+          timeout 1200 '$Locker && systemctl suspend-then-hibernate' before-sleep 'playerctl pause' \
+          timeout 180 'swaymsg "output eDP-1 power off"' resume 'swaymsg "output eDP-1 power on"' \
+          timeout 60 "sudo kbd-brightness --set 0" resume "sudo kbd-brightness --restore" \
+          timeout 60 'brillo -O && brillo -S $(echo "$(brillo)" / 3 | bc) -u 150000' \
+              resume 'brillo -I -u 150000' \
+          before-sleep 'loginctl lock-session $XDG_SESSION_ID' lock 'playerctl -a pause; $Locker' 
 
 # ---------- SwayFX
 
