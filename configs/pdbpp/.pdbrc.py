@@ -1,4 +1,5 @@
 import pdb
+
 class Config(pdb.DefaultConfig):
     sticky_by_default = True
     editor = "vim"
@@ -20,3 +21,4 @@ class Config(pdb.DefaultConfig):
                 terminal.Name.Function:      ('darkgreen',   'blue'),
                 terminal.Name.Namespace:     ('teal',        'white'),
                 })
+
