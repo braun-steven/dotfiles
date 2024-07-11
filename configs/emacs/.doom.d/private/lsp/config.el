@@ -1,6 +1,5 @@
 ;;; ../dotfiles/configs/emacs/.doom.d/tools/+lsp.el -*- lexical-binding: t; -*-
 (after! lsp-mode
-  (add-hook! text-mode '(lambda () (lsp)))
   (load! "+functions")
   (load! "+keybindings")
 

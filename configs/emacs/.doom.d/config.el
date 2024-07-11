@@ -1,5 +1,22 @@
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
+;; (defvar my-message-log-file "/tmp/emacs.log"
+;;   "Path to the log file where messages are appended.")
+
+;; (defun my-log-message (log-message)
+;;   "Append LOG-MESSAGE to the log file."
+;;   (when (and my-message-log-file (stringp my-message-log-file))
+;;     (with-temp-buffer
+;;       (insert log-message "\n")
+;;       (append-to-file (point-min) (point-max) my-message-log-file))))
+
+;; (defadvice message (after my-redirect activate)
+;;   (let ((log-message (apply #'format (ad-get-args 0))))
+;;     (my-log-message log-message)))
+
+;; (ad-activate 'message)
+
+
 ;; Place your private configuration here! Remember, you do not need to run 'doom
 ;; refresh' after modifying this file!
 
@@ -170,6 +187,11 @@
     `(avy-lead-face-3 :weight bold :foreground "yellow" :background ,(face-attribute 'default :background)))
   )
 
+;; Corfu setup
+(use-package! corfu
+    :config
+    (setq corfu-auto-delay 0.0))
+
 
 ;; accept completion from copilot
 (use-package! copilot
@@ -180,7 +202,9 @@
             ("TAB" . 'copilot-accept-completion)
             ("C-TAB" . 'copilot-accept-completion-by-word)
             ("C-<tab>" . 'copilot-accept-completion-by-word))
-    :config (setq copilot-indent-offset-warning-disable t))
+    :config (setq copilot-indent-offset-warning-disable t)
+    )
+
 
 
 ;; If pressing tab to complete sometimes doesn't work you might want to bind completion to another key or try:
