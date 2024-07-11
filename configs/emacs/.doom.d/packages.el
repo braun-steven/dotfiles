@@ -78,6 +78,11 @@
 
 (package! benchmark-init)
 
+;; Pin auctex due to issue
+(package! auctex :pin "86b2397abdc20a638e5751251026727bc6282022")
+
 ;; Load private module packages
 (dolist (file (directory-files "~/.doom.d/private/" t directory-files-no-dot-files-regexp))
   (load! (concat file "/packages.el")))
+
+

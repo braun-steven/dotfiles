@@ -33,10 +33,11 @@
         "custom/sep",
         "memory",
         "custom/sep",
+        // "cpu",
+        // "custom/sep",
         "pulseaudio",
         // "custom/sep",
         // "custom/vram",
-        // "cpu",
         // "temperature",
         // "custom/keyboard-layout",
         "custom/sep",
@@ -90,7 +91,7 @@
 
     "cpu": {
         "interval": 5,
-        "format": " CPU {usage}% ({load})", // Icon: microchip
+        "format": "  CPU {usage:3d}% ({load:2.1f})", // Icon: microchip
         "states": {
           "warning": 70,
           "critical": 90
@@ -209,7 +210,6 @@
         },
         "on-click": "pavucontrol"
     },
-
     "temperature": {
       "critical-threshold": 80,
       "interval": 5,
