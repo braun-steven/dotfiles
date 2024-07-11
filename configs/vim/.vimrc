@@ -206,7 +206,7 @@ nnoremap <F9> :make<CR>
 augroup pythonbindings
   autocmd! pythonbindings
   " Run python file
-  autocmd Filetype python set makeprg=python\ %
+  autocmd Filetype python set makeprg=python3\ %
   
   " Set textwidth in python to 100 lines
   autocmd Filetype python set textwidth=100
