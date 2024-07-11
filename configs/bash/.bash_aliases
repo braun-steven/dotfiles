@@ -1,5 +1,5 @@
 alias python="python3"
-alias pip="pip3"
+# alias pip="pip3"
 alias grep="grep --color=auto"
 alias eZ="$EDITOR ~/.zshrc"
 alias rZ="source ~/.zshrc"
@@ -28,14 +28,10 @@ alias em="emacsclient -t -a ''"
 alias dnfi="sudo dnf install"
 alias dnfr="sudo dnf remove"
 alias dnfs="dnf search"
-alias dnfu="echo '<<<<<<<<<<<<<<< Updating dnf' && sudo dnf update && echo -e '\n\n<<<<<<<<<<<<<<< Updating flatpaks' && flatpak update" # && echo -e '\n\n<-[Updating snaps]->' && sudo snap refresh"
+alias dnfu="echo -e '\033[1;32m[sudo dnf update]\033[0m' && sudo dnf update && echo -e '\n\n\033[1;32m[flatpaks update]\033[0m' && flatpak update"
 
 # Zypper on OpenSUSE Tumbleweed
 alias ls='ls -lh --group-directories-first'
-alias zin='sudo zypper install'
-alias zse='zypper search'
-alias zup='sudo zypper dup && '
-alias zup="echo -e '\033[1;32m[sudo zypper dup]\033[0m' && sudo zypper dup && echo -e '\n\n\033[1;32m[flatpaks update]\033[0m' && flatpak update"
 
 # TUVPN
 alias tuvpn="sudo tuvpn"

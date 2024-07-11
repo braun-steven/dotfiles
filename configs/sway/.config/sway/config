@@ -6,7 +6,8 @@ exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
 exec hash dbus-update-activation-environment 2>/dev/null && \
      dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP=sway
 
-output * bg ~/opensuse-wallpaper.png fill
+# output * bg ~/opensuse-wallpaper.png fill
+output * bg ~/output.png fill
 # output * bg ~/lakesidedeer-light.png fill
 
 # The following is now handled by kanshi
@@ -64,7 +65,6 @@ exec wl-paste -t text --watch clipman store --no-persist
 
 # Run kanshi: detect correct monitors
 exec_always killall kanshi & sleep 0.5 && kanshi & 
-#& sleep 0.5 && $HOME/dotbin/update-sway-monitors.sh &
 
 # exec_always $HOME/dotbin/update-sway-monitors.sh
 
@@ -74,7 +74,7 @@ exec_always killall waybar & sleep 0.5 && waybar &
 
 # Swaylock with options. "-f" daemonizes swaylock to work with systemd suspend afterwards
 set $Locker swaylock -f \
-      --image ~/opensuse-wallpaper-blur.png \
+      --image ~/fedora-wallpaper-dimblur.png \
       --inside-color 00000088 \
       --ring-color 285577 \
       --indicator-radius 100 \
@@ -91,7 +91,8 @@ set $Locker swaylock -f \
 #
 # Turn off screen after inactivity of 3 minutes
 exec swayidle -w \
-          timeout 1200 '$Locker && systemctl suspend-then-hibernate' before-sleep 'playerctl pause' \
+          timeout 1200 '$Locker && systemctl suspend' before-sleep 'playerctl pause' \
+          timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
           timeout 180 'swaymsg "output eDP-1 power off"' resume 'swaymsg "output eDP-1 power on"' \
           timeout 60 "sudo kbd-brightness --set 0" resume "sudo kbd-brightness --restore" \
           timeout 60 'brillo -O && brillo -S $(echo "$(brillo)" / 3 | bc) -u 150000' \
@@ -285,6 +286,10 @@ bindsym $mod+Shift+o move container to workspace number $wo
 bindsym $mod+Shift+p move container to workspace number $wp
 
 
+# Scratchpad
+bindsym $mod+Shift+s move window to scratchpad; scratchpad show
+bindsym $mod+s scratchpad show
+
 # Assign specific applications to specific workspaces
 assign [app_id="Mattermost"] $w0
 assign [app_id="Slack"] $w0
@@ -321,8 +326,8 @@ set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) re
 mode "$mode_system" {
     bindsym l exec $Locker, mode "default"
     bindsym e exec swaymsg exit, mode "default"
-    #bindsym s exec $Locker && systemctl suspend, mode "default"
-    bindsym s exec $Locker && systemctl suspend-then-hibernate, mode "default"
+    bindsym s exec $Locker && systemctl suspend, mode "default"
+    # bindsym s exec $Locker && systemctl suspend-then-hibernate, mode "default"
     bindsym h exec $Locker && systemctl hibernate, mode "default"
     bindsym r exec systemctl reboot, mode "default"
     bindsym Shift+s exec systemctl poweroff -i, mode "default"
@@ -391,6 +396,10 @@ for_window [app_id="Zoom"] floating enable
 for_window [app_id="zoom" title="Zoom Meeting"] floating disable
 for_window [app_id="Zoom" title="Zoom Meeting"] floating disable
 
+
+# Auto-switch to urgent windows
+for_window [urgent="latest"] focus
+
 exec nm-applet --tray --sm-disable &
 
 # Bluetooth
@@ -409,7 +418,8 @@ for_window [app_id="Pavucontrol"] floating enable, resize set 1280 768
 
 # suspend/lock shortcuts
 # bindsym $mod+$mod2+Ctrl+s exec $Locker && systemctl suspend  # Calling $Locker is not necessary with `betterlockscreen` since there is a systemctl service that starts betterlockscreen whenever the system suspends
-bindsym $mod+$mod2+Ctrl+s exec systemctl suspend-then-hibernate
+# bindsym $mod+$mod2+Ctrl+s exec systemctl suspend-then-hibernate
+bindsym $mod+$mod2+Ctrl+s exec systemctl suspend
 bindsym $mod+$mod2+Ctrl+l exec $Locker
 
 # Emacs anywhere (doesn't work on wayland)
@@ -488,7 +498,6 @@ exec /usr/libexec/polkit-gnome-authentication-agent-1  # Fedora/OpenSUSE
 # tiling_drag modifier titlebar
 
 exec dunst
-
 exec pasystray
 exec blueman-applet
 
