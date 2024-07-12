@@ -69,7 +69,7 @@
     opacity: 1.00;
     color: white;
     font-family: IBM Plex Mono, Hack, Inter, Cantarell;
-    font-size: 21px;
+    font-size: 14px;
 }
 
 /* Each module */
@@ -83,8 +83,8 @@
 #pulseaudio,
 #temperature,
 #tray {
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-left: 6px;
+    padding-right: 6px;
 }
 
 
@@ -150,9 +150,9 @@
 
 #mode {
     background: #900000;
-    border-top: 2px solid #2f343a;
+    border-top: 1px solid #2f343a;
     /* To compensate for the top border and still have vertical centering */
-    padding-bottom: 2px;
+    padding-bottom: 1px;
 }
 
 #network {
@@ -193,22 +193,22 @@
 
 #window {
     /* To compensate for the top border and still have vertical centering */
-    padding: 4px;
-    padding-left: 10px;
-    padding-right: 10px;
+    padding: 2px;
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
 
 /* Button */
 #workspaces button {
-    border-top: 2px solid transparent;
-    border-bottom: 2px solid transparent;
-    border-left: 2px solid transparent;
-    border-right: 2px solid transparent;
+    border-top: 1px solid transparent;
+    border-bottom: 1px solid transparent;
+    border-left: 1px solid transparent;
+    border-right: 1px solid transparent;
     /* To compensate for the top border and still have vertical centering */
-    padding-bottom: 2px;
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-bottom: 1px;
+    padding-left: 5px;
+    padding-right: 5px;
     border-color: #333333;
     color: #888888;
     background-color: #222222;
@@ -257,8 +257,8 @@
 
 #custom-sep {
     color: #888888;
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
 /*
