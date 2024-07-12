@@ -20,19 +20,19 @@ exec systemctl --user import-environment PATH
 
 
 # exec_always export PATH=$PATH:~/dotbin
-exec_always gsettings set org.gnome.desktop.interface text-scaling-factor 1.5
+exec_always gsettings set org.gnome.desktop.interface text-scaling-factor 1.0
 exec_always gsettings set org.gnome.nm-applet disable-disconnected-notifications "true"
 exec_always gsettings set org.gnome.nm-applet disable-connected-notifications "true"
 exec_always gsettings set org.gnome.desktop.interface document-font-name 'Inter 11'
 exec_always gsettings set org.gnome.desktop.interface font-name 'Inter 11'
-exec_always gsettings set org.gnome.desktop.interface cursor-size 32
-seat seat0 xcursor_theme Adwaita 32
+exec_always gsettings set org.gnome.desktop.interface cursor-size 24
+seat seat0 xcursor_theme Adwaita 24
 
 input type:touchpad {
     tap enabled
     natural_scroll enabled
     scroll_factor 0.10
-    pointer_accel 0.35
+    pointer_accel 0.20
 }
 
 input type:pointer {
@@ -77,8 +77,8 @@ set $Locker swaylock -f \
       --image ~/fedora-wallpaper-dimblur.png \
       --inside-color 00000088 \
       --ring-color 285577 \
-      --indicator-radius 100 \
-      --indicator-thickness 20
+      --indicator-radius 66 \
+      --indicator-thickness 13
 
 ### Idle configuration
 # Dim screen after inactivity of 1 minute
@@ -168,7 +168,7 @@ set $mod2 Mod1
 # is used in the bar {} block below.
 
 # font pango:CommitMono 16
-font pango:IBM Plex Mono 16
+font pango:IBM Plex Mono 10
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -460,7 +460,7 @@ bindsym XF86AudioMute        exec amixer set Master toggle
 
 
 # You can also use any non-zero value if you'd like to have a border
-for_window [class=".*"] border pixel 5
+for_window [class=".*"] border pixel 3
 default_floating_border none
 # default_border pixel 1
 # smart_borders on  # issues with firefox
@@ -468,8 +468,8 @@ default_floating_border none
 # gaps inner 8
 # gaps outer 5
 
-titlebar_border_thickness 2
-titlebar_padding 5 5
+titlebar_border_thickness 1
+titlebar_padding 2 2
 # smart_borders no_gaps
 
 # Enforce borders (and thus also window title borders) for all apps

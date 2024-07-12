@@ -16,7 +16,7 @@
     "position": "top",
 
     // If height property would be not present, it'd be calculated dynamically
-    "height": 28,
+    "height": 18,
 
     "modules-left": [
       //  "hyprland/workspaces",
@@ -237,8 +237,8 @@
 	},
 
     "tray": {
-        "icon-size": 28,
-        "spacing": 10
+        "icon-size": 18,
+        "spacing": 5
     }
 
 }
