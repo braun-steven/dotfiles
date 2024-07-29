@@ -120,12 +120,12 @@ else
   set current_theme dark
 end
 
-set_dark_theme
-# if test $current_theme = "light"
-#   set_light_theme
-# else
-#   set_dark_theme
-# end
+# set_dark_theme
+if test $current_theme = "light"
+  set_light_theme
+else
+  set_dark_theme
+end
 
 
 # Load aliases
