@@ -36,8 +36,8 @@
 (setq sbraun/theme-light 'modus-operandi)
 
 ;; Initially set the theme based on the current theme
-;; (set-doom-theme-based-on-darkman)
+(set-doom-theme-based-on-darkman)
+;; (setq doom-theme 'doom-nord)
 
 ;; Set a timer to check every 5 minutes (300 seconds)
-;; (run-at-time "5 min" 300 'check-and-update-theme)
-(setq doom-theme 'doom-nord)
+(run-at-time "5 min" 300 'check-and-update-theme)
