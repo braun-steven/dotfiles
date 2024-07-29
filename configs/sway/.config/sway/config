@@ -38,7 +38,7 @@ input type:touchpad {
 input type:pointer {
     # scroll_factor 0.35
     # accel_profile "adaptive" # disable mouse acceleration (enabled by default; to set it manually, use "adaptive" instead of "flat")
-    pointer_accel 0.75 # set mouse sensitivity (between -1 and 1)
+    pointer_accel 0.50 # set mouse sensitivity (between -1 and 1)
 }
 
 input type:keyboard {
@@ -157,7 +157,7 @@ exec swayidle -w \
 
 # client.background       #ffffff
 
-include /home/steven/.config/sway/theme-dark
+include /home/steven/.config/sway/theme-light
 # # ---------- i3
 
 
