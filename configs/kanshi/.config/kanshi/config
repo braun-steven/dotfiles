@@ -1,41 +1,40 @@
 profile "desktop" {
-    output DP-2 enable scale 1.5 position 0,0
+    output DP-2 enable  scale 1 position 0,0
     # output HDMI-A-1 enable  scale 1 position 0,0
-    output DP-1 enable scale 1.5 position 2560,0
-    # output DP-1 enable scale 1.5 position 3840,0
+    output DP-1 enable  scale 1 position 3840,0
     output eDP-1 disable
 }
 
 profile "desktop-half-hub" {
-    output DP-2 enable  scale 1.5 position 0,0
-    output HDMI-A-1 enable scale 1.5 position 2560,0
+    output DP-2 enable  scale 1 position 0,0
+    output HDMI-A-1 enable scale 1 position 3840,0
     output eDP-1 disable
 }
 
 profile "desktop-2" {
-    output eDP-1 enable scale 1.5 adaptive_sync on mode 2880x1800@60.001
-    output DP-2 enable  scale 1.5
+    output eDP-1 enable scale 1 adaptive_sync on mode 2880x1800@60
+    output DP-2 enable  scale 1
     # output HDMI-A-1 enable  scale 1
 }
 
 profile "desktop-1" {
-    output eDP-1 enable scale 1.5 adaptive_sync on mode 2880x1800@60.001
-    output DP-1 enable  scale 1.5
+    output eDP-1 enable scale 1 adaptive_sync on mode 2880x1800@60
+    output DP-1 enable  scale 1
 }
 
 profile "mobile" {
-    output eDP-1 enable scale 1.5 adaptive_sync on mode 2880x1800@60.001
+    output eDP-1 enable scale 1 adaptive_sync on mode 2880x1800@60
 }
 
 profile "work-patricks" {
-    output DP-1 enable scale 1.5 position 2560,0
-    output HDMI-A-1 enable scale 1.5 position 0,0
+    output DP-1 enable  scale 1 position 3840,0
+    output HDMI-A-1 enable  scale 1 position 0,0
     # output HDMI-A-1 enable  scale 1 position 1920,0
     # output DP-1 enable  scale 1 position 0,0
     output eDP-1 disable
 }
 
 profile "kundes" {
-    output eDP-1 enable scale 1.5 adaptive_sync on mode 2880x1800@60.001 position 0,1080
-    output HDMI-A-1 enable scale 2
+    output eDP-1 enable scale 1 adaptive_sync on mode 2880x1800@60 position 1200,1089
+    output HDMI-A-1 enable scale 2 position 3840,2160
 }
