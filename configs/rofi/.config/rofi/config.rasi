@@ -3,7 +3,7 @@ configuration {
 	font: "IBMPlex Mono 14";
 	show-icons: true;
 	terminal: "alacritty";
-	combi-modi: "drun,run,bookmarks:/home/steven/dotbin/rofi-bookmarks.py";
+	combi-modi: "drun,run,bookmarks:/home/steven/dotbin/rofi-bookmarks.py -p default-release";
 	kb-remove-char-back: "BackSpace";
 	kb-remove-to-eol: "Control+Shift+e";
 	kb-accept-entry: "Control+m,Return,KP_Enter";
