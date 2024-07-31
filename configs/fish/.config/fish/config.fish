@@ -113,20 +113,24 @@ function set_dark_theme
   set -U fish_pager_color_secondary_completion
 end
 
-# Read value of darkman if available
-if type -q darkman
-  set current_theme (darkman get)
-else
-  set current_theme dark
+function set_theme_auto
+  # Read value of darkman if available
+  if type -q darkman
+    set current_theme (darkman get)
+  else
+    set current_theme dark
+  end
+
+  # set_dark_theme
+  if test $current_theme = "light"
+    set_light_theme
+  else
+    set_dark_theme
+  end
 end
 
-# set_dark_theme
-if test $current_theme = "light"
-  set_light_theme
-else
-  set_dark_theme
-end
-
+# set_theme_auto
+set_dark_theme
 
 # Load aliases
 source ~/.bash_aliases
