@@ -85,7 +85,7 @@ def write_rofi_input(profile_loc, search_path=[], sep=" / "):
                     name == next(path_arr) for name in search_path
                 ):  # this is safe, because next would only error if path_arr was a 'subpath' of search_path,
                     path = sep.join(
-                        list(path_arr)
+                        [x for x in path_arr if x is not None]
                     )  # but bookmarks are leaves ie don't have children
                     icon = favicons.execute(
                         f"""SELECT max(ic.data) FROM moz_pages_w_icons pg, moz_icons_to_pages rel, moz_icons ic

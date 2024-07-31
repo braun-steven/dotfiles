@@ -157,7 +157,7 @@ exec swayidle -w \
 
 # client.background       #ffffff
 
-include /home/steven/.config/sway/theme-light
+include /home/steven/.config/sway/theme-dark
 # # ---------- i3
 
 
