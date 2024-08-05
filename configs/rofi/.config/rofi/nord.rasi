@@ -1,5 +1,7 @@
+
 * {
-    nord0: #2e3440;
+    /* nord0: #2e3440; */
+    nord0: rgba(46, 52, 64, 80%);
     nord1: #3b4252;
     nord2: #434c5e;
     nord3: #4c566a;
@@ -9,7 +11,8 @@
     nord7: #8fbcbb;
     nord8: #88c0d0;
     nord9: #81a1c1;
-    nord10: #5e81ac;
+    /* nord10: #5e81ac; */
+    nord10: rgba(94, 129, 172, 80%);
     nord11: #bf616a;
     nord12: #d08770;
     nord13: #ebcb8b;
@@ -19,18 +22,16 @@
 
     spacing: 2;
     background-color: transparent;
-    // background-color: rgba(59, 66, 82, 35%);
 
     background: transparent;
-    // background: rgba(59, 66, 82, 35%);
     foreground: var(nord4);
 
     normal-background: var(background);
     normal-foreground: var(foreground);
     alternate-normal-background: var(background);
     alternate-normal-foreground: var(foreground);
-    selected-normal-background: var(nord9);
-    selected-normal-foreground: var(background);
+    selected-normal-background: var(nord10);
+    selected-normal-foreground: var(nord10);
 
     active-background: var(background);
     active-foreground: var(nord10);
@@ -51,65 +52,67 @@ element {
     spacing: 5px;
     border:  0;
     cursor:  pointer;
-    background-color: rgba(0, 0, 0, 0%);
+    background-color: transparent;
 }
 element normal.normal {
-    // background-color: var(normal-background);
     text-color: var(normal-foreground);
 }
 element normal.urgent {
-    // background-color: var(urgent-background);
     text-color: var(urgent-foreground);
 }
 element normal.active {
-    // background-color: var(active-background);
     text-color: var(active-foreground);
 }
 element selected.normal {
     background-color: var(selected-normal-background);
+    foreground-color: var(selected-normal-foreground);
     text-color: var(nord6);
-    // text-color: var(selected-normal-foreground);
+    border-radius: 10px;
+
 }
 element selected.urgent {
-    // background-color: var(selected-urgent-background);
     text-color: var(selected-urgent-foreground);
 }
 element selected.active {
-    // background-color: var(selected-active-background);
     text-color: var(selected-active-foreground);
 }
 element alternate.normal {
-    // background-color: var(alternate-normal-background);
     text-color: var(alternate-normal-foreground);
 }
 element alternate.urgent {
-    // background-color: var(alternate-urgent-background);
     text-color: var(alternate-urgent-foreground);
 }
 element alternate.active {
-    // background-color: var(alternate-active-background);
     text-color: var(alternate-active-foreground);
 }
 element-text {
-    background-color: rgba(0, 0, 0, 0%);
+    background-color: transparent;
+    /* background-color: var(nord7); */
     text-color: inherit;
     highlight: inherit;
     cursor: inherit;
     vertical-align: 0.5;
 }
 element-icon {
-    background-color: rgba(0, 0, 0, 0%);
+    background-color: transparent;
+    /* background-color: var(nord7); */
     size: 1.0000em;
     text-color: inherit;
     cursor: inherit;
 }
 window {
     padding: 10;
-    border: 0;
-//    background-color: var(background-color);
-    background-color: rgba(59, 66, 82, 100%);
-    // background-color: rgba(0, 0, 0, 0%);
+    border: 3;
+    border-color: var(nord0);
+    background-color: var(nord0);
     border-radius: 0px;
+    /* border-radius: 20px; */
+    width: 35%;
+
+}
+
+listview {
+    lines:      5;
 }
 mainbox {
     padding: 0;
@@ -120,7 +123,8 @@ message {
 }
 textbox {
     text-color: var(foreground);
-    background-color: rgba(0, 0, 0, 0%);
+    background-color: transparent;
+    /* background-color: var(nord0); */
 }
 textbox-icon { horizontal-align: 0.5; }
 listview {
@@ -128,7 +132,8 @@ listview {
     scrollbar: true;
     spacing: 2px;
     fixed-height: 0;
-    background-color: rgba(0, 0, 0, 0%);
+    /* background-color: var(nord0); */
+    background-color: transparent;
 }
 scrollbar {
     padding: 0;
@@ -150,12 +155,12 @@ inputbar {
     margin: 7px;
     spacing: 0;
     text-color: var(normal-foreground);
-    background-color: rgba(0, 0, 0, 0%);
+    background-color: transparent;
     children: [ entry ];
 }
 entry {
     spacing: 0;
     cursor: text;
     text-color: var(normal-foreground);
-    background-color: rgba(0, 0, 0, 0%);
+    background-color: transparent;
 }

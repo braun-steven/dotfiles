@@ -1,20 +1,15 @@
 # -------------- Sway
-# include /etc/sway/config.d/*
-include /etc/sway/config.d/55-openSUSE-windows.conf
+include /etc/sway/config.d/*
 
 exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
 exec hash dbus-update-activation-environment 2>/dev/null && \
      dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP=sway
 
-# output * bg ~/opensuse-wallpaper.png fill
-output * bg ~/output.png fill
-# output * bg ~/lakesidedeer-light.png fill
+set $wallpaper ~/wallpaper/macos-nord-1.png
+# set $wallpaper ~/wallpaper/misty-mountains.jpg
+output * bg $wallpaper fill
 
 # The following is now handled by kanshi
-# output eDP-1 scale 1.5 mode 2880x1800@60Hz
-# output DP-2 scale 1.5 pos 0 0
-# output DP-1 scale 1.5 pos 2560 0
-
 exec systemctl --user import-environment PATH
 
 
@@ -101,19 +96,19 @@ exec swayidle -w \
 
 # ---------- SwayFX
 
-# blur enable
-# blur_passes 2
-# blur_radius 10
-# corner_radius 9
-# shadows enable
-# shadows_on_csd enable
-# shadow_blur_radius 10
-# shadow_color #000000FF
-# titlebar_separator enable
+blur enable
+blur_passes 2
+blur_radius 5
+corner_radius 9
+shadows enable
+shadows_on_csd enable
+shadow_blur_radius 10
+shadow_color #000000FF
+titlebar_separator enable
 
 
-# layer_effects "waybar" blur enable; shadows enable; shadow_blur_radius 10; corner_radius 0
-# layer_effects "rofi" blur enable; shadows enable; shadow_blur_radius 10; corner_radius 20
+layer_effects "waybar" blur enable; shadows enable; shadow_blur_radius 10; corner_radius 0
+layer_effects "rofi" blur enable; shadows enable; shadow_blur_radius 10; corner_radius 0
 
 # ---------- Theme
 
@@ -138,12 +133,19 @@ exec swayidle -w \
 
 # Window color settings
 # class                 border  backgr. text    indicator
+client.focused          #4c566a #4c566a #ffffff #667f99
+client.unfocused        #2e3440 #1f222dcc #888888 #1f222d
+client.focused_inactive #2e3440 #4c566a #ffffff #1f222d
+client.placeholder      #2e3440 #1f222d #888888 #1f222d
+client.urgent           #900000 #900000 #ffffff #900000
+client.background       #242424
+
+# # class                 border  backgr. text    indicator
 # client.focused          #4c566a #667f99cc #ffffff #667f99
 # client.unfocused        #2e3440 #1f222dcc #888888 #1f222d
 # client.focused_inactive #2e3440 #4c566a #ffffff #1f222d
 # client.placeholder      #2e3440 #1f222d #888888 #1f222d
 # client.urgent           #900000 #900000 #ffffff #900000
-
 # client.background       #242424
 
 # Default sway colors
@@ -460,16 +462,16 @@ bindsym XF86AudioMute        exec amixer set Master toggle
 
 
 # You can also use any non-zero value if you'd like to have a border
-for_window [class=".*"] border pixel 5
+for_window [class=".*"] border pixel 4
 default_floating_border none
 # default_border pixel 1
 # smart_borders on  # issues with firefox
 # smart_gaps on
-# gaps inner 8
-# gaps outer 5
+gaps inner 16
+gaps outer 5
 
 titlebar_border_thickness 2
-titlebar_padding 5 5
+# titlebar_padding 7 7
 # smart_borders no_gaps
 
 # Enforce borders (and thus also window title borders) for all apps

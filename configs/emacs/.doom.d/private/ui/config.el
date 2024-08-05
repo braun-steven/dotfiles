@@ -41,3 +41,6 @@
 
 ;; Set a timer to check every 5 minutes (300 seconds)
 ;; (run-at-time "5 min" 300 'check-and-update-theme)
+
+;; Frame transparency
+(doom/set-frame-opacity 90)
