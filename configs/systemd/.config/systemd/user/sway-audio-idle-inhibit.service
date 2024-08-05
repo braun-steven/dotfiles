@@ -1,0 +1,11 @@
+[Unit]
+Description=Sway Audio Idle Inhibit
+After=sway.service
+
+[Service]
+ExecStart=/usr/local/bin/sway-audio-idle-inhibit
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=default.target
