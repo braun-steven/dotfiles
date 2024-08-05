@@ -13,7 +13,7 @@ configuration {
 	kb-row-down: "Down,Control+j";
 }
 
-@theme "sway"
+@theme "nord"
 
 element-icon {
     size: 1.5em;

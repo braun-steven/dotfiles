@@ -118,8 +118,8 @@ set termguicolors
 
 " {{{ Colorscheme
 set background=dark
-colorscheme modus
-"colorscheme nord
+"colorscheme modus
+colorscheme nord
 
 function! SetBackgroundFromDarkman()
     " Get the output of `darkman get`
@@ -288,4 +288,12 @@ let g:CoolTotalMatches = 1
 " Time in milliseconds (default 250)
 let g:Illuminate_delay = 250
 let g:Illuminate_ftblacklist = ['nerdtree', 'python']
+" }}}
+
+
+" Transparent background {{{
+highlight Normal guibg=none
+highlight NonText guibg=none
+highlight Normal ctermbg=none
+highlight NonText ctermbg=none
 " }}}
