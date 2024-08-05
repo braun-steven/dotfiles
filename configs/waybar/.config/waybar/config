@@ -16,7 +16,7 @@
     "position": "top",
 
     // If height property would be not present, it'd be calculated dynamically
-    "height": 28,
+    "height": 32,
 
     "modules-left": [
       //  "hyprland/workspaces",
@@ -30,23 +30,15 @@
     "modules-right": [
         "custom/audio_idle_inhibitor",
         "network",
-        "custom/sep",
         "memory",
-        "custom/sep",
         // "cpu",
-        // "custom/sep",
         "pulseaudio",
-        // "custom/sep",
         // "custom/vram",
         // "temperature",
         // "custom/keyboard-layout",
-        "custom/sep",
-        "tray",
-        "custom/sep",
         "battery",
-        "custom/sep",
+        "tray",
         "clock#date",
-        "clock#time"
     ],
 
 
@@ -85,8 +77,8 @@
 
     "clock#date": {
       "interval": 10,
-      "format": "  {:%e %b %Y}", // Icon: calendar-alt
-      "tooltip-format": "{:%e %B %Y}"
+      "format": " {:%e %b %Y %H:%M}",
+      "tooltip": false
     },
 
     "cpu": {
@@ -112,8 +104,8 @@
         "interval": 5,
         "format": "󰍛 Mem {}%", // Icon: memory
         "states": {
-            "warning": 70,
-            "critical": 90
+            "warning": 90,
+            "critical": 95
         }
     },
 
