@@ -69,7 +69,7 @@ exec_always killall waybar & sleep 0.5 && waybar &
 
 # Swaylock with options. "-f" daemonizes swaylock to work with systemd suspend afterwards
 set $Locker swaylock -f \
-      --image ~/fedora-wallpaper-dimblur.png \
+      --image ~/wallpaper/macos-nord-1-dimblur.png \
       --inside-color 00000088 \
       --ring-color 285577 \
       --indicator-radius 100 \
@@ -159,7 +159,7 @@ client.background       #242424
 
 # client.background       #ffffff
 
-include /home/steven/.config/sway/theme-dark
+# include /home/steven/.config/sway/theme-dark
 # # ---------- i3
 
 
@@ -506,6 +506,3 @@ exec blueman-applet
 # Enable gsd xsettings such that applications can infer dark/light theme settings
 exec /usr/libexec/gsd-xsettings  # Fedora
 # exec /usr/lib/gsd-xsettings
-
-# Enables inhibit_idle when playing audio
-exec sway-audio-idle-inhibit
