@@ -65,7 +65,8 @@
 
 /* The whole bar */
 #waybar {
-    background: #000000;
+    /* background: #1f222d; */
+    background: rgba(31, 34, 45, 0.8);
     opacity: 1.00;
     color: white;
     font-family: IBM Plex Mono, Hack, Inter, Cantarell;
@@ -83,8 +84,22 @@
 #pulseaudio,
 #temperature,
 #tray {
-    padding-left: 10px;
-    padding-right: 10px;
+    border-top: 2px solid transparent;
+    border-bottom: 2px solid transparent;
+    border-left: 2px solid transparent;
+    border-right: 2px solid transparent;
+    /* /\* To compensate for the top border and still have vertical centering *\/ */
+    padding-bottom: 2px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+    color: #eceff4;
+    /* background-color: #3b4252; */
+    /* border-color: #4c566a; */
+    /* border-radius: 15px; */
+    margin-left: 5px;
+    margin-right: 5px;
 }
 
 
@@ -149,8 +164,8 @@
 }
 
 #mode {
-    background: #900000;
-    border-top: 2px solid #2f343a;
+    background: #667f99;
+    border-top: 2px solid white;
     /* To compensate for the top border and still have vertical centering */
     padding-bottom: 2px;
 }
@@ -207,52 +222,36 @@
     border-right: 2px solid transparent;
     /* To compensate for the top border and still have vertical centering */
     padding-bottom: 2px;
-    padding-left: 10px;
-    padding-right: 10px;
-    border-color: #333333;
-    color: #888888;
-    background-color: #222222;
+    margin-bottom: 8px;
+    margin-top: 8px;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-left: 5px;
+    margin-right: 5px;
+    /* color: #d8dee9; */
+    color: rgba(216, 222, 233, 0.5);
+    /* background-color: #3b4252; */
+    /* border-color: #4c566a; */
+    border-radius: 15px;
 }
-
-/* START SWAY */
 
 /* Focused button */
 #workspaces button.focused {
-    border-color: #4c7899;
+    /* border-color: #667f99; */
     color: #eceff4;
-    background-color: #285577;
+    /* background-color: #667f99; */
 }
 
 /* Focused button but on inactive monitor */
 #workspaces button.visible:not(.focused) {
-    border-color: #333333;
-    color: #ffffff;
-    background-color: #5f676a;
+    /* background-color: #4c566a; */
+    /* border-color: #667f99; */
+    color: rgba(216, 222, 233, 0.8);
 }
 
-/* END SWAY */
-
-/* START HYPRLAND */
-
-/* /\* Focused button but on inactive monitor *\/ */
-/* #workspaces button.visible { */
-/*     border-color: #333333; */
-/*     color: #ffffff; */
-/*     background-color: #5f676a; */
-/* } */
-
-/* /\* Active button *\/ */
-/* #workspaces button.active { */
-/*     border-color: #4c7899; */
-/*     color: #eceff4; */
-/*     background-color: #285577; */
-/* } */
-
-/* END HYPRLAND */
-
 #workspaces button.urgent {
-    border-color: #c9545d;
-    /* color: #c9545d; */
+    /* border-color: #c9545d; */
+    color: #c9545d;
 }
 
 #custom-sep {
