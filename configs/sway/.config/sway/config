@@ -5,16 +5,14 @@ exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
 exec hash dbus-update-activation-environment 2>/dev/null && \
      dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP=sway
 
-set $wallpaper ~/wallpaper/macos-nord-1.png
+# set $wallpaper ~/wallpaper/macos-nord-1.png
 # set $wallpaper ~/wallpaper/misty-mountains.jpg
-output * bg $wallpaper fill
+# set $wallpaper ~/wallpaper/fedora-wallpaper.png
+set $wallpaper ~/wallpaper/macos-big-sur-day
+output * bg $wallpaper.jpg fill
 
-# The following is now handled by kanshi
 exec systemctl --user import-environment PATH
 
-
-
-# exec_always export PATH=$PATH:~/dotbin
 exec_always gsettings set org.gnome.desktop.interface text-scaling-factor 1.5
 exec_always gsettings set org.gnome.nm-applet disable-disconnected-notifications "true"
 exec_always gsettings set org.gnome.nm-applet disable-connected-notifications "true"
@@ -69,9 +67,12 @@ exec_always killall waybar & sleep 0.5 && waybar &
 
 # Swaylock with options. "-f" daemonizes swaylock to work with systemd suspend afterwards
 set $Locker swaylock -f \
-      --image ~/wallpaper/macos-nord-1-dimblur.png \
+      --image $wallpaper-dimblur.jpg \
       --inside-color 00000088 \
       --ring-color 285577 \
+      --key-hl-color 28772f \
+      --ring-ver-color 285577 \
+      --inside-ver-color 285577 \
       --indicator-radius 100 \
       --indicator-thickness 20
 
@@ -85,7 +86,8 @@ set $Locker swaylock -f \
 # Turn off keyboard backlight after inactivity of 1 minute
 #
 # Turn off screen after inactivity of 3 minutes
-exec swayidle -w \
+exec_always killall swayidle
+exec_always swayidle -w \
           timeout 1200 '$Locker && systemctl suspend' before-sleep 'playerctl pause' \
           timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
           timeout 180 'swaymsg "output eDP-1 power off"' resume 'swaymsg "output eDP-1 power on"' \
@@ -96,19 +98,23 @@ exec swayidle -w \
 
 # ---------- SwayFX
 
-blur enable
-blur_passes 2
-blur_radius 5
-corner_radius 9
-shadows enable
-shadows_on_csd enable
-shadow_blur_radius 10
-shadow_color #000000FF
-titlebar_separator enable
+#blur enable
+#blur_passes 2
+#blur_radius 5
+#corner_radius 9
+#smart_corner_radius enable
+#shadows enable
+#shadows_on_csd enable
+#shadow_blur_radius 20
+#shadow_offset 0 10
+#shadow_color #000000FF
+#shadow_inactive_color #00000088
+# titlebar_separator enable
 
 
-layer_effects "waybar" blur enable; shadows enable; shadow_blur_radius 10; corner_radius 0
-layer_effects "rofi" blur enable; shadows enable; shadow_blur_radius 10; corner_radius 0
+# for_window [app_id="firefox"] blur disable
+# layer_effects "waybar" blur enable; shadows disable; corner_radius 0
+# layer_effects "rofi" blur enable; shadows enable; corner_radius 20
 
 # ---------- Theme
 
@@ -131,33 +137,27 @@ layer_effects "rofi" blur enable; shadows enable; shadow_blur_radius 10; corner_
 # nord14: #a3be8c;
 # nord15: #b48ead;
 
+# Nord Colors
 # Window color settings
-# class                 border  backgr. text    indicator
-client.focused          #4c566a #4c566a #ffffff #667f99
-client.unfocused        #2e3440 #1f222dcc #888888 #1f222d
-client.focused_inactive #2e3440 #4c566a #ffffff #1f222d
-client.placeholder      #2e3440 #1f222d #888888 #1f222d
-client.urgent           #900000 #900000 #ffffff #900000
-client.background       #242424
+# class                   border    backgr.   text      indicator
+# client.focused            #586d82   #506478   #ffffff   #586d82
+# client.unfocused          #2e3440   #262b36   #888888   #2e3440
+# client.focused_inactive   #2e3440   #4c566a   #d8dee980 #4c566a
+# client.placeholder        #2e3440   #1f222d   #888888   #1f222d
+# client.urgent             #900000   #900000   #ffffff   #900000
+# client.background         #242424
 
-# # class                 border  backgr. text    indicator
-# client.focused          #4c566a #667f99cc #ffffff #667f99
-# client.unfocused        #2e3440 #1f222dcc #888888 #1f222d
-# client.focused_inactive #2e3440 #4c566a #ffffff #1f222d
-# client.placeholder      #2e3440 #1f222d #888888 #1f222d
-# client.urgent           #900000 #900000 #ffffff #900000
-# client.background       #242424
 
 # Default sway colors
 
-# # class                 border  backgr. text    indicator child_border
-# client.focused          #4c7899 #285577 #ffffff #2e9ef4   #285577
-# client.focused_inactive #333333 #5f676a #ffffff #484e50   #5f676a
-# client.unfocused        #333333 #222222 #888888 #292d2e   #222222
-# client.urgent           #2f343a #900000 #ffffff #900000   #900000
-# client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
+# class                 border  backgr. text    indicator child_border
+client.focused          #4c7899 #285577 #ffffff #2e9ef4   #285577
+client.focused_inactive #333333 #5f676a #ffffff #484e50   #5f676a
+client.unfocused        #333333 #222222 #888888 #292d2e   #222222
+client.urgent           #2f343a #900000 #ffffff #900000   #900000
+client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
 
-# client.background       #ffffff
+client.background       #ffffff
 
 # include /home/steven/.config/sway/theme-dark
 # # ---------- i3
@@ -374,8 +374,8 @@ bindsym $mod+Shift+t exec ~/dotbin/rofi-todoist-new-task
 # Sreen brightness controls
 # bindsym XF86MonBrightnessUp exec brightnessctl set +10% # increase screen brightness
 # bindsym XF86MonBrightnessDown exec brightnessctl set 10%- # decrease screen brightness
-bindsym XF86MonBrightnessUp exec brillo -A 10 -q -u 100000
-bindsym XF86MonBrightnessDown exec brillo -U 10 -q -u 100000
+bindsym XF86MonBrightnessUp exec brillo -A 5 -q -u 100000
+bindsym XF86MonBrightnessDown exec brillo -U 5 -q -u 100000
 
 # Enable worksapce back and forth
 workspace_auto_back_and_forth yes
@@ -465,14 +465,12 @@ bindsym XF86AudioMute        exec amixer set Master toggle
 for_window [class=".*"] border pixel 4
 default_floating_border none
 # default_border pixel 1
-# smart_borders on  # issues with firefox
-# smart_gaps on
-gaps inner 16
-gaps outer 5
+#smart_gaps on
+#gaps inner 16
+#gaps outer 5
 
 titlebar_border_thickness 2
-# titlebar_padding 7 7
-# smart_borders no_gaps
+smart_borders on
 
 # Enforce borders (and thus also window title borders) for all apps
 # Without this, some apps like eye-of-gnome will be without a titlebar
@@ -489,7 +487,8 @@ titlebar_border_thickness 2
 # The Autostart directories in order of preference are:
 #    user-specific: $XDG_CONFIG_HOME/autostart (~/.config/autostart by default)
 #    system-wide: $XDG_CONFIG_DIRS/autostart (/etc/xdg/autostart by default) [1]
-exec dex --autostart --environment sway
+exec dex --autostart --environment sway  # Arch
+# exec dex-autostart --autostart --environment sway  # Fedora
 
 # Enable polit (e.g. polkit-gnome) authentication agent to get GUI password prompts
 exec /usr/libexec/polkit-gnome-authentication-agent-1  # Fedora/OpenSUSE
@@ -500,8 +499,8 @@ exec /usr/libexec/polkit-gnome-authentication-agent-1  # Fedora/OpenSUSE
 # tiling_drag modifier titlebar
 
 exec dunst
-exec pasystray
 exec blueman-applet
+# exec pasystray  # This is started by dex-autostart 
 
 # Enable gsd xsettings such that applications can infer dark/light theme settings
 exec /usr/libexec/gsd-xsettings  # Fedora

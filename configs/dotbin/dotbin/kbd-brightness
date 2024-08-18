@@ -4,7 +4,7 @@ CACHE_FILE="/tmp/kbd-brightness.cache"
 # Fedora/Arch
 BRIGHTNESS_FILE="/sys/class/leds/white:kbd_backlight/brightness"
 # OpenSUSE Tumbleweed
-BRIGHTNESS_FILE="/sys/devices/platform/tuxedo_nb05_kbd_backlight/leds/white:kbd_backlight/brightness"
+# BRIGHTNESS_FILE="/sys/devices/platform/tuxedo_nb05_kbd_backlight/leds/white:kbd_backlight/brightness"
 
 function set_brightness {
     # Check if the input is 0, 1, or 2

@@ -173,8 +173,8 @@ function initconda
 end
 
 
-# Define maybe-activate-conda-env on variable change of PWD
-function __maybe_activate_conda_env --on-variable PWD
+# Define maybe-activate-conda-env function
+function maybe_activate_conda_env
   # Check if "conda" command is available,
   if not type -q conda
      initconda
@@ -193,7 +193,6 @@ function __maybe_activate_conda_env --on-variable PWD
     end
   end
 
-
   # Get directory name without full path
   set dirname (path basename $PWD)
   # If directory name can be found in conda evironments, activate it!
@@ -204,31 +203,13 @@ function __maybe_activate_conda_env --on-variable PWD
   end
 end
 
-function zypper
-    if test "$argv[1]" = "up" -o "$argv[1]" = "upgrade"
-        # Print warning in red
-        echo -e "\033[31mWarning: Using 'zypper $argv[1]' is highly dangerous and may break the system.\033[0m"
-        echo "Do you want to continue? [y/N]"
-
-        # Read user input with default choice 'No'
-        read -l response
-        if test -z "$response"
-            set response "n"
-        end
-        set response (string lower "$response")
-
-        # If the user confirms with 'y' or 'yes', run the command
-        if test "$response" = "y" -o "$response" = "yes"
-            command zypper $argv
-        else
-            echo "Aborted."
-        end
-    else
-        # Run the command if the argument is not 'up' or 'upgrade'
-        command zypper $argv
-    end
+# Run the function when PWD changes
+function __on_pwd_change --on-variable PWD
+  maybe_activate_conda_env
 end
 
+# Run the function when the shell starts
+maybe_activate_conda_env
 
 #################
 # FUNCTIONS END #
