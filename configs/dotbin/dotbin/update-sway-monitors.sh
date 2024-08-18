@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Define the path to the monitors config file
+# monitors_config="/tmp/test"
 monitors_config="/home/steven/.config/sway/monitors"
 
 # Get the name of the left monitor

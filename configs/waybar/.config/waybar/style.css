@@ -6,22 +6,29 @@
  *
  * =========================================================================== */
 
-/*
- * Default colors for i3 status bar
- * bar {
-    colors {
-        background #000000
-        statusline #ffffff
-        separator #666666
+/* -----------------------------------------------------------------------------
+ * Colors
+ * -------------------------------------------------------------------------- */
 
-        focused_workspace  #4c7899 #285577 #ffffff
-        active_workspace   #333333 #5f676a #ffffff
-        inactive_workspace #333333 #222222 #888888
-        urgent_workspace   #2f343a #900000 #ffffff
-        binding_mode       #2f343a #900000 #ffffff
-    }
-}
- */
+/* Sway Default Colors */
+@define-color foreground-focused #ffffff;
+@define-color foreground-focused-inactive #ffffff;
+@define-color foreground-unfocused #888888;
+@define-color foreground-urgent #900000;
+@define-color background-focused #285577;
+@define-color background-focused-border #4c7899;
+@define-color background-focused-inactive #5f676a;
+@define-color background-focused-inactive-border #333333;
+@define-color background #000000;
+
+
+/* Nord */
+/* @define-color foreground #eceff4; */
+/* @define-color foreground-inactive rgba(216, 222, 233, 0.5); */
+/* @define-color background-focused rgba(80, 100, 120, 1.0); */
+/* @define-color background-focused-inactive rgba(76, 86, 106, 1.0); */
+/* @define-color background rgba(31, 34, 45, 1.0); */
+/* @define-color foreground-urgent #c9545d; */
 
 /* -----------------------------------------------------------------------------
  * Keyframes
@@ -66,11 +73,12 @@
 /* The whole bar */
 #waybar {
     /* background: #1f222d; */
-    background: rgba(31, 34, 45, 0.8);
+    background: @background;
     opacity: 1.00;
     color: white;
-    font-family: IBM Plex Mono, Hack, Inter, Cantarell;
-    font-size: 21px;
+    font-family: CommitMono, IBM Plex Mono, Hack, Inter, Cantarell;
+    font-size: 22px;
+    margin: 20px;
 }
 
 /* Each module */
@@ -90,14 +98,11 @@
     border-right: 2px solid transparent;
     /* /\* To compensate for the top border and still have vertical centering *\/ */
     padding-bottom: 2px;
-    margin-bottom: 5px;
-    margin-top: 5px;
+    margin-bottom: 3px;
+    margin-top: 3px;
     padding-left: 15px;
     padding-right: 15px;
     color: #eceff4;
-    /* background-color: #3b4252; */
-    /* border-color: #4c566a; */
-    /* border-radius: 15px; */
     margin-left: 5px;
     margin-right: 5px;
 }
@@ -164,7 +169,7 @@
 }
 
 #mode {
-    background: #667f99;
+    background: @background-focused;
     border-top: 2px solid white;
     /* To compensate for the top border and still have vertical centering */
     padding-bottom: 2px;
@@ -198,23 +203,15 @@
     color: red;
 }
 
-#tray {
-    /* No styles */
-}
-
-/* #window { */
-/*     font-weight: bold; */
-/* } */
-
-#window {
+#window {  /* window title */
     /* To compensate for the top border and still have vertical centering */
-    padding: 4px;
+    padding: 2px;
     padding-left: 10px;
     padding-right: 10px;
+
 }
 
-
-/* Button */
+/* Button default */
 #workspaces button {
     border-top: 2px solid transparent;
     border-bottom: 2px solid transparent;
@@ -222,50 +219,41 @@
     border-right: 2px solid transparent;
     /* To compensate for the top border and still have vertical centering */
     padding-bottom: 2px;
-    margin-bottom: 8px;
-    margin-top: 8px;
-    padding-left: 15px;
-    padding-right: 15px;
-    margin-left: 5px;
-    margin-right: 5px;
-    /* color: #d8dee9; */
-    color: rgba(216, 222, 233, 0.5);
-    /* background-color: #3b4252; */
-    /* border-color: #4c566a; */
-    border-radius: 15px;
+    padding-top: 0px;
+    padding-left: 12px;
+    padding-right: 12px;
+    color: @foreground-unfocused;
+    border: 2px solid transparent;
 }
 
 /* Focused button */
 #workspaces button.focused {
-    /* border-color: #667f99; */
-    color: #eceff4;
-    /* background-color: #667f99; */
+    /* border-top: 4px solid #667f99; */
+    color: @foreground-focused;
+    background: @background-focused;
+    border: 2px solid @background-focused-border;
 }
 
 /* Focused button but on inactive monitor */
 #workspaces button.visible:not(.focused) {
-    /* background-color: #4c566a; */
-    /* border-color: #667f99; */
-    color: rgba(216, 222, 233, 0.8);
+    color: @foreground-focused-inactive;
+    background: @background-focused-inactive;
+    border: 2px solid @background-focused-inactive-border;
 }
 
+/* Urgent button */
 #workspaces button.urgent {
-    /* border-color: #c9545d; */
-    color: #c9545d;
+    border: 2px solid @foreground-urgent;
 }
 
-#custom-sep {
-    color: #888888;
-    padding-left: 10px;
-    padding-right: 10px;
-}
-
-/*
- * Disable button hover
- */
+/* Hovered button */
 #workspaces button:hover {
     box-shadow: inherit;
     text-shadow: inherit;
-    background: inherit;
+    transition-duration: 0.2s;
+    /* background: inherit; */
+    /* border: inherit; */
+    background: @background-focused-inactive;
+    color: @foreground-focused;
+    border: 2px solid @background-focused-inactive;
 }
-
