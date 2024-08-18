@@ -1,7 +1,7 @@
-
 * {
-    /* nord0: #2e3440; */
-    nord0: rgba(46, 52, 64, 80%);
+    nord0-darker: #252933;
+    nord0: #2e3440;
+    /* nord0: rgba(46, 52, 64, 80%); */
     nord1: #3b4252;
     nord2: #434c5e;
     nord3: #4c566a;
@@ -11,8 +11,8 @@
     nord7: #8fbcbb;
     nord8: #88c0d0;
     nord9: #81a1c1;
-    /* nord10: #5e81ac; */
-    nord10: rgba(94, 129, 172, 80%);
+    nord10: #5e81ac;
+    /* nord10: rgba(94, 129, 172, 0%); */
     nord11: #bf616a;
     nord12: #d08770;
     nord13: #ebcb8b;
@@ -96,27 +96,27 @@ element-text {
 element-icon {
     background-color: transparent;
     /* background-color: var(nord7); */
-    size: 1.0000em;
+    size: 0.7500em;
     text-color: inherit;
     cursor: inherit;
+    margin:2px;
 }
 window {
-    padding: 10;
-    border: 3;
-    border-color: var(nord0);
-    background-color: var(nord0);
-    border-radius: 0px;
-    /* border-radius: 20px; */
-    width: 35%;
+    padding: 20;
+    border: 4;
+    border-color: var(nord3);
+    background-color: var(nord0-darker);
+    border-radius: 20px;
+    width: 20%;
 
 }
 
 listview {
-    lines:      5;
+    lines: 4;
 }
 mainbox {
-    padding: 0;
-    border: 0;
+    padding: 5;
+    /* border: -10; */
 }
 message {
     margin: 0px 7px;

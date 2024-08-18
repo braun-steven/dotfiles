@@ -37,10 +37,10 @@
 
 ;; Initially set the theme based on the current theme
 ;; (set-doom-theme-based-on-darkman)
-(setq doom-theme 'doom-nord)
+(setq doom-theme 'doom-one)
 
 ;; Set a timer to check every 5 minutes (300 seconds)
 ;; (run-at-time "5 min" 300 'check-and-update-theme)
 
 ;; Frame transparency
-(doom/set-frame-opacity 90)
+(doom/set-frame-opacity 100)

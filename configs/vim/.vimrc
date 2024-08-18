@@ -118,8 +118,8 @@ set termguicolors
 
 " {{{ Colorscheme
 set background=dark
-"colorscheme modus
-colorscheme nord
+colorscheme doom-one
+" colorscheme nord
 
 function! SetBackgroundFromDarkman()
     " Get the output of `darkman get`
@@ -292,8 +292,8 @@ let g:Illuminate_ftblacklist = ['nerdtree', 'python']
 
 
 " Transparent background {{{
-highlight Normal guibg=none
-highlight NonText guibg=none
-highlight Normal ctermbg=none
-highlight NonText ctermbg=none
+" highlight Normal guibg=none
+" highlight NonText guibg=none
+" highlight Normal ctermbg=none
+" highlight NonText ctermbg=none
 " }}}

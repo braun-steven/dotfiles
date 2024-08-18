@@ -64,22 +64,11 @@
 ;; Collection of Ridiculously Useful eXtensions for Emacs
 (package! crux)
 
-;; Thesaurus
-(unpin! powerthesaurus)
-
 (package! git-link)
 
-;; (package! typst-mode :recipe (:host github :repo "Ziqi-Yang/typst-mode.el"))
-(package! typst-ts-mode :recipe (:host sourcehut :repo "meow_king/typst-ts-mode"))
-;; (package! super-save)
-
-;; Grammarly
-;; (package! lsp-grammarly)
+(package! typst-ts-mode :recipe (:host codeberg :repo "meow_king/typst-ts-mode"))
 
 (package! benchmark-init)
-
-;; Pin auctex due to issue
-(package! auctex :pin "86b2397abdc20a638e5751251026727bc6282022")
 
 ;; Load private module packages
 (dolist (file (directory-files "~/.doom.d/private/" t directory-files-no-dot-files-regexp))
