@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# Temporary files
+SCREENSHOT="/tmp/swaylock_screenshot.png"
+BLURRED="/tmp/swaylock_blurred.png"
+
+# Capture screenshot using grim
+grim "$SCREENSHOT"
+
+# Apply blur effect using FFmpeg
+ffmpeg -i "$SCREENSHOT" -vf "boxblur=8:1" -y "$BLURRED"
+
+# Lock screen with swaylock
+swaylock -f \
+  --image "$BLURRED" \
+  --inside-color 00000088 \
+  --ring-color 285577 \
+  --key-hl-color 28772f \
+  --ring-ver-color 285577 \
+  --inside-ver-color 285577 \
+  --indicator-radius 100 \
+  --indicator-thickness 20
+
+# Clean up temporary files
+rm "$SCREENSHOT" "$BLURRED"
