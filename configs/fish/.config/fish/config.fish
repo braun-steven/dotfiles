@@ -172,6 +172,22 @@ function initconda
   end
 end
 
+function dnfu
+    # Get the current day of the week (1 is Monday, 7 is Sunday)
+    set current_day (date +%u)
+
+    # Check if it's Saturday (6) or Sunday (7)
+    if test $current_day -eq 6 -o $current_day -eq 7
+        echo -e '\033[1;32m[sudo dnf update]\033[0m'
+        sudo dnf update
+        echo -e '\n\n\033[1;32m[flatpaks update]\033[0m'
+        flatpak update
+    else
+        echo -e '\033[1;31mUpdates are only allowed on weekends (Saturday and Sunday).\033[0m'
+        echo -e '\033[1;31mToday is not a weekend. Update aborted.\033[0m'
+    end
+end
+
 
 # Define maybe-activate-conda-env function
 function maybe_activate_conda_env

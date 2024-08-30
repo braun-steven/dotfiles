@@ -1,0 +1,12 @@
+[[profile]]
+name = "mobile"
+
+[[profile.output]]
+enable = true
+search = ["m=TL140ADXP24-0", "s=", "v=Tianma Microelectronics Ltd."]
+mode = "2880x1800@60.001Hz"
+position = "0,0"
+scale = 1.15
+transform = "normal"
+adaptive_sync = false
+

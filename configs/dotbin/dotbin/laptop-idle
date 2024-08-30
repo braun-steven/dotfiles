@@ -1,0 +1,80 @@
+#!/bin/bash
+
+# Function to check if the laptop is running on battery power
+on_battery() {
+    upower -i /org/freedesktop/UPower/devices/line_power_ADP1 | grep -q "online:\s*no"
+}
+
+# Function to set idle state for screen brightness
+set_screen_idle() {
+    if on_battery; then
+        # Save current screen brightness, then set it to 1/3 of the current value
+        brillo -O && brillo -S $(echo "$(brillo)" / 3 | bc) -u 150000
+    fi
+}
+
+# Function to resume screen brightness from idle state
+resume_screen_idle() {
+    if on_battery; then
+        # Restore saved screen brightness
+        brillo -I -u 150000
+    fi
+}
+
+# Function to set idle state for keyboard backlight
+set_kbd_idle() {
+    if on_battery; then
+        # Set keyboard backlight to 0
+        sudo kbd-brightness --set 0
+    fi
+}
+
+# Function to resume keyboard backlight from idle state
+resume_kbd_idle() {
+    if on_battery; then
+        # Restore saved keyboard backlight
+        sudo kbd-brightness --restore
+    fi
+}
+
+# Check if correct number of arguments is provided
+if [ "$#" -ne 2 ]; then
+    echo "Usage: $0 {idle|resume} {screen|keyboard}"
+    exit 1
+fi
+
+# Main script logic
+case "$1" in
+    "idle")
+        case "$2" in
+            "screen")
+                set_screen_idle
+                ;;
+            "keyboard")
+                set_kbd_idle
+                ;;
+            *)
+                echo "Invalid second argument. Use 'screen' or 'keyboard'."
+                exit 1
+                ;;
+        esac
+        ;;
+    "resume")
+        case "$2" in
+            "screen")
+                resume_screen_idle
+                ;;
+            "keyboard")
+                resume_kbd_idle
+                ;;
+            *)
+                echo "Invalid second argument. Use 'screen' or 'keyboard'."
+                exit 1
+                ;;
+        esac
+        ;;
+    *)
+        echo "Invalid first argument. Use 'idle' or 'resume'."
+        exit 1
+        ;;
+esac

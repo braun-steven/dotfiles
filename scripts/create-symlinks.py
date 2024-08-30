@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 
 import os
-import sys
 import shutil
 from pathlib import Path
 import logging
@@ -38,11 +37,9 @@ def create_link(entry: os.DirEntry):
             logger.warning(f"Moving {dst} to {dst}.backup")
             shutil.move(dst, str(dst) + ".backup")
 
-
     # Create symlink
     os.symlink(src, dst)
-    logger.info(f"{src} -> {dst}")
-
+    logger.info(f"{src.replace(HOME, '~')} -> {dst.as_posix().replace(HOME, '~')}")
 
 
 def link_config(entry: os.DirEntry):
@@ -54,11 +51,21 @@ def link_config(entry: os.DirEntry):
 
 
 if __name__ == "__main__":
+
+    # Home path
+    HOME = os.getenv("HOME")
+
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "--remove-symlinks", "-r", action="store_true", help="Remove all symlinks."
     )
     parser.add_argument("--verbose", "-v", action="store_true", help="Verbose output.")
+    parser.add_argument(
+        "--dotfiles",
+        "-d",
+        default=os.path.join(HOME, "dotfiles"),
+        help="Path to dotfiles directory.",
+    )
     ARGS = parser.parse_args()
 
     # Setup logging
@@ -67,13 +74,11 @@ if __name__ == "__main__":
     else:
         log_level = logging.INFO
 
-    logging.basicConfig(level=log_level, format='%(levelname)s: %(message)s')
+    logging.basicConfig(level=log_level, format="%(levelname)s: %(message)s")
     logger = logging.getLogger(__name__)
 
-    # Home path
-    HOME = os.getenv("HOME")
     DOT_CONFIG = os.path.join(HOME, ".config")
-    CONFIG_DIR = os.path.join(os.getcwd(), "configs")
+    CONFIG_DIR = os.path.join(HOME, ARGS.dotfiles, "configs")
 
     # Scan all dirs in "./configs/"
     for entry in os.scandir(CONFIG_DIR):

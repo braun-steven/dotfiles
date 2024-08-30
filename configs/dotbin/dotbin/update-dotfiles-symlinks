@@ -1,0 +1,3 @@
+#!/bin/bash
+
+python ~/dotfiles/scripts/create-symlinks.py
