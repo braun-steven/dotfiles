@@ -1,4 +1,4 @@
-# -------------- Sway
+## -------------- Sway
 include /etc/sway/config.d/*
 
 exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
@@ -57,7 +57,11 @@ for_window [shell="xwayland"] title_format "[XWayland] %title"
 exec wl-paste -t text --watch clipman store --no-persist
 
 # Run kanshi: detect correct monitors
-exec_always killall kanshi & sleep 0.5 && kanshi & 
+# exec ~/.cargo/bin/shikane
+# exec_always sleep 2 && ~/.cargo/bin/shikanectl reload
+# exec kanshi  # Kanshi seems to have weird font issues in terminals after wakeup
+exec_always killall kanshi & sleep 0.5 && kanshi &
+# include ~/.config/sway/workspaces
 
 # exec_always $HOME/dotbin/update-sway-monitors.sh
 
@@ -91,62 +95,9 @@ exec_always swayidle -w \
           timeout 1200 '$Locker && systemctl suspend' before-sleep 'playerctl pause' \
           timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
           timeout 180 'swaymsg "output eDP-1 power off"' resume 'swaymsg "output eDP-1 power on"' \
-          timeout 60 "sudo kbd-brightness --set 0" resume "sudo kbd-brightness --restore" \
-          timeout 60 'brillo -O && brillo -S $(echo "$(brillo)" / 3 | bc) -u 150000' \
-              resume 'brillo -I -u 150000' \
-          before-sleep 'loginctl lock-session $XDG_SESSION_ID' lock 'playerctl -a pause; $Locker' 
-
-# ---------- SwayFX
-
-#blur enable
-#blur_passes 2
-#blur_radius 5
-#corner_radius 9
-#smart_corner_radius enable
-#shadows enable
-#shadows_on_csd enable
-#shadow_blur_radius 20
-#shadow_offset 0 10
-#shadow_color #000000FF
-#shadow_inactive_color #00000088
-# titlebar_separator enable
-
-
-# for_window [app_id="firefox"] blur disable
-# layer_effects "waybar" blur enable; shadows disable; corner_radius 0
-# layer_effects "rofi" blur enable; shadows enable; corner_radius 20
-
-# ---------- Theme
-
-# Nord colors
-#
-# nord0: #2e3440;
-# nord1: #3b4252;
-# nord2: #434c5e;
-# nord3: #4c566a;
-# nord4: #d8dee9;
-# nord5: #e5e9f0;
-# nord6: #eceff4;
-# nord7: #8fbcbb;
-# nord8: #88c0d0;
-# nord9: #81a1c1;
-# nord10: #5e81ac;
-# nord11: #bf616a;
-# nord12: #d08770;
-# nord13: #ebcb8b;
-# nord14: #a3be8c;
-# nord15: #b48ead;
-
-# Nord Colors
-# Window color settings
-# class                   border    backgr.   text      indicator
-# client.focused            #586d82   #506478   #ffffff   #586d82
-# client.unfocused          #2e3440   #262b36   #888888   #2e3440
-# client.focused_inactive   #2e3440   #4c566a   #d8dee980 #4c566a
-# client.placeholder        #2e3440   #1f222d   #888888   #1f222d
-# client.urgent             #900000   #900000   #ffffff   #900000
-# client.background         #242424
-
+          timeout 60 'laptop-idle idle keyboard' resume 'laptop-idle resume keyboard' \
+          timeout 60 'laptop-idle idle screen' resume 'laptop-idle resume screen' \
+          before-sleep 'loginctl lock-session $XDG_SESSION_ID' lock 'playerctl -a pause; $Locker'
 
 # Default sway colors
 
@@ -160,7 +111,6 @@ client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
 client.background       #ffffff
 
 # include /home/steven/.config/sway/theme-dark
-# # ---------- i3
 
 
 set $mod Mod4
@@ -178,10 +128,12 @@ floating_modifier $mod
 # start a terminal
 #bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Return exec alacritty msg create-window || alacritty
+# bindsym $mod+Return exec foot tmux -f ~/.config/tmux/nostatus.conf
 bindsym $mod+Shift+Return exec emacsclient -c
 
 # mouse focus
 focus_follows_mouse yes
+
 
 # kill focused window
 bindsym $mod+q kill
@@ -301,8 +253,8 @@ assign [app_id="thunderbird"] $w9
 # Set workspaces to specific monitors
 
 include $HOME/.config/sway/monitors
-# set $firstmon DP-1
-# set $secondmon HDMI-A-1
+# # set $firstmon DP-1
+# # set $secondmon HDMI-A-1
 workspace $w1 output $firstmon
 workspace $w2 output $firstmon
 workspace $w3 output $firstmon
@@ -398,14 +350,10 @@ for_window [app_id="Zoom"] floating enable
 for_window [app_id="zoom" title="Zoom Meeting"] floating disable
 for_window [app_id="Zoom" title="Zoom Meeting"] floating disable
 
-
 # Auto-switch to urgent windows
 for_window [urgent="latest"] focus
 
 exec nm-applet --tray --sm-disable &
-
-# Bluetooth
-exec blueberry-tray &
 
 # Start pulseaudio controls with mod+p in floating mode
 # Use create-window to reduce alacritty startup time
@@ -457,38 +405,20 @@ bindsym XF86AudioRaiseVolume exec amixer set Master $volumestep%+
 bindsym XF86AudioLowerVolume exec amixer set Master $volumestep%-
 bindsym XF86AudioMute        exec amixer set Master toggle
 
-# exec_always flashfocus
-
-
-
 # You can also use any non-zero value if you'd like to have a border
 for_window [class=".*"] border pixel 4
 default_floating_border none
-# default_border pixel 1
-#smart_gaps on
-#gaps inner 16
-#gaps outer 5
 
 titlebar_border_thickness 2
 smart_borders on
-
-# Enforce borders (and thus also window title borders) for all apps
-# Without this, some apps like eye-of-gnome will be without a titlebar
-# for_window [class=.*] border normal 4
-
-# From default i3 config
-#
-# This font is widely installed, provides lots of unicode glyphs, right-to-left
-# text rendering and scalability on retina/hidpi displays (thanks to pango).
-#font pango:DejaVu Sans Mono 8
 
 # Start XDG autostart .desktop files using dex. See also
 # https://wiki.archlinux.org/index.php/XDG_Autostart
 # The Autostart directories in order of preference are:
 #    user-specific: $XDG_CONFIG_HOME/autostart (~/.config/autostart by default)
 #    system-wide: $XDG_CONFIG_DIRS/autostart (/etc/xdg/autostart by default) [1]
-exec dex --autostart --environment sway  # Arch
-# exec dex-autostart --autostart --environment sway  # Fedora
+# exec dex --autostart --environment sway  # Arch
+exec dex-autostart --autostart --environment sway  # Fedora
 
 # Enable polit (e.g. polkit-gnome) authentication agent to get GUI password prompts
 exec /usr/libexec/polkit-gnome-authentication-agent-1  # Fedora/OpenSUSE
@@ -504,4 +434,3 @@ exec blueman-applet
 
 # Enable gsd xsettings such that applications can infer dark/light theme settings
 exec /usr/libexec/gsd-xsettings  # Fedora
-# exec /usr/lib/gsd-xsettings
