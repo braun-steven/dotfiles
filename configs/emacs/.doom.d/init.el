@@ -22,7 +22,7 @@
        :completion
        ;; company            ; the ultimate code completion backend
        ;; (company +childframe)            ; the ultimate code completion backend
-       (corfu +icons +dabbrev +orderless)
+       (corfu +icons +orderless)
        ;; (helm +fuzzy)              ; the *other* search engine for love and life
        ;;ido               ; the other *other* search engine...
        ;; (ivy +icons +prescient)               ; a search engine for love and life
