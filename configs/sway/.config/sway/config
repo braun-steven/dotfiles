@@ -18,6 +18,8 @@ exec_always gsettings set org.gnome.nm-applet disable-disconnected-notifications
 exec_always gsettings set org.gnome.nm-applet disable-connected-notifications "true"
 exec_always gsettings set org.gnome.desktop.interface document-font-name 'Inter 11'
 exec_always gsettings set org.gnome.desktop.interface font-name 'Inter 11'
+# exec_always gsettings set org.gnome.desktop.interface document-font-name 'Roboto Flex 11'
+# exec_always gsettings set org.gnome.desktop.interface font-name 'Roboto Flex 11'
 exec_always gsettings set org.gnome.desktop.interface cursor-size 32
 seat seat0 xcursor_theme Adwaita 32
 
