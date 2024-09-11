@@ -10,6 +10,21 @@ profile "desktop-2" {
     output eDP-1 disable
 }
 
+profile "desktop-1-half" {
+    output DP-2 enable scale 1 position 3840,0
+    output eDP-1 disable
+}
+
+profile "desktop-2-half" {
+    output DP-1 enable scale 1 position 3840,0
+    output eDP-1 disable
+}
+
+profile "desktop-3-half" {
+    output HDMI-A-1 enable scale 1 position 3840,0
+    output eDP-1 disable
+}
+
 profile "mobile" {
     output eDP-1 enable scale 1.00 adaptive_sync on mode 2880x1800@60
 }

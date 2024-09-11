@@ -66,28 +66,15 @@ fi
 
 source ~/.bash_aliases
 
-# Go into zsh
-# if [[ $(ps --no-header --pid=$PPID --format=cmd) != "zsh" ]] && [[ -z $SSH_CONNECTION ]]; then
-if [[ $(ps -p $PPID -o command=) != "fish" ]]; then
-# if [[ $(ps --no-header --pid=$PPID --format=cmd) != "fish" ]]; then
-  # exec zsh
-  if [[ ! -z $SSH_CONNECTION ]]; then
-    # Check if fish is available via homebrew
-
-    # Check if fish is available via homebrew
-    if [[ -f $HOME/homebrew/bin/fish ]]; then
-      exec $HOME/homebrew/bin/fish
-    else
-      echo "Fish shell via homebrew not found. Using zsh instead ..."
-      exec zsh
+# Use Fish if available, otherwise fall back to Zsh
+if command -v fish &> /dev/null; then
+    # Avoid creating an infinite loop of shells
+    if [[ $(ps --no-header --pid=$PPID --format=cmd) != "fish" ]]; then
+        exec fish
     fi
-  else
-    exec fish
-  fi
-  exit  # Exit afterward
+elif command -v zsh &> /dev/null; then
+    exec zsh
 fi
 
-
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
-. "$HOME/.cargo/env"
-
+# [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+# . "$HOME/.cargo/env"
