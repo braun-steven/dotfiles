@@ -16,10 +16,10 @@ exec systemctl --user import-environment PATH
 exec_always gsettings set org.gnome.desktop.interface text-scaling-factor 1.5
 exec_always gsettings set org.gnome.nm-applet disable-disconnected-notifications "true"
 exec_always gsettings set org.gnome.nm-applet disable-connected-notifications "true"
-exec_always gsettings set org.gnome.desktop.interface document-font-name 'Inter 11'
-exec_always gsettings set org.gnome.desktop.interface font-name 'Inter 11'
-# exec_always gsettings set org.gnome.desktop.interface document-font-name 'Roboto Flex 11'
-# exec_always gsettings set org.gnome.desktop.interface font-name 'Roboto Flex 11'
+exec_always gsettings set org.gnome.desktop.interface document-font-name 'Inter 12'
+exec_always gsettings set org.gnome.desktop.interface font-name 'Inter 12'
+# exec_always gsettings set org.gnome.desktop.interface document-font-name 'Roboto Flex 12'
+# exec_always gsettings set org.gnome.desktop.interface font-name 'Roboto Flex 12'
 exec_always gsettings set org.gnome.desktop.interface cursor-size 32
 seat seat0 xcursor_theme Adwaita 32
 
@@ -62,14 +62,15 @@ exec wl-paste -t text --watch clipman store --no-persist
 # exec ~/.cargo/bin/shikane
 # exec_always sleep 2 && ~/.cargo/bin/shikanectl reload
 # exec kanshi  # Kanshi seems to have weird font issues in terminals after wakeup
-exec_always killall kanshi & sleep 0.5 && kanshi &
+exec kanshi 
+# exec_always killall kanshi & sleep 0.5 && kanshi &
 # include ~/.config/sway/workspaces
 
 # exec_always $HOME/dotbin/update-sway-monitors.sh
 
 # Run waybar as bar
 # exec_always killall waybar & sleep 0.5 && ~/Waybar/build/waybar &
-exec_always killall waybar & sleep 0.5 && waybar &
+exec waybar
 
 # Swaylock with options. "-f" daemonizes swaylock to work with systemd suspend afterwards
 set $Locker swaylock -f \
@@ -275,10 +276,25 @@ workspace $wp output $secondmon
 
 # reload the configuration file
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Ctrl+r exec swaymsg reload
+# bindsym $mod+Ctrl+r exec swaymsg reload
 
 # Menu for lock logout etc.
-set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
+set $mode_restart Restart: (k) kanshi (W) waybar (w) wireplumber (e) emacs service, (s) sway
+mode "$mode_restart" {
+    bindsym k exec killall kanshi && sleep 0.5 && kanshi, mode "default"
+    bindsym Shift+w exec killall waybar && waybar, mode "default"
+    bindsym w exec systemctl --user restart wireplumber, mode "default"
+    bindsym e exec systemctl --user restart emacs, mode "default"
+    bindsym s exec swaymsg reload, mode "default"
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+Ctrl+r mode "$mode_restart"
+
+# Menu for lock logout etc.
+set $mode_system System (l) lock (e) logout (s) suspend (h) hibernate (r) reboot (Shift+s) shutdown
 mode "$mode_system" {
     bindsym l exec $Locker, mode "default"
     bindsym e exec swaymsg exit, mode "default"

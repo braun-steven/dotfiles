@@ -193,9 +193,9 @@
     (setq corfu-auto-delay 0.0))
 
 ;; Orderless setup
-(use-package! orderless
-    :config
-    (setq completion-styles '(flex orderless basic)))
+;; (use-package! orderless
+;;     :config
+;;     (setq completion-styles '(flex orderless basic)))
 
 
 ;; accept completion from copilot
