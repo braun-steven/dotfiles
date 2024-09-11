@@ -7,8 +7,9 @@ end
 # Aliases can be found in .bash_aliases which is sourced in .bashrc from which we start the fish shell
 
 # Install fisher if not available
-if not type -q fisher
+if not functions -q fisher
   curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher
+  fisher update
 end
 
 ##########################
