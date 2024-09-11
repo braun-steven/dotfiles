@@ -9,7 +9,6 @@ end
 # Install fisher if not available
 if not type -q fisher
   curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher
-  fisher update  # Update after first install
 end
 
 ##########################
@@ -197,6 +196,12 @@ end
 
 # Define maybe-activate-conda-env function
 function maybe_activate_conda_env
+
+  # Check if conda exists
+  if not test -d ~/.conda; or not test -f ~/.conda/bin/conda
+    return
+  end
+
   # Check if "conda" command is available,
   if not type -q conda
      initconda
