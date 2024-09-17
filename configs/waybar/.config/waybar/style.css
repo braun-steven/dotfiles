@@ -244,6 +244,7 @@
 /* Urgent button */
 #workspaces button.urgent {
     border: 2px solid @foreground-urgent;
+    background: @foreground-urgent;
 }
 
 /* Hovered button */
