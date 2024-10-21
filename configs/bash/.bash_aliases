@@ -18,7 +18,7 @@ alias zshreload="source ~/.zshrc"
 alias i3config="$EDITOR ~/.config/i3/config"
 alias xresourcesconfig="$EDITOR ~/.Xresources"
 alias xresourcesreload="xrdb -merge ~/.Xresources"
-alias rsync="rsync --archive --compress-level=3 --copy-links --partial --inplace --rsh=ssh -r"
+alias rsync="rsync --progress -vh --archive --compress-level=3 --copy-links --partial --inplace --rsh=ssh -r"
 alias ipy="python -c 'import IPython; IPython.terminal.ipapp.launch_new_instance()'"
 
 # Emacsclient terminal

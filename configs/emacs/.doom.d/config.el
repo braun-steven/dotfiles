@@ -58,7 +58,7 @@
 ;; (if (eq system-type 'darwin)
 ;; (setq doom-font (font-spec :family "Hack" :size 14.0))  ;; MacOS
 ;; (setq doom-font (font-spec :family "Hack" :size 12))  ;; Linux
-(setq doom-font (font-spec :family "CommitMono" :size 24))  ;; Linux
+(setq doom-font (font-spec :family "CommitMono" :size 25))  ;; Linux
 
 ;;   )
 ;; (setq doom-font (font-spec :family "Consolas" :size 12.0))
@@ -150,6 +150,10 @@
 
   ;; Set magit status margin
   (setq magit-status-margin '(t age magit-log-margin-width t 18)))
+
+(use-package! magit-todos
+  :after magit
+  :config (magit-todos-mode 1))
 
 
 (use-package! vertico-directory

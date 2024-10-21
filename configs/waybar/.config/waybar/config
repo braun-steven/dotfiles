@@ -37,6 +37,7 @@
         // "temperature",
         // "custom/keyboard-layout",
         "battery",
+//        "custom/light-toggle",
         "tray",
         "clock#date",
     ],
@@ -213,6 +214,7 @@
 	"custom/audio_idle_inhibitor": {
 		"format": " {icon} ",
 		"exec": "sway-audio-idle-inhibit --dry-print-both-waybar",
+        "interval": 5,
 		"exec-if": "which sway-audio-idle-inhibit",
 		"return-type": "json",
 		"format-icons": {
@@ -222,6 +224,14 @@
 			"none": ""
 		}
 	},
+    "custom/light-toggle": {
+        "exec": "~/.local/bin/light_icon.sh",
+        "interval": 5,
+        "signal": 10,  // Match this number with the pkill signal in the script
+        "tooltip": "Click to toggle office light",
+        "on-click": "~/.local/bin/toggle_light.sh"
+    },
+
 
     "tray": {
         "icon-size": 28,
