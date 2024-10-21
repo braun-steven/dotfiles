@@ -38,7 +38,7 @@ export QT_SCALE_FACTOR=0.75
 
 # If we have an ssh connection, export the docker host
 if [[ ! -z $SSH_CONNECTION ]]; then
-  if [[ $(hostname) == "debian" ]]; then
+  if [[ $(hostname) == "homeserver" ]]; then
     export DOCKER_HOST="unix:///var/run/docker.sock"
   else
     export DOCKER_HOST="unix:///run/user/$(id -u)/docker.sock"
@@ -48,3 +48,8 @@ fi
 
 export PROJECTS="$HOME/projects"
 export DOTFILES="$HOME/dotfiles"
+
+# Source private exports
+if [[ -f "$HOME/.bash_exports_private" ]]; then
+  source "$HOME/.bash_exports_private"
+fi

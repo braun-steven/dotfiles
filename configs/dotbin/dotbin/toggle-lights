@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# Source private exports
+source /home/steven/.bash_exports_private
+
+# Check if the state argument is provided and valid
+state=$1  # Should be either "on" or "off"
+
+if [[ "$state" != "on" && "$state" != "off" ]]; then
+  echo "Usage: $0 {on|off}"
+  exit 1
+fi
+
+# Check if the Logitech Webcam C925e is connected
+if lsusb | grep -q "Logitech Webcam C925e"; then
+  if [[ "$state" == "on" ]]; then
+    echo "Turning on the office light."
+    curl -X POST https://homeassistant.steven-braun.com/api/webhook/${HOMEASSISTANT_OFFICE_LIGHT_ON_ID}
+  elif [[ "$state" == "off" ]]; then
+    echo "Turning off the office light."
+    curl -X POST https://homeassistant.steven-braun.com/api/webhook/${HOMEASSISTANT_OFFICE_LIGHT_OFF_ID}
+  fi
+else
+  echo "Logitech Webcam C925e not detected. Exiting."
+fi

@@ -4,7 +4,7 @@
 ;; DAP mode
 (map! :localleader
       :map python-mode-map
-      "d"   #'py-pyment-region
+      ;; "d"   #'py-pyment-region
 
       (:prefix ("D" . "DAP")
                ;; transient state
