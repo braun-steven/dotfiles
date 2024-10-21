@@ -23,10 +23,10 @@
     (setq conda-env-home-directory (expand-file-name "~/.conda"))
     (setq conda-anaconda-home (expand-file-name "~/.conda")))
 
-  ;; Python docstring tool
-  (use-package! py-pyment
-    :after python
-    :config
-    (setq py-pyment-options '("--output=google")))
+  ;; ;; Python docstring tool
+  ;; (use-package! py-pyment
+  ;;   :after python
+  ;;   :config
+  ;;   (setq py-pyment-options '("--output=google")))
 
   )

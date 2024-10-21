@@ -20,3 +20,4 @@
          :target (file "~/org/pathfinder-blood-lords/20231124162340-pathfinder_2e_blood_lords_session_notes.org")
          :unnarrowed t)
         ))
+

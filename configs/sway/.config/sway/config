@@ -93,14 +93,16 @@ set $Locker swaylock -f \
 # Turn off keyboard backlight after inactivity of 1 minute
 #
 # Turn off screen after inactivity of 3 minutes
-exec_always killall swayidle
+# exec_always killall swayidle
 exec_always swayidle -w \
-          timeout 1200 '$Locker && systemctl suspend' before-sleep 'playerctl pause' \
+          timeout 1200 '$Locker && toggle-lights off && systemctl suspend' resume 'sleep 3 && toggle-lights on' \
           timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
           timeout 180 'swaymsg "output eDP-1 power off"' resume 'swaymsg "output eDP-1 power on"' \
           timeout 60 'laptop-idle idle keyboard' resume 'laptop-idle resume keyboard' \
           timeout 60 'laptop-idle idle screen' resume 'laptop-idle resume screen' \
-          before-sleep 'loginctl lock-session $XDG_SESSION_ID' lock 'playerctl -a pause; $Locker'
+          before-sleep 'loginctl lock-session $XDG_SESSION_ID' before-sleep 'playerctl pause' lock 'playerctl -a pause; $Locker'
+
+
 
 # Default sway colors
 
