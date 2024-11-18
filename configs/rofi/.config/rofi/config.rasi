@@ -1,6 +1,6 @@
 configuration {
 	modi: "combi";
-	font: "IBMPlex Mono 20";
+	font: "IBMPlex Mono 14";
 	show-icons: true;
 	terminal: "alacritty";
 	combi-modi: "drun,run,bookmarks:/home/steven/dotbin/rofi-bookmarks.py -p default-release";
