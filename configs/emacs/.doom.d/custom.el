@@ -53,7 +53,14 @@
  '(rustic-ansi-faces
    ["#282c34" "#ff6c6b" "#98be65" "#ECBE7B" "#51afef" "#c678dd" "#46D9FF" "#bbc2cf"])
  '(safe-local-variable-values
-   '((eval message "Hello woooooorld")
+   '((eval setq ispell-local-dictionary "de_DE")
+     (eval add-to-list 'org-roam-capture-templates
+      '("s" "pathfinder session" entry
+        (file "~/org/notes/templates/pathfinder-session.org")
+        :target
+        (file "~/org/pathfinder-blood-lords/20231124162340-pathfinder_2e_blood_lords_session_notes.org")
+        :unnarrowed t :empty-lines 1))
+     (eval message "Hello woooooorld")
      (eval message "Hello world")
      (eval setq org-roam-db-location
       (expand-file-name "org/notes/org-roam.db"

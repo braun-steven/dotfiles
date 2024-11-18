@@ -136,7 +136,7 @@
 
     },
     "custom/memory":{
-        "exec": "memory_usage=$(free -m | awk '/^Mem:/ {print int($3/$2 * 100)}'); [ $memory_usage -gt 90 ] && echo 󰍛 Mem ${memory_usage}% || echo ''",
+        "exec": "memory_usage=$(free -m | awk '/^Mem:/ {print int($3/$2 * 100)}'); [ $memory_usage -gt 80 ] && echo 󰍛 Mem ${memory_usage}% || echo ''",
         "interval": "5",
     },
 
