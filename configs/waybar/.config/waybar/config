@@ -234,8 +234,8 @@
 
 
     "tray": {
-        "icon-size": 28,
-        "spacing": 10
+        "icon-size": 18,
+        "spacing": 5
     }
 
 }

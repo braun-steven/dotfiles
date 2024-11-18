@@ -6,7 +6,7 @@ enable = true
 search = ["m=TL140ADXP24-0", "s=", "v=Tianma Microelectronics Ltd."]
 mode = "2880x1800@60.001Hz"
 position = "0,0"
-scale = 1.0
+scale = 1.5
 transform = "normal"
 adaptive_sync = true
 
@@ -21,8 +21,8 @@ search = ["m=TL140ADXP24-0", "s=", "v=Tianma Microelectronics Ltd."]
 enable = true
 search = ["m=LG Ultra HD", "s=0x0006462D", "v=LG Electronics"]
 mode = "3840x2160@60Hz"
-position = "3840,0"
-scale = 1.0
+position = "2560,0"
+scale = 1.5
 transform = "normal"
 adaptive_sync = false
 
@@ -31,7 +31,7 @@ enable = true
 search = ["m=LU28R55", "s=HNMR100496", "v=Samsung Electric Company"]
 mode = "3840x2160@60Hz"
 position = "0,0"
-scale = 1.0
+scale = 1.5
 transform = "normal"
 adaptive_sync = false
 
@@ -43,7 +43,7 @@ enable = true
 search = ["m=TL140ADXP24-0", "s=", "v=Tianma Microelectronics Ltd."]
 mode = "2880x1800@120Hz"
 position = "0,1080"
-scale = 1.0
+scale = 1.5
 transform = "normal"
 adaptive_sync = true
 
@@ -52,7 +52,7 @@ enable = true
 search = ["m=Philips UHDTV", "s=0x01010101", "v=Philips Consumer Electronics Company"]
 mode = "3840x2160@60Hz"
 position = "0,0"
-scale = 2.0
+scale = 1.5
 transform = "normal"
 adaptive_sync = false
 
