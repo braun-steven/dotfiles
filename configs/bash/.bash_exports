@@ -53,3 +53,6 @@ export DOTFILES="$HOME/dotfiles"
 if [[ -f "$HOME/.bash_exports_private" ]]; then
   source "$HOME/.bash_exports_private"
 fi
+
+# Set TERM value to kitty (makes alacritty also show correct colors -- why?)
+TERM=xterm-kitty

@@ -64,7 +64,7 @@
 ;; Collection of Ridiculously Useful eXtensions for Emacs
 (package! crux)
 
-(package! git-link)
+;; (package! git-link)
 
 (package! typst-ts-mode :recipe (:host codeberg :repo "meow_king/typst-ts-mode"))
 
@@ -77,3 +77,4 @@
   (load! (concat file "/packages.el")))
 
 
+(package! copilot-chat :recipe (:host github :repo "chep/copilot-chat.el" :files ("*.el")))

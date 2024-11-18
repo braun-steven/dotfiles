@@ -1,0 +1,1 @@
+wf-recorder -g "$(swaymsg -t get_tree | jq -r '.. | select(.pid? and .visible?) | .rect | "\(.x),\(.y) \(.width)x\(.height)"' | slurp -r)" --file=Videos/wf-recorder/$(date '+%Y-%m-%d_%H:%M:%S').mp4

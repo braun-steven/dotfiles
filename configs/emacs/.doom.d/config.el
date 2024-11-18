@@ -194,12 +194,14 @@
 ;; Corfu setup
 (use-package! corfu
     :config
-    (setq corfu-auto-delay 0.0))
+    (setq corfu-auto-delay 0.0)
+    (setq corfu-auto-prefix 3)
+    (setq corfu-preselect 'prompt))
 
 ;; Orderless setup
 ;; (use-package! orderless
 ;;     :config
-;;     (setq completion-styles '(flex orderless basic)))
+;;     (setq completion-styles '(orderless-flex basic)))
 
 
 ;; accept completion from copilot
@@ -209,10 +211,33 @@
     :bind (:map copilot-completion-map
             ("<tab>" . 'copilot-accept-completion)
             ("TAB" . 'copilot-accept-completion)
-            ("C-TAB" . 'copilot-accept-completion-by-word)
-            ("C-<tab>" . 'copilot-accept-completion-by-word))
+            ;; ("C-TAB" . 'copilot-accept-completion-by-word)
+            ;; ("C-<tab>" . 'copilot-accept-completion-by-word)
+            )
     :config (setq copilot-indent-offset-warning-disable t)
     )
+
+(use-package! copilot-chat
+  :after (request org markdown-mode shell-maker))
+
+
+(use-package! transient
+  :config
+
+(defun resize-repeatable (func amount)
+  "Call FUNC with AMOUNT and keep transient open."
+  (funcall func amount)
+  (transient-setup 'transient-resize-window))
+
+(transient-define-prefix transient-resize-window ()
+  "Transient menu for resizing the current window."
+  [["Resize Window"
+    ("<" "Decrease width" (lambda () (interactive) (resize-repeatable #'evil-window-decrease-width 5)))
+    (">" "Increase width" (lambda () (interactive) (resize-repeatable #'evil-window-increase-width 5)))
+    ("-" "Decrease width" (lambda () (interactive) (resize-repeatable #'evil-window-decrease-height 5)))
+    ("+" "Increase width" (lambda () (interactive) (resize-repeatable #'evil-window-increase-height 5)))
+    ("q" "Quit" transient-quit-one)]])
+)
 
 
 

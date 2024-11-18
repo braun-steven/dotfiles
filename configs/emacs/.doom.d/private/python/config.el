@@ -16,6 +16,9 @@
 
   (setq pyimport-pyflakes-path "~/.local/bin/pyflakes")
 
+  (after! lsp-pyright
+   (setq lsp-pyright-auto-import-completions t))
+
   ;; Set correct conda variables
   (use-package! conda
     :after python
