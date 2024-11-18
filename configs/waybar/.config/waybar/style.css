@@ -213,10 +213,10 @@
 
 /* Button default */
 #workspaces button {
-    border-top: 2px solid transparent;
+    border-top: 0px solid transparent;
     border-bottom: 2px solid transparent;
-    border-left: 2px solid transparent;
-    border-right: 2px solid transparent;
+    border-left: 0px solid transparent;
+    border-right: 0px solid transparent;
     /* To compensate for the top border and still have vertical centering */
     padding-bottom: 2px;
     padding-top: 0px;
@@ -231,19 +231,19 @@
     /* border-top: 4px solid #667f99; */
     color: @foreground-focused;
     background: @background-focused;
-    border: 2px solid @background-focused-border;
+    border-bottom: 2px solid @background-focused-border;
 }
 
 /* Focused button but on inactive monitor */
 #workspaces button.visible:not(.focused) {
     color: @foreground-focused-inactive;
     background: @background-focused-inactive;
-    border: 2px solid @background-focused-inactive-border;
+    border-bottom: 2px solid @background-focused-inactive-border;
 }
 
 /* Urgent button */
 #workspaces button.urgent {
-    border: 2px solid @foreground-urgent;
+    border-bottom: 2px solid @foreground-urgent;
     background: @foreground-urgent;
 }
 
@@ -256,5 +256,5 @@
     /* border: inherit; */
     background: @background-focused-inactive;
     color: @foreground-focused;
-    border: 2px solid @background-focused-inactive;
+    border-bottom: 2px solid @background-focused-inactive;
 }

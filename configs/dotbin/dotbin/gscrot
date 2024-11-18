@@ -1,3 +1,15 @@
 #!/bin/bash
 
-grimshot save anything
+wl-copy < $(grimshot save anything)
+
+# Get the most recently modified file in the ~/Pictures directory
+latest_file=$(command ls -t ~/Pictures/ | head -n 1)
+latest_file_path=~/Pictures/"$latest_file"
+
+# Check if a file was captured
+if [ -f "$latest_file_path" ]; then
+    # Use the Python script to add the recent screenshot to the GTK recent files list
+    add-to-recent-files "$latest_file_path"
+else
+    echo "No new screenshot found"
+fi

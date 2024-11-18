@@ -8,8 +8,14 @@ exec hash dbus-update-activation-environment 2>/dev/null && \
 # set $wallpaper ~/wallpaper/macos-nord-1.png
 # set $wallpaper ~/wallpaper/misty-mountains.jpg
 # set $wallpaper ~/wallpaper/fedora-wallpaper.png
-set $wallpaper ~/wallpaper/macos-big-sur-day
-output * bg $wallpaper.jpg fill
+set $wallpaper_base ~/wallpaper/macos-big-sur-day
+# set $wallpaper_base ~/wallpaper/Rancho_Cucamonga_Tree_6K
+# set $wallpaper_base ~/wallpaper/Whirl_Mac
+# set $wallpaper_base ~/wallpaper/TiGradient_Mac
+set $wallpaper $wallpaper_base.png
+set $wallpaper_dimblur $wallpaper_base-dimblur.png
+
+output * bg $wallpaper fill
 
 exec systemctl --user import-environment PATH
 
@@ -18,8 +24,6 @@ exec_always gsettings set org.gnome.nm-applet disable-disconnected-notifications
 exec_always gsettings set org.gnome.nm-applet disable-connected-notifications "true"
 exec_always gsettings set org.gnome.desktop.interface document-font-name 'Inter 12'
 exec_always gsettings set org.gnome.desktop.interface font-name 'Inter 12'
-# exec_always gsettings set org.gnome.desktop.interface document-font-name 'Roboto Flex 12'
-# exec_always gsettings set org.gnome.desktop.interface font-name 'Roboto Flex 12'
 exec_always gsettings set org.gnome.desktop.interface cursor-size 32
 seat seat0 xcursor_theme Adwaita 32
 
@@ -59,10 +63,9 @@ for_window [shell="xwayland"] title_format "[XWayland] %title"
 exec wl-paste -t text --watch clipman store --no-persist
 
 # Run kanshi: detect correct monitors
-# exec ~/.cargo/bin/shikane
-# exec_always sleep 2 && ~/.cargo/bin/shikanectl reload
+exec_always pgrep shikane && pkill shikane; ~/.cargo/bin/shikane
 # exec kanshi  # Kanshi seems to have weird font issues in terminals after wakeup
-exec kanshi 
+# exec kanshi 
 # exec_always killall kanshi & sleep 0.5 && kanshi &
 # include ~/.config/sway/workspaces
 
@@ -70,18 +73,20 @@ exec kanshi
 
 # Run waybar as bar
 # exec_always killall waybar & sleep 0.5 && ~/Waybar/build/waybar &
-exec waybar
+exec_always pgrep waybar && pkill waybar; sleep 0.5; waybar 2>&1 | tee -a /tmp/waybar.log
 
 # Swaylock with options. "-f" daemonizes swaylock to work with systemd suspend afterwards
-set $Locker swaylock -f \
-      --image $wallpaper-dimblur.jpg \
-      --inside-color 00000088 \
-      --ring-color 285577 \
-      --key-hl-color 28772f \
-      --ring-ver-color 285577 \
-      --inside-ver-color 285577 \
-      --indicator-radius 100 \
-      --indicator-thickness 20
+# set $Locker swaylock -f \
+#       --image $wallpaper_dimblur \
+#       --inside-color 00000088 \
+#       --ring-color 285577 \
+#       --key-hl-color 28772f \
+#       --ring-ver-color 285577 \
+#       --inside-ver-color 285577 \
+#       --indicator-radius 100 \
+#       --indicator-thickness 20
+
+set $Locker hyprlock
 
 ### Idle configuration
 # Dim screen after inactivity of 1 minute
@@ -93,9 +98,8 @@ set $Locker swaylock -f \
 # Turn off keyboard backlight after inactivity of 1 minute
 #
 # Turn off screen after inactivity of 3 minutes
-# exec_always killall swayidle
-exec_always swayidle -w \
-          timeout 1200 '$Locker && toggle-lights off && systemctl suspend' resume 'sleep 3 && toggle-lights on' \
+exec_always pgrep swayidle && pkill swayidle; sleep 0.5 && swayidle -w \
+          timeout 1200 '$Locker && systemctl suspend' resume 'sleep 3' \
           timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
           timeout 180 'swaymsg "output eDP-1 power off"' resume 'swaymsg "output eDP-1 power on"' \
           timeout 60 'laptop-idle idle keyboard' resume 'laptop-idle resume keyboard' \
@@ -114,6 +118,8 @@ client.urgent           #2f343a #900000 #ffffff #900000   #900000
 client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
 
 client.background       #ffffff
+
+
 
 # include /home/steven/.config/sway/theme-dark
 
@@ -204,7 +210,7 @@ set $w0 "10 󰻞 chat"
 set $wy "11 (y)"
 set $wu "12 (u)"
 set $wi "13 (i)"
-set $wo "14 (o)"
+set $wo "14 (o) pomodoro"
 set $wp "15  (p) gtd"
 
 # switch to workspace
@@ -281,11 +287,12 @@ workspace $wp output $secondmon
 # bindsym $mod+Ctrl+r exec swaymsg reload
 
 # Menu for lock logout etc.
-set $mode_restart Restart: (k) kanshi (W) waybar (w) wireplumber (e) emacs service, (s) sway
+set $mode_restart Restart: (w) waybar (p) wireplumber (e) emacs service, (s) sway
 mode "$mode_restart" {
-    bindsym k exec killall kanshi && sleep 0.5 && kanshi, mode "default"
-    bindsym Shift+w exec killall waybar && waybar, mode "default"
-    bindsym w exec systemctl --user restart wireplumber, mode "default"
+    # bindsym k exec ~/.cargo/bin/shikanectl reload, mode "default"
+    # bindsym k exec killall kanshi && sleep 0.5 && kanshi, mode "default"
+    bindsym w exec killall waybar; waybar, mode "default"
+    bindsym p exec systemctl --user restart wireplumber, mode "default"
     bindsym e exec systemctl --user restart emacs, mode "default"
     bindsym s exec swaymsg reload, mode "default"
 
@@ -363,6 +370,7 @@ for_window [window_role="dialog"] floating enable
 for_window [window_role="menu"] floating enable
 for_window [window_role="Preferences"] floating enable
 for_window [title="Volume Control"] floating enable resize set 640 960
+for_window [title=".*Bitwarden.*"] floating enable
 
 # Zoom, float everything except for the actual meeting window
 for_window [app_id="zoom"] floating enable

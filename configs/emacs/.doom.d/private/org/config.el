@@ -7,6 +7,34 @@
 
 ;; Org setup
 (after! org
+
   (load! "+functions")
   (load! "+keybindings")
-  (load! "+org-setup"))
+
+  (use-package! org-journal
+    :config
+    (setq org-journal-dir "~/org/journal/")
+    (setq org-journal-file-type 'yearly)
+    )
+
+   ;; Hide emphasis markers like /foo/ and *bar*
+   (setq org-hide-emphasis-markers t)
+
+   ;; ;; Make TAB cycle all subtrees
+   (after! evil-org
+   (remove-hook 'org-tab-first-hook #'+org-cycle-only-current-subtree-h))
+
+   ;; Enable booktabs table export
+   (setq org-latex-tables-booktabs t)
+
+   (setq org-roam-capture-templates
+   '(
+           ("d" "default" plain "%?"
+           :target (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
+           :unnarrowed t)
+           ("m" "meeting" entry (file "~/org/notes/templates/meetings.org")
+           :target (file "~/org/notes/phd/meetings/misc.org")
+           :unnarrowed t
+           :empty-lines 1)
+           ))
+  )

@@ -73,3 +73,25 @@
 
 
 (map! :after corfu :map corfu-map :i [tab] #'corfu-next)
+
+;; Copilot chat
+(map! :leader
+      (:prefix ("C" . "Copilot Chat")
+       :desc "Reset" "r" #'copilot-chat-reset
+       :desc "Display" "d" #'copilot-chat-display
+       :desc "Explain Symbol" "e" #'copilot-chat-explain-symbol-at-line
+       :desc "Explain Code" "E" #'copilot-chat-explain
+       :desc "Review" "v" #'copilot-chat-review
+       :desc "Document" "D" #'copilot-chat-doc
+       :desc "Fix" "f" #'copilot-chat-fix
+       :desc "Optimize" "o" #'copilot-chat-optimize
+       :desc "Test" "t" #'copilot-chat-test
+       :desc "Prompt" "p" #'copilot-chat-custom-prompt-selection
+       :desc "Add Buffer" "a" #'copilot-chat-add-current-buffer
+       :desc "Remove Buffer" "x" #'copilot-chat-del-current-buffer
+       :desc "List Buffers" "l" #'copilot-chat-list
+       :desc "Prev Prompt" "h" #'copilot-chat-prompt-history-previous
+       :desc "Next Prompt" "n" #'copilot-chat-prompt-history-next
+       :desc "Ask Insert" "i" #'copilot-chat-ask-and-insert
+       :desc "Commit Message" "c" #'copilot-chat-insert-commit-message
+       ))
