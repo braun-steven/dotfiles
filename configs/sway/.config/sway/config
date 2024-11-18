@@ -99,7 +99,7 @@ set $Locker hyprlock
 #
 # Turn off screen after inactivity of 3 minutes
 exec_always killall swayidle; sleep 0.5; swayidle -w \
-          timeout 1200 '$Locker && systemctl suspend' resume 'sleep 3' \
+          timeout 1200 'systemctl suspend' resume 'sleep 3' \
           timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
           timeout 180 'swaymsg "output eDP-1 power off"' resume 'swaymsg "output eDP-1 power on"' \
           timeout 60 'laptop-idle idle keyboard' resume 'laptop-idle resume keyboard' \
@@ -287,11 +287,11 @@ workspace $wp output $secondmon
 # bindsym $mod+Ctrl+r exec swaymsg reload
 
 # Menu for lock logout etc.
-set $mode_restart Restart: (w) waybar (p) wireplumber (e) emacs service, (s) sway
+set $mode_restart Restart: (p) wireplumber (e) emacs service, (s) sway
 mode "$mode_restart" {
     # bindsym k exec ~/.cargo/bin/shikanectl reload, mode "default"
     # bindsym k exec killall kanshi && sleep 0.5 && kanshi, mode "default"
-    bindsym w exec killall waybar; waybar, mode "default"
+    # bindsym w exec killall waybar; sleep 0.5; waybar, mode "default"
     bindsym p exec systemctl --user restart wireplumber, mode "default"
     bindsym e exec systemctl --user restart emacs, mode "default"
     bindsym s exec swaymsg reload, mode "default"
@@ -303,13 +303,11 @@ mode "$mode_restart" {
 bindsym $mod+Ctrl+r mode "$mode_restart"
 
 # Menu for lock logout etc.
-set $mode_system System (l) lock (e) logout (s) suspend (h) hibernate (r) reboot (Shift+s) shutdown
+set $mode_system System (l) lock (e) logout (s) suspend (r) reboot (Shift+s) shutdown
 mode "$mode_system" {
     bindsym l exec $Locker, mode "default"
     bindsym e exec swaymsg exit, mode "default"
     bindsym s exec $Locker && systemctl suspend, mode "default"
-    # bindsym s exec $Locker && systemctl suspend-then-hibernate, mode "default"
-    bindsym h exec $Locker && systemctl hibernate, mode "default"
     bindsym r exec systemctl reboot, mode "default"
     bindsym Shift+s exec systemctl poweroff -i, mode "default"
 
@@ -397,7 +395,7 @@ for_window [app_id="Pavucontrol"] floating enable, resize set 1280 768
 # suspend/lock shortcuts
 # bindsym $mod+$mod2+Ctrl+s exec $Locker && systemctl suspend  # Calling $Locker is not necessary with `betterlockscreen` since there is a systemctl service that starts betterlockscreen whenever the system suspends
 # bindsym $mod+$mod2+Ctrl+s exec systemctl suspend-then-hibernate
-bindsym $mod+$mod2+Ctrl+s exec systemctl suspend
+bindsym $mod+$mod2+Ctrl+s exec $Locker & systemctl suspend
 bindsym $mod+$mod2+Ctrl+l exec $Locker
 
 # Emacs anywhere (doesn't work on wayland)
