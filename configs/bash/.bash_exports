@@ -21,20 +21,18 @@ fi
 
 
 # Extend $PATH
-export PATH="$PATH:$HOME/.local/bin"
-export PATH="$PATH:$HOME/.cargo/bin"
-export PATH="$PATH:$HOME/dotbin"  # scripts from dotfiles
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="$HOME/dotbin:$PATH"  # scripts from dotfiles
 export PATH="$HOME/bin:$PATH"  # local binaries
-export PATH="$PATH:$HOME/.emacs.d/bin" # doom binaries
+export PATH="$HOME/.emacs.d/bin:$PATH" # doom binaries
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"  # yarn
-export PATH="$PATH:$HOME/homebrew/bin"  # local homebrew install
+export PATH="$HOME/homebrew/bin:$PATH"  # local homebrew install
 # export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/lib/"
-export PATH="$PATH:/opt/homebrew/bin"  # homebrew
-export PATH="$PATH:$HOME/Library/Python/3.9/bin"  # homebrew
-export PATH="$PATH:/Library/TeX/texbin"  # latex stuff (latexmk)
+export PATH="/opt/homebrew/bin:$PATH"  # homebrew
 
 # Fix QT Apps on High DPI screens (e.g. Zoom)
-export QT_SCALE_FACTOR=0.75
+# export QT_SCALE_FACTOR=0.75
 
 # If we have an ssh connection, export the docker host
 if [[ ! -z $SSH_CONNECTION ]]; then
@@ -44,10 +42,6 @@ if [[ ! -z $SSH_CONNECTION ]]; then
     export DOCKER_HOST="unix:///run/user/$(id -u)/docker.sock"
   fi
 fi
-
-
-export PROJECTS="$HOME/projects"
-export DOTFILES="$HOME/dotfiles"
 
 # Source private exports
 if [[ -f "$HOME/.bash_exports_private" ]]; then
