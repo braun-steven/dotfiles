@@ -95,3 +95,9 @@
        :desc "Ask Insert" "i" #'copilot-chat-ask-and-insert
        :desc "Commit Message" "c" #'copilot-chat-insert-commit-message
        ))
+
+(map! :leader
+      (:prefix "n"
+              (:prefix "r"
+                       :desc "PARA" "p" #'(lambda () (interactive) (find-file "~/org/notes/20241119070534-para_hub.org")))
+               ))

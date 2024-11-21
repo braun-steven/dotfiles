@@ -11,6 +11,10 @@
   (load! "+functions")
   (load! "+keybindings")
 
+  ;; (setq +org-roam-auto-backlinks-buffer t)
+  (use-package! ox-hugo
+    :after ox)
+
   (use-package! org-journal
     :config
     (setq org-journal-dir "~/org/journal/")

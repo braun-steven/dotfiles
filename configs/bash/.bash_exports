@@ -55,4 +55,4 @@ if [[ -f "$HOME/.bash_exports_private" ]]; then
 fi
 
 # Set TERM value to kitty (makes alacritty also show correct colors -- why?)
-TERM=xterm-kitty
+TERM=xterm-256color

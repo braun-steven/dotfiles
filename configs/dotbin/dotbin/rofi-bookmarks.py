@@ -94,9 +94,9 @@ def write_rofi_input(profile_loc, search_path=[], sep=" / "):
                         (url,),
                     ).fetchone()[0]
                     if icon:
-                        print(f"{path}\x00info\x1f{url}\x1ficon\x1f{cache_icon(icon)}")
+                        print(f"{path} ({url})\x00info\x1f{url}\x1ficon\x1f{cache_icon(icon)}")
                     else:
-                        print(f"{path}\x00info\x1f{url}")
+                        print(f"{path} ({url})\x00info\x1f{url}")
 
 
 if __name__ == "__main__":
