@@ -154,7 +154,7 @@
         +roam2
         +pretty
         +journal
-        ;;+hugo            ; use Emacs for hugo blogging
+        +hugo            ; use Emacs for hugo blogging
         ;;+jupyter        ; ipython/jupyter support for babel
         ;;+pandoc          ; export-with-pandoc support
         ;; +pomodoro        ; be fruitful with the tomato technique

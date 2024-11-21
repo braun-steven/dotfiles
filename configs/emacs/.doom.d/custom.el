@@ -126,6 +126,5 @@
  '(org-level-3 ((t (:inherit outline-3 :height 1.2))))
  '(org-level-4 ((t (:inherit outline-4 :height 1.15))))
  '(org-level-5 ((t (:inherit outline-5 :height 1.1))))
- '(org-link ((t (:foreground "#51afef"))))
  '(org-super-agenda-header ((t (:height 0.8 :box nil :inherit (org-agenda-structure)))))
  '(ts-fold-replacement-face ((t (:foreground unspecified :box nil :inherit font-lock-comment-face :weight light)))))
