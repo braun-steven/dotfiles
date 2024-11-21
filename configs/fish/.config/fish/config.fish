@@ -239,19 +239,6 @@ end
 # Run the function when the shell starts
 maybe_activate_conda_env
 
-# Try to install uv if not available
-if not type -q uv
-  echo "uv is not available. Trying to install it ..."
-  curl -LsSf https://astral.sh/uv/install.sh | sh
-end
-
-# Replace pip with uv pip if uv is installed, else run pip
-if type -q uv
-  function pip
-    uv pip $argv
-  end
-end
-
 #################
 # FUNCTIONS END #
 #################
