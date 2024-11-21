@@ -63,30 +63,30 @@ for_window [shell="xwayland"] title_format "[XWayland] %title"
 exec wl-paste -t text --watch clipman store --no-persist
 
 # Run kanshi: detect correct monitors
-exec_always killall shikane; sleep 0.5; ~/.cargo/bin/shikane
+exec_always killall -q shikane; sleep 0.5; ~/.cargo/bin/shikane
 # exec kanshi  # Kanshi seems to have weird font issues in terminals after wakeup
 # exec kanshi 
-# exec_always killall kanshi & sleep 0.5 && kanshi &
+# exec_always killall -q kanshi & sleep 0.5 && kanshi &
 # include ~/.config/sway/workspaces
 
 # exec_always $HOME/dotbin/update-sway-monitors.sh
 
 # Run waybar as bar
-# exec_always killall waybar & sleep 0.5 && ~/Waybar/build/waybar &
-exec_always killall waybar; sleep 0.5; waybar 2>&1 | tee -a /tmp/waybar.log
+# exec_always killall -q waybar & sleep 0.5 && ~/Waybar/build/waybar &
+exec_always killall -q waybar; sleep 0.5; waybar 2>&1 | tee -a /tmp/waybar.log
 
 # Swaylock with options. "-f" daemonizes swaylock to work with systemd suspend afterwards
-# set $Locker swaylock -f \
-#       --image $wallpaper_dimblur \
-#       --inside-color 00000088 \
-#       --ring-color 285577 \
-#       --key-hl-color 28772f \
-#       --ring-ver-color 285577 \
-#       --inside-ver-color 285577 \
-#       --indicator-radius 100 \
-#       --indicator-thickness 20
+set $Locker swaylock -f \
+      --image $wallpaper_dimblur \
+      --inside-color 00000088 \
+      --ring-color 285577 \
+      --key-hl-color 28772f \
+      --ring-ver-color 285577 \
+      --inside-ver-color 285577 \
+      --indicator-radius 75 \
+      --indicator-thickness 15
 
-set $Locker hyprlock
+# set $Locker hyprlock
 
 ### Idle configuration
 # Dim screen after inactivity of 1 minute
@@ -98,7 +98,7 @@ set $Locker hyprlock
 # Turn off keyboard backlight after inactivity of 1 minute
 #
 # Turn off screen after inactivity of 3 minutes
-exec_always killall swayidle; sleep 0.5; swayidle -w \
+exec_always killall -q swayidle; sleep 0.2; swayidle -w \
           timeout 1200 'systemctl suspend' resume 'sleep 3' \
           timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
           timeout 180 'swaymsg "output eDP-1 power off"' resume 'swaymsg "output eDP-1 power on"' \
@@ -207,7 +207,7 @@ set $w7 "7"
 set $w8 "8  spotify"
 set $w9 "9 󰊫 mail+cal"
 set $w0 "10 󰻞 chat"
-set $wy "11 (y)"
+set $wy "11 (y) LLMs"
 set $wu "12 (u)"
 set $wi "13 (i)"
 set $wo "14 (o) pomodoro"
@@ -289,9 +289,6 @@ workspace $wp output $secondmon
 # Menu for lock logout etc.
 set $mode_restart Restart: (p) wireplumber (e) emacs service, (s) sway
 mode "$mode_restart" {
-    # bindsym k exec ~/.cargo/bin/shikanectl reload, mode "default"
-    # bindsym k exec killall kanshi && sleep 0.5 && kanshi, mode "default"
-    # bindsym w exec killall waybar; sleep 0.5; waybar, mode "default"
     bindsym p exec systemctl --user restart wireplumber, mode "default"
     bindsym e exec systemctl --user restart emacs, mode "default"
     bindsym s exec swaymsg reload, mode "default"
@@ -432,7 +429,7 @@ bindsym XF86AudioLowerVolume exec amixer set Master $volumestep%-
 bindsym XF86AudioMute        exec amixer set Master toggle
 
 # You can also use any non-zero value if you'd like to have a border
-for_window [class=".*"] border pixel 2
+for_window [class=".*"] border pixel 3
 default_floating_border none
 
 titlebar_border_thickness 1

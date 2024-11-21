@@ -94,10 +94,10 @@ element-icon {
 }
 window {
     padding: 10;
-    border: 3;
+    border: 2;
     border-color: #285577;
     background-color: #222222;
-    border-radius: 20px;
+    border-radius: 12px;
     width: 35%;
 
 }
