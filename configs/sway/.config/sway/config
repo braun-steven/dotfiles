@@ -69,11 +69,8 @@ exec_always killall -q shikane; sleep 0.5; ~/.cargo/bin/shikane
 # exec_always killall -q kanshi & sleep 0.5 && kanshi &
 # include ~/.config/sway/workspaces
 
-# exec_always $HOME/dotbin/update-sway-monitors.sh
-
 # Run waybar as bar
-# exec_always killall -q waybar & sleep 0.5 && ~/Waybar/build/waybar &
-exec_always killall -q waybar; sleep 0.5; waybar 2>&1 | tee -a /tmp/waybar.log
+bar swaybar_command waybar
 
 # Swaylock with options. "-f" daemonizes swaylock to work with systemd suspend afterwards
 set $Locker swaylock -f \

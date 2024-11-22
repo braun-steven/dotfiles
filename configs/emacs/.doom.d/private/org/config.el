@@ -11,6 +11,30 @@
   (load! "+functions")
   (load! "+keybindings")
 
+  (set-face-attribute 'org-level-1 nil :height 1.20 :background nil)
+  (set-face-attribute 'org-level-2 nil :height 1.10 :background nil)
+  (set-face-attribute 'org-level-3 nil :height 1.05 :background nil)
+  (set-face-attribute 'org-level-4 nil :height 1.00 :background nil)
+  (set-face-attribute 'org-level-5 nil :height 1.00 :background nil)
+  (set-face-attribute 'org-level-6 nil :height 1.00 :background nil)
+  (set-face-attribute 'org-level-7 nil :height 1.00 :background nil)
+  (set-face-attribute 'org-level-8 nil :height 1.00 :background nil)
+
+
+(setq org-publish-project-alist
+      '(("org"
+         :base-directory "~/org/notes/"
+         :publishing-function org-html-publish-to-html
+         :publishing-directory "~/public_html"
+         :section-numbers t
+         :with-toc t
+         :recursive t
+         :html-head "<link rel=\"stylesheet\"
+                    href=\"../other/mystyle.css\"
+                    type=\"text/css\"/>")))
+
+
+
   ;; (setq +org-roam-auto-backlinks-buffer t)
   (use-package! ox-hugo
     :after ox)

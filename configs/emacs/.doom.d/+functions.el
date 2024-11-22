@@ -52,6 +52,13 @@ current buffer's, reload dir-locals."
                                      (getenv "HOME"))))
     (find-file file-path)))
 
+(defun sbraun/open-org-para-hub ()
+  "Open the my PARA hub."
+  (interactive)
+  (let ((file-path (expand-file-name "org/notes/20241119070534-para_hub.org"
+                                     (getenv "HOME"))))
+    (find-file file-path)))
+
 ;; Projectile after switch cook
 (defun activate-project-conda-env-maybe ()
   "Perform some action after switching Projectile projects."
