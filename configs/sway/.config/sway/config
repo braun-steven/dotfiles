@@ -69,7 +69,8 @@ exec_always killall -q shikane; sleep 0.5; ~/.cargo/bin/shikane
 # exec_always killall -q kanshi & sleep 0.5 && kanshi &
 # include ~/.config/sway/workspaces
 
-# Run waybar as bar
+# Run waybar as bar (first kill existing bars)
+exec_always killall waybar
 bar swaybar_command waybar
 
 # Swaylock with options. "-f" daemonizes swaylock to work with systemd suspend afterwards
@@ -103,22 +104,9 @@ exec_always killall -q swayidle; sleep 0.2; swayidle -w \
           timeout 60 'laptop-idle idle screen' resume 'laptop-idle resume screen' \
           before-sleep 'loginctl lock-session $XDG_SESSION_ID' before-sleep 'playerctl pause' lock 'playerctl -a pause; $Locker'
 
-
-
-# Default sway colors
-
-# class                 border  backgr. text    indicator child_border
-client.focused          #4c7899 #285577 #ffffff #2e9ef4   #285577
-client.focused_inactive #333333 #5f676a #ffffff #484e50   #5f676a
-client.unfocused        #333333 #222222 #888888 #292d2e   #222222
-client.urgent           #2f343a #900000 #ffffff #900000   #900000
-client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
-
-client.background       #ffffff
-
-
-
-# include /home/steven/.config/sway/theme-dark
+# Set background and theme from symlinked light/dark files
+include ~/.config/sway/background
+include ~/.config/sway/theme
 
 
 set $mod Mod4
@@ -284,10 +272,11 @@ workspace $wp output $secondmon
 # bindsym $mod+Ctrl+r exec swaymsg reload
 
 # Menu for lock logout etc.
-set $mode_restart Restart: (p) wireplumber (e) emacs service, (s) sway
+set $mode_restart Restart: (p) wireplumber (e) emacs service, (s) sway (w) waybar
 mode "$mode_restart" {
     bindsym p exec systemctl --user restart wireplumber, mode "default"
     bindsym e exec systemctl --user restart emacs, mode "default"
+    bindsym w exec killall waybar && waybar, mode "default"
     bindsym s exec swaymsg reload, mode "default"
 
     # back to normal: Enter or Escape
@@ -363,6 +352,7 @@ for_window [window_role="menu"] floating enable
 for_window [window_role="Preferences"] floating enable
 for_window [title="Volume Control"] floating enable resize set 640 960
 for_window [title=".*Bitwarden.*"] floating enable
+for_window [title="Characters"] floating enable
 
 # Zoom, float everything except for the actual meeting window
 for_window [app_id="zoom"] floating enable
