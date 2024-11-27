@@ -1,2 +1,0 @@
-setxkbmap us altgr-intl -option 'caps:escape'
-xset r rate 200 40
