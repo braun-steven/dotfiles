@@ -119,7 +119,6 @@ setopt SHARE_HISTORY
 #  MISC begin                    #
 ##################################
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 source $HOME/.bash_functions
 
