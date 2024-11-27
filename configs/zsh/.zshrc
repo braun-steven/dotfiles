@@ -163,6 +163,11 @@ export TERM=xterm-256color
 
 ulimit -n 30000  # Allow up to 30k open files at the same time
 
+# If eza binary is available, overwrite ls
+if command -v eza &> /dev/null; then
+  alias ls='eza -l --group-directories-first --color auto'
+fi
+
 ##################################
 #  MISC end                      #
 ##################################
