@@ -66,20 +66,27 @@ fi
 
 # source ~/.zinit/bin/zinit.zsh
 
-zinit ice wait'0'
-zinit light sorin-ionescu/prezto
+# zinit ice wait'0'
+# zinit light sorin-ionescu/prezto
 
-zinit ice wait'0' lucid
+# zinit ice wait'0' lucid
 zinit light hlissner/zsh-autopair
-zinit light junegunn/fzf
+# zinit light junegunn/fzf
 zinit light ptavares/zsh-direnv
-zinit light esc/conda-zsh-completion
+# zinit light esc/conda-zsh-completion
 zinit light zsh-users/zsh-autosuggestions
 zinit light zdharma-continuum/fast-syntax-highlighting
+zinit snippet PZTM::environment
+zinit snippet PZTM::history
+zinit snippet PZTM::utility
+zinit snippet PZTM::completion
 
 # Load pure theme
 zinit ice pick"async.zsh" src"pure.zsh" # with zsh-async library that's bundled with it.
 zinit light sindresorhus/pure
+
+autoload -Uz compinit
+compinit
 
 ##################################
 #  ZINIT end                     #
@@ -90,7 +97,7 @@ zinit light sindresorhus/pure
 #  ZSH INTERNAL SETTINGS begin   #
 ##################################
 
-ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+# ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 
 # vi mode
 bindkey -v
@@ -126,8 +133,8 @@ bindkey "^X^E" edit-command-line
 # Source aliases finally
 source ~/.bash_aliases
 
-# Hook direnv
-eval "$(direnv hook zsh)"
+# Hook direnv not necessary due to zsh/direnv plugin, see zinit block | TODO delete
+# eval "$(direnv hook zsh)"
 
 export TERM=xterm-256color
 
@@ -158,4 +165,3 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
-
