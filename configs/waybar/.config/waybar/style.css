@@ -18,17 +18,9 @@
 @define-color background-focused #285577;
 @define-color background-focused-border #4c7899;
 @define-color background-focused-inactive #5f676a;
-@define-color background-focused-inactive-border #333333;
+@define-color background-focused-inactive-border #888888;
 @define-color background #000000;
 
-
-/* Nord */
-/* @define-color foreground #eceff4; */
-/* @define-color foreground-inactive rgba(216, 222, 233, 0.5); */
-/* @define-color background-focused rgba(80, 100, 120, 1.0); */
-/* @define-color background-focused-inactive rgba(76, 86, 106, 1.0); */
-/* @define-color background rgba(31, 34, 45, 1.0); */
-/* @define-color foreground-urgent #c9545d; */
 
 /* -----------------------------------------------------------------------------
  * Keyframes
@@ -220,18 +212,23 @@
     /* To compensate for the top border and still have vertical centering */
     padding-bottom: 2px;
     padding-top: 0px;
-    padding-left: 12px;
-    padding-right: 12px;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-left: 2px;
+    margin-right: 2px;
+    border-radius: 6px;
     color: @foreground-unfocused;
     border: 2px solid transparent;
 }
 
 /* Focused button */
 #workspaces button.focused {
-    /* border-top: 4px solid #667f99; */
     color: @foreground-focused;
     background: @background-focused;
     border-bottom: 2px solid @background-focused-border;
+    border-radius: 10px;
 }
 
 /* Focused button but on inactive monitor */
@@ -239,12 +236,21 @@
     color: @foreground-focused-inactive;
     background: @background-focused-inactive;
     border-bottom: 2px solid @background-focused-inactive-border;
+    border-radius: 10px;
 }
 
 /* Urgent button */
 #workspaces button.urgent {
     border-bottom: 2px solid @foreground-urgent;
     background: @foreground-urgent;
+}
+
+/* Hovered focused button (same as without hovering) */
+#workspaces button.focused:hover {
+    color: @foreground-focused;
+    background: @background-focused;
+    border-bottom: 2px solid @background-focused-border;
+    border-radius: 10px;
 }
 
 /* Hovered button */

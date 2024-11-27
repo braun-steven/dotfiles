@@ -32,5 +32,8 @@ map sj <Plug>(easymotion-j)
 map sk <Plug>(easymotion-k)
 
 # Black format
-map ,, :action me.lensvol.blackconnect.actions.ReformatWholeFileAction<CR>
+nnoremap ,, :action me.lensvol.blackconnect.actions.ReformatWholeFileAction<CR>
 set ideajoin
+
+# Find usages
+nnoremap gr :action FindUsages<CR>

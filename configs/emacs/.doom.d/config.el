@@ -195,7 +195,7 @@
 (use-package! corfu
     :config
     (setq corfu-auto-delay 0.0)
-    (setq corfu-auto-prefix 3)
+    (setq corfu-auto-prefix 2)
     (setq corfu-preselect 'prompt))
 
 ;; Orderless setup
