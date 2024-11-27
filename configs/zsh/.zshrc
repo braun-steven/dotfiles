@@ -73,7 +73,7 @@ fi
 zinit light hlissner/zsh-autopair
 # zinit light junegunn/fzf
 zinit light ptavares/zsh-direnv
-# zinit light esc/conda-zsh-completion
+zinit light esc/conda-zsh-completion
 zinit light zsh-users/zsh-autosuggestions
 zinit light zdharma-continuum/fast-syntax-highlighting
 zinit snippet PZTM::environment
