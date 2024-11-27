@@ -126,6 +126,9 @@ source $HOME/.bash_functions
 # Add maybe_activate_conda_env as chpwd (change working directory) hook
 autoload -U add-zsh-hook
 add-zsh-hook -Uz chpwd maybe_activate_conda_env
+# Run the function when the shell starts
+maybe_activate_conda_env
+
 
 autoload edit-command-line; zle -N edit-command-line
 bindkey "^X^E" edit-command-line
