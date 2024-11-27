@@ -1,3 +1,9 @@
+# ZINIT
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+[ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
+[ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+source "${ZINIT_HOME}/zinit.zsh"
+
 source ~/.bash_exports
 
 # Start tmux in ssh connections
@@ -51,67 +57,33 @@ fi
 ##################################
 
 ##################################
-#  ZGEN begin                    #
+#  ZINIT begin                   #
 ##################################
 
-if [[ ! -d "${HOME}/.zgen" ]]; then
-  git clone https://github.com/tarjoilija/zgen.git "${HOME}/.zgen"
-fi
+# if [[ ! -f ~/.zinit/bin/zinit.zsh ]]; then
+#   mkdir -p ~/.zinit/bin && curl -fsSL https://git.io/zinit-install | bash
+# fi
 
-# load zgen
-source "${HOME}/.zgen/zgen.zsh"
+# source ~/.zinit/bin/zinit.zsh
 
-AUTOPAIR_INHIBIT_INIT=1
+zinit ice wait'0'
+zinit light sorin-ionescu/prezto
 
-# if the init script doesn't exist
-if ! zgen saved; then
+zinit ice wait'0' lucid
+zinit light hlissner/zsh-autopair
+zinit light junegunn/fzf
+zinit light ptavares/zsh-direnv
+zinit light esc/conda-zsh-completion
+zinit light zsh-users/zsh-autosuggestions
+zinit light zdharma-continuum/fast-syntax-highlighting
 
-  # specify plugins here
-  # prezto options
-  zgen prezto editor key-bindings 'emacs'
-  zgen prezto prompt theme 'pure'
-
-  # Load general plugins
-  zgen load hlissner/zsh-autopair
-  zgen load agkozak/zsh-z
-  zgen load mafredri/zsh-async
-  zgen load junegunn/fzf shell
-  zgen load ptavares/zsh-direnv
-
-  zgen load esc/conda-zsh-completion
-
-  zgen load zsh-users/zsh-autosuggestions
-  # zgen load zsh-users/zsh-syntax-highlighting
-  zgen load zdharma-continuum/fast-syntax-highlighting
-
-  # Load Prezto
-  zgen prezto
-
-  # Load Prezto Modules
-  # zgen prezto git
-  zgen prezto environment
-  zgen prezto terminal
-  # zgen prezto editor
-  zgen prezto history
-  # zgen prezto directory
-  # zgen prezto spectrum
-  zgen prezto utility
-  zgen prezto completion  # Must be loaded after utility
-  # zgen prezto syntax-highlighting
-  # zgen prezto history-substring-search
-  # zgen prezto autosuggestions
-  # zgen prezto prompt
-
-  zgen prezto utility safe-ops 'no'
-
-  # generate the init script from plugins above
-  zgen save
-fi
+# Load pure theme
+zinit ice pick"async.zsh" src"pure.zsh" # with zsh-async library that's bundled with it.
+zinit light sindresorhus/pure
 
 ##################################
-#  ZGEN end                      #
+#  ZINIT end                     #
 ##################################
-
 
 
 ##################################
@@ -148,8 +120,6 @@ source $HOME/.bash_functions
 autoload -U add-zsh-hook
 add-zsh-hook -Uz chpwd maybe_activate_conda_env
 
-autopair-init
-
 autoload edit-command-line; zle -N edit-command-line
 bindkey "^X^E" edit-command-line
 
@@ -172,6 +142,7 @@ fi
 #  MISC end                      #
 ##################################
 
+eval "$(zoxide init zsh)"
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
