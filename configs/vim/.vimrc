@@ -117,7 +117,7 @@ syntax on                 " Enable syntax highlighting
 set termguicolors
 
 " {{{ Colorscheme
-" set background=light
+" set background=dark
 colorscheme modus
 
 function! SetBackgroundFromDarkman()
@@ -128,9 +128,9 @@ function! SetBackgroundFromDarkman()
 
     " Set background according to the theme
     if theme == 'dark'
-        set background=light
+        set background=dark
     elseif theme == 'light'
-        set background=light
+        set background=dark
     endif
 endfunction
 
