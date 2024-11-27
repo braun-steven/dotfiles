@@ -67,13 +67,20 @@ fi
 source ~/.bash_aliases
 
 # Use Fish if available, otherwise fall back to Zsh
-if command -v fish &> /dev/null; then
+# if command -v fish &> /dev/null; then
+#     # Avoid creating an infinite loop of shells
+#     if [[ $(ps --no-header --pid=$PPID --format=cmd) != "fish" ]]; then
+#         exec fish
+#     fi
+# elif command -v zsh &> /dev/null; then
+#     exec zsh
+# fi
+
+if command -v zsh &> /dev/null; then
     # Avoid creating an infinite loop of shells
-    if [[ $(ps --no-header --pid=$PPID --format=cmd) != "fish" ]]; then
-        exec fish
+    if [[ $(ps --no-header --pid=$PPID --format=cmd) != "zsh" ]]; then
+        exec zsh
     fi
-elif command -v zsh &> /dev/null; then
-    exec zsh
 fi
 
 # [ -f ~/.fzf.bash ] && source ~/.fzf.bash
