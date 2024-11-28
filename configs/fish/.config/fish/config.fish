@@ -6,12 +6,14 @@ end
 # Exports can be found in .bashrc from which we start the fish shell
 # Aliases can be found in .bash_aliases which is sourced in .bashrc from which we start the fish shell
 
-# Install fisher if not available
+# Check if fisher is installed; if not, install it
 if not functions -q fisher
-  curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher
-  fisher update
+  # Install Fisher
+  set -l fisher_path ~/.config/fish/functions/fisher.fish
+  if not test -f $fisher_path
+    curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish -o $fisher_path
+  end
 end
-
 ##########################
 # Keybindings in vi-mode #
 ##########################
