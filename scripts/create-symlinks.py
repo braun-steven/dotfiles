@@ -19,6 +19,9 @@ def create_link(entry: os.DirEntry):
     # Create parent directories if they don't exist
     dst.parent.mkdir(parents=True, exist_ok=True)
 
+    # Make sure that dst never equals to $HOME
+    assert dst != Path(HOME), f"Destination: {dst} is $HOME!"
+
     # Check if dst already exists
     if dst.exists():
         # Check if dst is a symlink
