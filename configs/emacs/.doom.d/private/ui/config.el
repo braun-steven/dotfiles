@@ -5,7 +5,7 @@
 (setq modus-themes-italic-constructs t
       modus-themes-bold-constructs nil
       modus-themes-common-palette-overrides '(
-                                        ;; (string green)
+                                        ;; (string green)  ;; Note: default blue has better contrast to other black chars
                                         )
       )
 
@@ -36,11 +36,11 @@
 (setq sbraun/theme-light 'modus-operandi)
 
 ;; Initially set the theme based on the current theme
-(set-doom-theme-based-on-darkman)
-;; (setq doom-theme 'doom-one)
+;; (set-doom-theme-based-on-darkman)
+(setq doom-theme 'doom-one)
 
 ;; Set a timer to check every 5 minutes (300 seconds)
-(run-at-time "5 min" 300 'check-and-update-theme)
+;; (run-at-time "1 min" 60 'check-and-update-theme)
 
 ;; Frame transparency
 (doom/set-frame-opacity 100)

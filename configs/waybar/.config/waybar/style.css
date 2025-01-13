@@ -19,7 +19,8 @@
 @define-color background-focused-border #4c7899;
 @define-color background-focused-inactive #5f676a;
 @define-color background-focused-inactive-border #888888;
-@define-color background #000000;
+@define-color background rgb(16,16,16);
+/* @define-color background #000000; */
 
 
 /* -----------------------------------------------------------------------------
@@ -212,7 +213,7 @@
     /* To compensate for the top border and still have vertical centering */
     padding-bottom: 2px;
     padding-top: 0px;
-    margin-top: 3px;
+    margin-top: 0px;
     margin-bottom: 3px;
     padding-left: 10px;
     padding-right: 10px;
@@ -263,4 +264,14 @@
     background: @background-focused-inactive;
     color: @foreground-focused;
     border-bottom: 2px solid @background-focused-inactive;
+}
+
+#custom-darkman {
+    padding-left: 10px;  /* Adjust the padding value as needed */
+    padding-right: 10px;  /* Adjust the padding value as needed */
+}
+#custom-notification {
+  font-family: "NotoSansMono Nerd Font";
+  padding-left: 10px;  /* Adjust the padding value as needed */
+    padding-right: 10px;  /* Adjust the padding value as needed */
 }
