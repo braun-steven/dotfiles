@@ -96,6 +96,17 @@
        :desc "Commit Message" "c" #'copilot-chat-insert-commit-message
        ))
 
+
+;; Copilot chat
+(map! :leader
+      (:prefix ("G" . "gptel")
+       :desc "gptel" "g" #'gptel
+       :desc "send" "s" #'gptel-send
+       :desc "rewrite" "r" #'gptel-rewrite
+       :desc "menu" "m" #'gptel-menu
+       :desc "regenerate" "R" #'gptel--regenerate
+       ))
+
 (map! :leader
       (:prefix "n"
               (:prefix "r"
