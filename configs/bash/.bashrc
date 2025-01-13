@@ -77,3 +77,5 @@ elif command -v zsh &> /dev/null; then
 fi
 
 # . "$HOME/.cargo/env"
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
