@@ -65,6 +65,7 @@
 (package! crux)
 
 ;; (package! git-link)
+;; (package! git-link :pin "40f7b1674d2c703199ff2f82b464f17aa6f61b4b")  ;; Fixes transient issue
 
 (package! typst-ts-mode :recipe (:host codeberg :repo "meow_king/typst-ts-mode"))
 
@@ -78,3 +79,9 @@
 
 
 (package! copilot-chat :recipe (:host github :repo "chep/copilot-chat.el" :files ("*.el")))
+
+(package! gptel)
+
+(package! org-modern)
+
+(package! ultra-scroll :recipe (:host github :repo "jdtsmith/ultra-scroll" :files ("*.el")))

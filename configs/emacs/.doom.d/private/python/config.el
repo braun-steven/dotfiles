@@ -19,6 +19,8 @@
   (after! lsp-pyright
    (setq lsp-pyright-auto-import-completions nil))
 
+  (add-hook 'python-mode-hook (lambda () (setq-local corfu-auto-prefix 2)))
+
   ;; Set correct conda variables
   (use-package! conda
     :after python

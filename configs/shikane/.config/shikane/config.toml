@@ -36,27 +36,6 @@ transform = "normal"
 adaptive_sync = false
 
 [[profile]]
-name = "kundes"
-
-[[profile.output]]
-enable = true
-search = ["m=TL140ADXP24-0", "s=", "v=Tianma Microelectronics Ltd."]
-mode = "2880x1800@120Hz"
-position = "0,1440"
-scale = 1.5
-transform = "normal"
-adaptive_sync = true
-
-[[profile.output]]
-enable = true
-search = ["m=Philips UHDTV", "s=0x01010101", "v=Philips Consumer Electronics Company"]
-mode = "3840x2160@60Hz"
-position = "0,0"
-scale = 1.5
-transform = "normal"
-adaptive_sync = false
-
-[[profile]]
 name = "desktop-home only left monitor"
 
 [[profile.output]]
@@ -74,6 +53,48 @@ search = ["m=LU28R55", "s=HNMR100496", "v=Samsung Electric Company"]
 mode = "3840x2160@60Hz"
 position = "0,0"
 scale = 1.5
+transform = "normal"
+adaptive_sync = false
+
+[[profile]]
+name = "Dominic Home"
+
+[[profile.output]]
+enable = true
+search = ["m=GRUNDIG WUXGA", "s=0x00000001", "v=GRU"]
+mode = "1920x1080@50Hz"
+position = "641,0"
+scale = 1.0
+transform = "normal"
+adaptive_sync = false
+
+[[profile.output]]
+enable = true
+search = ["m=TL140ADXP24-0", "s=", "v=Tianma Microelectronics Ltd."]
+mode = "2880x1800@120Hz"
+position = "641,1080"
+scale = 1.5
+transform = "normal"
+adaptive_sync = false
+
+[[profile]]
+name = "kundes"
+
+[[profile.output]]
+enable = true
+search = ["m=TL140ADXP24-0", "s=", "v=Tianma Microelectronics Ltd."]
+mode = "2880x1800@120Hz"
+position = "0,1080"
+scale = 1.5
+transform = "normal"
+adaptive_sync = true
+
+[[profile.output]]
+enable = true
+search = ["m=Philips UHDTV", "s=0x01010101", "v=Philips Consumer Electronics Company"]
+mode = "3840x2160@60Hz"
+position = "0,0"
+scale = 2.0
 transform = "normal"
 adaptive_sync = false
 
