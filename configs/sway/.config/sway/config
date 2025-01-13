@@ -1,31 +1,16 @@
 ## -------------- Sway
 include /etc/sway/config.d/*
 
-exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
+exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK PATH
 exec hash dbus-update-activation-environment 2>/dev/null && \
      dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP=sway
 
-# set $wallpaper ~/wallpaper/macos-nord-1.png
-# set $wallpaper ~/wallpaper/misty-mountains.jpg
-# set $wallpaper ~/wallpaper/fedora-wallpaper.png
-set $wallpaper_base ~/wallpaper/macos-big-sur-day
-# set $wallpaper_base ~/wallpaper/Rancho_Cucamonga_Tree_6K
-# set $wallpaper_base ~/wallpaper/Whirl_Mac
-# set $wallpaper_base ~/wallpaper/TiGradient_Mac
+set $wallpaper_base ~/wallpaper/macos-big-sur-night
 set $wallpaper $wallpaper_base.png
 set $wallpaper_dimblur $wallpaper_base-dimblur.png
 
 output * bg $wallpaper fill
 
-exec systemctl --user import-environment PATH
-
-exec_always gsettings set org.gnome.desktop.interface text-scaling-factor 1.0
-exec_always gsettings set org.gnome.nm-applet disable-disconnected-notifications "true"
-exec_always gsettings set org.gnome.nm-applet disable-connected-notifications "true"
-exec_always gsettings set org.gnome.desktop.interface document-font-name 'Inter 12'
-exec_always gsettings set org.gnome.desktop.interface font-name 'Inter 12'
-exec_always gsettings set org.gnome.desktop.interface cursor-size 24
-seat seat0 xcursor_theme Adwaita 24
 
 input type:touchpad {
     tap enabled
@@ -46,6 +31,7 @@ input type:keyboard {
   xkb_options ctrl:nocaps
   xkb_layout us
   xkb_variant altgr-intl
+
   # Typematic delay and rate
   repeat_delay 200
   repeat_rate 40
@@ -59,64 +45,34 @@ bindsym Mod1+l exec wtype -k right
 # Mark XWayland windows
 for_window [shell="xwayland"] title_format "[XWayland] %title"
 
-# Enable clipboard
-exec wl-paste -t text --watch clipman store --no-persist
-
-# Run kanshi: detect correct monitors
-exec_always killall -q shikane; sleep 0.5; ~/.cargo/bin/shikane
-# exec kanshi  # Kanshi seems to have weird font issues in terminals after wakeup
-# exec kanshi 
-# exec_always killall -q kanshi & sleep 0.5 && kanshi &
-# include ~/.config/sway/workspaces
-
-# Run waybar as bar (first kill existing bars)
-exec_always killall waybar
-bar swaybar_command waybar
-
 # Swaylock with options. "-f" daemonizes swaylock to work with systemd suspend afterwards
 set $Locker swaylock -f \
       --image $wallpaper_dimblur \
       --inside-color 00000088 \
-      --ring-color 285577 \
-      --key-hl-color 28772f \
-      --ring-ver-color 285577 \
-      --inside-ver-color 285577 \
+      --ring-color 2E323C \
+      --key-hl-color 799033 \
+      --ring-ver-color 2E323C \
+      --inside-ver-color 2E323C \
       --indicator-radius 75 \
       --indicator-thickness 15
 
-# set $Locker hyprlock
 
-### Idle configuration
-# Dim screen after inactivity of 1 minute
-# brillo -O: save current brightness
-# brillo -S $(( $(brillo) / 2 )) -u 150000: set brightness to half of what it is now (150us fade out)
-# brillo -S 0 -u 150000: set brightness to 0 (150us fade out)
-# brillo -I -u 150000: restore brightness (150us fade in)
-#
-# Turn off keyboard backlight after inactivity of 1 minute
-#
-# Turn off screen after inactivity of 3 minutes
-exec_always killall -q swayidle; sleep 0.2; swayidle -w \
-          timeout 1200 'systemctl suspend' resume 'sleep 3' \
-          timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
-          timeout 180 'swaymsg "output eDP-1 power off"' resume 'swaymsg "output eDP-1 power on"' \
-          timeout 60 'laptop-idle idle keyboard' resume 'laptop-idle resume keyboard' \
-          timeout 60 'laptop-idle idle screen' resume 'laptop-idle resume screen' \
-          before-sleep 'loginctl lock-session $XDG_SESSION_ID' before-sleep 'playerctl pause' lock 'playerctl -a pause; $Locker'
+# These are symlinked to either {background,theme}-{dark,light} based on `darkman get`
+# include ~/.config/sway/background
+# include ~/.config/sway/theme
 
-# Set background and theme from symlinked light/dark files
-include ~/.config/sway/background
-include ~/.config/sway/theme
+# Fixed dark theme
+include ~/.config/sway/theme-dark
+include ~/.config/sway/background-dark
 
-
+# Modifier keys
 set $mod Mod4
 set $mod2 Mod1
 
-# Font for window titles. Will also be used by the bar unless a different font
-# is used in the bar {} block below.
-
-# font pango:CommitMono 16
+# Font for window titles.
+# font pango:Inter 10
 font pango:IBM Plex Mono 10
+font pango:CommitMono 10
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -124,12 +80,10 @@ floating_modifier $mod
 # start a terminal
 #bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Return exec alacritty msg create-window || alacritty
-# bindsym $mod+Return exec foot tmux -f ~/.config/tmux/nostatus.conf
 bindsym $mod+Shift+Return exec emacsclient -c
 
 # mouse focus
 focus_follows_mouse yes
-
 
 # kill focused window
 bindsym $mod+q kill
@@ -143,13 +97,11 @@ bindsym $mod+l focus right
 bindsym $mod+k focus up
 bindsym $mod+j focus down
 
-
 # Navigate workspace next/prev
 bindsym $mod+Ctrl+l workspace next
 bindsym $mod+Ctrl+h workspace prev
 bindsym $mod+$mod2+l workspace next
 bindsym $mod+$mod2+h workspace prev
-
 
 # move focused window
 bindsym $mod+Shift+h move left
@@ -167,12 +119,10 @@ bindsym $mod+v split v
 bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
-# bindsym $mod+$mod2+s layout stacking
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
-# bindsym $mod+Shift+space floating toggle
 bindsym $mod+Shift+f floating toggle
 
 # change focus between tiling / floating windows
@@ -215,9 +165,6 @@ bindsym $mod+i workspace number $wi
 bindsym $mod+o workspace number $wo
 bindsym $mod+p workspace number $wp
 
-# Allow workspace renaming
-bindsym $mod+Shift+r exec ~/dotbin/sway-rename-workspace
-
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace number $w1
 bindsym $mod+Shift+2 move container to workspace number $w2
@@ -235,6 +182,8 @@ bindsym $mod+Shift+i move container to workspace number $wi
 bindsym $mod+Shift+o move container to workspace number $wo
 bindsym $mod+Shift+p move container to workspace number $wp
 
+# Allow workspace renaming
+bindsym $mod+Shift+r exec ~/dotbin/sway-rename-workspace
 
 # Scratchpad
 bindsym $mod+Shift+s move window to scratchpad; scratchpad show
@@ -267,17 +216,14 @@ workspace $wi output $secondmon
 workspace $wo output $secondmon
 workspace $wp output $secondmon
 
-# reload the configuration file
-# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-# bindsym $mod+Ctrl+r exec swaymsg reload
-
 # Menu for lock logout etc.
-set $mode_restart Restart: (p) wireplumber (e) emacs service, (s) sway (w) waybar
+set $mode_restart Restart: (p) wireplumber (e) emacs service, (s) sway (w) waybar (m) monitors
 mode "$mode_restart" {
     bindsym p exec systemctl --user restart wireplumber, mode "default"
     bindsym e exec systemctl --user restart emacs, mode "default"
-    bindsym w exec killall waybar && waybar, mode "default"
+    bindsym w exec killall waybar && waybar &> /tmp/waybar.log, mode "default"
     bindsym s exec swaymsg reload, mode "default"
+    bindsym m exec ~/.cargo/bin/shikanectl reload, mode "default"
 
     # back to normal: Enter or Escape
     bindsym Return mode "default"
@@ -325,17 +271,18 @@ mode "resize" {
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
-
 bindsym $mod+r mode "resize"
 
-# Todoist
-bindsym $mod+Shift+t exec ~/dotbin/rofi-todoist-new-task
-
 # Sreen brightness controls
-# bindsym XF86MonBrightnessUp exec brightnessctl set +10% # increase screen brightness
-# bindsym XF86MonBrightnessDown exec brightnessctl set 10%- # decrease screen brightness
 bindsym XF86MonBrightnessUp exec brillo -A 5 -q -u 100000
 bindsym XF86MonBrightnessDown exec brillo -U 5 -q -u 100000
+
+
+# Special keys to adjust volume via PulseAudio
+bindsym --locked XF86AudioMute exec pactl set-sink-mute \@DEFAULT_SINK@ toggle
+bindsym --locked XF86AudioLowerVolume exec pactl set-sink-volume \@DEFAULT_SINK@ -5%
+bindsym --locked XF86AudioRaiseVolume exec pactl set-sink-volume \@DEFAULT_SINK@ +5%
+bindsym --locked XF86AudioMicMute exec pactl set-source-mute \@DEFAULT_SOURCE@ toggle
 
 # Enable worksapce back and forth
 workspace_auto_back_and_forth yes
@@ -343,7 +290,7 @@ workspace_auto_back_and_forth yes
 # Floating mod
 floating_modifier $mod
 
-#Correct floating handling
+# Correct floating handling
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="bubble"] floating enable
 for_window [window_role="task_dialog"] floating enable
@@ -363,7 +310,6 @@ for_window [app_id="Zoom" title="Zoom Meeting"] floating disable
 # Auto-switch to urgent windows
 for_window [urgent="latest"] focus
 
-exec nm-applet --tray --sm-disable &
 
 # Start pulseaudio controls with mod+p in floating mode
 # Use create-window to reduce alacritty startup time
@@ -371,76 +317,98 @@ exec nm-applet --tray --sm-disable &
 bindsym $mod+Ctrl+p exec alacritty msg create-window -t "PULSE" -e 'pulsemixer' || alacritty -t "PULSE" -e 'pulsemixer'
 bindsym $mod+Ctrl+s exec rofi-set-audio-sink
 
-
 # Floating window rules
 for_window [title="PULSE"] floating enable
 for_window [app_id="Pavucontrol"] floating enable, resize set 1280 768
 
 # suspend/lock shortcuts
-# bindsym $mod+$mod2+Ctrl+s exec $Locker && systemctl suspend  # Calling $Locker is not necessary with `betterlockscreen` since there is a systemctl service that starts betterlockscreen whenever the system suspends
-# bindsym $mod+$mod2+Ctrl+s exec systemctl suspend-then-hibernate
 bindsym $mod+$mod2+Ctrl+s exec $Locker & systemctl suspend
 bindsym $mod+$mod2+Ctrl+l exec $Locker
-
-# Emacs anywhere (doesn't work on wayland)
-# bindsym $mod+Shift+e exec ~/.emacs.d/bin/doom +everywhere
-# for_window [class="Emacs" title="^Emacs Everywhere.*"] floating enable, resize set 1280x768
-
-# Some startup stuff
-# exec gammastep  # Redshift wayland alternative
-exec wlsunset -t 4000 -T 6500 -l 49.98 -L 8.27  # Handles dpms on/off better than gammastep
 
 # Move to first workspace on startup
 exec swaymsg workspace $w1
 
-## Volume control
-
-# Signal used to update the status line
-#   i3blocks uses SIGRTMIN+10 by default
-#   i3status uses SIGUSR1 by default
-set $statussig SIGUSR1
-
-# Amount to increase/decrease volume as a percentage
-set $volumestep 5
-
-# pulseaudio-utils settings
-#
-# Symbolic name for sink (numeric index not supported)
-#   Recommended: comment out this setting and omit the -s option to use default sink
-#   List sink names: pacmd list-sinks | awk -F "[<>]" '/^\s+name: <.*>/{print $2}'
-#set $sinkname alsa_output.pci-0000_00_1b.0.analog-stereo
-
 # Using pulseaudio-utils (append "-s $sinkname" without quotes to override default sink)
-bindsym XF86AudioRaiseVolume exec amixer set Master $volumestep%+
-bindsym XF86AudioLowerVolume exec amixer set Master $volumestep%-
+bindsym XF86AudioRaiseVolume exec amixer set Master 5%+
+bindsym XF86AudioLowerVolume exec amixer set Master 5%-
 bindsym XF86AudioMute        exec amixer set Master toggle
 
 # You can also use any non-zero value if you'd like to have a border
 for_window [class=".*"] border pixel 3
 default_floating_border none
-
 titlebar_border_thickness 1
-# smart_borders on
 
-# Start XDG autostart .desktop files using dex. See also
-# https://wiki.archlinux.org/index.php/XDG_Autostart
-# The Autostart directories in order of preference are:
-#    user-specific: $XDG_CONFIG_HOME/autostart (~/.config/autostart by default)
-#    system-wide: $XDG_CONFIG_DIRS/autostart (/etc/xdg/autostart by default) [1]
-# exec dex --autostart --environment sway  # Arch
-exec dex-autostart --autostart --environment sway  # Fedora
+# title_align center
 
-# Enable polit (e.g. polkit-gnome) authentication agent to get GUI password prompts
-exec /usr/libexec/polkit-gnome-authentication-agent-1  # Fedora/OpenSUSE
-# exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
-# move tiling windows via drag & drop by left-clicking into the title bar,
-# or left-clicking anywhere into the window while holding the floating modifier.
-# tiling_drag modifier titlebar
+# Programms or things that should be run on every start of sway but not when reloading sway
+exec {
+  # Enable clipboard
+  wl-paste -t text --watch clipman store --no-persist
 
-exec dunst
-exec blueman-applet
-# exec pasystray  # This is started by dex-autostart 
 
-# Enable gsd xsettings such that applications can infer dark/light theme settings
-exec /usr/libexec/gsd-xsettings  # Fedora
+  ### Idle configuration
+  # Dim screen after inactivity of 1 minute
+  # brillo -O: save current brightness
+  # brillo -S $(( $(brillo) / 2 )) -u 150000: set brightness to half of what it is now (150us fade out)
+  # brillo -S 0 -u 150000: set brightness to 0 (150us fade out)
+  # brillo -I -u 150000: restore brightness (150us fade in)
+  #
+  # Turn off keyboard backlight after inactivity of 1 minute with laptop-idle keyboard/screen
+  #
+  # Turn off screen after inactivity of 3 minutes
+  swayidle -w \
+            timeout 1200 'systemctl suspend' resume 'sleep 3' \
+            timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
+            timeout 180 'swaymsg "output eDP-1 power off"' resume 'swaymsg "output eDP-1 power on"' \
+            timeout 60 'laptop-idle idle keyboard' resume 'laptop-idle resume keyboard' \
+            timeout 60 'laptop-idle idle screen' resume 'laptop-idle resume screen' \
+            before-sleep 'loginctl lock-session $XDG_SESSION_ID' before-sleep 'playerctl pause' lock 'playerctl -a pause; $Locker'
+
+  # Enable gsd xsettings such that applications can infer dark/light theme settings
+  /usr/libexec/gsd-xsettings
+
+  # Bluetooth applet
+  blueman-applet
+
+  # Notification daemon
+  dunst
+  # swaync
+
+  # Enable polkit (e.g. polkit-gnome) authentication agent to get GUI password prompts
+  /usr/libexec/polkit-gnome-authentication-agent-1
+
+  # Start XDG autostart .desktop files using dex. See also
+  # https://wiki.archlinux.org/index.php/XDG_Autostart
+  # The Autostart directories in order of preference are:
+  #    user-specific: $XDG_CONFIG_HOME/autostart (~/.config/autostart by default)
+  #    system-wide: $XDG_CONFIG_DIRS/autostart (/etc/xdg/autostart by default) [1]
+  dex-autostart --autostart --environment sway
+
+  # Add red shift during the evening hours
+  wlsunset -t 4000 -T 6500 -l 49.98 -L 8.27  # Handles dpms on/off better than gammastep
+
+  # NetworkManager applet
+  exec nm-applet --tray --sm-disable &
+
+  # Run shikane: detect correct monitors
+  ~/.cargo/bin/shikane
+
+  # Evolution alarm notififications for calendar reminders
+  /usr/libexec/evolution-data-server/evolution-alarm-notify
+
+}
+
+# Programms or things that should be run on every start/reload of sway
+exec_always {
+
+  # Run waybar as bar (first kill existing bars) (Note: without the "bash -c ..." waybar doesn't start on first sway start)
+  bash -c "killall waybar; waybar"
+
+  # Disable notifications
+  gsettings set org.gnome.nm-applet disable-disconnected-notifications "true"
+  gsettings set org.gnome.nm-applet disable-connected-notifications "true"
+
+  # Reload shikane: detect correct monitors
+  ~/.cargo/bin/shikanectl reload
+}

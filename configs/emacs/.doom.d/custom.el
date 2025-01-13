@@ -81,6 +81,8 @@
      (eval setq org-roam-directory
       (expand-file-name "org/pathfinder-blood-lords"
                         (getenv "HOME")))))
+ '(tex-font-script-display '(-0.0 0.0))
+ '(tex-suscript-height-ratio 1.0)
  '(vc-annotate-background "#282c34")
  '(vc-annotate-background-mode nil)
  '(vc-annotate-color-map
@@ -125,6 +127,8 @@
  '(avy-lead-face-1 ((t (:weight bold :foreground "orange" :background "#ffffff"))))
  '(avy-lead-face-2 ((t (:weight bold :foreground "gold" :background "#ffffff"))))
  '(avy-lead-face-3 ((t (:weight bold :foreground "yellow" :background "#ffffff"))))
+ '(font-latex-subscript-face ((t nil)))
+ '(font-latex-superscript-face ((t nil)))
  '(helm-buffer-modified ((t (:inherit font-lock-comment-face :foreground "IndianRed2"))))
  '(org-agenda-structure ((t (:height 1.5 :weight ultra-bold :box (:line-width 2 :color "grey75" :style released-button)))))
  '(org-level-1 ((t (:inherit outline-1 :height 1.3))))
