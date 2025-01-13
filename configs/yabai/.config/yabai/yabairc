@@ -1,0 +1,123 @@
+#!/usr/bin/env bash
+
+# the scripting-addition must be loaded manually if
+# you are running yabai on macOS Big Sur. Uncomment
+# the following line to have the injection performed
+# when the config is executed during startup.
+#
+# for this to work you must configure sudo such that
+# it will be able to run the command without password
+#
+# see this wiki page for information:
+#  - https://github.com/koekeishiya/yabai/wiki/Installing-yabai-(latest-release)
+#
+
+sudo yabai --load-sa
+yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
+
+# global settings
+yabai -m config mouse_follows_focus          off
+# From: https://github.com/koekeishiya/yabai/wiki/Configuration#window-modifications
+# With focus follows mouse, you can also focus windows without having to click on them. This can be set to either autofocus (window gets focused, but not raised) or autoraise (window gets raised as if it was clicked on).
+yabai -m config focus_follows_mouse          autofocus
+yabai -m config window_origin_display        default
+yabai -m config window_placement             second_child
+yabai -m config window_shadow                float  # Add shadow only to floating windows
+yabai -m config window_opacity               off
+yabai -m config window_opacity_duration      0.25
+yabai -m config window_animation_duration    0.00
+yabai -m config active_window_opacity        1.0
+yabai -m config normal_window_opacity        0.95
+yabai -m config insert_feedback_color        0xffd75f5f
+yabai -m config split_ratio                  0.5
+yabai -m config split_type                   auto  # vertical/horizontal/auto
+yabai -m config auto_balance                 off
+yabai -m config auto_padding                 off
+yabai -m config mouse_modifier               alt
+yabai -m config mouse_action1                move
+yabai -m config mouse_action2                resize
+yabai -m config mouse_drop_action            swap
+
+# yabai -m config active_window_border_color   0xff4c7899  # i3 blue
+# yabai -m config active_window_border_color   0xff51afef  # doom-one blue
+# yabai -m config normal_window_border_color   0xff555555
+
+# general space settings
+yabai -m config layout                       bsp
+yabai -m config top_padding                  6
+yabai -m config bottom_padding               8
+yabai -m config left_padding                 8
+yabai -m config right_padding                8
+yabai -m config window_gap                   6
+
+# label spaces
+yabai -m space 1 --label 1
+yabai -m space 2 --label 2
+yabai -m space 3 --label 3
+yabai -m space 4 --label 4
+yabai -m space 5 --label 5
+yabai -m space 6 --label 6
+yabai -m space 7 --label 7
+yabai -m space 8 --label 8
+yabai -m space 9 --label 9
+yabai -m space 10 --label 10
+yabai -m space 11 --label 11
+yabai -m space 12 --label 12
+yabai -m space 13 --label 13
+yabai -m space 14 --label 14
+yabai -m space 15 --label 15
+
+
+# float settings windows
+yabai -m rule --add app='^Finder$' manage=off sticky=off
+yabai -m rule --add title='Settings$' manage=off sticky=on 
+yabai -m rule --add app="^System Preferences$" manage=off 
+yabai -m rule --add app="^System Information$" manage=off 
+yabai -m rule --add title="^Preferences$" manage=off
+yabai -m rule --add title="^Digital Colour Meter$" manage=off 
+yabai -m rule --add title="^General.*" manage=off   # Calendar settings
+yabai -m rule --add title="^Quick Entry.*" manage=off   # Things 3 settings
+yabai -m rule --add title="^Accounts.*" manage=off   # MacOS Mail accounts
+yabai -m rule --add title="^Run/Debug Configurations.*" manage=off   # PyCharm
+yabai -m rule --add title="^Disk Utility$" manage=off   # MacOS Disk utility
+yabai -m rule --add app="^App Store$" manage=off   # MacOS App Store
+yabai -m rule --add app="^Signal$" manage=off   # Signal
+yabai -m rule --add app="^Messages$" manage=off   # Messages
+yabai -m rule --add app=".*WhatsApp.*" manage=off   # WhatsApp
+yabai -m rule --add app="^NordVPN$" manage=off   # NordVPN
+yabai -m rule --add app="^Notes$" manage=off   # Apple Notes
+
+
+# PyCharm
+yabai -m rule --add title="^Merge Revisions.*" manage=off
+yabai -m rule --add title="^Rename$" manage=off
+yabai -m rule --add title="^Delete$" manage=off
+yabai -m rule --add title="^Move$" manage=off
+yabai -m rule --add title="^Copy$" manage=off
+yabai -m rule --add title="^Evaluate$" manage=off
+yabai -m rule --add title="^Extract.*$" manage=off
+yabai -m rule --add title="^Welcome to PyCharm$" manage=off
+yabai -m rule --add title="^Add File to Git$" manage=off
+yabai -m rule --add title="^Emacs Everywhere.*" manage=off
+
+# Set padding for spacebar
+# yabai -m config external_bar all:30:0
+yabai -m config external_bar all:3:28
+
+# Focus window to mous when windows/application is destroyed
+# yabai -m signal --add event=window_destroyed action="yabai -m query --windows --window &> /dev/null || yabai -m window --focus mouse"
+# yabai -m signal --add event=application_terminated action="yabai -m query --windows --window &> /dev/null || yabai -m window --focus mouse"
+yabai -m signal --add event=window_focused action="sketchybar --trigger window_focus"
+# yabai -m signal --add event=window_created action="sketchybar --trigger windows_on_spaces"
+# yabai -m signal --add event=window_destroyed action="sketchybar --trigger windows_on_spaces"
+
+# Exclude problematic apps from being managed:
+yabai -m rule --add app="^(LuLu|Calculator|Software Update|Dictionary|VLC|System Preferences|System Settings|Photo Booth|Archive Utility|Python|LibreOffice|App Store|Steam|Alfred|Activity Monitor)$" manage=off
+yabai -m rule --add label="Finder" app="^Finder$" title="(Co(py|nnect)|Move|Info|Pref)" manage=off
+yabai -m rule --add label="Safari" app="^Safari$" title="^(General|(Tab|Password|Website|Extension)s|AutoFill|Se(arch|curity)|Privacy|Advance)$" manage=off
+yabai -m rule --add label="About This Mac" app="System Information" title="About This Mac" manage=off
+yabai -m rule --add label="Select file to save to" app="^Inkscape$" title="Select file to save to" manage=off
+
+borders active_color=0xff51afef inactive_color=0xff555555 width=4.0 style=round 2>/dev/null 1>&2 &
+
+echo "yabai configuration loaded.."
