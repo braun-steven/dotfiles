@@ -6,14 +6,18 @@ end
 # Exports can be found in .bashrc from which we start the fish shell
 # Aliases can be found in .bash_aliases which is sourced in .bashrc from which we start the fish shell
 
-# Check if fisher is installed; if not, install it
+# Ensure Fisher is installed and avoid loops
 if not functions -q fisher
-  # Install Fisher
-  set -l fisher_path ~/.config/fish/functions/fisher.fish
-  if not test -f $fisher_path
-    curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish -o $fisher_path
-  end
+    # Use a temporary environment variable to prevent loops
+    set -q FISHER_INITIALIZED
+    or begin
+        set -gx FISHER_INITIALIZED 1
+        curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source
+        fisher install jorgebucaran/fisher
+        fisher update
+    end
 end
+
 ##########################
 # Keybindings in vi-mode #
 ##########################
@@ -137,8 +141,8 @@ function set_theme_auto
   end
 end
 
-set_theme_auto
-# set_dark_theme
+# set_theme_auto
+set_dark_theme
 
 # Load aliases
 source ~/.bash_aliases

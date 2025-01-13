@@ -155,6 +155,10 @@
   :after magit
   :config (magit-todos-mode 1))
 
+(use-package! vertico
+  :config
+  (setq vertico-posframe-width 160))
+
 
 (use-package! vertico-directory
   :after vertico
@@ -195,7 +199,7 @@
 (use-package! corfu
     :config
     (setq corfu-auto-delay 0.0)
-    (setq corfu-auto-prefix 2)
+    (setq corfu-auto-prefix 3)
     (setq corfu-preselect 'prompt))
 
 ;; Orderless setup
@@ -209,6 +213,7 @@
     :defer t
     :hook (prog-mode . copilot-mode)
     :bind (:map copilot-completion-map
+            ;; ("C-f" . 'copilot-accept-completion)
             ("<tab>" . 'copilot-accept-completion)
             ("TAB" . 'copilot-accept-completion)
             ;; ("C-TAB" . 'copilot-accept-completion-by-word)
@@ -220,6 +225,29 @@
 (use-package! copilot-chat
   :after (request org markdown-mode shell-maker))
 
+
+(use-package! gptel
+ :config
+ ;; (setq! gptel-api-key "your key")
+;; OPTIONAL configuration
+;; OPTIONAL configuration
+        (setq
+        gptel-model 'gemini-exp-1206
+        gptel-backend (gptel-make-gemini "Gemini"
+                        :key (lambda ()
+                        (with-temp-buffer
+                          (insert-file-contents "~/.gemini-api-key")
+                          (buffer-string)))
+                        :stream t))
+ )
+
+(use-package! org-modern
+  :after org
+  :config
+
+ ;; Option 2: Globally
+(with-eval-after-load 'org (global-org-modern-mode))
+  )
 
 (use-package! transient
   :config
@@ -239,6 +267,13 @@
     ("q" "Quit" transient-quit-one)]])
 )
 
+
+(use-package! ultra-scroll
+  :init
+  (setq scroll-conservatively 101 ; important!
+        scroll-margin 0)
+        :config
+        (ultra-scroll-mode 1))
 
 
 ;; If pressing tab to complete sometimes doesn't work you might want to bind completion to another key or try:
