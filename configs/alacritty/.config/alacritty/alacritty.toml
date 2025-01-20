@@ -3,7 +3,7 @@
 # general.import = ["/home/steven/.config/alacritty/themes/themes/papercolor_light.toml"]
 # general.import = ["/home/steven/.config/alacritty/themes/themes/catppuccin_latte.toml"]
 # general.import = ["/home/steven/.config/alacritty/themes/themes/doom_one.toml"]
-general.import = ["/home/steven/.config/alacritty/themes/themes/doom_one.toml"]
+general.import = ["~/.config/alacritty/themes/themes/doom_one.toml"]
 # general.import = ["/home/steven/.config/alacritty/themes/themes/nord.toml"]
 # general.import = ["/home/steven/.config/alacritty/themes/themes/doom_one.toml"]
 # general.import = ["/home/steven/.config/alacritty/themes/themes/github_light.toml"]
@@ -29,7 +29,8 @@ y = 0
 program = "/bin/bash"
 
 [window]
-decorations = "Full"
+decorations = "none"
+# decorations = "Full"
 decorations_theme_variant = "Dark"
 dynamic_title = true
 title = "Alacritty"

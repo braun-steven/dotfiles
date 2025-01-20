@@ -2,13 +2,17 @@
 
 update() {
   source "$CONFIG_DIR/colors.sh"
-  COLOR=$BACKGROUND_2
+  BORDER_COLOR=$TRANSPARENT
+  BG_COLOR=$TRANSPARENT
+
   if [ "$SELECTED" = "true" ]; then
-    COLOR=$BLUE
+    BORDER_COLOR=$WHITE
+    BG_COLOR=$BACKGROUND_1
   fi
   sketchybar --set $NAME icon.highlight=$SELECTED \
                          label.highlight=$SELECTED \
-                         background.border_color=$COLOR
+                         background.border_color=$BORDER_COLOR \
+                         background.color=$BG_COLOR
 }
 
 set_space_label() {
