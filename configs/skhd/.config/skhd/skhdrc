@@ -106,19 +106,19 @@
 # ]
 
 # open terminal, blazingly fast compared to iTerm/Hyper
-# cmd - return : /Applications/kitty.app/Contents/MacOS/kitty --single-instance -d ~
 cmd+shift-return : emacsclient -c -n -a '' && sleep 0.25 && yabai -m window --focus $(yabai -m query --windows | jq '[.[] | select(.app == "Emacs")] | max_by(.id) | .id')
 
 # cmd+shift-e : doom +everywhere
-# cmd - return : /Users/steven/dotfiles/configs/dotbin/dotbin/skhd-iterm2-new-window.sh && yabai -m window --focus $(yabai -m query --windows | jq '[.[] | select(.app == "iTerm2")] | max_by(.id) | .id')
+cmd + ctrl - return : /Users/steven/dotfiles/configs/dotbin/dotbin/skhd-iterm2-new-window.sh && yabai -m window --focus $(yabai -m query --windows | jq '[.[] | select(.app == "iTerm2")] | max_by(.id) | .id')
 # cmd - return : /Applications/kitty.app/Contents/MacOS/kitty
 # Open alacritty window:
 # 1. try to use an exisiting alacritty server to create a new window (fastest)
 # 2. if that fails, open the alacritty app
 # 3. sleep shortly, such that yabai is able to detect the change (new window)
 # 4. focus on latest alacritty window (window with highest id). This fixes an issue where if the focus was previously not on an alacritty window (e.g. safari), the new window would open but the focus stays on the old window (e.g. safari)
-# cmd - return : alacritty msg create-window || open -na /Applications/Alacritty.app && sleep 0.5 && yabai -m window --focus $(yabai -m query --windows | jq '[.[] | select(.app == "Alacritty")] | max_by(.id) | .id')
-cmd - return : alacritty msg create-window || open -na /Applications/Alacritty.app
+# cmd + ctrl - return : alacritty msg create-window || open -na /Applications/Alacritty.app && sleep 0.2 && yabai -m window --focus $(yabai -m query --windows | jq '[.[] | select(.app == "Alacritty")] | max_by(.id) | .id')
+# cmd - return : alacritty msg create-window || open -na /Applications/Alacritty.app
+# cmd + ctrl - return : /Applications/kitty.app/Contents/MacOS/kitty --single-instance -d ~
 
 # cmd - return : kitty --single-instance -d ~
 # cmd - return : open -na /Applications/Alacritty.app
@@ -212,10 +212,10 @@ cmd - j : yabai -m window --focus stack.next || yabai -m window --focus south
 cmd - k : yabai -m window --focus stack.prev || yabai -m window --focus north
 
 # move managed window
-shift + cmd - h : yabai -m window --warp west || yabai -m window --display west
-shift + cmd - l : yabai -m window --warp east || yabai -m window --display east
+shift + cmd - h : yabai -m window --warp west  || yabai -m window --display west
+shift + cmd - l : yabai -m window --warp east  || yabai -m window --display east
 shift + cmd - j : yabai -m window --warp south 
-shift +  cmd - k : yabai -m window --warp north
+shift + cmd - k : yabai -m window --warp north
 
 # spaces
 cmd - 1 : yabai -m space --focus 1 || yabai -m space --focus recent
@@ -228,11 +228,17 @@ cmd - 7 : yabai -m space --focus 7 || yabai -m space --focus recent
 cmd - 8 : yabai -m space --focus 8 || yabai -m space --focus recent
 cmd - 9 : yabai -m space --focus 9 || yabai -m space --focus recent
 cmd - 0 : yabai -m space --focus 10 || yabai -m space --focus recent
-cmd + alt - 6 : yabai -m space --focus 11 || yabai -m space --focus recent
-cmd + alt - 7 : yabai -m space --focus 12 || yabai -m space --focus recent
-cmd + alt - 8 : yabai -m space --focus 13 || yabai -m space --focus recent
-cmd + alt - 9 : yabai -m space --focus 14 || yabai -m space --focus recent
-cmd + alt - 0 : yabai -m space --focus 15 || yabai -m space --focus recent
+# cmd + ctrl - 6 : yabai -m space --focus 11 || yabai -m space --focus recent
+# cmd + ctrl - 7 : yabai -m space --focus 12 || yabai -m space --focus recent
+# cmd + ctrl - 8 : yabai -m space --focus 13 || yabai -m space --focus recent
+# cmd + ctrl - 9 : yabai -m space --focus 14 || yabai -m space --focus recent
+# cmd + ctrl - 0 : yabai -m space --focus 15 || yabai -m space --focus recent
+
+cmd - y : yabai -m space --focus 11 || yabai -m space --focus recent
+cmd - u : yabai -m space --focus 12 || yabai -m space --focus recent
+# cmd - i : yabai -m space --focus 13 || yabai -m space --focus recent
+# cmd - o : yabai -m space --focus 14 || yabai -m space --focus recent
+# cmd - p : yabai -m space --focus 15 || yabai -m space --focus recent
 
 # send window to desktop and follow focus
 shift + cmd - 1 : yabai -m window --space 1
@@ -245,11 +251,17 @@ shift + cmd - 7 : yabai -m window --space 7
 shift + cmd - 8 : yabai -m window --space 8
 shift + cmd - 9 : yabai -m window --space 9
 shift + cmd - 0 : yabai -m window --space 10
-shift + cmd + alt - 6 : yabai -m window --space 11
-shift + cmd + alt - 7 : yabai -m window --space 12
-shift + cmd + alt - 8 : yabai -m window --space 13
-shift + cmd + alt - 9 : yabai -m window --space 14
-shift + cmd + alt - 0 : yabai -m window --space 15
+# shift + cmd + ctrl - 6 : yabai -m window --space 11
+# shift + cmd + ctrl - 7 : yabai -m window --space 12
+# shift + cmd + ctrl - 8 : yabai -m window --space 13
+# shift + cmd + ctrl - 9 : yabai -m window --space 14
+# shift + cmd + ctrl - 0 : yabai -m window --space 15
+
+shift + cmd - y : yabai -m window --space 11
+shift + cmd - u : yabai -m window --space 12
+# shift + cmd - i : yabai -m window --space 13
+# shift + cmd - o : yabai -m window --space 14
+# shift + cmd - p : yabai -m window --space 15
 
 cmd - q : yabai -m window --close
 
@@ -258,27 +270,28 @@ cmd - q : yabai -m window --close
 # shift + lctrl + cmd - j : yabai -m window --insert south
 # shift + lctrl + cmd - k : yabai -m window --insert north
 # shift + lctrl + cmd - l : yabai -m window --insert east
-cmd + alt - h : yabai -m window --insert east
-cmd + alt - v : yabai -m window --insert south
+# cmd + alt - h : yabai -m window --insert east
+# cmd + alt - v : yabai -m window --insert south
 
 # toggle window zoom
 # alt - d : yabai -m window --toggle zoom-parent
 # toggle fullscreen
-cmd + ctrl + shift - f : yabai -m window --toggle native-fullscreen
+alt + shift - f: yabai -m window --toggle native-fullscreen
+# cmd + ctrl + shift - f : yabai -m window --toggle native-fullscreen
 # cmd + ctrl + shift - f : yabai -m window --toggle zoom-fullscreen
 # cmd + ctrl + alt - f : yabai -m window --toggle native-fullscreen
 
 # toggle window split type
-cmd + ctrl - e : yabai -m window --toggle split
+alt - e : yabai -m window --toggle split
 
 # float / unfloat window and center on screen
-cmd + ctrl - f : yabai -m window --toggle float;\
+alt - f : yabai -m window --toggle float;\
           yabai -m window --grid 4:4:1:1:2:2
 
 # toggle sticky(+float), topmost, picture-in-picture
-cmd + alt - p : yabai -m window --toggle sticky;\
-           yabai -m window --toggle topmost;\
-           yabai -m window --toggle pip
+# cmd + alt - p : yabai -m window --toggle sticky;\
+#            yabai -m window --toggle topmost;\
+#            yabai -m window --toggle pip
 
 
 # Restart yabai
@@ -288,8 +301,8 @@ cmd + alt - p : yabai -m window --toggle sticky;\
 cmd + ctrl - r : yabai --restart-service
 
 # Stacking windows
-cmd + shift - w : yabai -m window --stack east || yabai -m window --stack west
-cmd + shift - e : yabai -m config layout bsp
+alt - w : yabai -m window --stack east || yabai -m window --stack west
+alt + shift - e : yabai -m config layout bsp
 # cmd - e : yabai -m window --stack south || yabai -m window --stack north
 
 

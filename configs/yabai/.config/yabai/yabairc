@@ -20,9 +20,10 @@ yabai -m config mouse_follows_focus          off
 # From: https://github.com/koekeishiya/yabai/wiki/Configuration#window-modifications
 # With focus follows mouse, you can also focus windows without having to click on them. This can be set to either autofocus (window gets focused, but not raised) or autoraise (window gets raised as if it was clicked on).
 yabai -m config focus_follows_mouse          autofocus
-yabai -m config window_origin_display        default
+yabai -m config window_origin_display        focused
+yabai -m config window_insertion_point       focused
 yabai -m config window_placement             second_child
-yabai -m config window_shadow                float  # Add shadow only to floating windows
+yabai -m config window_shadow                on  # Add shadow only to floating windows
 yabai -m config window_opacity               off
 yabai -m config window_opacity_duration      0.25
 yabai -m config window_animation_duration    0.00
@@ -38,17 +39,13 @@ yabai -m config mouse_action1                move
 yabai -m config mouse_action2                resize
 yabai -m config mouse_drop_action            swap
 
-# yabai -m config active_window_border_color   0xff4c7899  # i3 blue
-# yabai -m config active_window_border_color   0xff51afef  # doom-one blue
-# yabai -m config normal_window_border_color   0xff555555
-
 # general space settings
 yabai -m config layout                       bsp
 yabai -m config top_padding                  6
 yabai -m config bottom_padding               8
 yabai -m config left_padding                 8
 yabai -m config right_padding                8
-yabai -m config window_gap                   6
+yabai -m config window_gap                   8
 
 # label spaces
 yabai -m space 1 --label 1
@@ -70,6 +67,8 @@ yabai -m space 15 --label 15
 
 # float settings windows
 yabai -m rule --add app='^Finder$' manage=off sticky=off
+yabai -m rule --add app='^Weather$' manage=off sticky=off
+yabai -m rule --add app='^Alacritty$' manage=off sticky=off
 yabai -m rule --add title='Settings$' manage=off sticky=on 
 yabai -m rule --add app="^System Preferences$" manage=off 
 yabai -m rule --add app="^System Information$" manage=off 
@@ -101,8 +100,9 @@ yabai -m rule --add title="^Add File to Git$" manage=off
 yabai -m rule --add title="^Emacs Everywhere.*" manage=off
 
 # Set padding for spacebar
-# yabai -m config external_bar all:30:0
-yabai -m config external_bar all:3:28
+# yabai -m config external_bar all:24:0  # Top
+# yabai -m config external_bar all:0:24    # Bottom
+yabai -m config external_bar all:0:0    # Bottom
 
 # Focus window to mous when windows/application is destroyed
 # yabai -m signal --add event=window_destroyed action="yabai -m query --windows --window &> /dev/null || yabai -m window --focus mouse"
@@ -118,6 +118,11 @@ yabai -m rule --add label="Safari" app="^Safari$" title="^(General|(Tab|Password
 yabai -m rule --add label="About This Mac" app="System Information" title="About This Mac" manage=off
 yabai -m rule --add label="Select file to save to" app="^Inkscape$" title="Select file to save to" manage=off
 
-borders active_color=0xff51afef inactive_color=0xff555555 width=4.0 style=round 2>/dev/null 1>&2 &
+# Add borders using JankyBoarders
+# borders active_color=0xff51afef inactive_color=0xff555555 width=4.0 style=round hidpi=on 2>/dev/null 1>&2 &
+
+# Call the function on space change event (TODO: changes padding globally for now, I want this to only change it for the current space)
+ # yabai -m signal --add event=window_focused \
+ #                     action="bash /Users/steven/set_padding.sh"
 
 echo "yabai configuration loaded.."

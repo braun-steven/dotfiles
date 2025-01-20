@@ -72,7 +72,7 @@
        word-wrap         ; soft wrapping with language-aware indent
 
        :emacs
-       (dired +icons)             ; making dired pretty [functional]
+       (dired +icons +dirvish)             ; making dired pretty [functional]
        electric          ; smarter, keyword-based electric-indent
        undo
        ;; (ibuffer +icons)           ; interactive buffer management
@@ -194,7 +194,7 @@
 
        :os
        ;; tty
-       ;; (:if IS-MAC macos)             ; MacOS-specific commands
+       (:if IS-MAC macos)             ; MacOS-specific commands
 
        :config
        ;;literate
@@ -203,4 +203,4 @@
 ;; Let j and k go over visual lines
 (setq evil-respect-visual-line-mode t)
 ;; ;; Remove fram decorations
-;; (add-to-list 'default-frame-alist '(undecorated-round . t))
+(add-to-list 'default-frame-alist '(undecorated-round . t))

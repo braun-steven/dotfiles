@@ -58,7 +58,7 @@
 ;; (if (eq system-type 'darwin)
 ;; (setq doom-font (font-spec :family "Hack" :size 14.0))  ;; MacOS
 ;; (setq doom-font (font-spec :family "Hack" :size 12))  ;; Linux
-(setq doom-font (font-spec :family "CommitMono" :size 17))  ;; Linux
+(setq doom-font (font-spec :family "CommitMono" :size 13.5))
 
 ;;   )
 ;; (setq doom-font (font-spec :family "Consolas" :size 12.0))
@@ -240,14 +240,6 @@
                           (buffer-string)))
                         :stream t))
  )
-
-(use-package! org-modern
-  :after org
-  :config
-
- ;; Option 2: Globally
-(with-eval-after-load 'org (global-org-modern-mode))
-  )
 
 (use-package! transient
   :config
