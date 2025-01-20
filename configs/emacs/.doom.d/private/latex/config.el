@@ -1,5 +1,5 @@
 ;;; ../dotfiles/configs/emacs/.doom.d/lang/+latex.el -*- lexical-binding: t; -*-
-(after! tex
+(after! auctex
   (load! "+functions")
   (load! "+keybindings")
 
@@ -8,7 +8,7 @@
 
   ;; Add auto-fillmode (auto line brake after 80 chars)
   ;; (add-hook 'TeX-mode-hook #'auto-fill-mode)
-  (add-hook 'LaTeX-mode-hook (lambda () (setq TeX-command-default "LaTeXmk")))
+  (add-hook 'LaTeX-mode-hook (lambda () (setq TeX-command-default "LaTeXMk")))
 
 
  ;;  (custom-set-variables

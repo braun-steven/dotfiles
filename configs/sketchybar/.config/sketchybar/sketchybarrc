@@ -21,17 +21,20 @@ launchctl unload -F /System/Library/LaunchAgents/com.apple.OSDUIHelper.plist > /
 
 # Setting up the general bar appearance of the bar
 bar=(
-  height=30
+  height=24
   color=$BAR_COLOR
-  border_width=2
+  border_width=0
   border_color=$BAR_BORDER_COLOR
-  shadow=off
+  shadow=on
   position=bottom
   sticky=on
   padding_right=10
   padding_left=10
   y_offset=0
-  margin=-2
+  blur_radius=100
+  margin=0
+  topmost=window
+  font_smoothing=off  # fonts look thicker with on
 )
 
 sketchybar --bar "${bar[@]}"
@@ -39,18 +42,19 @@ sketchybar --bar "${bar[@]}"
 # Setting up default values
 defaults=(
   updates=when_shown
-  icon.font="$FONT:Bold:12.0"
+  blur_radius=30
+  icon.font="$FONT:Regular:11.0"
   icon.color=$ICON_COLOR
   icon.padding_left=$PADDINGS
   icon.padding_right=$PADDINGS
-  label.font="$FONT:Regular:12.0"
+  label.font="$FONT:Regular:11.0"
   label.color=$LABEL_COLOR
   label.padding_left=$PADDINGS
   label.padding_right=$PADDINGS
   padding_right=$PADDINGS
   padding_left=$PADDINGS
   background.height=20
-  background.corner_radius=9
+  background.corner_radius=8
   background.border_width=2
   popup.background.border_width=2
   popup.background.corner_radius=9
@@ -71,15 +75,33 @@ source "$ITEM_DIR/spaces.sh"
 # source "$ITEM_DIR/spotify.sh"
 
 # Right
-source "$ITEM_DIR/calendar.sh"
+# source "$ITEM_DIR/calendar.sh"
 # source "$ITEM_DIR/brew.sh"
 # source "$ITEM_DIR/github.sh"
-source "$ITEM_DIR/battery.sh"
-source "$ITEM_DIR/volume.sh"
+# source "$ITEM_DIR/battery.sh"
+# source "$ITEM_DIR/volume.sh"
 # source "$ITEM_DIR/cpu.sh"
 
 
 # Forcing all item scripts to run (never do this outside of sketchybarrc)
 sketchybar --update
+
+# # Aerospace
+# sketchybar --add event aerospace_workspace_change
+
+# for sid in $(aerospace list-workspaces --all); do
+#     sketchybar --add item space.$sid left \
+#         --subscribe space.$sid aerospace_workspace_change \
+#         --set space.$sid \
+#         background.color=0x44ffffff \
+#         background.corner_radius=5 \
+#         background.height=20 \
+#         background.drawing=off \
+#         label="" \
+#         click_script="aerospace workspace $sid" \
+#         script="$CONFIG_DIR/plugins/aerospace.sh $sid"
+# done
+
+        # label="$sid" \
 
 echo "sketchybar configuation loaded.."
