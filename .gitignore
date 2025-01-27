@@ -11,6 +11,8 @@ configs/emacs/.doom.d/+modules/lang/org/org-gcal-credentials.el
 # Fish
 fish_variables
 
+fish/.config/fish/functions/
+
 # Onedrive stuff
 configs/onedrive/.config/onedrive/items*
 configs/onedrive/.config/onedrive/.config.hash
