@@ -1,3 +1,3 @@
 # Dotfiles
 
-![Screenshot](./scrot.png)
+![Screenshot](./res/scrot.png)
