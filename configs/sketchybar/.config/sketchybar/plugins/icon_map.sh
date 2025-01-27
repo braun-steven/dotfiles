@@ -107,7 +107,7 @@ case "$1" in
 "zoom.us")
   icon_result=":zoom:"
   ;;
-"IntelliJ IDEA")
+"IntelliJ IDEA" | "PyCharm")
   icon_result=":idea:"
   ;;
 "Music" | "音乐")

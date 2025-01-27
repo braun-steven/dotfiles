@@ -6,8 +6,8 @@ source "$HOME/.config/sketchybar/icons.sh" # Loads all defined icons
 ITEM_DIR="$HOME/.config/sketchybar/items" # Directory where the items are configured
 PLUGIN_DIR="$HOME/.config/sketchybar/plugins" # Directory where all the plugin scripts are stored
 
-FONT="Hack" # Needs to have Regular, Bold, Semibold, Heavy and Black variants
-# FONT="SF Pro" # Needs to have Regular, Bold, Semibold, Heavy and Black variants
+# FONT="Hack" # Needs to have Regular, Bold, Semibold, Heavy and Black variants
+FONT="SF Pro" # Needs to have Regular, Bold, Semibold, Heavy and Black variants
 PADDINGS=3 # All paddings use this value (icon, label, background)
 
 # Setting up and starting the helper process
@@ -75,11 +75,11 @@ source "$ITEM_DIR/spaces.sh"
 # source "$ITEM_DIR/spotify.sh"
 
 # Right
-# source "$ITEM_DIR/calendar.sh"
+source "$ITEM_DIR/calendar.sh"
 # source "$ITEM_DIR/brew.sh"
 # source "$ITEM_DIR/github.sh"
 # source "$ITEM_DIR/battery.sh"
-# source "$ITEM_DIR/volume.sh"
+source "$ITEM_DIR/volume.sh"
 # source "$ITEM_DIR/cpu.sh"
 
 
@@ -97,7 +97,7 @@ sketchybar --update
 #         background.corner_radius=5 \
 #         background.height=20 \
 #         background.drawing=off \
-#         label="" \
+#         label="$sid " \
 #         click_script="aerospace workspace $sid" \
 #         script="$CONFIG_DIR/plugins/aerospace.sh $sid"
 # done
