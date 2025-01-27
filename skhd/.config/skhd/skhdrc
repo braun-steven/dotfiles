@@ -109,7 +109,7 @@
 cmd+shift-return : emacsclient -c -n -a '' && sleep 0.25 && yabai -m window --focus $(yabai -m query --windows | jq '[.[] | select(.app == "Emacs")] | max_by(.id) | .id')
 
 # cmd+shift-e : doom +everywhere
-cmd + ctrl - return : /Users/steven/dotfiles/configs/dotbin/dotbin/skhd-iterm2-new-window.sh && yabai -m window --focus $(yabai -m query --windows | jq '[.[] | select(.app == "iTerm2")] | max_by(.id) | .id')
+cmd + ctrl - return : /Users/steven/dotbin/skhd-iterm2-new-window.sh # && yabai -m window --focus $(yabai -m query --windows | jq '[.[] | select(.app == "iTerm2")] | max_by(.id) | .id')
 # cmd + ctrl - return : /Applications/kitty.app/Contents/MacOS/kitty
 # Open alacritty window:
 # 1. try to use an exisiting alacritty server to create a new window (fastest)
