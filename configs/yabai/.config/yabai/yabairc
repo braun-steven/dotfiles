@@ -58,17 +58,17 @@ yabai -m space 7 --label 7
 yabai -m space 8 --label 8
 yabai -m space 9 --label 9
 yabai -m space 10 --label 10
-yabai -m space 11 --label 11
-yabai -m space 12 --label 12
-yabai -m space 13 --label 13
-yabai -m space 14 --label 14
-yabai -m space 15 --label 15
+# yabai -m space 11 --label 11
+# yabai -m space 12 --label 12
+# yabai -m space 13 --label 13
+# yabai -m space 14 --label 14
+# yabai -m space 15 --label 15
 
 
 # float settings windows
 yabai -m rule --add app='^Finder$' manage=off sticky=off
 yabai -m rule --add app='^Weather$' manage=off sticky=off
-yabai -m rule --add app='^Alacritty$' manage=off sticky=off
+# yabai -m rule --add app='^Alacritty$' manage=off sticky=off
 yabai -m rule --add title='Settings$' manage=off sticky=on 
 yabai -m rule --add app="^System Preferences$" manage=off 
 yabai -m rule --add app="^System Information$" manage=off 
@@ -120,9 +120,5 @@ yabai -m rule --add label="Select file to save to" app="^Inkscape$" title="Selec
 
 # Add borders using JankyBoarders
 # borders active_color=0xff51afef inactive_color=0xff555555 width=4.0 style=round hidpi=on 2>/dev/null 1>&2 &
-
-# Call the function on space change event (TODO: changes padding globally for now, I want this to only change it for the current space)
- # yabai -m signal --add event=window_focused \
- #                     action="bash /Users/steven/set_padding.sh"
 
 echo "yabai configuration loaded.."

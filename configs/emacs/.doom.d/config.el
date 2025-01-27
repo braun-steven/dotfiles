@@ -282,6 +282,12 @@
 ;;   ;; Bind the custom function to <tab> in Evil's insert state
 ;;   (evil-define-key 'insert 'global (kbd "<tab>") 'my/copilot-tab-or-default))
 
+;;; in $DOOMDIR/config.el
+(remove-hook! '(window-setup-hook after-make-frame-functions)
+              #'doom-restore-menu-bar-in-gui-frames-h)
+
+(menu-bar-mode 0)
+
 
 ;; Load private modules
 (dolist (file (directory-files "~/.doom.d/private/" t directory-files-no-dot-files-regexp))

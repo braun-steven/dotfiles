@@ -231,10 +231,11 @@ function maybe_activate_conda_env
   set dirname (path basename $PWD)
   # If directory name can be found in conda evironments, activate it!
   if command ls ~/.conda/envs/ | grep -q $dirname
-    echo "Conda environment '$dirname' found! Activating now ..."
+    # echo "Conda environment '$dirname' found! Activating now ..."
     initconda
     conda activate $dirname
   end
+
 end
 
 # Run the function when PWD changes
