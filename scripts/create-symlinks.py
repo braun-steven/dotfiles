@@ -81,7 +81,7 @@ if __name__ == "__main__":
     logger = logging.getLogger(__name__)
 
     DOT_CONFIG = os.path.join(HOME, ".config")
-    CONFIG_DIR = os.path.join(HOME, ARGS.dotfiles, "configs")
+    CONFIG_DIR = os.path.join(HOME, ARGS.dotfiles)
 
     # Scan all dirs in "./configs/"
     for entry in os.scandir(CONFIG_DIR):
