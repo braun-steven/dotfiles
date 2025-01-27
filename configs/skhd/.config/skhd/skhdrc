@@ -110,14 +110,15 @@ cmd+shift-return : emacsclient -c -n -a '' && sleep 0.25 && yabai -m window --fo
 
 # cmd+shift-e : doom +everywhere
 cmd + ctrl - return : /Users/steven/dotfiles/configs/dotbin/dotbin/skhd-iterm2-new-window.sh && yabai -m window --focus $(yabai -m query --windows | jq '[.[] | select(.app == "iTerm2")] | max_by(.id) | .id')
-# cmd - return : /Applications/kitty.app/Contents/MacOS/kitty
+# cmd + ctrl - return : /Applications/kitty.app/Contents/MacOS/kitty
 # Open alacritty window:
 # 1. try to use an exisiting alacritty server to create a new window (fastest)
 # 2. if that fails, open the alacritty app
 # 3. sleep shortly, such that yabai is able to detect the change (new window)
 # 4. focus on latest alacritty window (window with highest id). This fixes an issue where if the focus was previously not on an alacritty window (e.g. safari), the new window would open but the focus stays on the old window (e.g. safari)
+# cmd + ctrl - return: /Applications/Alacritty.app/Contents/MacOS/alacritty
 # cmd + ctrl - return : alacritty msg create-window || open -na /Applications/Alacritty.app && sleep 0.2 && yabai -m window --focus $(yabai -m query --windows | jq '[.[] | select(.app == "Alacritty")] | max_by(.id) | .id')
-# cmd - return : alacritty msg create-window || open -na /Applications/Alacritty.app
+# cmd + ctrl - return : alacritty msg create-window || open -na /Applications/Alacritty.app
 # cmd + ctrl - return : /Applications/kitty.app/Contents/MacOS/kitty --single-instance -d ~
 
 # cmd - return : kitty --single-instance -d ~
@@ -234,8 +235,8 @@ cmd - 0 : yabai -m space --focus 10 || yabai -m space --focus recent
 # cmd + ctrl - 9 : yabai -m space --focus 14 || yabai -m space --focus recent
 # cmd + ctrl - 0 : yabai -m space --focus 15 || yabai -m space --focus recent
 
-cmd - y : yabai -m space --focus 11 || yabai -m space --focus recent
-cmd - u : yabai -m space --focus 12 || yabai -m space --focus recent
+# cmd - y : yabai -m space --focus 11 || yabai -m space --focus recent
+# cmd - u : yabai -m space --focus 12 || yabai -m space --focus recent
 # cmd - i : yabai -m space --focus 13 || yabai -m space --focus recent
 # cmd - o : yabai -m space --focus 14 || yabai -m space --focus recent
 # cmd - p : yabai -m space --focus 15 || yabai -m space --focus recent
@@ -257,13 +258,14 @@ shift + cmd - 0 : yabai -m window --space 10
 # shift + cmd + ctrl - 9 : yabai -m window --space 14
 # shift + cmd + ctrl - 0 : yabai -m window --space 15
 
-shift + cmd - y : yabai -m window --space 11
-shift + cmd - u : yabai -m window --space 12
+# shift + cmd - y : yabai -m window --space 11
+# shift + cmd - u : yabai -m window --space 12
 # shift + cmd - i : yabai -m window --space 13
 # shift + cmd - o : yabai -m window --space 14
 # shift + cmd - p : yabai -m window --space 15
 
 cmd - q : yabai -m window --close
+cmd + ctrl - q   : kill $(yabai -m query --windows --window | jq .pid)
 
 # Set insertion point for focused container
 # shift + lctrl + cmd - h : yabai -m window --insert west

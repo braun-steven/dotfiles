@@ -13,6 +13,7 @@ update() {
                          label.highlight=$SELECTED \
                          background.border_color=$BORDER_COLOR \
                          background.color=$BG_COLOR
+
 }
 
 set_space_label() {

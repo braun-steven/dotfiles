@@ -29,8 +29,8 @@ y = 0
 program = "/bin/bash"
 
 [window]
-decorations = "none"
-# decorations = "Full"
+# decorations = "none"
+decorations = "Full"
 decorations_theme_variant = "Dark"
 dynamic_title = true
 title = "Alacritty"
