@@ -15,6 +15,7 @@ if [ ! -d $HOME/.tmux/plugins/tpm ]; then
 fi
 
 
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash  # do this first
 # Check if fzf is available, if not, check if ~/.fzf exists, and if neither, clone and install
 if ! command -v fzf &> /dev/null; then
   if [[ ! -d $HOME/.fzf ]]; then
@@ -93,4 +94,3 @@ fi
 
 # . "$HOME/.cargo/env"
 
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
