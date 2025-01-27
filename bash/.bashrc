@@ -15,11 +15,14 @@ if [ ! -d $HOME/.tmux/plugins/tpm ]; then
 fi
 
 
-# Download and install fzf
-if [[ ! -d $HOME/.fzf ]]; then
-  git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-  ~/.fzf/install
+# Check if fzf is available, if not, check if ~/.fzf exists, and if neither, clone and install
+if ! command -v fzf &> /dev/null; then
+  if [[ ! -d $HOME/.fzf ]]; then
+    git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+  fi
+  ~/.fzf/install --key-bindings --completion --update-rc
 fi
+
 
 # Check if zoxide is installed
 if ! command -v zoxide &> /dev/null; then
