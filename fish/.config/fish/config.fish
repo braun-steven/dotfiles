@@ -14,7 +14,6 @@ if not functions -q fisher
         set -gx FISHER_INITIALIZED 1
         curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source
         fisher install jorgebucaran/fisher
-        fisher update
     end
 end
 
