@@ -1,5 +1,5 @@
 ;;; ../dotfiles/configs/emacs/.doom.d/lang/+latex.el -*- lexical-binding: t; -*-
-(after! auctex
+(after! tex
   (load! "+functions")
   (load! "+keybindings")
 

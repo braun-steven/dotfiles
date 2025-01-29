@@ -41,11 +41,16 @@ yabai -m config mouse_drop_action            swap
 
 # general space settings
 yabai -m config layout                       bsp
-yabai -m config top_padding                  6
-yabai -m config bottom_padding               8
-yabai -m config left_padding                 8
-yabai -m config right_padding                8
-yabai -m config window_gap                   8
+yabai -m config top_padding                  0
+yabai -m config bottom_padding               0
+yabai -m config left_padding                 0
+yabai -m config right_padding                0
+yabai -m config window_gap                   4
+# yabai -m config top_padding                  6
+# yabai -m config bottom_padding               8
+# yabai -m config left_padding                 8
+# yabai -m config right_padding                8
+# yabai -m config window_gap                   8
 
 # label spaces
 yabai -m space 1 --label 1
@@ -85,6 +90,7 @@ yabai -m rule --add app="^Messages$" manage=off   # Messages
 yabai -m rule --add app=".*WhatsApp.*" manage=off   # WhatsApp
 yabai -m rule --add app="^NordVPN$" manage=off   # NordVPN
 yabai -m rule --add app="^Notes$" manage=off   # Apple Notes
+yabai -m rule --add app="^Spotify$" manage=off   # Spotify
 
 
 # PyCharm
