@@ -56,9 +56,10 @@
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
 ;; (if (eq system-type 'darwin)
-;; (setq doom-font (font-spec :family "Hack" :size 14.0))  ;; MacOS
+(setq doom-font (font-spec :family "SF Mono" :size 12.5))  ;; MacOS
+;; (setq doom-font (font-spec :family "Hack" :size 13.0))  ;; MacOS
 ;; (setq doom-font (font-spec :family "Hack" :size 12))  ;; Linux
-(setq doom-font (font-spec :family "CommitMono" :size 13.5))
+;; (setq doom-font (font-spec :family "CommitMono" :size 13.5))
 
 ;;   )
 ;; (setq doom-font (font-spec :family "Consolas" :size 12.0))
@@ -294,3 +295,6 @@
   (if (file-directory-p file)
       (load! (concat file "/config.el"))))
 
+
+;; Integrate MacOS clipboard with Emacs
+(load! "pbcopy.el")
