@@ -31,6 +31,43 @@ if ! command -v zoxide &> /dev/null; then
   curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
 fi
 
+# Check if eza is installed
+if ! command -v eza &> /dev/null; then
+  echo "eza not found. Installing now ..."
+
+  # Determine architecture
+  ARCH=$(uname -m)
+  EZA_TAR="ERROR"
+
+  if [[ "$ARCH" == "x86_64" ]]; then
+    EZA_TAR="eza_x86_64-unknown-linux-gnu.tar.gz"
+  elif [[ "$ARCH" == "aarch64" ]]; then
+    EZA_TAR="eza_aarch64-unknown-linux-gnu.tar.gz"
+  elif [[ "$ARCH" == "armv7l" ]]; then
+    EZA_TAR="eza_arm-unknown-linux-gnueabihf.tar.gz"
+  fi
+
+  # Skip installation if architecture is unsupported
+  if [[ "$EZA_TAR" == "ERROR" ]]; then
+    echo "eza installation skipped: unsupported architecture ($ARCH)."
+  else
+    # Create ~/.local/bin if it doesn't exist
+    mkdir -p "$HOME/.local/bin"
+
+    # Download and extract eza
+    wget -c "https://github.com/eza-community/eza/releases/latest/download/$EZA_TAR" -O - | tar xz
+
+    # Move binary to ~/.local/bin
+    mv eza "$HOME/.local/bin/eza"
+    chmod +x "$HOME/.local/bin/eza"
+
+    # Ensure ~/.local/bin is in PATH
+    if [[ ":$PATH:" != *":$HOME/.local/bin:"* ]]; then
+      export PATH="$HOME/.local/bin:$PATH"
+    fi
+  fi
+fi
+
 
 ###########################
 # INSTALLING BINARIES END #
