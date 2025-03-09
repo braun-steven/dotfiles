@@ -97,10 +97,12 @@
        ))
 
 
-;; Copilot chat
+;; GPTel
 (map! :leader
       (:prefix ("G" . "gptel")
        :desc "gptel" "g" #'gptel
+       :desc "add-buffer" "a" #'gptel-add
+       :desc "add-fille" "f" #'gptel-add-file
        :desc "send" "s" #'gptel-send
        :desc "rewrite" "r" #'gptel-rewrite
        :desc "menu" "m" #'gptel-menu

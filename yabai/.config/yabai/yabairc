@@ -70,6 +70,7 @@ yabai -m space 10 --label 10
 # yabai -m space 15 --label 15
 
 
+
 # float settings windows
 yabai -m rule --add app='^Finder$' manage=off sticky=off
 yabai -m rule --add app='^Weather$' manage=off sticky=off
@@ -88,9 +89,12 @@ yabai -m rule --add app="^App Store$" manage=off   # MacOS App Store
 yabai -m rule --add app="^Signal$" manage=off   # Signal
 yabai -m rule --add app="^Messages$" manage=off   # Messages
 yabai -m rule --add app=".*WhatsApp.*" manage=off   # WhatsApp
+yabai -m rule --add app=".*MacWhisper.*" manage=off   # MacWhisper
 yabai -m rule --add app="^NordVPN$" manage=off   # NordVPN
 yabai -m rule --add app="^Notes$" manage=off   # Apple Notes
 yabai -m rule --add app="^Spotify$" manage=off   # Spotify
+yabai -m rule --add app="^Pearcleaner$" manage=off
+yabai -m rule --add app="^Podcasts$" manage=off
 
 
 # PyCharm
