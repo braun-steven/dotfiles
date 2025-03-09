@@ -196,6 +196,8 @@
     `(avy-lead-face-3 :weight bold :foreground "yellow" :background ,(face-attribute 'default :background)))
   )
 
+(setq fill-column 100)
+
 ;; Corfu setup
 (use-package! corfu
     :config
@@ -226,6 +228,10 @@
 (use-package! copilot-chat
   :after (request org markdown-mode shell-maker))
 
+(after! transient
+        :config
+        (setq transient-show-during-minibuffer-read t)
+        )
 
 (use-package! gptel
  :config
@@ -233,32 +239,69 @@
 ;; OPTIONAL configuration
 ;; OPTIONAL configuration
         (setq
-        gptel-model 'gemini-exp-1206
+        gptel-model 'gemini-2.0-pro-exp-02-05
         gptel-backend (gptel-make-gemini "Gemini"
                         :key (lambda ()
                         (with-temp-buffer
                           (insert-file-contents "~/.gemini-api-key")
                           (buffer-string)))
                         :stream t))
+
+        (gptel-make-anthropic "Claude"          ;Any name you want
+        :stream t                             ;Streaming responses
+        :key (lambda ()
+                        (with-temp-buffer
+                          (insert-file-contents "~/.anthropic-api-key")
+                          (buffer-string)))
+        :models '(claude-3-7-sonnet-20250219)
+        :header (lambda () (when-let* ((key (gptel--get-api-key)))
+                        `(("x-api-key" . ,key)
+                        ("anthropic-version" . "2023-06-01")
+                        ("anthropic-beta" . "pdfs-2024-09-25")
+                        ("anthropic-beta" . "output-128k-2025-02-19")
+                        ("anthropic-beta" . "prompt-caching-2024-07-31"))))
+        :request-params '(:thinking (:type "enabled" :budget_tokens 2048)
+                        :max_tokens 4096))
+
+        (add-to-list 'gptel--gemini-models
+             '(gemini-2.0-pro-exp-02-05
+               :description "Next generation Pro model"
+               :capabilities (tool-use json media)
+               :mime-types ("image/png" "image/jpeg" "image/webp" "image/heic" "image/heif"
+                            "application/pdf" "text/plain" "text/csv" "text/html")
+               :context-window 32
+               :cutoff-date "2024-08"))
+        (add-to-list 'gptel--gemini-models
+             '(gemini-2.0-flash-thinking-exp-01-21
+               :description "Next gen, high speed, multimodal for a diverse variety of tasks"
+               :capabilities (json)
+               :input-cost 0.00
+               :output-cost 0.00
+               :cutoff-date "2024-08"))
+        (add-to-list 'gptel--gemini-models
+             '(gemini-2.0-flash-exp
+               :description "Multi-modal, streaming, tool use 2000 RPM"
+               :capabilities (tool-use json media)
+               :mime-types ("image/png" "image/jpeg" "image/webp" "image/heic" "image/heif"
+                             "application/pdf" "text/plain" "text/csv" "text/html")
+               :context-window 1000
+               :input-cost 0.00
+               :output-cost 0.00
+               :cutoff-date "2024-08"))
+    (add-hook 'gptel-post-stream-hook 'gptel-auto-scroll)
+    (add-hook 'gptel-post-response-functions 'gptel-end-of-response)
+    (setf (alist-get 'org-mode gptel-prompt-prefix-alist) "@user\n")
+    (setf (alist-get 'org-mode gptel-response-prefix-alist) "@assistant\n")
+
+    (setq gptel-prompt-prefix-alist '((markdown-mode . "### @USER:\n")
+        (org-mode . "*** @USER:\n")
+        (text-mode . "### @USER:\n")))
+
+    (setq gptel-response-prefix-alist '((markdown-mode . "### @ASSISTANT:\n")
+        (org-mode . "*** @ASSISTANT:\n")
+        (text-mode . "### @ASSISTANT:\n")))
+
  )
-
-(use-package! transient
-  :config
-
-(defun resize-repeatable (func amount)
-  "Call FUNC with AMOUNT and keep transient open."
-  (funcall func amount)
-  (transient-setup 'transient-resize-window))
-
-(transient-define-prefix transient-resize-window ()
-  "Transient menu for resizing the current window."
-  [["Resize Window"
-    ("<" "Decrease width" (lambda () (interactive) (resize-repeatable #'evil-window-decrease-width 5)))
-    (">" "Increase width" (lambda () (interactive) (resize-repeatable #'evil-window-increase-width 5)))
-    ("-" "Decrease width" (lambda () (interactive) (resize-repeatable #'evil-window-decrease-height 5)))
-    ("+" "Increase width" (lambda () (interactive) (resize-repeatable #'evil-window-increase-height 5)))
-    ("q" "Quit" transient-quit-one)]])
-)
 
 
 (use-package! ultra-scroll
@@ -269,7 +312,7 @@
         (ultra-scroll-mode 1))
 
 
-;; If pressing tab to complete sometimes doesn't work you might want to bind completion to another key or try:
+;; ;; If pressing tab to complete sometimes doesn't work you might want to bind completion to another key or try:
 ;; (after! (evil copilot)
 ;;   ;; Define the custom function that either accepts the completion or does the default behavior
 ;;   (defun my/copilot-tab-or-default ()
@@ -283,11 +326,15 @@
 ;;   ;; Bind the custom function to <tab> in Evil's insert state
 ;;   (evil-define-key 'insert 'global (kbd "<tab>") 'my/copilot-tab-or-default))
 
-;;; in $DOOMDIR/config.el
-(remove-hook! '(window-setup-hook after-make-frame-functions)
-              #'doom-restore-menu-bar-in-gui-frames-h)
+;; ;;; in $DOOMDIR/config.el
+;; (remove-hook! '(window-setup-hook after-make-frame-functions)
+;;               #'doom-restore-menu-bar-in-gui-frames-h)
 
 (menu-bar-mode 0)
+
+;; Fix latex mode not starting, see also: https://github.com/doomemacs/doomemacs/issues/8191
+(add-to-list 'auto-mode-alist '("\\.tex\\'" . LaTeX-mode))
+
 
 
 ;; Load private modules
