@@ -53,9 +53,11 @@
  '(rustic-ansi-faces
    ["#282c34" "#ff6c6b" "#98be65" "#ECBE7B" "#51afef" "#c678dd" "#46D9FF" "#bbc2cf"])
  '(safe-local-variable-values
-   '((eval setq org-roam-db-location
+   '((TeX-master . t)
+     (TeX-master . "./main")
+     (eval setq org-roam-db-location
       (expand-file-name "org-exports/quickstart/content-org/org-roam.db"
-       (getenv "HOME")))
+                        (getenv "HOME")))
      (eval setq org-roam-directory
       (expand-file-name "org-exports/quickstart/content-org"
                         (getenv "HOME")))
