@@ -56,11 +56,12 @@
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
 ;; (if (eq system-type 'darwin)
-;; (setq doom-font (font-spec :family "SF Mono" :size 12.5))  ;; MacOS
-;; (setq doom-font (font-spec :family "Hack" :size 13.0))  ;; MacOS
+;; (setq doom-font (font-spec :family "CommitMono" :size 14.0))  ;; MacOS
+(setq doom-font (font-spec :family "SF Mono" :size 13.0))  ;; MacOS
+;; (setq doom-font (font-spec :family "Hack" :size 13.5))  ;; MacOS
 ;; (setq doom-font (font-spec :family "Hack" :size 15))  ;; Linux
-(setq doom-font (font-spec :family "Dejavu Sans Mono" :size 15))  ;; Linux
-(setq doom-font (font-spec :family "SF Mono" :size 16))  ;; Linux
+;; (setq doom-font (font-spec :family "Dejavu Sans Mono" :size 14))  ;; Linux
+;; (setq doom-font (font-spec :family "SF Mono" :size 16))  ;; Linux
 ;; (setq doom-font (font-spec :family "CommitMono" :size 16))  ;; Linux
 
 ;; Add some more space between the lines
@@ -188,7 +189,7 @@
     `(avy-lead-face-3 :weight bold :foreground "yellow" :background ,(face-attribute 'default :background)))
   )
 
-(setq fill-column 100)
+;; (setq! fill-column 100)
 
 ;; Corfu setup
 (use-package! corfu
