@@ -3,6 +3,9 @@
   (load! "+functions")
   (load! "+keybindings")
 
+
+ (setq! fill-column 120)
+
   ;; Make latex sections have a larger font
   (setq font-latex-fontify-sectioning 1.1)
 
