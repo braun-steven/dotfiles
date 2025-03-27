@@ -13,11 +13,12 @@ general.live_config_reload = true
 TERM = "xterm-256color"
 
 [font]
-size = 12.5
+size = 11
 
 [font.normal]
-family = "SF Mono"
-# family = "CommitMono"
+# family = "SF Mono"
+# family = "Dejavu Sans Mono"
+family = "CommitMono"
 # family = "Hack"
 # family = "Source Code Pro"
 # family = "IBM Plex Mono"

@@ -57,12 +57,14 @@
 ;; font string. You generally only need these two:
 ;; (if (eq system-type 'darwin)
 ;; (setq doom-font (font-spec :family "CommitMono" :size 14.0))  ;; MacOS
-(setq doom-font (font-spec :family "SF Mono" :size 13.0))  ;; MacOS
 ;; (setq doom-font (font-spec :family "Hack" :size 13.5))  ;; MacOS
 ;; (setq doom-font (font-spec :family "Hack" :size 15))  ;; Linux
 ;; (setq doom-font (font-spec :family "Dejavu Sans Mono" :size 14))  ;; Linux
 ;; (setq doom-font (font-spec :family "SF Mono" :size 16))  ;; Linux
 ;; (setq doom-font (font-spec :family "CommitMono" :size 16))  ;; Linux
+;; (setq doom-font (font-spec :family "Dejavu Sans Mono" :size 15))  ;; Linux
+;; (setq doom-font (font-spec :family "SF Mono" :size 16))  ;; Linux
+(setq doom-font (font-spec :family "CommitMono" :size 15))  ;; Linux
 
 ;; Add some more space between the lines
 ;; (setq line-spacing 0.17)
@@ -328,7 +330,15 @@
 ;; Fix latex mode not starting, see also: https://github.com/doomemacs/doomemacs/issues/8191
 (add-to-list 'auto-mode-alist '("\\.tex\\'" . LaTeX-mode))
 
+;; (after! jinx
+;;   (setq jinx-languages "pt_BR en_US"
+;;       jinx-delay 1.0))
 
+;; (after! vertico-multiform ;; if using vertico
+;;   (add-to-list 'vertico-multiform-categories
+;;                '(jinx (vertico-grid-annotate . 25)))
+
+;;   (vertico-multiform-mode 1))
 
 ;; Load private modules
 (dolist (file (directory-files "~/.doom.d/private/" t directory-files-no-dot-files-regexp))
