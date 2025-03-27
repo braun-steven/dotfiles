@@ -224,6 +224,7 @@ mode "$mode_restart" {
     bindsym w exec killall waybar && waybar &> /tmp/waybar.log, mode "default"
     bindsym s exec swaymsg reload, mode "default"
     bindsym m exec ~/.cargo/bin/shikanectl reload, mode "default"
+    # bindsym m exec ~/.cargo/bin/shikanectl reload, mode "default"
 
     # back to normal: Enter or Escape
     bindsym Return mode "default"
