@@ -20,7 +20,7 @@
  ;;   )
 
   ;; Also fontify commonly custom commands defined by \newcomand
-  ;; (add-hook 'TeX-mode-hook #'(lambda () (push '("citeauthorandref" "[{") font-latex-match-reference-keywords)))
+  (add-hook 'TeX-mode-hook #'(lambda () (push '("citeauthorandref" "[{") font-latex-match-reference-keywords)))
 
   ;; Set latex viewer
   (setq +latex-viewers '(pdf-tools))

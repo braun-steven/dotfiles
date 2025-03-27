@@ -64,7 +64,7 @@
 ;; Collection of Ridiculously Useful eXtensions for Emacs
 (package! crux)
 
-;; (package! git-link)
+(package! git-link)
 ;; (package! git-link :pin "40f7b1674d2c703199ff2f82b464f17aa6f61b4b")  ;; Fixes transient issue
 
 (package! typst-ts-mode :recipe (:host codeberg :repo "meow_king/typst-ts-mode"))
@@ -73,12 +73,12 @@
 
 (package! magit-todos)
 
+;; (package! jinx)
+
 ;; Load private module packages
 (dolist (file (directory-files "~/.doom.d/private/" t directory-files-no-dot-files-regexp))
   (load! (concat file "/packages.el")))
 
-
-(package! copilot-chat :recipe (:host github :repo "chep/copilot-chat.el" :files ("*.el")))
 
 (package! gptel)
 
