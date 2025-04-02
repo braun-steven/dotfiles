@@ -1,15 +1,15 @@
 #!/usr/bin/env sh
 
 # Symlink sway theme and background (-f overwrites existing symlink)
-# ln -f -s ~/.config/sway/theme-dark ~/.config/sway/theme
-# ln -f -s ~/.config/sway/background-dark ~/.config/sway/background
-# swaymsg reload
+ln -f -s ~/.config/sway/theme-dark ~/.config/sway/theme
+ln -f -s ~/.config/sway/background-dark ~/.config/sway/background
+swaymsg reload
 
 # Alacritty
-# sed -i --follow-symlinks 's/alabaster/doom_one/g' ~/.config/alacritty/alacritty.toml
+sed -i --follow-symlinks 's/alabaster/doom_one/g' ~/.config/alacritty/alacritty.toml
 
 # Vim (This is now handled in .vimrc directly)
-# sed -i --follow-symlinks 's/background=light/background=dark/g' ~/.vimrc
+sed -i --follow-symlinks 's/background=light/background=dark/g' ~/.vimrc
 
 # Gnome
 gsettings set org.gnome.desktop.interface gtk-theme Adwaita-dark

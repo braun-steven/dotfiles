@@ -121,7 +121,8 @@
     "network": {
         "interval": 5,
         "format-wifi": "  Wifi {signalStrength}%", // Icon: wifi
-        "format-ethernet": "  {ifname}: {ipaddr}/{cidr}", // Icon: ethernet
+        "format-ethernet": "󰈀  Connected", // Icon: ethernet
+        // "format-ethernet": "󰈀  {ifname}: {ipaddr}/{cidr}", // Icon: ethernet
         "format-disconnected": "⚠  Disconnected",
         "tooltip-format": "{ifname}: {ipaddr}"
     },

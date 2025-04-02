@@ -58,12 +58,12 @@ set $Locker swaylock -f \
 
 
 # These are symlinked to either {background,theme}-{dark,light} based on `darkman get`
-# include ~/.config/sway/background
-# include ~/.config/sway/theme
+include ~/.config/sway/background
+include ~/.config/sway/theme
 
 # Fixed dark theme
-include ~/.config/sway/theme-dark
-include ~/.config/sway/background-dark
+# include ~/.config/sway/theme-dark
+# include ~/.config/sway/background-dark
 
 # Modifier keys
 set $mod Mod4
@@ -223,8 +223,8 @@ mode "$mode_restart" {
     bindsym e exec systemctl --user restart emacs, mode "default"
     bindsym w exec killall waybar && waybar &> /tmp/waybar.log, mode "default"
     bindsym s exec swaymsg reload, mode "default"
+    # bindsym m exec killall kanshi && sleep 0.5 && kanshi, mode "default"
     bindsym m exec ~/.cargo/bin/shikanectl reload, mode "default"
-    # bindsym m exec ~/.cargo/bin/shikanectl reload, mode "default"
 
     # back to normal: Enter or Escape
     bindsym Return mode "default"
@@ -393,6 +393,7 @@ exec {
   exec nm-applet --tray --sm-disable &
 
   # Run shikane: detect correct monitors
+  # exec kanshi
   ~/.cargo/bin/shikane
 
   # Evolution alarm notififications for calendar reminders
@@ -412,4 +413,5 @@ exec_always {
 
   # Reload shikane: detect correct monitors
   ~/.cargo/bin/shikanectl reload
+  # killall kanshi & sleep 0.5 && kanshi &
 }

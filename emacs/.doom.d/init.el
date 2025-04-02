@@ -56,6 +56,7 @@
        ;; (window-select +numbers)     ; visually switch windows
        workspaces        ; tab emulation, persistence & separate workspaces
        zen               ; distraction-free coding or writing
+       smooth-scroll
 
        :editor
        (evil +everywhere); come to the dark side, we have cookies

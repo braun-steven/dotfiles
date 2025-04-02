@@ -8,5 +8,5 @@
 ;; (package! buftra :recipe (:host github :repo "humitos/buftra.el"))  ;; py-pyment dependency!
 (unpin! conda)
 
-(package! copilot
+(package! copilot :pin "7d105d7"
   :recipe (:host github :repo "copilot-emacs/copilot.el" :files ("*.el")))
