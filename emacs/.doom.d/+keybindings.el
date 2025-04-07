@@ -6,14 +6,15 @@
       "SPC" nil 
       "`" nil
 
+      "v" #'er/expand-region
+
       :leader
       "SPC" #'execute-extended-command
-      ;; "SPC" #'counsel-M-x
 
       "x"  nil
       (:prefix ("x" . "font")
-       "-"  #'doom/decrease-font-size
-       "+"  #'doom/increase-font-size))
+       "-"  #'sbraun/decrease-font-size
+       "+"  #'sbraun/increase-font-size))
 
 ;; Buffers
 (map!

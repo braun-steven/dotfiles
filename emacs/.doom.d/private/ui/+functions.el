@@ -28,3 +28,14 @@
   "Load the light theme saved in the sbraun/theme-light variable."
   (interactive)
   (load-theme sbraun/theme-dark))
+
+(defun sbraun/decrease-font-size (&optional increment)
+  "Shrinks the font size across the current and child frames."
+  (interactive "p")
+  (doom-adjust-font-size (* (- 0.5) (or increment doom-font-increment))))
+
+
+(defun sbraun/increase-font-size (&optional increment)
+  "Shrinks the font size across the current and child frames."
+  (interactive "p")
+  (doom-adjust-font-size (* (+ 0.5) (or increment doom-font-increment))))
