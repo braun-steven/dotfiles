@@ -339,7 +339,7 @@ for_window [class=".*"] border pixel 3
 default_floating_border none
 titlebar_border_thickness 1
 
-# title_align center
+title_align center
 
 
 # Programms or things that should be run on every start of sway but not when reloading sway
