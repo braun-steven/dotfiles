@@ -306,6 +306,9 @@
         :config
         (ultra-scroll-mode 1))
 
+;; Removes the "with-editor: Cannot determine a suitable Emacsclient" Warning
+(setq-default with-editor-emacsclient-executable "emacsclient")
+
 
 ;; ;; If pressing tab to complete sometimes doesn't work you might want to bind completion to another key or try:
 ;; (after! (evil copilot)
