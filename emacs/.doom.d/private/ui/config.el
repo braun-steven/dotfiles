@@ -36,11 +36,11 @@
 (setq sbraun/theme-light 'modus-operandi)
 
 ;; Initially set the theme based on the current theme
-(set-doom-theme-based-on-darkman)
-;; (setq doom-theme 'doom-one)
+;; (set-doom-theme-based-on-darkman)
+(setq doom-theme 'doom-one)
 
 ;; Set a timer to check every 5 minutes (300 seconds)
-(run-at-time "1 min" 60 'check-and-update-theme)
+;; (run-at-time "1 min" 60 'check-and-update-theme)
 
 ;; Frame transparency
 (doom/set-frame-opacity 100)
