@@ -1,1 +1,0 @@
-Most of the config here is directly copied and modified from https://github.com/FelixKratz/dotfiles/tree/master/.config/sketchybar. Huge thanks to Felix Kratz for (a) maintaining SketchyBar and (b) providing his dotfiles for his config!

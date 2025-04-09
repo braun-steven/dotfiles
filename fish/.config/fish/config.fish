@@ -141,8 +141,8 @@ function set_theme_auto
   end
 end
 
-set_theme_auto
-# set_dark_theme
+# set_theme_auto
+set_dark_theme
 
 # Load aliases
 source ~/.bash_aliases
