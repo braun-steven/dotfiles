@@ -7,7 +7,8 @@ exec hash dbus-update-activation-environment 2>/dev/null && \
 
 set $wallpaper_base ~/wallpaper/macos-big-sur-night
 set $wallpaper $wallpaper_base.png
-set $wallpaper_dimblur $wallpaper_base-dimblur.png
+set $wallpaper_dimblur ~/wallpaper/Rancho_Cucamonga_Tree_6K-dimblur.png
+# set $wallpaper_dimblur $wallpaper_base-dimblur.png
 
 output * bg $wallpaper fill
 
@@ -60,35 +61,52 @@ set $Locker swaylock -f \
 # ---------- SwayFX
 
 # blur enable
-# blur_passes 2
-# blur_radius 5
-# corner_radius 9
-# shadows enable
-# shadows_on_csd enable
-# shadow_blur_radius 10
+blur enable
+blur_passes 2
+blur_radius 5
+corner_radius 9
+shadows enable
+shadows_on_csd enable
+shadow_blur_radius 14
+shadow_offset 2 5
+shadow_color #00000066
+shadow_inactive_color #00000044
 # shadow_color #000000FF
-# titlebar_separator enable
+titlebar_separator enable
 
 
-# layer_effects "waybar" blur enable; shadows enable; shadow_blur_radius 10; corner_radius 0
-# layer_effects "rofi" blur enable; shadows enable; shadow_blur_radius 10; corner_radius 0
+layer_effects "waybar" {
+  blur enable;
+  # shadows enable;
+  corner_radius 0;
+}
 
-# for_window [class=".*"] border pixel 4
-# default_floating_border none
-# # default_border pixel 1
-# # smart_borders on  # issues with firefox
-# smart_gaps on
-# gaps inner 16
-# gaps outer 5
+layer_effects "rofi" {
+ blur enable;
+ shadows enable;
+ corner_radius 10;
+}
+
+for_window [class=".*"] border pixel 4
+default_floating_border none
+# default_border pixel 1
+# smart_borders on  # issues with firefox
+smart_gaps on
+gaps inner 8
+gaps outer 3
 
 # titlebar_border_thickness 2
 # # titlebar_padding 7 7
-# smart_borders on
+smart_borders on
 
 # ---------- SwayFX
 
 # These are symlinked to either {background,theme}-{dark,light} based on `darkman get`
-include ~/.config/sway/background
+
+output * bg ~/wallpaper/Rancho_Cucamonga_Tree_6K.png fill
+# include ~/.config/sway/background-light
+# include ~/.config/sway/background-light
+# include ~/.config/sway/background
 include ~/.config/sway/theme
 
 # Fixed dark theme

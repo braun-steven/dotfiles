@@ -5,9 +5,9 @@
 * {
     font:   "Raleway Regular 15";
 
-    bg0:    #222222;
+    bg0:    #222222C0;
     bg1:    #7E7E7E80;
-    bg2:    #285577;
+    bg2:    #285577C0;
 
     fg0:    #DEDEDE;
     fg1:    #FFFFFF;
