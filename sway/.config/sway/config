@@ -37,10 +37,10 @@ input type:keyboard {
   repeat_rate 40
 }
 
-bindsym Mod1+h exec wtype -k left
-bindsym Mod1+j exec wtype -k down
-bindsym Mod1+k exec wtype -k up
-bindsym Mod1+l exec wtype -k right
+bindsym Mod1+Ctrl+h exec wtype -k left
+bindsym Mod1+Ctrl+j exec wtype -k down
+bindsym Mod1+Ctrl+k exec wtype -k up
+bindsym Mod1+Ctrl+l exec wtype -k right
 
 # Mark XWayland windows
 for_window [shell="xwayland"] title_format "[XWayland] %title"
@@ -56,6 +56,36 @@ set $Locker swaylock -f \
       --indicator-radius 75 \
       --indicator-thickness 15
 
+
+# ---------- SwayFX
+
+# blur enable
+# blur_passes 2
+# blur_radius 5
+# corner_radius 9
+# shadows enable
+# shadows_on_csd enable
+# shadow_blur_radius 10
+# shadow_color #000000FF
+# titlebar_separator enable
+
+
+# layer_effects "waybar" blur enable; shadows enable; shadow_blur_radius 10; corner_radius 0
+# layer_effects "rofi" blur enable; shadows enable; shadow_blur_radius 10; corner_radius 0
+
+# for_window [class=".*"] border pixel 4
+# default_floating_border none
+# # default_border pixel 1
+# # smart_borders on  # issues with firefox
+# smart_gaps on
+# gaps inner 16
+# gaps outer 5
+
+# titlebar_border_thickness 2
+# # titlebar_padding 7 7
+# smart_borders on
+
+# ---------- SwayFX
 
 # These are symlinked to either {background,theme}-{dark,light} based on `darkman get`
 include ~/.config/sway/background
