@@ -25,27 +25,6 @@ transform = "normal"
 adaptive_sync = false
 
 [[profile]]
-name = "desktop-home only left monitor"
-
-[[profile.output]]
-enable = true
-search = ["m=TL140ADXP24-0", "s=", "v=Tianma Microelectronics Ltd."]
-mode = "2880x1800@120Hz"
-position = "3840,0"
-scale = 2.0
-transform = "normal"
-adaptive_sync = false
-
-[[profile.output]]
-enable = true
-search = ["m=LU28R55", "s=HNMR100496", "v=Samsung Electric Company"]
-mode = "3840x2160@60Hz"
-position = "0,0"
-scale = 1.5
-transform = "normal"
-adaptive_sync = false
-
-[[profile]]
 name = "Dominic Home"
 
 [[profile.output]]
@@ -66,37 +45,6 @@ scale = 1.5
 transform = "normal"
 adaptive_sync = false
 
-[[profile]]
-name = "stephanie-office-aachen"
-
-[[profile.output]]
-enable = true
-search = ["m=P27-8 TS UHD", "s=YVBK105630", "v=Fujitsu Siemens Computers GmbH"]
-mode = "3840x2160@60Hz"
-position = "0,0"
-scale = 1.5
-transform = "normal"
-adaptive_sync = false
-
-[[profile.output]]
-enable = false
-search = ["m=TL140ADXP24-0", "s=", "v=Tianma Microelectronics Ltd."]
-
-[[profile]]
-name = "mani-office-aachen"
-
-[[profile.output]]
-enable = true
-search = ["m=23MB35", "s=411NDXQ8H426", "v=LG Electronics"]
-mode = "1920x1080@60Hz"
-position = "0,0"
-scale = 1.0
-transform = "normal"
-adaptive_sync = false
-
-[[profile.output]]
-enable = false
-search = ["m=TL140ADXP24-0", "s=", "v=Tianma Microelectronics Ltd."]
 
 [[profile]]
 name = "mobile"
@@ -130,4 +78,20 @@ position = "298,1080"
 scale = 1.5
 transform = "normal"
 adaptive_sync = false
+
+[[profile]]
+name = "home only left monitor"
+
+[[profile.output]]
+enable = true
+search = ["m=LU28R55", "s=HNMR100496", "v=Samsung Electric Company"]
+mode = "3840x2160@60Hz"
+position = "298,0"
+scale = 1.5
+transform = "normal"
+adaptive_sync = false
+
+[[profile.output]]
+enable = false
+search = ["m=TL140ADXP24-0", "s=", "v=Tianma Microelectronics Ltd."]
 

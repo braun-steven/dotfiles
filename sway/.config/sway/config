@@ -87,7 +87,7 @@ layer_effects "rofi" {
  corner_radius 10;
 }
 
-for_window [class=".*"] border pixel 4
+# for_window [class=".*"] border pixel 4
 default_floating_border none
 # default_border pixel 1
 # smart_borders on  # issues with firefox
@@ -383,7 +383,7 @@ bindsym XF86AudioLowerVolume exec amixer set Master 5%-
 bindsym XF86AudioMute        exec amixer set Master toggle
 
 # You can also use any non-zero value if you'd like to have a border
-for_window [class=".*"] border pixel 3
+for_window [class=".*"] border pixel 2
 default_floating_border none
 titlebar_border_thickness 1
 
