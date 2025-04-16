@@ -5,13 +5,13 @@
 * {
     font:   "Raleway Regular 15";
 
-    bg0:    #222222C0;
-    bg1:    #7E7E7E80;
-    bg2:    #285577C0;
+    bg0:    #222222;
+    bg1:    #7E7E7E;
+    bg2:    #285577;
 
     fg0:    #DEDEDE;
     fg1:    #FFFFFF;
-    fg2:    #DEDEDE80;
+    fg2:    #DEDEDE;
 
     background-color:   transparent;
     text-color:         @fg0;
