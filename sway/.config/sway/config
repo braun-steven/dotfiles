@@ -61,45 +61,44 @@ set $Locker swaylock -f \
 # ---------- SwayFX
 
 # blur enable
-blur enable
-blur_passes 2
-blur_radius 5
-corner_radius 9
-shadows enable
-shadows_on_csd enable
-shadow_blur_radius 14
-shadow_offset 2 5
-shadow_color #00000066
-shadow_inactive_color #00000044
-# shadow_color #000000FF
-titlebar_separator enable
+# blur_passes 2
+# blur_radius 5
+# corner_radius 9
+# shadows enable
+# shadows_on_csd enable
+# shadow_blur_radius 14
+# shadow_offset 2 5
+# shadow_color #00000066
+# shadow_inactive_color #00000044
+# titlebar_separator enable
 
 
-layer_effects "waybar" {
-  blur enable;
-  # shadows enable;
-  corner_radius 0;
-}
+# layer_effects "waybar" {
+#   blur enable;
+#   # shadows enable;
+#   corner_radius 0;
+# }
 
-layer_effects "rofi" {
- blur enable;
- shadows enable;
- corner_radius 10;
-}
+# layer_effects "rofi" {
+#  blur enable;
+#  shadows enable;
+#  corner_radius 10;
+# }
 
 # for_window [class=".*"] border pixel 4
-default_floating_border none
+# default_floating_border none
 # default_border pixel 1
 # smart_borders on  # issues with firefox
-smart_gaps on
-gaps inner 8
-gaps outer 3
+# smart_gaps on
+# gaps inner 8
+# gaps outer 3
 
 # titlebar_border_thickness 2
 # # titlebar_padding 7 7
-smart_borders on
 
 # ---------- SwayFX
+
+smart_borders on
 
 # These are symlinked to either {background,theme}-{dark,light} based on `darkman get`
 
@@ -347,7 +346,8 @@ for_window [window_role="dialog"] floating enable
 for_window [window_role="menu"] floating enable
 for_window [window_role="Preferences"] floating enable
 for_window [title="Volume Control"] floating enable resize set 640 960
-for_window [title=".*Bitwarden.*"] floating enable
+# for_window [title=".*Bitwarden.*"] floating enable
+for_window [app_id="^firefox$" title="^Extension: \(Bitwarden - Free Password Manager\) - Bitwarden — Mozilla Firefox$"] floating enable
 for_window [title="Characters"] floating enable
 
 # Zoom, float everything except for the actual meeting window
@@ -445,7 +445,7 @@ exec {
   ~/.cargo/bin/shikane
 
   # Evolution alarm notififications for calendar reminders
-  /usr/libexec/evolution-data-server/evolution-alarm-notify
+  # /usr/libexec/evolution-data-server/evolution-alarm-notify
 
 }
 
