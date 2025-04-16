@@ -98,7 +98,7 @@ Plug 'itchyny/lightline.vim'
 Plug 'tpope/vim-repeat'
 
 " Github Copilot
-Plug 'github/copilot.vim'
+" Plug 'github/copilot.vim'
 
 " Modus theme
 Plug 'miikanissi/modus-themes.nvim'

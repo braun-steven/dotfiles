@@ -19,7 +19,8 @@
 @define-color background-focused-border #4c7899;
 @define-color background-focused-inactive #5f676a;
 @define-color background-focused-inactive-border #888888;
-@define-color background rgba(20,20,22, 0.90);
+/* @define-color background rgba(20,20,22, 0.90); */
+@define-color background rgb(20,20,22);
 /* @define-color background rgb(16,16,16); */
 /* @define-color background #000000; */
 
