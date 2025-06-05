@@ -4,6 +4,8 @@
 
       ;; :nv "," nil
 
+      :nv "C-<return>" #'typst-ts-editing-meta-return
+
       :localleader
 
       :desc "View" "v"     #'typst-ts-mode-preview

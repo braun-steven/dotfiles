@@ -115,3 +115,19 @@
               (:prefix "r"
                        :desc "PARA" "p" #'(lambda () (interactive) (find-file "~/org/notes/20241119070534-para_hub.org")))
                ))
+
+
+;; Useful, when there is a variable `bar' and I want to turn it into `foo(bar)'
+(map! :after evil ;; Ensure evil and its maps are loaded
+      :map evil-visual-state-map
+      ;; For parentheses ()
+      "s)" (kbd "S)i")  ;; Pressing 's' then ')' in visual mode will execute S, then (, then i
+      "s(" (kbd "S)i")  ;; Pressing 's' then '(' in visual mode will execute S, then (, then i
+
+      ;; For square brackets []
+      "s]" (kbd "S]i")  ;; Pressing 's' then ']' in visual mode will execute S, then [, then i
+      "s[" (kbd "S]i")  ;; Pressing 's' then '[' in visual mode will execute S, then [, then i
+
+      ;; For curly braces {}
+      "s}" (kbd "S}i")  ;; Pressing 's' then '}' in visual mode will execute S, then {, then i
+      "s{" (kbd "S}i")) ;; Pressing 's' then '{' in visual mode will execute S, then {, then i

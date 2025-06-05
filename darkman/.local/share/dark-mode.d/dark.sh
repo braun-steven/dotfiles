@@ -23,3 +23,4 @@ gsettings set org.gnome.desktop.wm.preferences theme Colloid-Dark
 gsettings set org.gnome.desktop.interface icon-theme Colloid
 gsettings set org.gnome.desktop.interface cursor-theme Adwaita
 gsettings set org.gnome.desktop.interface color-scheme prefer-dark
+

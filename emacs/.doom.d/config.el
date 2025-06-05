@@ -191,7 +191,7 @@
     `(avy-lead-face-3 :weight bold :foreground "yellow" :background ,(face-attribute 'default :background)))
   )
 
-;; (setq! fill-column 100)
+(setq! fill-column 120)
 
 ;; Corfu setup
 (use-package! corfu
@@ -225,64 +225,19 @@
 
 (after! transient
         :config
-        (setq transient-show-during-minibuffer-read t)
-        )
+        (setq transient-show-during-minibuffer-read t))
 
 (use-package! gptel
  :config
- ;; (setq! gptel-api-key "your key")
-;; OPTIONAL configuration
-;; OPTIONAL configuration
         (setq
-        gptel-model 'gemini-2.0-pro-exp-02-05
-        gptel-backend (gptel-make-gemini "Gemini"
-                        :key (lambda ()
-                        (with-temp-buffer
-                          (insert-file-contents "~/.gemini-api-key")
-                          (buffer-string)))
-                        :stream t))
-
-        (gptel-make-anthropic "Claude"          ;Any name you want
-        :stream t                             ;Streaming responses
-        :key (lambda ()
-                        (with-temp-buffer
-                          (insert-file-contents "~/.anthropic-api-key")
-                          (buffer-string)))
-        :models '(claude-3-7-sonnet-20250219)
-        :header (lambda () (when-let* ((key (gptel--get-api-key)))
-                        `(("x-api-key" . ,key)
-                        ("anthropic-version" . "2023-06-01")
-                        ("anthropic-beta" . "pdfs-2024-09-25")
-                        ("anthropic-beta" . "output-128k-2025-02-19")
-                        ("anthropic-beta" . "prompt-caching-2024-07-31"))))
-        :request-params '(:thinking (:type "enabled" :budget_tokens 2048)
-                        :max_tokens 4096))
-
-        (add-to-list 'gptel--gemini-models
-             '(gemini-2.0-pro-exp-02-05
-               :description "Next generation Pro model"
-               :capabilities (tool-use json media)
-               :mime-types ("image/png" "image/jpeg" "image/webp" "image/heic" "image/heif"
-                            "application/pdf" "text/plain" "text/csv" "text/html")
-               :context-window 32
-               :cutoff-date "2024-08"))
-        (add-to-list 'gptel--gemini-models
-             '(gemini-2.0-flash-thinking-exp-01-21
-               :description "Next gen, high speed, multimodal for a diverse variety of tasks"
-               :capabilities (json)
-               :input-cost 0.00
-               :output-cost 0.00
-               :cutoff-date "2024-08"))
-        (add-to-list 'gptel--gemini-models
-             '(gemini-2.0-flash-exp
-               :description "Multi-modal, streaming, tool use 2000 RPM"
-               :capabilities (tool-use json media)
-               :mime-types ("image/png" "image/jpeg" "image/webp" "image/heic" "image/heif"
-                             "application/pdf" "text/plain" "text/csv" "text/html")
-               :context-window 1000
-               :input-cost 0.00
-               :output-cost 0.00
-               :cutoff-date "2024-08"))
+        gptel-model 'gpt-4o
+        ;; gptel-backend (gptel-make-gemini "Gemini"
+        ;;                 :key (lambda ()
+        ;;                 (with-temp-buffer
+        ;;                   (insert-file-contents "~/.gemini-api-key")
+        ;;                   (buffer-string)))
+        ;;                 :stream t)
+        )
     (add-hook 'gptel-post-stream-hook 'gptel-auto-scroll)
     (add-hook 'gptel-post-response-functions 'gptel-end-of-response)
     (setf (alist-get 'org-mode gptel-prompt-prefix-alist) "@user\n")
@@ -295,16 +250,17 @@
     (setq gptel-response-prefix-alist '((markdown-mode . "### @ASSISTANT:\n")
         (org-mode . "*** @ASSISTANT:\n")
         (text-mode . "### @ASSISTANT:\n")))
+ )
 
+(custom-set-variables
+ '(gptel-context-highlight-face ((t nil)))
  )
 
 
 (use-package! ultra-scroll
   :init
-  (setq scroll-conservatively 101 ; important!
-        scroll-margin 0)
-        :config
-        (ultra-scroll-mode 1))
+  (setq scroll-margin 0))
+
 
 ;; Removes the "with-editor: Cannot determine a suitable Emacsclient" Warning
 (setq-default with-editor-emacsclient-executable "emacsclient")
@@ -330,18 +286,26 @@
 
 (menu-bar-mode 0)
 
-;; Fix latex mode not starting, see also: https://github.com/doomemacs/doomemacs/issues/8191
-(add-to-list 'auto-mode-alist '("\\.tex\\'" . LaTeX-mode))
+;; ;; Fix latex mode not starting, see also: https://github.com/doomemacs/doomemacs/issues/8191
+;; (add-to-list 'auto-mode-alist '("\\.tex\\'" . LaTeX-mode))
 
-;; (after! jinx
-;;   (setq jinx-languages "pt_BR en_US"
-;;       jinx-delay 1.0))
+(use-package! jinx
+  :config
+  (setq jinx-languages "en_US de_DE"
+      jinx-delay 1.0)
+        (dolist (hook '(text-mode-hook prog-mode-hook conf-mode-hook org-mode-hook LaTeX-mode-hook))
+                (add-hook hook #'jinx-mode))
+  )
 
-;; (after! vertico-multiform ;; if using vertico
-;;   (add-to-list 'vertico-multiform-categories
-;;                '(jinx (vertico-grid-annotate . 25)))
+(use-package! titlecase
+  :defer t)
 
-;;   (vertico-multiform-mode 1))
+
+(after! vertico-multiform ;; if using vertico
+  (add-to-list 'vertico-multiform-categories
+               '(jinx (vertico-grid-annotate . 25)))
+
+  (vertico-multiform-mode 1))
 
 ;; Load private modules
 (dolist (file (directory-files "~/.doom.d/private/" t directory-files-no-dot-files-regexp))
@@ -350,4 +314,4 @@
 
 
 ;; Integrate MacOS clipboard with Emacs
-(load! "pbcopy.el")
+;; (load! "pbcopy.el")
