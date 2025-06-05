@@ -68,9 +68,7 @@ Plug 'wellle/targets.vim'
 Plug 'jiangmiao/auto-pairs'
 
 " Colorscheme
-Plug 'rakr/vim-one'
 Plug 'romgrk/doom-one.vim'
-Plug 'arcticicestudio/nord-vim'
 
 " Easier vim navigation
 Plug 'easymotion/vim-easymotion'
@@ -98,7 +96,7 @@ Plug 'itchyny/lightline.vim'
 Plug 'tpope/vim-repeat'
 
 " Github Copilot
-" Plug 'github/copilot.vim'
+Plug 'github/copilot.vim'
 
 " Modus theme
 Plug 'miikanissi/modus-themes.nvim'
@@ -288,12 +286,4 @@ let g:CoolTotalMatches = 1
 " Time in milliseconds (default 250)
 let g:Illuminate_delay = 250
 let g:Illuminate_ftblacklist = ['nerdtree', 'python']
-" }}}
-
-
-" Transparent background {{{
-" highlight Normal guibg=none
-" highlight NonText guibg=none
-" highlight Normal ctermbg=none
-" highlight NonText ctermbg=none
 " }}}

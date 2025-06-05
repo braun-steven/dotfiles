@@ -23,7 +23,7 @@ input type:touchpad {
 input type:pointer {
     # scroll_factor 0.35
     # accel_profile "adaptive" # disable mouse acceleration (enabled by default; to set it manually, use "adaptive" instead of "flat")
-    pointer_accel 0.2 # set mouse sensitivity (between -1 and 1)
+    pointer_accel 0.5 # set mouse sensitivity (between -1 and 1)
 }
 
 input type:keyboard {
@@ -98,7 +98,7 @@ set $Locker swaylock -f \
 
 # ---------- SwayFX
 
-smart_borders on
+smart_borders off
 
 # These are symlinked to either {background,theme}-{dark,light} based on `darkman get`
 
@@ -118,7 +118,7 @@ set $mod2 Mod1
 
 # Font for window titles.
 # font pango:Inter 10
-font pango:IBM Plex Mono 10
+# font pango:IBM Plex Mono 10
 font pango:CommitMono 10
 
 # Use Mouse+$mod to drag floating windows to their wanted position
@@ -264,12 +264,13 @@ workspace $wo output $secondmon
 workspace $wp output $secondmon
 
 # Menu for lock logout etc.
-set $mode_restart Restart: (p) wireplumber (e) emacs service, (s) sway (w) waybar (m) monitors
+set $mode_restart Restart: (p) wireplumber (e) emacs service, (s) sway (w) waybar (m) monitors (S) shikane
 mode "$mode_restart" {
     bindsym p exec systemctl --user restart wireplumber, mode "default"
     bindsym e exec systemctl --user restart emacs, mode "default"
     bindsym w exec killall waybar && waybar &> /tmp/waybar.log, mode "default"
     bindsym s exec swaymsg reload, mode "default"
+    bindsym Shift+s exec killall shikane && shikane, mode "default"
     # bindsym m exec killall kanshi && sleep 0.5 && kanshi, mode "default"
     bindsym m exec ~/.cargo/bin/shikanectl reload, mode "default"
 
@@ -383,7 +384,7 @@ bindsym XF86AudioLowerVolume exec amixer set Master 5%-
 bindsym XF86AudioMute        exec amixer set Master toggle
 
 # You can also use any non-zero value if you'd like to have a border
-for_window [class=".*"] border pixel 2
+for_window [class=".*"] border pixel 3
 default_floating_border none
 titlebar_border_thickness 1
 
@@ -461,5 +462,6 @@ exec_always {
 
   # Reload shikane: detect correct monitors
   ~/.cargo/bin/shikanectl reload
+  # killall shikane && ~/.cargo/bin/shikane
   # killall kanshi & sleep 0.5 && kanshi &
 }

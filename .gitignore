@@ -20,3 +20,4 @@ configs/onedrive/.config/onedrive/refresh_token
 
 .DS_Store
 .projectile-cache.eld
+/emacs/.doom.d/custom.el

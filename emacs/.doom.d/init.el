@@ -87,14 +87,14 @@
 
        :checkers
        (syntax +childframe)              ; tasing you for every semicolon you forget
-       (spell +flyspell +aspell)             ; tasing you for misspelling mispelling
+       ;; (spell +flyspell +aspell)             ; tasing you for misspelling mispelling
        grammar           ; tasing grammar mistake every you make
 
        :tools
        ;;ansible
        biblio
        ;; (debugger +lsp)          ; FIXME stepping through code, to help you add bugs
-       ;; direnv
+       direnv
        ;;docker
        ;;editorconfig      ; let someone else argue about tabs vs spaces
        ;; ein               ; tame Jupyter notebooks with emacs

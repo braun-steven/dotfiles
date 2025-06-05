@@ -71,6 +71,7 @@
     background: @background;
     opacity: 1.00;
     color: white;
+    /* font-family: Inter; */
     font-family: CommitMono, IBM Plex Mono, Hack, Inter, Cantarell;
     font-size: 15px;
     margin: 8px;
@@ -212,42 +213,45 @@
 /* Button default */
 #workspaces button {
     border-top: 0px solid transparent;
-    border-bottom: 2px solid transparent;
+    border-bottom: 0px solid transparent;
     border-left: 0px solid transparent;
     border-right: 0px solid transparent;
     /* To compensate for the top border and still have vertical centering */
-    padding-bottom: 2px;
+    padding-bottom: 0px;
     padding-top: 0px;
     margin-top: 0px;
-    margin-bottom: 3px;
+    margin-bottom: 0px;
     padding-left: 10px;
     padding-right: 10px;
-    margin-left: 2px;
-    margin-right: 2px;
-    border-radius: 6px;
+    margin-left: 0px;
+    margin-right: 0px;
+    border-radius: 0px;
+    /* border-radius: 6px; */
     color: @foreground-unfocused;
-    border: 2px solid transparent;
+    border: 0px solid transparent;
 }
 
 /* Focused button */
 #workspaces button.focused {
     color: @foreground-focused;
     background: @background-focused;
-    border-bottom: 2px solid @background-focused-border;
-    border-radius: 10px;
+    border-bottom: 0px solid @background-focused-border;
+    border-radius: 0px;
+    /* border-radius: 10px; */
 }
 
 /* Focused button but on inactive monitor */
 #workspaces button.visible:not(.focused) {
     color: @foreground-focused-inactive;
     background: @background-focused-inactive;
-    border-bottom: 2px solid @background-focused-inactive-border;
-    border-radius: 10px;
+    border-bottom: 0px solid @background-focused-inactive-border;
+    border-radius: 0px;
+    /* border-radius: 10px; */
 }
 
 /* Urgent button */
 #workspaces button.urgent {
-    border-bottom: 2px solid @foreground-urgent;
+    border-bottom: 0px solid @foreground-urgent;
     background: @foreground-urgent;
 }
 
@@ -255,8 +259,9 @@
 #workspaces button.focused:hover {
     color: @foreground-focused;
     background: @background-focused;
-    border-bottom: 2px solid @background-focused-border;
-    border-radius: 10px;
+    border-bottom: 0px solid @background-focused-border;
+    border-radius: 0px;
+    /* border-radius: 10px; */
 }
 
 /* Hovered button */
@@ -268,7 +273,7 @@
     /* border: inherit; */
     background: @background-focused-inactive;
     color: @foreground-focused;
-    border-bottom: 2px solid @background-focused-inactive;
+    border-bottom: 0px solid @background-focused-inactive;
 }
 
 #custom-darkman {

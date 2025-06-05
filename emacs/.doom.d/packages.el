@@ -73,17 +73,23 @@
 
 (package! magit-todos)
 
-;; (package! jinx)
+;; (package! gptel)
+(package! gptel :recipe (:nonrecursive t))
+(package! copilot-chat) ;; Usefull for diff-based git-commit messages
+
+
+;; (package! ultra-scroll :recipe (:host github :repo "jdtsmith/ultra-scroll" :files ("*.el")))
+(package! powerthesaurus)
+
+;; Fish mode
+(package! fish-mode)
+
+(package! jinx)
+
+(package! titlecase)
 
 ;; Load private module packages
 (dolist (file (directory-files "~/.doom.d/private/" t directory-files-no-dot-files-regexp))
   (load! (concat file "/packages.el")))
 
 
-(package! gptel)
-
-(package! ultra-scroll :recipe (:host github :repo "jdtsmith/ultra-scroll" :files ("*.el")))
-(package! powerthesaurus)
-
-;; Fish mode
-(package! fish-mode)

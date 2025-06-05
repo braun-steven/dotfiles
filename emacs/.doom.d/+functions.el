@@ -45,10 +45,17 @@ current buffer's, reload dir-locals."
 ;; }}}
 
 
-(defun sbraun/open-pathfinder-session-notes ()
+(defun sbraun/open-pathfinder-blood-lords-session-notes ()
   "Open the Pathfinder 2E Blood Lords session notes."
   (interactive)
   (let ((file-path (expand-file-name "org/pathfinder-blood-lords/20231124162340-pathfinder_2e_blood_lords_session_notes.org"
+                                     (getenv "HOME"))))
+    (find-file file-path)))
+
+(defun sbraun/open-pathfinder-seven-dooms-for-sandpoint-session-notes ()
+  "Open the Pathfinder 2E Blood Lords session notes."
+  (interactive)
+  (let ((file-path (expand-file-name "~/org/pathfinder-seven-dooms-for-sandpoint/20250505174307-session_notes.org"
                                      (getenv "HOME"))))
     (find-file file-path)))
 

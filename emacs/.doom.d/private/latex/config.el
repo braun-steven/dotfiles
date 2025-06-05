@@ -23,9 +23,11 @@
   (add-hook 'TeX-mode-hook #'(lambda () (push '("citeauthorandref" "[{") font-latex-match-reference-keywords)))
 
   ;; Set latex viewer
-  (setq +latex-viewers '(pdf-tools))
+  (setq +latex-viewers '(evince))
+  ;; (setq +latex-viewers '(pdf-tools))
   (setq TeX-view-program-selection '(
-        ;; (output-pdf "vince")
+
+        ;; (output-pdf "Evince")
         ;; (output-pdf "Zathura")
         (output-pdf "PDF Tools")
         ((output-dvi has-no-display-manager)
