@@ -244,19 +244,18 @@
       ],
       "tooltip": true
     },
-	"custom/audio_idle_inhibitor": {
-		"format": " {icon} ",
-		"exec": "sway-audio-idle-inhibit --dry-print-both-waybar",
-        "interval": 5,
-		"exec-if": "which sway-audio-idle-inhibit",
-		"return-type": "json",
-		"format-icons": {
-			"output": " ",
-			"input": " ",
-			"output-input": "   ",
-			"none": ""
-		}
-	},
+    "custom/audio_idle_inhibitor": {
+        "format": " {icon} ",
+        "exec": "/usr/local/bin/sway-audio-idle-inhibit --dry-print-both-waybar",
+        "exec-if": "which sway-audio-idle-inhibit",
+        "return-type": "json",
+        "format-icons": {
+            "output": "   |",
+            "input": "   |",
+            "output-input": "     |",
+            "none": ""
+        }
+    },
     "custom/light-toggle": {
         "exec": "~/.local/bin/light_icon.sh",
         "interval": 5,
