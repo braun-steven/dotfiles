@@ -33,7 +33,7 @@
 
 ;; Define the themes
 (setq sbraun/theme-dark 'doom-one)
-(setq sbraun/theme-light 'modus-operandi)
+(setq sbraun/theme-light 'modus-operandi-tinted)
 
 ;; Initially set the theme based on the current theme
 ;; (set-doom-theme-based-on-darkman)

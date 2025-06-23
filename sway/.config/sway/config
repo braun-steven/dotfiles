@@ -5,9 +5,10 @@ exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK PATH
 exec hash dbus-update-activation-environment 2>/dev/null && \
      dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP=sway
 
-set $wallpaper_base ~/wallpaper/macos-big-sur-night
+set $wallpaper_base ~/wallpaper/wave-layer-7-water-blue
+# set $wallpaper_base ~/wallpaper/macos-big-sur-night
 set $wallpaper $wallpaper_base.png
-set $wallpaper_dimblur ~/wallpaper/Rancho_Cucamonga_Tree_6K-dimblur.png
+set $wallpaper_dimblur ~/wallpaper/wave-layer-7-blue-dimblur.png
 # set $wallpaper_dimblur $wallpaper_base-dimblur.png
 
 output * bg $wallpaper fill
@@ -102,7 +103,7 @@ smart_borders off
 
 # These are symlinked to either {background,theme}-{dark,light} based on `darkman get`
 
-output * bg ~/wallpaper/Rancho_Cucamonga_Tree_6K.png fill
+# output * bg ~/wallpaper/Rancho_Cucamonga_Tree_6K.png fill
 # include ~/.config/sway/background-light
 # include ~/.config/sway/background-light
 # include ~/.config/sway/background

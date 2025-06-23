@@ -108,7 +108,7 @@
 (setq emacs-dir (file-name-as-directory "~/.doom.d"))
 
 ;; Better scrolling
-(setq scroll-margin 3)
+;; (setq scroll-margin 3)
 
 ;; Set which-key delay
 (setq which-key-idle-delay 0.75)
@@ -230,13 +230,14 @@
 (use-package! gptel
  :config
         (setq
-        gptel-model 'gpt-4o
-        ;; gptel-backend (gptel-make-gemini "Gemini"
-        ;;                 :key (lambda ()
-        ;;                 (with-temp-buffer
-        ;;                   (insert-file-contents "~/.gemini-api-key")
-        ;;                   (buffer-string)))
-        ;;                 :stream t)
+        gptel-model 'gpt-4.1
+        ;; gptel-model 'gpt-4o
+        gptel-backend (gptel-make-gemini "Gemini"
+                        :key (lambda ()
+                        (with-temp-buffer
+                          (insert-file-contents "~/.gemini-api-key")
+                          (buffer-string)))
+                        :stream t)
         )
     (add-hook 'gptel-post-stream-hook 'gptel-auto-scroll)
     (add-hook 'gptel-post-response-functions 'gptel-end-of-response)
@@ -252,14 +253,24 @@
         (text-mode . "### @ASSISTANT:\n")))
  )
 
+(use-package! gptel-prompts
+  :after gptel
+  :config
+  (setq gptel-prompts-directory "~/prompts/")
+  (gptel-prompts-update)
+  ;; Ensure prompts are updated if prompt files change
+  (gptel-prompts-add-update-watchers))
+
+
+
 (custom-set-variables
  '(gptel-context-highlight-face ((t nil)))
  )
 
 
-(use-package! ultra-scroll
-  :init
-  (setq scroll-margin 0))
+;; (use-package! ultra-scroll
+;;   :init
+;;   (setq scroll-margin 0))
 
 
 ;; Removes the "with-editor: Cannot determine a suitable Emacsclient" Warning
@@ -306,6 +317,7 @@
                '(jinx (vertico-grid-annotate . 25)))
 
   (vertico-multiform-mode 1))
+
 
 ;; Load private modules
 (dolist (file (directory-files "~/.doom.d/private/" t directory-files-no-dot-files-regexp))

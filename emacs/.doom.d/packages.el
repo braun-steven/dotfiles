@@ -75,16 +75,18 @@
 
 ;; (package! gptel)
 (package! gptel :recipe (:nonrecursive t))
+(package! gptel-prompts :recipe (:host github :repo "jwiegley/gptel-prompts"))
 (package! copilot-chat) ;; Usefull for diff-based git-commit messages
 
 
-;; (package! ultra-scroll :recipe (:host github :repo "jdtsmith/ultra-scroll" :files ("*.el")))
 (package! powerthesaurus)
 
 ;; Fish mode
 (package! fish-mode)
 
 (package! jinx)
+
+(package! websocket)
 
 (package! titlecase)
 

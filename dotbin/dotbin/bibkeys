@@ -1,0 +1,49 @@
+#!/usr/bin/python
+import sys
+
+try:
+    import bibtexparser
+except ImportError:
+    print("Please install the bibtexparser library. Exiting...")
+    sys.exit(1)
+
+def extract_bibtex_keys_and_titles(file_path):
+    try:
+        bib_database = bibtexparser.parse_file(file_path)
+        entries = []
+        for entry in bib_database.entries:
+            key = entry.key
+            title = entry.get("title")
+            if title is None:
+                # Try again with "Title"
+                title = entry.get("Title")
+            title = title.value.replace('\n', ' ').strip()
+            title = " ".join(e.strip() for e in title.split(" ") if len(e) > 0)
+
+            # Remove "{" and "}" from the title
+            title = title.replace("{", "").replace("}", "")
+
+
+            entries.append((key, title))
+        # Sort by key alphabetically
+        entries.sort(key=lambda x: x[0])
+        return entries
+    except FileNotFoundError:
+        print(f"File not found: {file_path}")
+    except Exception as e:
+        print(f"An error occurred: {e}")
+    return []
+
+if __name__ == "__main__":
+    if len(sys.argv) != 2:
+        print("Usage: python extract_bib_keys.py <path_to_bib_file>")
+        sys.exit(1)
+
+    bib_file_path = sys.argv[1]
+    entries = extract_bibtex_keys_and_titles(bib_file_path)
+
+    if entries:
+        for key, title in entries:
+            print(f"{key} | {title}")
+    else:
+        print("No BibTeX entries found.")

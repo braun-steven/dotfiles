@@ -1,0 +1,30 @@
+# Colors (Modus Operandi Tinted)
+# author Steven Braun, taken from modus-themes for emacs by Prot (https://protesilaos.com/)
+
+[colors.primary]
+background = '#fbf7f0'
+foreground = '#000000'
+
+[colors.cursor]
+text = '#fbf7f0'
+cursor = '#000000'
+
+[colors.normal]
+black = '#000000'
+red = '#a60000'
+green = '#006300'
+yellow = '#6d5000'
+blue = '#0031a9'
+magenta = '#721045'
+cyan = '#00598b'
+white = '#a6a6a6'
+
+[colors.bright]
+black = '#595959'
+red = '#d00000'
+green = '#008900'
+yellow = '#808000'
+blue = '#0000ff'
+magenta = '#dd22dd'
+cyan = '#008899'
+white = '#FFFFFF'

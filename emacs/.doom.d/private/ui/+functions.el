@@ -7,7 +7,7 @@
                                               (->> (custom-available-themes)
                                                    (-map #'symbol-name)
                                                    (--select (string-prefix-p "doom-" it)))))))
-  (ap/load-theme theme))
+  (sbraun/load-theme theme))
 
 (defun sbraun/load-theme (theme)
   "Disable active themes and load THEME.

@@ -7,9 +7,10 @@
   (typst-ts-mode-watch-options "--open")
   ;; experimental settings (I'm the main dev, so I enable these)
   (typst-ts-mode-enable-raw-blocks-highlight t)
-  (typst-ts-mode-highlight-raw-blocks-at-startup t))
+  (typst-ts-mode-highlight-raw-blocks-at-startup t)
+  )
 
-:config
+  :config
   (load! "+functions")
   (load! "+keybindings")
 
@@ -22,8 +23,19 @@
   ;; Necessary or else localleader is not detected
   (add-hook 'typst-ts-mode-hook #'evil-normalize-keymaps))
 
-;; (after! typst-ts-mode
-;;   (load! "+functions")
-;;   (load! "+keybindings")
-;;   ;; Necessary or else localleader is not detected
-;;   (add-hook 'typst-ts-mode-hook #'evil-normalize-keymaps))
+
+(use-package! typst-ts-mode
+  :custom
+  (typst-ts-mode-watch-options "--open")
+  :config
+  ;; make sure to install typst-lsp from
+  ;; https://github.com/nvarner/typst-lsp/releases
+  ;; or use tinymist
+  (after! lsp-mode
+  (add-to-list 'lsp-language-id-configuration '(typst-ts-mode . "typst"))
+  (lsp-register-client
+   (make-lsp-client
+    :new-connection (lsp-stdio-connection "typst-lsp")
+    :major-modes '(typst-ts-mode)
+    :server-id 'typst-lsp))
+  ))

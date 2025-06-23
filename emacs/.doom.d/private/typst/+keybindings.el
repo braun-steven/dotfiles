@@ -12,4 +12,9 @@
       :desc "Watch" "w"     #'typst-ts-mode-watch-toggle
       :desc "Compile" "c"     #'typst-ts-mode-compile-and-preview
       :desc "Format" ","    #'sbraun/typstfmt-current-buffer
+
+      (:prefix ("i" . "Insert")
+               "b" #'sbraun/insert-bibtex-key-at-point
+               "l" #'sbraun/insert-label-from-buffer
+               )
       )
