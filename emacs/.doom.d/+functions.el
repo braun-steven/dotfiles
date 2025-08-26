@@ -120,3 +120,14 @@ current buffer's, reload dir-locals."
          (chosen (completing-read "Select BibTeX entry: " candidates nil t)))
     ;; Insert only the key part (cdr of chosen)
     (insert (cdr (assoc chosen candidates)))))
+
+(defun sbraun/open-alacritty-in-project-root ()
+  "Open a new Alacritty window in the current project's root directory."
+  (interactive)
+  (let ((project-root (or (when (fboundp 'project-root)
+                            (when-let ((proj (project-current)))
+                              (project-root proj)))
+                          default-directory)))
+    (if project-root
+        (start-process "alacritty" nil "alacritty" "msg" "create-window" "--working-directory" project-root)
+      (message "Could not determine project root."))))

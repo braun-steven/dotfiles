@@ -33,3 +33,35 @@ Return a list of the labels as strings (without the angle brackets)."
         (message "No labels found in buffer.")
       (let ((chosen (completing-read "Select label: " unique-labels nil t)))
         (insert (format "@%s" chosen))))))
+
+
+(defun sbraun/insert-bibtex-key-at-point ()
+  "Insert a BibTeX key at point by searching keys and titles from `bibtex-lookup-bibfile`."
+  (interactive)
+  (unless bibtex-lookup-bibfile
+    (user-error "Variable `bibtex-lookup-bibfile` is not set"))
+  (let* ((python-script "bibkeys") ;; update this path
+         (bibfile (expand-file-name bibtex-lookup-bibfile (projectile-project-root)))
+         (python-cmd (format "%s %s"
+                             (shell-quote-argument python-script)
+                             (shell-quote-argument bibfile)))
+         (output (shell-command-to-string python-cmd))
+         (lines (split-string output "\n" t))
+         ;; Parse into (key . title)
+         (entries
+          (mapcar (lambda (line)
+                    (let ((parts (split-string line " | ")))
+                      (cons (car parts) (cadr parts))))
+                  lines))
+         ;; Calculate max key width for padding
+         (max-key-len (apply #'max (mapcar (lambda (e) (length (car e))) entries)))
+         ;; Prepare candidates with padded key and title separated by spaces only
+         (candidates
+          (mapcar (lambda (entry)
+                    (let ((key (car entry))
+                          (title (cdr entry)))
+                      (cons (format (format "%%-%ds  %%s" max-key-len) key title) key)))
+                  entries))
+         (chosen (completing-read "Select BibTeX entry: " candidates nil t)))
+    ;; Insert only the key part (cdr of chosen)
+    (insert (format "@%s" (cdr (assoc chosen candidates))))))

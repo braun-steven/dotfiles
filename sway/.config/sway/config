@@ -5,11 +5,11 @@ exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK PATH
 exec hash dbus-update-activation-environment 2>/dev/null && \
      dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP=sway
 
-set $wallpaper_base ~/wallpaper/wave-layer-7-water-blue
-# set $wallpaper_base ~/wallpaper/macos-big-sur-night
+# set $wallpaper_base ~/wallpaper/wave-layer-7-water-blue
+set $wallpaper_base ~/wallpaper/macos-big-sur-day
 set $wallpaper $wallpaper_base.png
-set $wallpaper_dimblur ~/wallpaper/wave-layer-7-blue-dimblur.png
-# set $wallpaper_dimblur $wallpaper_base-dimblur.png
+# set $wallpaper_dimblur ~/wallpaper/wave-layer-7-blue-dimblur.png
+set $wallpaper_dimblur $wallpaper_base-dimblur.png
 
 output * bg $wallpaper fill
 
@@ -193,7 +193,7 @@ set $w0 "10 󰻞 chat"
 set $wy "11 (y) LLMs"
 set $wu "12 (u)"
 set $wi "13 (i)"
-set $wo "14 (o) pomodoro"
+set $wo "14 (o)"
 set $wp "15  (p) gtd"
 
 # switch to workspace
@@ -271,7 +271,6 @@ mode "$mode_restart" {
     bindsym e exec systemctl --user restart emacs, mode "default"
     bindsym w exec killall waybar && waybar &> /tmp/waybar.log, mode "default"
     bindsym s exec swaymsg reload, mode "default"
-    bindsym Shift+s exec killall shikane && shikane, mode "default"
     # bindsym m exec killall kanshi && sleep 0.5 && kanshi, mode "default"
     bindsym m exec ~/.cargo/bin/shikanectl reload, mode "default"
 
@@ -414,7 +413,7 @@ exec {
             timeout 180 'swaymsg "output eDP-1 power off"' resume 'swaymsg "output eDP-1 power on"' \
             timeout 60 'laptop-idle idle keyboard' resume 'laptop-idle resume keyboard' \
             timeout 60 'laptop-idle idle screen' resume 'laptop-idle resume screen' \
-            before-sleep 'loginctl lock-session $XDG_SESSION_ID' before-sleep 'playerctl pause' lock 'playerctl -a pause; $Locker'
+            before-sleep 'loginctl lock-session $XDG_SESSION_ID; playerctl pause; playerctl -a pause'
 
 
   # Inhibit swayidle if audio input/output is running
@@ -448,7 +447,7 @@ exec {
 
   # Run shikane: detect correct monitors
   # exec kanshi
-  ~/.cargo/bin/shikane
+  # ~/.cargo/bin/shikane  # This is already in exec_always
 
   # Evolution alarm notififications for calendar reminders
   # /usr/libexec/evolution-data-server/evolution-alarm-notify
@@ -466,7 +465,7 @@ exec_always {
   gsettings set org.gnome.nm-applet disable-connected-notifications "true"
 
   # Reload shikane: detect correct monitors
-  ~/.cargo/bin/shikanectl reload
-  # killall shikane && ~/.cargo/bin/shikane
-  # killall kanshi & sleep 0.5 && kanshi &
+  # ~/.cargo/bin/shikanectl reload
+  killall shikane || ~/.cargo/bin/shikane
+  # killall kanshi || sleep 0.5 && ~/.cargo/bin/kanshi
 }

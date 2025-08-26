@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+# Define the variables
+wallpaper_dimblur="~/wallpaper/macos-big-sur-day-dimblur.png" # Replace with your wallpaper path
+Locker="swaylock -f \
+  --image $wallpaper_dimblur \
+  --inside-color 00000088 \
+  --ring-color 2E323C \
+  --key-hl-color 799033 \
+  --ring-ver-color 2E323C \
+  --inside-ver-color 2E323C \
+  --indicator-radius 75 \
+  --indicator-thickness 15"
+
+# Run swayidle with the defined variables
+swayidle -w \
+  timeout 1200 'systemctl suspend' resume 'sleep 3' \
+  timeout 600 'niri msg action power-off-monitors' resume 'niri msg action power-on-monitors' \
+  timeout 60 'laptop-idle idle keyboard' resume 'laptop-idle resume keyboard' \
+  timeout 60 'laptop-idle idle screen' resume 'laptop-idle resume screen' \
+  before-sleep 'loginctl lock-session $XDG_SESSION_ID' before-sleep 'playerctl pause' lock "playerctl -a pause; $Locker"

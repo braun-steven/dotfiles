@@ -90,6 +90,8 @@
 
 (package! titlecase)
 
+(package! kdl-mode)
+
 ;; Load private module packages
 (dolist (file (directory-files "~/.doom.d/private/" t directory-files-no-dot-files-regexp))
   (load! (concat file "/packages.el")))

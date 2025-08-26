@@ -232,7 +232,8 @@
 }
 
 /* Focused button */
-#workspaces button.focused {
+/* #workspaces button.active { */ /* Niri */
+#workspaces button.focused {  /* Sway */
     color: @foreground-focused;
     background: @background-focused;
     border-bottom: 0px solid @background-focused-border;
@@ -240,7 +241,8 @@
     /* border-radius: 10px; */
 }
 
-/* Focused button but on inactive monitor */
+/* /\* Focused button but on inactive monitor *\/ */
+/* Sway */
 #workspaces button.visible:not(.focused) {
     color: @foreground-focused-inactive;
     background: @background-focused-inactive;
@@ -248,6 +250,16 @@
     border-radius: 0px;
     /* border-radius: 10px; */
 }
+
+/* Focused button but on inactive monitor */
+/* Niri */
+/* #workspaces button.active:not(.focused) { */
+/*     color: @foreground-focused-inactive; */
+/*     background: @background-focused-inactive; */
+/*     border-bottom: 0px solid @background-focused-inactive-border; */
+/*     border-radius: 0px; */
+/*     /\* border-radius: 10px; *\/ */
+/* } */
 
 /* Urgent button */
 #workspaces button.urgent {

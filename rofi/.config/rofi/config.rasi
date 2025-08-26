@@ -2,7 +2,9 @@ configuration {
 	modi: "combi";
 	show-icons: true;
 	terminal: "alacritty";
+//	combi-modi: "drun,run";
 	combi-modi: "drun,bookmarks:/home/steven/dotbin/rofi-bookmarks.py -p default-release,run";
+//	combi-modi: "drun,bookmarks:/home/steven/rofi_bookmarks_rs/target/release/rofi-bookmarks -p default-release,run";
 	combi-hide-mode-prefix: true;
 	kb-remove-char-back: "BackSpace";
 	kb-remove-to-eol: "Control+Shift+e";

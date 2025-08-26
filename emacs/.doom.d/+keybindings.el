@@ -8,6 +8,8 @@
 
       "v" #'er/expand-region
 
+      "T" #'sbraun/open-alacritty-in-project-root
+
       :leader
       "SPC" #'execute-extended-command
 
@@ -106,7 +108,6 @@
        :desc "add-fille" "f" #'gptel-add-file
        :desc "send" "s" #'gptel-send
        :desc "rewrite" "r" #'gptel-rewrite
-       :desc "menu" "m" #'gptel-menu
        :desc "regenerate" "R" #'gptel--regenerate
        ))
 
@@ -115,6 +116,11 @@
               (:prefix "r"
                        :desc "PARA" "p" #'(lambda () (interactive) (find-file "~/org/notes/20241119070534-para_hub.org")))
                ))
+
+(map! :map gptel-mode-map
+      :localleader
+       :desc "menu" "m" #'gptel-menu
+      )
 
 
 ;; Useful, when there is a variable `bar' and I want to turn it into `foo(bar)'

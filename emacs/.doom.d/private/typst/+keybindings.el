@@ -8,8 +8,8 @@
 
       :localleader
 
-      :desc "View" "v"     #'typst-ts-mode-preview
-      :desc "Watch" "w"     #'typst-ts-mode-watch-toggle
+      :desc "View" "v"     #'typst-ts-preview
+      :desc "Watch" "w"     #'typst-ts-watch-mode
       :desc "Compile" "c"     #'typst-ts-mode-compile-and-preview
       :desc "Format" ","    #'sbraun/typstfmt-current-buffer
 

@@ -19,14 +19,16 @@
     "height": 14,
 
     "modules-left": [
-        // "hyprland/workspaces",
-          "sway/workspaces",
+//          "niri/workspaces"
+//          "custom/niri-windows",
+//          "wlr/taskbar"
+          "sway/workspaces"
 //        "sway/window",
-        "sway/mode",
+//        "sway/mode"
     ],
-//     "modules-center": [
-//     //      "sway/window"
-//     ],
+//      "modules-center": [
+//         "cffi/niri-taskbar",
+//      ],
     "modules-right": [
         "custom/audio_idle_inhibitor",
         "custom/memory",
@@ -268,6 +270,24 @@
     "tray": {
         "icon-size": 18,
         "spacing": 10
-    }
-
+    },
+    "wlr/taskbar": {
+        "all-outputs": false,
+        // "format": "{icon} {title} {short_state}",
+        "format": "{icon}",
+        "icon-size": 24,
+        "tooltip-format": "{title} | {app_id}",
+        "on-click": "activate",
+        "on-click-middle": "close",
+        "on-click-right": "fullscreen"
+    },
+    "cffi/niri-taskbar": {
+        "module_path": "/home/steven/niri-taskbar/target/release/libniri_taskbar.so",
+  },
+  "custom/niri-windows": {
+    "exec": "~/.config/waybar/scripts/list-niri-windows.sh",
+    "interval": 1,
+    "format": "{text}",
+    "tooltip": true
+},
 }

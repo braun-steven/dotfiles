@@ -31,5 +31,13 @@ appendix=$(get_appendix_for_workspace "$current_workspace_number")
 # Construct the new workspace name
 full_workspace_name="${current_workspace_number} ${new_workspace_name}${appendix}"
 
-# Rename the workspace
-swaymsg "rename workspace to \"$full_workspace_name\""
+# Check if `niri` is running
+if pgrep -x "niri" > /dev/null; then
+    # If `niri` is running, use `niri` to rename the workspace
+    niri msg action set-workspace-name "$full_workspace_name"
+    exit 0
+else
+    # Rename the workspace
+    swaymsg "rename workspace to \"$full_workspace_name\""
+fi
+

@@ -20,11 +20,11 @@
 ;; Place your private configuration here! Remember, you do not need to run 'doom
 ;; refresh' after modifying this file!
 
-(use-package! benchmark-init
-  :ensure t
-  :config
-  ;; To disable collection of benchmark data after init is done.
-  (add-hook 'after-init-hook 'benchmark-init/deactivate))
+;; (use-package! benchmark-init
+;;   :ensure t
+;;   :config
+;;   ;; To disable collection of benchmark data after init is done.
+;;   (add-hook 'after-init-hook 'benchmark-init/deactivate))
 
 ;; Set garbace collection threshold to 100MB
 (setq gc-cons-threshold 100000000)
@@ -102,6 +102,7 @@
   (hl-line-mode (if rainbow-mode -1 +1)))
 
 ;; Enable word wrap mode
+(setq +word-wrap-extra-indent 'single)
 (+global-word-wrap-mode)
 
 ;; Emacs config location
@@ -151,9 +152,9 @@
   :after magit
   :config (magit-todos-mode 1))
 
-(use-package! vertico
-  :config
-  (setq vertico-posframe-width 160))
+;; (use-package! vertico
+;;   :config
+;;   (setq vertico-posframe-width 160))
 
 
 (use-package! vertico-directory
@@ -166,6 +167,8 @@
 
 ;; Disable loading all known projects when opening a single project. If set to true, this may greatly reduce performance.
 (setq lsp-pyright-multi-root nil)
+(setq lsp-pyright-langserver-command "basedpyright")
+
 
 
 (after! (projectile conda)
@@ -198,12 +201,14 @@
     :config
     (setq corfu-auto-delay 0.0)
     (setq corfu-auto-prefix 3)
-    (setq corfu-preselect 'prompt))
+    (setq corfu-preselect 'prompt)
+    (setq completion-styles '(orderless basic))
+    )
 
 ;; Orderless setup
-;; (use-package! orderless
-;;     :config
-;;     (setq completion-styles '(orderless-flex basic)))
+(use-package! orderless
+    :config
+    (setq orderless-matching-styles '(orderless-literal orderless-regexp)))
 
 
 ;; accept completion from copilot
@@ -230,7 +235,8 @@
 (use-package! gptel
  :config
         (setq
-        gptel-model 'gpt-4.1
+        gptel-model 'gemini-2.5-pro
+        gptel-include-reasoning nil
         ;; gptel-model 'gpt-4o
         gptel-backend (gptel-make-gemini "Gemini"
                         :key (lambda ()
@@ -244,13 +250,13 @@
     (setf (alist-get 'org-mode gptel-prompt-prefix-alist) "@user\n")
     (setf (alist-get 'org-mode gptel-response-prefix-alist) "@assistant\n")
 
-    (setq gptel-prompt-prefix-alist '((markdown-mode . "### @USER:\n")
-        (org-mode . "*** @USER:\n")
-        (text-mode . "### @USER:\n")))
+    (setq gptel-prompt-prefix-alist '((markdown-mode . "# @USER:\n")
+        (org-mode . "* @USER:\n")
+        (text-mode . "# @USER:\n")))
 
-    (setq gptel-response-prefix-alist '((markdown-mode . "### @ASSISTANT:\n")
-        (org-mode . "*** @ASSISTANT:\n")
-        (text-mode . "### @ASSISTANT:\n")))
+    (setq gptel-response-prefix-alist '((markdown-mode . "# @ASSISTANT:\n")
+        (org-mode . "* @ASSISTANT:\n")
+        (text-mode . "# @ASSISTANT:\n")))
  )
 
 (use-package! gptel-prompts
@@ -276,6 +282,8 @@
 ;; Removes the "with-editor: Cannot determine a suitable Emacsclient" Warning
 (setq-default with-editor-emacsclient-executable "emacsclient")
 
+;; Set search to ignore linebreaks
+(setq search-whitespace-regexp "[[:space:]\n]")
 
 ;; ;; If pressing tab to complete sometimes doesn't work you might want to bind completion to another key or try:
 ;; (after! (evil copilot)
