@@ -19,10 +19,10 @@
     "height": 14,
 
     "modules-left": [
-//          "niri/workspaces"
 //          "custom/niri-windows",
 //          "wlr/taskbar"
           "sway/workspaces"
+//          "niri/workspaces"
 //        "sway/window",
 //        "sway/mode"
     ],

@@ -232,7 +232,6 @@
 }
 
 /* Focused button */
-/* #workspaces button.active { */ /* Niri */
 #workspaces button.focused {  /* Sway */
     color: @foreground-focused;
     background: @background-focused;
@@ -243,6 +242,7 @@
 
 /* /\* Focused button but on inactive monitor *\/ */
 /* Sway */
+/* #workspaces button.active:not(.focused) { */
 #workspaces button.visible:not(.focused) {
     color: @foreground-focused-inactive;
     background: @background-focused-inactive;
