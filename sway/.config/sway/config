@@ -106,7 +106,7 @@ smart_borders off
 # output * bg ~/wallpaper/Rancho_Cucamonga_Tree_6K.png fill
 # include ~/.config/sway/background-light
 # include ~/.config/sway/background-light
-# include ~/.config/sway/background
+include ~/.config/sway/background
 include ~/.config/sway/theme
 
 # Fixed dark theme

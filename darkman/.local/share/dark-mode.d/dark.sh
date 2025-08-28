@@ -2,7 +2,8 @@
 
 # Symlink sway theme and background (-f overwrites existing symlink)
 # ln -f -s ~/.config/sway/theme-dark ~/.config/sway/theme
-# ln -f -s ~/.config/sway/background-dark ~/.config/sway/background
+ln -f -s ~/.config/sway/background-dark ~/.config/sway/background
+swaymsg "$(cat ~/.config/sway/background-dark)"
 # swaymsg reload
 
 # Alacritty
