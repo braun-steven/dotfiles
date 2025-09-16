@@ -23,6 +23,13 @@
   ;; Necessary or else localleader is not detected
   (add-hook 'typst-ts-mode-hook #'evil-normalize-keymaps))
 
+;; (with-eval-after-load 'eglot
+;;   (with-eval-after-load 'typst-ts-mode
+;;     (add-to-list 'eglot-server-programs
+;;                  `((typst-ts-mode) .
+;;                    ,(eglot-alternatives `(,typst-ts-lsp-download-path
+;;                                           "tinymist"
+;;                                           "typst-lsp"))))))
 
 (use-package! typst-ts-mode
   :custom

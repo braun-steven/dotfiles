@@ -1,4 +1,10 @@
 ;;; ../dotfiles/configs/emacs/.doom.d/tools/+lsp.el -*- lexical-binding: t; -*-
+
+(after! eglot
+        (setq eglot-ignored-server-capabilities '(:inlayHintProvider))
+        ;; Light-bulb icon by default, leads to highlighted line being taller than others (bug? not rendering correctly?)
+        (setq eglot-code-action-indicator "*"))
+
 (after! lsp-mode
   (load! "+functions")
   (load! "+keybindings")

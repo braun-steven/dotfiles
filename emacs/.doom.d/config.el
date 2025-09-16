@@ -64,7 +64,8 @@
 ;; (setq doom-font (font-spec :family "CommitMono" :size 16))  ;; Linux
 ;; (setq doom-font (font-spec :family "Dejavu Sans Mono" :size 15))  ;; Linux
 ;; (setq doom-font (font-spec :family "SF Mono" :size 16))  ;; Linux
-(setq doom-font (font-spec :family "CommitMono" :size 15))  ;; Linux
+(setq doom-font (font-spec :family "SF Mono" :size 12))  ;; Linux
+;; (setq doom-font (font-spec :family "CommitMono" :size 14.0))  ;; Linux
 
 ;; Add some more space between the lines
 ;; (setq line-spacing 0.17)
@@ -124,6 +125,8 @@
 
 ;; Load custom functions
 (load! "+functions")
+
+(setq org-roam-directory "~/org/notes")
 
 (use-package! doom-themes
   :config
@@ -303,7 +306,6 @@
 ;; (remove-hook! '(window-setup-hook after-make-frame-functions)
 ;;               #'doom-restore-menu-bar-in-gui-frames-h)
 
-(menu-bar-mode 0)
 
 ;; ;; Fix latex mode not starting, see also: https://github.com/doomemacs/doomemacs/issues/8191
 ;; (add-to-list 'auto-mode-alist '("\\.tex\\'" . LaTeX-mode))
@@ -327,11 +329,21 @@
   (vertico-multiform-mode 1))
 
 
+(menu-bar-mode 0)
+
+;; MacOS umlauts
+(setq ns-alternate-modifier 'none
+      ns-right-alternate-modifier 'meta)
+
+;; Integrate MacOS clipboard with Emacs
+;; (load! "pbcopy.el")
+
+(custom-theme-set-faces
+   'user
+   '(variable-pitch ((t (:family "SF Pro" :height 130))))
+   '(fixed-pitch ((t ( :family "SF Mono" :height 130)))))
+
 ;; Load private modules
 (dolist (file (directory-files "~/.doom.d/private/" t directory-files-no-dot-files-regexp))
   (if (file-directory-p file)
       (load! (concat file "/config.el"))))
-
-
-;; Integrate MacOS clipboard with Emacs
-;; (load! "pbcopy.el")

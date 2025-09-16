@@ -67,7 +67,9 @@
 (package! git-link)
 ;; (package! git-link :pin "40f7b1674d2c703199ff2f82b464f17aa6f61b4b")  ;; Fixes transient issue
 
-(package! typst-ts-mode :recipe (:host codeberg :repo "meow_king/typst-ts-mode"))
+;; (package! typst-ts-mode :recipe (:host codeberg :repo "meow_king/typst-ts-mode"))
+(package! typst-ts-mode :recipe (:host nil :repo "https://git.sr.ht/~meow_king/typst-ts-mode"))
+
 
 (package! benchmark-init)
 

@@ -13,7 +13,7 @@ def create_link(entry: os.DirEntry):
     src = entry.path
 
     # Replace $HOME/dotfiles/configs/<CONFIG>/ with $HOME
-    rplc = "/".join(src.split("/")[:6])
+    rplc = "/".join(src.split("/")[:5])
     dst = Path(src.replace(rplc, HOME))
 
     # Create parent directories if they don't exist
@@ -85,7 +85,16 @@ if __name__ == "__main__":
 
     # Scan all dirs in "./configs/"
     for entry in os.scandir(CONFIG_DIR):
-        assert entry.is_dir(), f"'{entry.path}' is not a directory!"
+
+        if not entry.is_dir():
+            # Skip non-directories
+            logger.warning(f"'{entry.path}' is not a directory!")
+            continue
+
+        # Check if directory is ".git" (dotfiles has the .git dir)
+        if entry.name == ".git":
+            continue
+
         for f in os.scandir(entry):
 
             # Skip .DS_store files on MacOS

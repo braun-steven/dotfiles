@@ -11,6 +11,10 @@
   (load! "+functions")
   (load! "+keybindings")
 
+
+   ;; Add variable-pitch mode to org-mode (for nicer writing experience)
+   ;; (add-hook 'org-mode-hook 'variable-pitch-mode)
+
   (set-face-attribute 'org-level-1 nil :height 1.20 :background nil)
   (set-face-attribute 'org-level-2 nil :height 1.10 :background nil)
   (set-face-attribute 'org-level-3 nil :height 1.05 :background nil)
@@ -65,4 +69,5 @@
            :unnarrowed t
            :empty-lines 1)
            ))
-  )
+
+   )

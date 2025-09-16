@@ -4,7 +4,7 @@ alias reboot="sudo systemctl reboot"
 alias poweroff="sudo systemctl poweroff"
 alias vimupdate="vim +PlugClean +PlugUpdate +UpdateRemoteRepositories +qa"
 alias rsync="rsync --progress -vh --archive --compress-level=3 --copy-links --partial --inplace --rsh=ssh -r"
-alias ipy="python -c 'import IPython; IPython.terminal.ipapp.launch_new_instance()'"
+# alias ipy="python -c 'import IPython; IPython.terminal.ipapp.launch_new_instance()'"
 
 # Emacsclient terminal
 alias em="emacsclient -t -a ''"

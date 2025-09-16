@@ -17,8 +17,7 @@ yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
 
 # global settings
 yabai -m config mouse_follows_focus          off
-# From: https://github.com/koekeishiya/yabai/wiki/Configuration#window-modifications
-# With focus follows mouse, you can also focus windows without having to click on them. This can be set to either autofocus (window gets focused, but not raised) or autoraise (window gets raised as if it was clicked on).
+# From: https://github.com/koekeishiya/yabai/wiki/Configuration#window-modifications With focus follows mouse, you can also focus windows without having to click on them. This can be set to either autofocus (window gets focused, but not raised) or autoraise (window gets raised as if it was clicked on).
 yabai -m config focus_follows_mouse          autofocus
 yabai -m config window_origin_display        focused
 yabai -m config window_insertion_point       focused
@@ -63,8 +62,8 @@ yabai -m space 7 --label 7
 yabai -m space 8 --label 8
 yabai -m space 9 --label 9
 yabai -m space 10 --label 10
-# yabai -m space 11 --label 11
-# yabai -m space 12 --label 12
+yabai -m space 11 --label 11
+yabai -m space 12 --label 12
 # yabai -m space 13 --label 13
 # yabai -m space 14 --label 14
 # yabai -m space 15 --label 15
@@ -72,8 +71,9 @@ yabai -m space 10 --label 10
 
 
 # float settings windows
-yabai -m rule --add app='^Finder$' manage=off sticky=off
+# yabai -m rule --add app='^Finder$' manage=off sticky=off
 yabai -m rule --add app='^Weather$' manage=off sticky=off
+# yabai -m rule --add app='^Photos$' manage=off sticky=off
 # yabai -m rule --add app='^Alacritty$' manage=off sticky=off
 yabai -m rule --add title='Settings$' manage=off sticky=on 
 yabai -m rule --add app="^System Preferences$" manage=off 
@@ -86,15 +86,16 @@ yabai -m rule --add title="^Accounts.*" manage=off   # MacOS Mail accounts
 yabai -m rule --add title="^Run/Debug Configurations.*" manage=off   # PyCharm
 yabai -m rule --add title="^Disk Utility$" manage=off   # MacOS Disk utility
 yabai -m rule --add app="^App Store$" manage=off   # MacOS App Store
-yabai -m rule --add app="^Signal$" manage=off   # Signal
+# yabai -m rule --add app="^Signal$" manage=off   # Signal
 yabai -m rule --add app="^Messages$" manage=off   # Messages
-yabai -m rule --add app=".*WhatsApp.*" manage=off   # WhatsApp
+# yabai -m rule --add app=".*WhatsApp.*" manage=off   # WhatsApp
 yabai -m rule --add app=".*MacWhisper.*" manage=off   # MacWhisper
 yabai -m rule --add app="^NordVPN$" manage=off   # NordVPN
 yabai -m rule --add app="^Notes$" manage=off   # Apple Notes
 yabai -m rule --add app="^Spotify$" manage=off   # Spotify
 yabai -m rule --add app="^Pearcleaner$" manage=off
 yabai -m rule --add app="^Podcasts$" manage=off
+yabai -m rule --add app="^Trace$" manage=off
 
 
 # PyCharm
@@ -108,6 +109,8 @@ yabai -m rule --add title="^Extract.*$" manage=off
 yabai -m rule --add title="^Welcome to PyCharm$" manage=off
 yabai -m rule --add title="^Add File to Git$" manage=off
 yabai -m rule --add title="^Emacs Everywhere.*" manage=off
+# yabai -m rule --add app="Mail" title="^New Message.*" manage=off
+# yabai -m rule --add app="Mail" title="^Re:.*" manage=off
 
 # Set padding for spacebar
 # yabai -m config external_bar all:24:0  # Top

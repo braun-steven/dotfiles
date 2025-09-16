@@ -40,7 +40,7 @@ Return a list of the labels as strings (without the angle brackets)."
   (interactive)
   (unless bibtex-lookup-bibfile
     (user-error "Variable `bibtex-lookup-bibfile` is not set"))
-  (let* ((python-script "bibkeys") ;; update this path
+  (let* ((python-script (expand-file-name "~/dotbin/bibkeys")) ;; update this path
          (bibfile (expand-file-name bibtex-lookup-bibfile (projectile-project-root)))
          (python-cmd (format "%s %s"
                              (shell-quote-argument python-script)
