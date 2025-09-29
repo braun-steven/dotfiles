@@ -56,15 +56,15 @@
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
 ;; (if (eq system-type 'darwin)
-;; (setq doom-font (font-spec :family "CommitMono" :size 14.0))  ;; MacOS
+;; (setq doom-font (font-spec :family "CommitMono" :size 12.0))  ;; MacOS
 ;; (setq doom-font (font-spec :family "Hack" :size 13.5))  ;; MacOS
 ;; (setq doom-font (font-spec :family "Hack" :size 15))  ;; Linux
 ;; (setq doom-font (font-spec :family "Dejavu Sans Mono" :size 14))  ;; Linux
 ;; (setq doom-font (font-spec :family "SF Mono" :size 16))  ;; Linux
 ;; (setq doom-font (font-spec :family "CommitMono" :size 16))  ;; Linux
 ;; (setq doom-font (font-spec :family "Dejavu Sans Mono" :size 15))  ;; Linux
-;; (setq doom-font (font-spec :family "SF Mono" :size 16))  ;; Linux
-(setq doom-font (font-spec :family "SF Mono" :size 12))  ;; Linux
+;; (setq doom-font (font-spec :family "SF Mono" :size 16))
+(setq doom-font (font-spec :family "SF Mono" :size 12))
 ;; (setq doom-font (font-spec :family "CommitMono" :size 14.0))  ;; Linux
 
 ;; Add some more space between the lines
@@ -338,10 +338,10 @@
 ;; Integrate MacOS clipboard with Emacs
 ;; (load! "pbcopy.el")
 
-(custom-theme-set-faces
-   'user
-   '(variable-pitch ((t (:family "SF Pro" :height 130))))
-   '(fixed-pitch ((t ( :family "SF Mono" :height 130)))))
+;; (custom-theme-set-faces
+;;    'user
+;;    '(variable-pitch ((t (:family "SF Pro" :height 150))))
+;;    '(fixed-pitch ((t ( :family "SF Mono" :height 130)))))
 
 ;; Load private modules
 (dolist (file (directory-files "~/.doom.d/private/" t directory-files-no-dot-files-regexp))

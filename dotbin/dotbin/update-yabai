@@ -1,20 +1,18 @@
 #!/usr/bin/env sh
 
-# Stop yabai
-brew services stop fyabai
+# set codesigning certificate name here (default: yabai-cert)
+export YABAI_CERT=
 
-# Remove previous git directory
-rm -rf Library/Caches/Homebrew/fyabai--git/
+# stop yabai
+yabai --stop-service
 
-# Upgrade yabai
-brew reinstall fyabai
+# reinstall yabai (remove old service file because homebrew changes binary path)
+yabai --uninstall-service
+brew reinstall koekeishiya/formulae/yabai
+codesign -fs "${YABAI_CERT:-yabai-cert}" "$(brew --prefix yabai)/bin/yabai"
 
-# Update yabai sha256 sum in private yabai-sudoers file
-line="$USER ALL = (root) NOPASSWD: sha256:$(shasum -a 256 $(which yabai)) $(which yabai) --load-sa"
-echo $line | sudo tee /private/etc/sudoers.d/yabai
+# Update scripting addition
+echo "$(whoami) ALL=(root) NOPASSWD: sha256:$(shasum -a 256 $(which yabai) | cut -d " " -f 1) $(which yabai) --load-sa" | sudo tee /private/etc/sudoers.d/yabai
 
-# Codesign binary
-codesign -fs 'yabai-cert' /opt/homebrew/Cellar/fyabai/HEAD-*/bin/yabai
-
-# Start yabai again
-brew services start fyabai
+# finally, start yabai
+yabai --start-service
