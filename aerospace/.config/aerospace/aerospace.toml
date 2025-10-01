@@ -23,7 +23,7 @@ after-startup-command = [
 ]
 
 # Start AeroSpace at login
-start-at-login = false
+start-at-login = true
 
 # Normalizations. See: https://nikitabobko.github.io/AeroSpace/guide#normalization
 enable-normalization-flatten-containers = true
@@ -61,7 +61,7 @@ automatically-unhide-macos-hidden-apps = true
 
 [[on-window-detected]]
     if.app-id = 'Mattermost.Desktop'
-    run = 'move-node-to-workspace 0'
+    run = 'move-node-to-workspace 10'
 
 [[on-window-detected]]
     if.app-id = 'com.apple.mail'
@@ -74,6 +74,10 @@ automatically-unhide-macos-hidden-apps = true
 [[on-window-detected]]
     if.app-id = 'com.culturedcode.ThingsMac'
     run = 'move-node-to-workspace 8'
+
+[[on-window-detected]]
+    if.app-id = 'com.spotify.client'
+    run = 'move-node-to-workspace 7'
 
 [workspace-to-monitor-force-assignment]
     1 = 1                     
@@ -124,13 +128,14 @@ automatically-unhide-macos-hidden-apps = true
     #     activate
     # end tell'
     # '''
-    cmd-shift-enter = 'exec-and-forget /Users/steven/dotfiles/dotbin/dotbin/skhd-iterm2-new-window.sh'
+    cmd-ctrl-enter = 'exec-and-forget /Users/steven/dotfiles/dotbin/dotbin/skhd-iterm2-new-window.sh'
+    cmd-shift-enter = 'exec-and-forget emacsclient -c'
 
     # i3 wraps focus by default
-    cmd-h =         'focus --boundaries-action wrap-around-the-workspace left'
-    cmd-j =         'focus --boundaries-action wrap-around-the-workspace down'
-    cmd-k =         'focus --boundaries-action wrap-around-the-workspace up'
-    cmd-l = 'focus --boundaries-action wrap-around-the-workspace right'
+    cmd-h = 'focus --boundaries all-monitors-outer-frame left'
+    cmd-j = 'focus --boundaries all-monitors-outer-frame down'
+    cmd-k = 'focus --boundaries all-monitors-outer-frame up'
+    cmd-l = 'focus --boundaries all-monitors-outer-frame right'
 
     cmd-shift-h = 'move left'
     cmd-shift-j = 'move down'
@@ -166,17 +171,18 @@ automatically-unhide-macos-hidden-apps = true
     # should be supported at all https://github.com/nikitabobko/AeroSpace/issues/5
     # alt-a = 'focus parent'
 
-    cmd-1 = 'workspace 1'
-    cmd-2 = 'workspace 2'
-    cmd-3 = 'workspace 3'
-    cmd-4 = 'workspace 4'
-    cmd-5 = 'workspace 5'
-    cmd-6 = 'workspace 6'
-    cmd-7 = 'workspace 7'
-    cmd-8 = 'workspace 8'
-    cmd-9 = 'workspace 9'
-    cmd-0 = 'workspace 10'
-    cmd-y = 'workspace 11'
+    cmd-1 = 'workspace 1 --auto-back-and-forth'
+    cmd-2 = 'workspace 2 --auto-back-and-forth'
+    cmd-3 = 'workspace 3 --auto-back-and-forth'
+    cmd-4 = 'workspace 4 --auto-back-and-forth'
+    cmd-5 = 'workspace 5 --auto-back-and-forth'
+    cmd-6 = 'workspace 6 --auto-back-and-forth'
+    cmd-7 = 'workspace 7 --auto-back-and-forth'
+    cmd-8 = 'workspace 8 --auto-back-and-forth'
+    cmd-9 = 'workspace 9 --auto-back-and-forth'
+    cmd-0 = 'workspace 10 --auto-back-and-forth'
+    cmd-y = 'workspace 11 --auto-back-and-forth'
+    cmd-u = 'workspace 12 --auto-back-and-forth'
 
     cmd-shift-1 = 'move-node-to-workspace 1'
     cmd-shift-2 = 'move-node-to-workspace 2'
@@ -189,42 +195,41 @@ automatically-unhide-macos-hidden-apps = true
     cmd-shift-9 = 'move-node-to-workspace 9'
     cmd-shift-0 = 'move-node-to-workspace 10'
     cmd-shift-y = 'move-node-to-workspace 11'
+    cmd-shift-u = 'move-node-to-workspace 12'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
-    alt-tab = 'workspace-back-and-forth'
+    # alt-tab = 'workspace-back-and-forth'
     # See: https://nikitabobko.github.io/AeroSpace/commands#move-workspace-to-monitor
-    alt-shift-tab = 'move-workspace-to-monitor --wrap-around next'
+    # alt-shift-tab = 'move-workspace-to-monitor --wrap-around next'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#mode
-    alt-shift-semicolon = 'mode service'
+    alt-shift-r = 'reload-config'
 
+    # alt-r = 'mode resize'
+    # alt-esc = 'mode service'
 
-    alt-shift-c = 'reload-config'
-
-    alt-r = 'mode resize'
-
-[mode.resize.binding]
-    h = 'resize width -50'
-    j = 'resize height +50'
-    k = 'resize height -50'
-    l = 'resize width +50'
-    enter = 'mode main'
-    esc = 'mode main'
+# [mode.resize.binding]
+#     h = 'resize width -50'
+#     j = 'resize height +50'
+#     k = 'resize height -50'
+#     l = 'resize width +50'
+#     enter = 'mode main'
+#     esc = 'mode main'
 
 
 
 # 'service' binding mode declaration.
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
-[mode.service.binding]
-    esc = ['reload-config', 'mode main']
-    r = ['flatten-workspace-tree', 'mode main'] # reset layout
-    f = ['layout floating tiling', 'mode main'] # Toggle between floating and tiling layout
-    backspace = ['close-all-windows-but-current', 'mode main']
+# [mode.service.binding]
+#     esc = ['reload-config', 'mode main']
+#     r = ['flatten-workspace-tree', 'mode main'] # reset layout
+#     f = ['layout floating tiling', 'mode main'] # Toggle between floating and tiling layout
+#     backspace = ['close-all-windows-but-current', 'mode main']
 
-    # sticky is not yet supported https://github.com/nikitabobko/AeroSpace/issues/2
-    #s = ['layout sticky tiling', 'mode main']
+#     # sticky is not yet supported https://github.com/nikitabobko/AeroSpace/issues/2
+#     #s = ['layout sticky tiling', 'mode main']
 
-    alt-shift-h = ['join-with left', 'mode main']
-    alt-shift-j = ['join-with down', 'mode main']
-    alt-shift-k = ['join-with up', 'mode main']
-    alt-shift-l = ['join-with right', 'mode main']
+#     alt-shift-h = ['join-with left', 'mode main']
+#     alt-shift-j = ['join-with down', 'mode main']
+#     alt-shift-k = ['join-with up', 'mode main']
+#     alt-shift-l = ['join-with right', 'mode main']
