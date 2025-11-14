@@ -23,16 +23,10 @@
   (add-hook 'python-mode-hook (lambda () (setq-local corfu-auto-prefix 2)))
 
   ;; Set correct conda variables
-  (use-package! conda
-    :after python
-    :config
-    (setq conda-env-home-directory (expand-file-name "~/.conda"))
-    (setq conda-anaconda-home (expand-file-name "~/.conda")))
-
-  ;; ;; Python docstring tool
-  ;; (use-package! py-pyment
+  ;; (use-package! conda
   ;;   :after python
   ;;   :config
-  ;;   (setq py-pyment-options '("--output=google")))
+  ;;   (setq conda-env-home-directory (expand-file-name "~/.conda"))
+  ;;   (setq conda-anaconda-home (expand-file-name "~/.conda")))
 
   )

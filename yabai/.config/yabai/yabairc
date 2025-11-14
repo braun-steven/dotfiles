@@ -22,7 +22,7 @@ yabai -m config focus_follows_mouse          autofocus
 yabai -m config window_origin_display        focused
 yabai -m config window_insertion_point       focused
 yabai -m config window_placement             second_child
-yabai -m config window_shadow                on  # Add shadow only to floating windows
+yabai -m config window_shadow                on  # (on/off/float)
 yabai -m config window_opacity               off
 yabai -m config window_opacity_duration      0.25
 yabai -m config window_animation_duration    0.00
@@ -44,7 +44,7 @@ yabai -m config top_padding                  0
 yabai -m config bottom_padding               0
 yabai -m config left_padding                 0
 yabai -m config right_padding                0
-yabai -m config window_gap                   4
+yabai -m config window_gap                   6
 # yabai -m config top_padding                  6
 # yabai -m config bottom_padding               8
 # yabai -m config left_padding                 8
@@ -86,9 +86,9 @@ yabai -m rule --add title="^Accounts.*" manage=off   # MacOS Mail accounts
 yabai -m rule --add title="^Run/Debug Configurations.*" manage=off   # PyCharm
 yabai -m rule --add title="^Disk Utility$" manage=off   # MacOS Disk utility
 yabai -m rule --add app="^App Store$" manage=off   # MacOS App Store
-# yabai -m rule --add app="^Signal$" manage=off   # Signal
+yabai -m rule --add app="^Signal$" manage=off   # Signal
 yabai -m rule --add app="^Messages$" manage=off   # Messages
-# yabai -m rule --add app=".*WhatsApp.*" manage=off   # WhatsApp
+yabai -m rule --add app=".*WhatsApp.*" manage=off   # WhatsApp
 yabai -m rule --add app=".*MacWhisper.*" manage=off   # MacWhisper
 yabai -m rule --add app="^NordVPN$" manage=off   # NordVPN
 yabai -m rule --add app="^Notes$" manage=off   # Apple Notes
@@ -108,7 +108,7 @@ yabai -m rule --add title="^Evaluate$" manage=off
 yabai -m rule --add title="^Extract.*$" manage=off
 yabai -m rule --add title="^Welcome to PyCharm$" manage=off
 yabai -m rule --add title="^Add File to Git$" manage=off
-yabai -m rule --add title="^Emacs Everywhere.*" manage=off
+# yabai -m rule --add title="^Emacs Everywhere.*" manage=off
 # yabai -m rule --add app="Mail" title="^New Message.*" manage=off
 # yabai -m rule --add app="Mail" title="^Re:.*" manage=off
 
@@ -133,5 +133,7 @@ yabai -m rule --add label="Select file to save to" app="^Inkscape$" title="Selec
 
 # Add borders using JankyBoarders
 # borders active_color=0xff51afef inactive_color=0xff555555 width=4.0 style=round hidpi=on 2>/dev/null 1>&2 &
+
+# --- End Dynamic Gaps ---
 
 echo "yabai configuration loaded.."

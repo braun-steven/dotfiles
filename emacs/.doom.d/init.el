@@ -22,7 +22,7 @@
        :completion
        ;; company            ; the ultimate code completion backend
        ;; (company +childframe)            ; the ultimate code completion backend
-       (corfu +icons +orderless +dabbrev)
+       (corfu +icons +orderless)
        ;; (helm +fuzzy)              ; the *other* search engine for love and life
        ;;ido               ; the other *other* search engine...
        ;; (ivy +icons +prescient)               ; a search engine for love and life
@@ -95,7 +95,7 @@
        biblio
        ;; (debugger +lsp)          ; FIXME stepping through code, to help you add bugs
        direnv
-       ;;docker
+       (docker +lsp +tree-sitter)
        ;;editorconfig      ; let someone else argue about tabs vs spaces
        ;; ein               ; tame Jupyter notebooks with emacs
        ;; (eval +overlay)     ; run code, run (also, repls)
@@ -153,7 +153,7 @@
        (org              ; organize your plain life in plain text
         ;; +dragndrop       ; drag & drop files/images into org buffers
         +roam2
-        ;; +pretty
+        +pretty
         +journal
         +hugo            ; use Emacs for hugo blogging
         ;;+jupyter        ; ipython/jupyter support for babel
@@ -165,7 +165,7 @@
        ;;php               ; perl's insecure younger brother
        ;;plantuml          ; diagrams for confusing people more
        ;;purescript        ; javascript, but functional
-       (python +lsp +conda +pyright +tree-sitter)            ; beautiful is better than ugly
+       (python +lsp +pyright +tree-sitter)            ; beautiful is better than ugly
        ;;qt                ; the 'cutest' gui framework ever
        ;;racket            ; a DSL for DSLs
        ;;rest              ; Emacs as a REST client
@@ -203,5 +203,6 @@
 
 ;; Let j and k go over visual lines
 (setq evil-respect-visual-line-mode t)
-;; ;; Remove fram decorations
+;; ;; Remove frame decorations
 (add-to-list 'default-frame-alist '(undecorated-round . t))
+

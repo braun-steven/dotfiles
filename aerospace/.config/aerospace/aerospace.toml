@@ -79,6 +79,11 @@ automatically-unhide-macos-hidden-apps = true
     if.app-id = 'com.spotify.client'
     run = 'move-node-to-workspace 7'
 
+
+[[on-window-detected]]
+    if.app-id = 'com.apple.podcasts'
+    run = 'layout floating'
+
 [workspace-to-monitor-force-assignment]
     1 = 1                     
     2 = 1
@@ -151,7 +156,8 @@ automatically-unhide-macos-hidden-apps = true
     # normalizations
     # alt-n = 'split horizontal'
     # alt-v = 'split vertical'
-    cmd-q = 'close'
+    cmd-q = 'close --quit-if-last-window'
+    cmd-shift-q = 'close-all-windows-but-current --quit-if-last-window'
 
 
     # alt-shift-s = 'layout v_accordion' # 'layout stacking' in i3

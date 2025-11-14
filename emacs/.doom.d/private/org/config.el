@@ -11,19 +11,27 @@
   (load! "+functions")
   (load! "+keybindings")
 
-  (add-hook 'org-mode-hook 'org-appear-mode)
+  ;; (add-hook 'org-mode-hook 'org-appear-mode)
 
-  (after! org-appear
-    (setq org-appear-autolinks t)
-    (setq org-appear-autoentities t)
-    (setq org-appear-autosubmarkers t)
-    (setq org-appear-delay 0.0)
-    (setq org-appear-trigger 'always))
+;; (custom-theme-set-faces
+;;    'user
+;;    '(variable-pitch ((t (:family "SF Pro" :height 140 :weight light))))
+;;    '(fixed-pitch ((t ( :family "SF Mono" :height 140)))))
+
+  ;; (after! org-appear
+  ;;   (setq org-appear-autolinks t)
+  ;;   (setq org-appear-autoentities t)
+  ;;   (setq org-appear-autosubmarkers t)
+  ;;   (setq org-appear-delay 0.0)
+  ;;   (setq org-appear-trigger 'always))
 
 
    ;; Add variable-pitch mode to org-mode (for nicer writing experience)
-   ;; (add-hook 'org-mode-hook 'variable-pitch-mode)
-
+  ;; (add-hook 'org-mode-hook 'variable-pitch-mode)
+  ;; (set-face-attribute 'org-table nil :inherit 'fixed-pitch)
+  ;; (set-face-attribute 'org-block nil :inherit '(fixed-pitch))
+  ;; (set-face-attribute 'org-indent nil :inherit '(org-hide fixed-pitch))
+  ;; (set-face-attribute 'org-code nil :inherit '(shadow fixed-pitch))
   (set-face-attribute 'org-level-1 nil :height 1.30 :background nil)
   (set-face-attribute 'org-level-2 nil :height 1.20 :background nil)
   (set-face-attribute 'org-level-3 nil :height 1.10 :background nil)
@@ -32,6 +40,12 @@
   (set-face-attribute 'org-level-6 nil :height 1.05 :background nil)
   (set-face-attribute 'org-level-7 nil :height 1.05 :background nil)
   (set-face-attribute 'org-level-8 nil :height 1.05 :background nil)
+
+  ;; (setq org-modern-star 'org-modern-replace-stars)
+  (setq org-modern-hide-stars t)
+  ;; (setq org-modern-star '("" "" "" "" ""))
+
+   ;; (add-hook 'org-mode-hook (lambda () (setq-local line-spacing 0.5)))
 
 
    ;; Hide emphasis markers like /foo/ and *bar*

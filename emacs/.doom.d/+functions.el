@@ -87,6 +87,57 @@ current buffer's, reload dir-locals."
   )
 
 
+(defun my-projectile-activate-python-env-maybe ()
+  "After switching Projectile projects, check for a Python environment.
+
+1.  Look for a local '.venv' directory in the project root.
+2.  Look for a local 'venv' directory in the project root.
+3.  If 1 or 2 is found, activate it using 'pyvenv-activate'.
+4.  If not, check if the project's directory name matches a conda
+    environment and activate it using 'conda-env-activate'."
+  (message "Project changed... checking for Python env.")
+
+  (when (projectile-project-root)
+    (let* ((project-root (projectile-project-root))
+           ;; Check for .venv first
+           (dot-venv-path (expand-file-name ".venv" project-root))
+           ;; Then check for venv
+           (venv-path (expand-file-name "venv" project-root))
+           (found-venv-dir nil))
+
+      ;; Determine which venv path exists, if any
+      (cond
+       ((file-directory-p dot-venv-path)
+        (setq found-venv-dir dot-venv-path))
+       ((file-directory-p venv-path)
+        (setq found-venv-dir venv-path)))
+
+      (if found-venv-dir
+          ;; --- 1. Pyvenv Logic ---
+          ;; Found a local .venv or venv
+          (progn
+            (message (concat "Found pyvenv, activating: " (file-relative-name found-venv-dir project-root)))
+            (pyvenv-activate found-venv-dir))
+
+        ;; --- 2. Conda Logic (fallback) ---
+        ;; No local pyvenv found, try to find a matching conda env
+        (let* (;; More robust way to get the project directory name
+               (project-dir-name (file-name-nondirectory (directory-file-name project-root)))
+               (conda-env-name-candidate project-dir-name))
+
+          (message (concat "No local pyvenv found. Checking for conda env '" conda-env-name-candidate "'..."))
+          
+          ;; Assumes (conda-env-candidates) function exists from your setup
+          (if (fboundp 'conda-env-candidates)
+              (if (member conda-env-name-candidate (conda-env-candidates))
+                  (progn
+                    (message (concat "Found matching conda environment: " conda-env-name-candidate))
+                    (conda-env-activate conda-env-name-candidate))
+                (message "No matching conda env found."))
+            (message "Conda function 'conda-env-candidates' not found.")))
+        ))))
+
+
 (defvar-local bibtex-lookup-bibfile nil
   "Path to the BibTeX file to use for key lookup.")
 

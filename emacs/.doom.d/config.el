@@ -64,7 +64,7 @@
 ;; (setq doom-font (font-spec :family "CommitMono" :size 16))  ;; Linux
 ;; (setq doom-font (font-spec :family "Dejavu Sans Mono" :size 15))  ;; Linux
 ;; (setq doom-font (font-spec :family "SF Mono" :size 16))
-(setq doom-font (font-spec :family "SF Mono" :size 12))
+(setq doom-font (font-spec :family "SF Mono" :size 13))
 ;; (setq doom-font (font-spec :family "CommitMono" :size 14.0))  ;; Linux
 
 ;; Add some more space between the lines
@@ -174,8 +174,11 @@
 
 
 
+;; (after! (projectile conda)
+;;   (add-hook 'projectile-after-switch-project-hook #'activate-project-conda-env-maybe))
+
 (after! (projectile conda)
-  (add-hook 'projectile-after-switch-project-hook #'activate-project-conda-env-maybe))
+  (add-hook 'projectile-after-switch-project-hook #'my-projectile-activate-conda-env))
 
 
 
@@ -229,7 +232,8 @@
     )
 
 (use-package! copilot-chat
-  :after (request org markdown-mode shell-maker))
+  :config
+  (setq copilot-chat-default-model "gpt-5-mini"))
 
 (after! transient
         :config
@@ -310,6 +314,8 @@
 ;; ;; Fix latex mode not starting, see also: https://github.com/doomemacs/doomemacs/issues/8191
 ;; (add-to-list 'auto-mode-alist '("\\.tex\\'" . LaTeX-mode))
 
+
+
 (use-package! jinx
   :config
   (setq jinx-languages "en_US de_DE"
@@ -329,19 +335,13 @@
   (vertico-multiform-mode 1))
 
 
-(menu-bar-mode 0)
+(setq menu-bar-mode 0)
 
 ;; MacOS umlauts
 (setq ns-alternate-modifier 'none
       ns-right-alternate-modifier 'meta)
 
-;; Integrate MacOS clipboard with Emacs
-;; (load! "pbcopy.el")
 
-;; (custom-theme-set-faces
-;;    'user
-;;    '(variable-pitch ((t (:family "SF Pro" :height 150))))
-;;    '(fixed-pitch ((t ( :family "SF Mono" :height 130)))))
 
 ;; Load private modules
 (dolist (file (directory-files "~/.doom.d/private/" t directory-files-no-dot-files-regexp))

@@ -178,11 +178,11 @@ function pdf
   command evince $argv[1] & disown
 end
 
-function initconda
-  if test -f $HOME/.conda/bin/conda
-      eval $HOME/.conda/bin/conda "shell.fish" "hook" $argv | source
-  end
-end
+# function initconda
+#   if test -f $HOME/.conda/bin/conda
+#       eval $HOME/.conda/bin/conda "shell.fish" "hook" $argv | source
+#   end
+# end
 
 function dnfu
     # Get the current day of the week (1 is Monday, 7 is Sunday)
@@ -201,50 +201,104 @@ function dnfu
 end
 
 
-# Define maybe-activate-conda-env function
-function maybe_activate_conda_env
+# # Define maybe-activate-conda-env function
+# function maybe_activate_conda_env
 
-  # Check if conda exists
-  if not test -d ~/.conda; or not test -f ~/.conda/bin/conda
-    return
-  end
+#   # Check if conda exists
+#   if not test -d ~/.conda; or not test -f ~/.conda/bin/conda
+#     return
+#   end
 
-  # Check if "conda" command is available,
-  if not type -q conda
-     initconda
-  end
+#   # Check if "conda" command is available,
+#   if not type -q conda
+#      initconda
+#   end
 
-  # Check if conda env is set
-  # fish shell: check if $CONDA_DEFAULT_ENV is set
-  if test -n "$CONDA_DEFAULT_ENV"
-    set dirname (path basename $PWD)
+#   # Check if conda env is set
+#   # fish shell: check if $CONDA_DEFAULT_ENV is set
+#   if test -n "$CONDA_DEFAULT_ENV"
+#     set dirname (path basename $PWD)
 
-    # Check if current conda env is no longer part of current pwd
-    if not string match -q "*$CONDA_DEFAULT_ENV*" "$PWD"
-      echo "Deactivating conda environment $CONDA_DEFAULT_ENV"
-      conda deactivate
+#     # Check if current conda env is no longer part of current pwd
+#     if not string match -q "*$CONDA_DEFAULT_ENV*" "$PWD"
+#       echo "Deactivating conda environment $CONDA_DEFAULT_ENV"
+#       conda deactivate
+#       return
+#     end
+#   end
+
+#   # Get directory name without full path
+#   set dirname (path basename $PWD)
+#   # If directory name can be found in conda evironments, activate it!
+#   if command ls ~/.conda/envs/ | grep -q $dirname
+#     # echo "Conda environment '$dirname' found! Activating now ..."
+#     initconda
+#     conda activate $dirname
+#   end
+
+# end
+
+# # Run the function when PWD changes
+# function __on_pwd_change --on-variable PWD
+#   maybe_activate_conda_env
+# end
+
+# # Run the function when the shell starts
+# maybe_activate_conda_env
+
+# --- Automatic Virtual Environment Activation for Fish Shell ---
+
+# Define maybe_activate_virtual_env function
+function maybe_activate_virtual_env
+
+  # 1. Check if a virtual env is currently active
+  if test -n "$VIRTUAL_ENV"
+    # Get the parent directory of the virtual env (this is the project root)
+    set -l venv_project_root (path dirname "$VIRTUAL_ENV")
+
+    # 2. Check if we have moved *out* of that project's directory
+    if not string match -q "$venv_project_root*" "$PWD"
+      echo "Leaving project, deactivating virtual environment..."
+      # Check if the 'deactivate' function exists before calling it
+      if functions -q deactivate
+        deactivate
+      end
+      # After deactivating, we proceed to check for a new env
+    else
+      # We are still inside the active project, so we're done.
       return
     end
   end
 
-  # Get directory name without full path
-  set dirname (path basename $PWD)
-  # If directory name can be found in conda evironments, activate it!
-  if command ls ~/.conda/envs/ | grep -q $dirname
-    # echo "Conda environment '$dirname' found! Activating now ..."
-    initconda
-    conda activate $dirname
+  # 3. No env is active (or we just deactivated one).
+  #    Check for a new env in the *current* directory.
+  #    We check in this priority: .venv, venv, env
+  set -l venv_paths "./.venv/bin/activate.fish" "./venv/bin/activate.fish" "./env/bin/activate.fish"
+
+  for venv_path in $venv_paths
+    if test -f $venv_path
+      # echo "Found virtual environment: $venv_path. Activating..."
+      source $venv_path
+      # Found and activated, no need to check others.
+      return
+    end
   end
 
 end
 
+# --- Hooks to run the function ---
+
 # Run the function when PWD changes
-function __on_pwd_change --on-variable PWD
-  maybe_activate_conda_env
+# Note: You can add `maybe_activate_virtual_env` to your *existing*
+# `__on_pwd_change` function alongside `maybe_activate_conda_env`
+# or use a separate one like this:
+function __on_pwd_change_for_venv --on-variable PWD
+  maybe_activate_virtual_env
 end
 
 # Run the function when the shell starts
-maybe_activate_conda_env
+maybe_activate_virtual_env
+
 
 #################
 # FUNCTIONS END #
@@ -271,7 +325,7 @@ complete -c eog -k -xa "(__fish_complete_suffix gif)"
 direnv hook fish | source
 
 # Initialize conda
-initconda
+# initconda
 
 # =============================================================================
 #
