@@ -40,16 +40,16 @@ yabai -m config mouse_drop_action            swap
 
 # general space settings
 yabai -m config layout                       bsp
-yabai -m config top_padding                  0
-yabai -m config bottom_padding               0
-yabai -m config left_padding                 0
-yabai -m config right_padding                0
-yabai -m config window_gap                   6
-# yabai -m config top_padding                  6
-# yabai -m config bottom_padding               8
-# yabai -m config left_padding                 8
-# yabai -m config right_padding                8
-# yabai -m config window_gap                   8
+# yabai -m config top_padding                  0
+# yabai -m config bottom_padding               0
+# yabai -m config left_padding                 0
+# yabai -m config right_padding                0
+# yabai -m config window_gap                   6
+yabai -m config top_padding                  6
+yabai -m config bottom_padding               8
+yabai -m config left_padding                 8
+yabai -m config right_padding                8
+yabai -m config window_gap                   8
 
 # label spaces
 yabai -m space 1 --label 1
@@ -113,16 +113,16 @@ yabai -m rule --add title="^Add File to Git$" manage=off
 # yabai -m rule --add app="Mail" title="^Re:.*" manage=off
 
 # Set padding for spacebar
-# yabai -m config external_bar all:24:0  # Top
+yabai -m config external_bar all:32:0  # Top
 # yabai -m config external_bar all:0:24    # Bottom
-yabai -m config external_bar all:0:0    # Bottom
+# yabai -m config external_bar all:0:0    # Bottom
 
 # Focus window to mous when windows/application is destroyed
 # yabai -m signal --add event=window_destroyed action="yabai -m query --windows --window &> /dev/null || yabai -m window --focus mouse"
 # yabai -m signal --add event=application_terminated action="yabai -m query --windows --window &> /dev/null || yabai -m window --focus mouse"
-# yabai -m signal --add event=window_focused action="sketchybar --trigger window_focus"
-# yabai -m signal --add event=window_created action="sketchybar --trigger windows_on_spaces"
-# yabai -m signal --add event=window_destroyed action="sketchybar --trigger windows_on_spaces"
+yabai -m signal --add event=window_focused action="sketchybar --trigger window_focus"
+yabai -m signal --add event=window_created action="sketchybar --trigger windows_on_spaces"
+yabai -m signal --add event=window_destroyed action="sketchybar --trigger windows_on_spaces"
 
 # Exclude problematic apps from being managed:
 yabai -m rule --add app="^(LuLu|Calculator|Software Update|Dictionary|VLC|System Preferences|System Settings|Photo Booth|Archive Utility|Python|LibreOffice|App Store|Steam|Alfred|Activity Monitor)$" manage=off

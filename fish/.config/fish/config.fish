@@ -320,6 +320,35 @@ complete -c eog -k -xa "(__fish_complete_suffix gif)"
 # CUSTOM AUTOCOMPLETE END  #
 ############################
 
+function glm --description "Run Claude Code via Z.AI GLM Coding Plan"
+    # 1) Get API key securely (example: from macOS Keychain)
+    #    First store it once via:
+    #      security add-generic-password -a "$USER" -s zai_glm_api_key -w 'YOUR_REAL_KEY'
+    #
+    set -l ZAI_API_KEY (security find-generic-password -s zai_glm_api_key -w 2>/dev/null)
+
+    if test -z "$ZAI_API_KEY"
+        echo "Error: could not read Z.AI API key from keychain (service: zai_glm_api_key)" >&2
+        echo "Add it with: security add-generic-password -a \"$USER\" -s zai_glm_api_key -w 'YOUR_REAL_KEY'" >&2
+        return 1
+    end
+
+    # 2) Export Anthropic-compatible env vars for Claude Code (GLM Coding Plan)
+    #    These correspond to the settings.json env block in the docs.  [oai_citation:1‡docs.z.ai](https://docs.z.ai/scenario-example/develop-tools/claude)
+    set -lx ANTHROPIC_AUTH_TOKEN $ZAI_API_KEY
+    set -lx ANTHROPIC_BASE_URL "https://api.z.ai/api/anthropic"
+    set -lx API_TIMEOUT_MS "3000000"
+
+    # Optional: explicit model mapping (override default GLM mapping if you want)
+    # Comment out any you don't care about.
+    set -lx ANTHROPIC_DEFAULT_HAIKU_MODEL  "glm-4.5-air"
+    set -lx ANTHROPIC_DEFAULT_SONNET_MODEL "glm-4.6"
+    set -lx ANTHROPIC_DEFAULT_OPUS_MODEL   "glm-4.6"
+
+    # 3) Forward all arguments to Claude Code
+    claude $argv
+end
+
 
 # Enable direnv
 direnv hook fish | source
