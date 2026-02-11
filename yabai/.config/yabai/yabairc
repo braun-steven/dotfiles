@@ -40,16 +40,16 @@ yabai -m config mouse_drop_action            swap
 
 # general space settings
 yabai -m config layout                       bsp
-# yabai -m config top_padding                  0
-# yabai -m config bottom_padding               0
-# yabai -m config left_padding                 0
-# yabai -m config right_padding                0
-# yabai -m config window_gap                   6
-yabai -m config top_padding                  6
-yabai -m config bottom_padding               8
-yabai -m config left_padding                 8
-yabai -m config right_padding                8
-yabai -m config window_gap                   8
+yabai -m config top_padding                  0
+yabai -m config bottom_padding               0
+yabai -m config left_padding                 0
+yabai -m config right_padding                0
+yabai -m config window_gap                   6
+# yabai -m config top_padding                  6
+# yabai -m config bottom_padding               8
+# yabai -m config left_padding                 8
+# yabai -m config right_padding                8
+# yabai -m config window_gap                   8
 
 # label spaces
 yabai -m space 1 --label 1
@@ -71,7 +71,7 @@ yabai -m space 12 --label 12
 
 
 # float settings windows
-# yabai -m rule --add app='^Finder$' manage=off sticky=off
+yabai -m rule --add app='^Finder$' manage=off sticky=off
 yabai -m rule --add app='^Weather$' manage=off sticky=off
 # yabai -m rule --add app='^Photos$' manage=off sticky=off
 # yabai -m rule --add app='^Alacritty$' manage=off sticky=off
@@ -85,7 +85,9 @@ yabai -m rule --add title="^Quick Entry.*" manage=off   # Things 3 settings
 yabai -m rule --add title="^Accounts.*" manage=off   # MacOS Mail accounts
 yabai -m rule --add title="^Run/Debug Configurations.*" manage=off   # PyCharm
 yabai -m rule --add title="^Disk Utility$" manage=off   # MacOS Disk utility
+yabai -m rule --add title="Sign in - Google Accounts" manage=off   # Disable Google sign-in windows from being managed
 yabai -m rule --add app="^App Store$" manage=off   # MacOS App Store
+yabai -m rule --add app="^QuickTime Player$" manage=off   
 yabai -m rule --add app="^Signal$" manage=off   # Signal
 yabai -m rule --add app="^Messages$" manage=off   # Messages
 yabai -m rule --add app=".*WhatsApp.*" manage=off   # WhatsApp
@@ -96,7 +98,8 @@ yabai -m rule --add app="^Spotify$" manage=off   # Spotify
 yabai -m rule --add app="^Pearcleaner$" manage=off
 yabai -m rule --add app="^Podcasts$" manage=off
 yabai -m rule --add app="^Trace$" manage=off
-
+yabai -m rule --add app="^Inkscape$" title="^$" manage=off  # Some dialogs in Inkscape
+yabai -m rule --add app="^Inkscape$" title="^Select" manage=off  # Select dialogs in Inkscape
 
 # PyCharm
 yabai -m rule --add title="^Merge Revisions.*" manage=off
@@ -109,13 +112,13 @@ yabai -m rule --add title="^Extract.*$" manage=off
 yabai -m rule --add title="^Welcome to PyCharm$" manage=off
 yabai -m rule --add title="^Add File to Git$" manage=off
 # yabai -m rule --add title="^Emacs Everywhere.*" manage=off
-# yabai -m rule --add app="Mail" title="^New Message.*" manage=off
+# yabai -mj rule --add app="Mail" title="^New Message.*" manage=off
 # yabai -m rule --add app="Mail" title="^Re:.*" manage=off
 
 # Set padding for spacebar
-yabai -m config external_bar all:32:0  # Top
+# yabai -m config external_bar all:32:0  # Top
 # yabai -m config external_bar all:0:24    # Bottom
-# yabai -m config external_bar all:0:0    # Bottom
+yabai -m config external_bar all:0:0    # Bottom
 
 # Focus window to mous when windows/application is destroyed
 # yabai -m signal --add event=window_destroyed action="yabai -m query --windows --window &> /dev/null || yabai -m window --focus mouse"

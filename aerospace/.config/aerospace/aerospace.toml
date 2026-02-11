@@ -84,6 +84,11 @@ automatically-unhide-macos-hidden-apps = true
     if.app-id = 'com.apple.podcasts'
     run = 'layout floating'
 
+[[on-window-detected]]
+# Whatsapp
+    if.app-id = 'net.whatsapp.WhatsApp'
+    run = 'layout floating'
+
 [workspace-to-monitor-force-assignment]
     1 = 1                     
     2 = 1
@@ -97,6 +102,7 @@ automatically-unhide-macos-hidden-apps = true
     10 = 1
     11 = 2
     12 = 2
+    13 = 2
 
 [exec]
     inherit-env-vars = true
@@ -133,7 +139,7 @@ automatically-unhide-macos-hidden-apps = true
     #     activate
     # end tell'
     # '''
-    cmd-ctrl-enter = 'exec-and-forget /Users/steven/dotfiles/dotbin/dotbin/skhd-iterm2-new-window.sh'
+    cmd-ctrl-shift-enter = 'exec-and-forget /Users/steven/dotfiles/dotbin/dotbin/skhd-iterm2-new-window.sh'
     cmd-shift-enter = 'exec-and-forget emacsclient -c'
 
     # i3 wraps focus by default
@@ -156,15 +162,16 @@ automatically-unhide-macos-hidden-apps = true
     # normalizations
     # alt-n = 'split horizontal'
     # alt-v = 'split vertical'
-    cmd-q = 'close --quit-if-last-window'
-    cmd-shift-q = 'close-all-windows-but-current --quit-if-last-window'
+    cmd-q = 'close'
+    cmd-shift-q = 'close --quit-if-last-window'
+    # cmd-shift-q = 'close-all-windows-but-current --quit-if-last-window'
 
 
     # alt-shift-s = 'layout v_accordion' # 'layout stacking' in i3
     alt-w = 'layout h_accordion' # 'layout tabbed' in i3
     alt-e = 'layout tiles horizontal vertical' # 'layout toggle split' in i3
 
-    alt-f = 'layout floating tiling' # 'floating toggle' in i3
+    alt-f = ['layout floating tiling'] # 'floating toggle' in i3
     alt-shift-f = 'fullscreen'
     alt-ctrl-shift-f = 'macos-native-fullscreen'
     # alt-shift-space = 'layout floating tiling' # 'floating toggle' in i3
@@ -189,6 +196,7 @@ automatically-unhide-macos-hidden-apps = true
     cmd-0 = 'workspace 10 --auto-back-and-forth'
     cmd-y = 'workspace 11 --auto-back-and-forth'
     cmd-u = 'workspace 12 --auto-back-and-forth'
+    cmd-i = 'workspace 13 --auto-back-and-forth'
 
     cmd-shift-1 = 'move-node-to-workspace 1'
     cmd-shift-2 = 'move-node-to-workspace 2'
@@ -202,6 +210,7 @@ automatically-unhide-macos-hidden-apps = true
     cmd-shift-0 = 'move-node-to-workspace 10'
     cmd-shift-y = 'move-node-to-workspace 11'
     cmd-shift-u = 'move-node-to-workspace 12'
+    cmd-shift-i = 'move-node-to-workspace 13'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
     # alt-tab = 'workspace-back-and-forth'

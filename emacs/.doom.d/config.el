@@ -79,7 +79,7 @@
 ;;
 ;; - `load!' for loading external *.el files relative to this one
 ;; - `use-package' for configuring packages
-;; - `after!' for running code after a package has loaded
+;; - `with-eval-after-load` for running code after a package has loaded
 ;; - `add-load-path!' for adding directories to the `load-path', where Emacs
 ;;   looks when you load packages with `require' or `use-package'.
 ;; - `map!' for binding new keys
@@ -144,20 +144,12 @@
 (use-package! powerthesaurus
   :after tex)
 
-(after! magit
+(with-eval-after-load 'magit
   ;; Set magit log margin
   (setq magit-log-margin '(t "%Y-%m-%d" magit-log-margin-width t 18))
 
   ;; Set magit status margin
   (setq magit-status-margin '(t age magit-log-margin-width t 18)))
-
-(use-package! magit-todos
-  :after magit
-  :config (magit-todos-mode 1))
-
-;; (use-package! vertico
-;;   :config
-;;   (setq vertico-posframe-width 160))
 
 
 (use-package! vertico-directory
@@ -174,11 +166,9 @@
 
 
 
-;; (after! (projectile conda)
-;;   (add-hook 'projectile-after-switch-project-hook #'activate-project-conda-env-maybe))
-
-(after! (projectile conda)
-  (add-hook 'projectile-after-switch-project-hook #'my-projectile-activate-conda-env))
+(with-eval-after-load 'projectile
+  (with-eval-after-load 'python
+    (add-hook 'projectile-after-switch-project-hook #'my-projectile-activate-python-env-maybe)))
 
 
 
@@ -233,11 +223,10 @@
 
 (use-package! copilot-chat
   :config
-  (setq copilot-chat-default-model "gpt-5-mini"))
+  (setq copilot-chat-default-model "gpt-5.1-codex-mini"))
 
-(after! transient
-        :config
-        (setq transient-show-during-minibuffer-read t))
+(with-eval-after-load 'transient
+  (setq transient-show-during-minibuffer-read t))
 
 (use-package! gptel
  :config
@@ -293,7 +282,8 @@
 (setq search-whitespace-regexp "[[:space:]\n]")
 
 ;; ;; If pressing tab to complete sometimes doesn't work you might want to bind completion to another key or try:
-;; (after! (evil copilot)
+;; (with-eval-after-load 'evil
+;;   (with-eval-after-load 'copilot
 ;;   ;; Define the custom function that either accepts the completion or does the default behavior
 ;;   (defun my/copilot-tab-or-default ()
 ;;     (interactive)
@@ -304,7 +294,7 @@
 ;;       (evil-insert 1))) ; Default action to insert a tab. Adjust as needed.
 
 ;;   ;; Bind the custom function to <tab> in Evil's insert state
-;;   (evil-define-key 'insert 'global (kbd "<tab>") 'my/copilot-tab-or-default))
+;;   (evil-define-key 'insert 'global (kbd "<tab>") 'my/copilot-tab-or-default)))
 
 ;; ;;; in $DOOMDIR/config.el
 ;; (remove-hook! '(window-setup-hook after-make-frame-functions)
@@ -328,7 +318,7 @@
   :defer t)
 
 
-(after! vertico-multiform ;; if using vertico
+(with-eval-after-load 'vertico-multiform ;; if using vertico
   (add-to-list 'vertico-multiform-categories
                '(jinx (vertico-grid-annotate . 25)))
 

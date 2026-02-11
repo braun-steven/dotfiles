@@ -238,7 +238,7 @@ cmd - 0 : yabai -m space --focus 10 || yabai -m space --focus recent
 
 cmd - y : yabai -m space --focus 11 || yabai -m space --focus recent
 cmd - u : yabai -m space --focus 12 || yabai -m space --focus recent
-# cmd - i : yabai -m space --focus 13 || yabai -m space --focus recent
+cmd - i : yabai -m space --focus 13 || yabai -m space --focus recent
 # cmd - o : yabai -m space --focus 14 || yabai -m space --focus recent
 # cmd - p : yabai -m space --focus 15 || yabai -m space --focus recent
 
@@ -301,7 +301,7 @@ alt - f : yabai -m window --toggle float;\
 # cmd + ctrl - r : /usr/bin/env osascript <<< \
 #         "display notification \"Restarting Yabai\" with title \"Yabai\""; \
 #         launchctl kickstart -k "gui/${UID}/homebrew.mxcl.yabai"
-cmd + ctrl - r : yabai --restart-service
+# cmd + ctrl - r : yabai --restart-service
 
 # Stacking windows
 alt - w : yabai -m window --stack east || yabai -m window --stack west

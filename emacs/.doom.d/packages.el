@@ -81,7 +81,13 @@
 (package! copilot-chat) ;; Usefull for diff-based git-commit messages
 
 
-(package! powerthesaurus)
+;; (package! powerthesaurus)
+;; REVIEW: This fork fixes SavchenkoValeriy/emacs-powerthesaurus#40.
+(package! powerthesaurus
+      :recipe (:host github
+               :repo "doomelpa/powerthesaurus")
+      :pin "d9ebb866f6fce469102665f187266f0a041cfc4b"
+      )
 
 ;; Fish mode
 (package! fish-mode)
@@ -94,9 +100,13 @@
 
 (package! kdl-mode)
 
+;;(package! reader
+;;  :recipe (:host codeberg
+;;           :repo "divyaranjan/emacs-reader"
+;;           :files ("*.el" "render-core.so")
+;;           :pre-build ("make" "all")))
+
 ;; Load private module packages
 (dolist (file (directory-files "~/.doom.d/private/" t directory-files-no-dot-files-regexp))
   (load! (concat file "/packages.el")))
-
-
 

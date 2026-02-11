@@ -1,17 +1,37 @@
 #!/usr/bin/env python3
 import argparse
-import random
-import shutil
-import arxiv
 import os
+import re
+import shutil
 import smtplib
+import tempfile
 import urllib.request
 from email import encoders
 from email.mime.base import MIMEBase
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
+from pathlib import Path
 
+import arxiv
 from PyPDF2 import PdfReader
+
+TMP_DIR = Path(tempfile.gettempdir()).resolve()
+
+
+def sanitize_filename_component(name: str, fallback: str = "downloaded-paper") -> str:
+    """Sanitize untrusted file name input to a safe single path component."""
+    base_name = Path(name).name.strip() if name else ""
+    safe_name = re.sub(r"[^A-Za-z0-9._ -]", "_", base_name)
+    safe_name = safe_name.strip(" .")
+    return safe_name or fallback
+
+
+def ensure_path_in_tmp(file_name: str) -> Path:
+    """Return a destination path under tmp, refusing traversal outside tmp."""
+    destination = (TMP_DIR / file_name).resolve()
+    if TMP_DIR != destination and TMP_DIR not in destination.parents:
+        raise ValueError(f"Refusing to write outside temp directory: {destination}")
+    return destination
 
 
 def notify_mail(credentials_path, subject, message, path=None):
@@ -87,17 +107,17 @@ def download_from_arxiv(url: str):
 
 def download(url: str):
     print("Starting download from", url)
-    fname_tmp = f"/tmp/file-{random.randint(0, 1000000)}.pdf"
-    result = urllib.request.urlretrieve(url, fname_tmp)
+    with tempfile.NamedTemporaryFile(suffix=".pdf", dir=TMP_DIR, delete=False) as temp_file:
+        fname_tmp = temp_file.name
+    urllib.request.urlretrieve(url, fname_tmp)
 
     pdf = PdfReader(fname_tmp)
     info = pdf.metadata
-    title = info.title
-    if "/Created" in info:
+    title = sanitize_filename_component(info.title if info else "")
+    if info and "/Created" in info:
         date = info["/Created"]
 
         assert date != ""
-        assert title != ""
 
         date_mod = date[2:] + "00"  # 00: unknown month
         fname_new = f"{date_mod}.{title}.pdf"
@@ -105,7 +125,7 @@ def download(url: str):
         fname_new = f"{title}.pdf"
 
     src = fname_tmp
-    dst = os.path.join("/tmp", fname_new)
+    dst = str(ensure_path_in_tmp(fname_new))
 
     shutil.move(src, dst)
 

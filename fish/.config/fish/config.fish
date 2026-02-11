@@ -2,6 +2,8 @@ if status is-interactive
     # Commands to run in interactive sessions can go here
 end
 
+set -U fish_greeting ""
+
 
 # Exports can be found in .bashrc from which we start the fish shell
 # Aliases can be found in .bash_aliases which is sourced in .bashrc from which we start the fish shell
@@ -321,10 +323,6 @@ complete -c eog -k -xa "(__fish_complete_suffix gif)"
 ############################
 
 function glm --description "Run Claude Code via Z.AI GLM Coding Plan"
-    # 1) Get API key securely (example: from macOS Keychain)
-    #    First store it once via:
-    #      security add-generic-password -a "$USER" -s zai_glm_api_key -w 'YOUR_REAL_KEY'
-    #
     set -l ZAI_API_KEY (security find-generic-password -s zai_glm_api_key -w 2>/dev/null)
 
     if test -z "$ZAI_API_KEY"
@@ -341,9 +339,9 @@ function glm --description "Run Claude Code via Z.AI GLM Coding Plan"
 
     # Optional: explicit model mapping (override default GLM mapping if you want)
     # Comment out any you don't care about.
-    set -lx ANTHROPIC_DEFAULT_HAIKU_MODEL  "glm-4.5-air"
-    set -lx ANTHROPIC_DEFAULT_SONNET_MODEL "glm-4.6"
-    set -lx ANTHROPIC_DEFAULT_OPUS_MODEL   "glm-4.6"
+    set -lx ANTHROPIC_DEFAULT_HAIKU_MODEL  "glm-4.7"
+    set -lx ANTHROPIC_DEFAULT_SONNET_MODEL "glm-4.7"
+    set -lx ANTHROPIC_DEFAULT_OPUS_MODEL   "glm-4.7"
 
     # 3) Forward all arguments to Claude Code
     claude $argv

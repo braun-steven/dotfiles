@@ -1,5 +1,5 @@
 ;;; ../dotfiles/configs/emacs/.doom.d/editor/+evil.el -*- lexical-binding: t; -*-
-(after! evil
+(with-eval-after-load 'evil
   (load! "+functions")
   (load! "+keybindings")
 

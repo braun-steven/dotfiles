@@ -38,11 +38,10 @@
   ;; make sure to install typst-lsp from
   ;; https://github.com/nvarner/typst-lsp/releases
   ;; or use tinymist
-  (after! lsp-mode
-  (add-to-list 'lsp-language-id-configuration '(typst-ts-mode . "typst"))
-  (lsp-register-client
-   (make-lsp-client
-    :new-connection (lsp-stdio-connection "typst-lsp")
-    :major-modes '(typst-ts-mode)
-    :server-id 'typst-lsp))
-  ))
+  (with-eval-after-load 'lsp-mode
+    (add-to-list 'lsp-language-id-configuration '(typst-ts-mode . "typst"))
+    (lsp-register-client
+     (make-lsp-client
+      :new-connection (lsp-stdio-connection "typst-lsp")
+      :major-modes '(typst-ts-mode)
+      :server-id 'typst-lsp))))

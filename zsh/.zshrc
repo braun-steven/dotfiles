@@ -169,3 +169,6 @@ unset __conda_setup
 # <<< conda initialize <<<
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Added by Antigravity
+export PATH="/Users/steven/.antigravity/antigravity/bin:$PATH"

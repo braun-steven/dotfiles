@@ -1,5 +1,5 @@
 ;;; ../dotfiles/configs/emacs/.doom.d/lang/+julia.el -*- lexical-binding: t; -*-
-(after! julia
+(with-eval-after-load 'julia-mode
   (load! "+functions")
   (load! "+keybindings")
 

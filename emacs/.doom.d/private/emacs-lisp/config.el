@@ -1,5 +1,5 @@
 ;;; ../dotfiles/configs/emacs/.doom.d/lang/+elisp.el -*- lexical-binding: t; -*-
-(after! emacs-lisp
+(with-eval-after-load 'elisp-mode
   (load! "+functions")
   (load! "+keybindings")
 

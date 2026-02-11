@@ -1,5 +1,5 @@
 ;;; ../dotfiles/configs/emacs/.doom.d/lang/+python.el -*- lexical-binding: t; -*-
-(after! python
+(with-eval-after-load 'python
   (load! "+functions")
   (load! "+keybindings")
 
@@ -14,11 +14,11 @@
   (add-hook 'python-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
   ;; (add-hook 'python-mode-hook #'(lambda () (setq fill-column 100)))
 
-  (setq pyimport-pyflakes-path "~/.local/bin/pyflakes")
+  ;; (setq pyimport-pyflakes-path "~/.local/bin/pyflakes")
 
 
-  (after! lsp-pyright
-   (setq lsp-pyright-auto-import-completions nil))
+  (with-eval-after-load 'lsp-pyright
+    (setq lsp-pyright-auto-import-completions nil))
 
   (add-hook 'python-mode-hook (lambda () (setq-local corfu-auto-prefix 2)))
 

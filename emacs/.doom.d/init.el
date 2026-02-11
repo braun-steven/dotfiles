@@ -53,7 +53,7 @@
        ;; unicode           ; extended unicode support for various languages
        (vc-gutter +pretty)         ; vcs diff in the fringe
        ;; vi-tilde-fringe   ; fringe tildes to mark beyond EOB
-       ;; (window-select +numbers)     ; visually switch windows
+       window-select     ; visually switch windows
        workspaces        ; tab emulation, persistence & separate workspaces
        zen               ; distraction-free coding or writing
        smooth-scroll
@@ -153,9 +153,9 @@
        (org              ; organize your plain life in plain text
         ;; +dragndrop       ; drag & drop files/images into org buffers
         +roam2
-        +pretty
-        +journal
-        +hugo            ; use Emacs for hugo blogging
+        ;; +pretty
+        ;; +journal
+        ;; +hugo            ; use Emacs for hugo blogging
         ;;+jupyter        ; ipython/jupyter support for babel
         ;;+pandoc          ; export-with-pandoc support
         ;; +pomodoro        ; be fruitful with the tomato technique
@@ -165,7 +165,7 @@
        ;;php               ; perl's insecure younger brother
        ;;plantuml          ; diagrams for confusing people more
        ;;purescript        ; javascript, but functional
-       (python +lsp +pyright +tree-sitter)            ; beautiful is better than ugly
+       (python +lsp +tree-sitter)            ; beautiful is better than ugly
        ;;qt                ; the 'cutest' gui framework ever
        ;;racket            ; a DSL for DSLs
        ;;rest              ; Emacs as a REST client

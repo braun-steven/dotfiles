@@ -1,5 +1,5 @@
 ;;; ../dotfiles/configs/emacs/.doom.d/tools/+pdf.el -*- lexical-binding: t; -*-
-(after! pdf-tools
+(with-eval-after-load 'pdf-tools
   (load! "+functions")
   (load! "+keybindings")
 

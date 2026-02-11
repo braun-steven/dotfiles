@@ -20,3 +20,4 @@ alias ls='ls -lh --group-directories-first'
 
 # TUVPN
 alias tuvpn="sudo tuvpn"
+alias lazygit='lazygit --use-config-file="$HOME/.config/lazygit/config.yml"'

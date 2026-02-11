@@ -6,7 +6,7 @@
 (setq org-roam-directory "~/org/notes")
 
 ;; Org setup
-(after! org
+(with-eval-after-load 'org
 
   (load! "+functions")
   (load! "+keybindings")
@@ -18,7 +18,7 @@
 ;;    '(variable-pitch ((t (:family "SF Pro" :height 140 :weight light))))
 ;;    '(fixed-pitch ((t ( :family "SF Mono" :height 140)))))
 
-  ;; (after! org-appear
+  ;; (with-eval-after-load 'org-appear
   ;;   (setq org-appear-autolinks t)
   ;;   (setq org-appear-autoentities t)
   ;;   (setq org-appear-autosubmarkers t)
@@ -49,11 +49,11 @@
 
 
    ;; Hide emphasis markers like /foo/ and *bar*
-   (setq org-hide-emphasis-markers t)
+   (setq org-hide-emphasis-markers nil)
 
    ;; ;; Make TAB cycle all subtrees
-   (after! evil-org
-   (remove-hook 'org-tab-first-hook #'+org-cycle-only-current-subtree-h))
+   (with-eval-after-load 'evil-org
+     (remove-hook 'org-tab-first-hook #'+org-cycle-only-current-subtree-h))
 
    ;; ;; Enable booktabs table export
    ;; (setq org-latex-tables-booktabs t)
